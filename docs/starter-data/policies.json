@@ -1,0 +1,46 @@
+{
+  "_note": "PLACEHOLDER policies for Chapter 4. Only formal_recruitment needs a working next-round effect for the MVP.",
+  "powerTokens": 1,
+  "policies": [
+    {
+      "id": "formal_recruitment",
+      "name": "Formal recruitment",
+      "benefit": "Hiring follows written criteria instead of 'fit'.",
+      "cost": "Hiring takes longer.",
+      "nextRoundEffect": "Removes the hidden 'fit' penalty at the Gatekeeper.",
+      "mvp": true
+    },
+    {
+      "id": "childcare_support",
+      "name": "Childcare support",
+      "benefit": "Parents can stay on key projects.",
+      "cost": "Uses budget.",
+      "nextRoundEffect": "TBD",
+      "mvp": false
+    },
+    {
+      "id": "flexible_working",
+      "name": "Flexible working",
+      "benefit": "Availability is no longer the measure of commitment.",
+      "cost": "Harder scheduling.",
+      "nextRoundEffect": "TBD (e.g. lowers the Ideal Worker's Availability threshold)",
+      "mvp": false
+    },
+    {
+      "id": "anti_harassment",
+      "name": "Anti-harassment policy",
+      "benefit": "Speaking up no longer costs your career.",
+      "cost": "Training time.",
+      "nextRoundEffect": "TBD (e.g. changes Chapter 2 outcomes)",
+      "mvp": false
+    },
+    {
+      "id": "intimacy_coordination",
+      "name": "Intimacy coordination",
+      "benefit": "Safer sets and clearer consent.",
+      "cost": "Higher production cost.",
+      "nextRoundEffect": "TBD",
+      "mvp": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "title": "Same Rules?",
+  "subtitle": "One career. Another turn.",
+  "introduction": "[PLACEHOLDER] Your first day in the creative industries begins here. Choose your badge and a name, then follow the career board. Each decision stays with this career.",
+  "promotionTitle": "Creative Director",
+  "promotionText": "[PLACEHOLDER] You now sit on the other side of the table. Your next decisions concern the people and rules that will shape another career.",
+  "defaultNames": {
+    "female": "Alex",
+    "male": "Alex"
+  },
+  "defaultDirector": "The Director",
+  "gatekeeperReturning": "[PLACEHOLDER] {name}, who held the director’s chair in the previous career, is now reviewing your application.",
+  "gatekeeperFormal": "[PLACEHOLDER] The recruitment policy uses written criteria for this appointment.",
+  "gatekeeperUnchanged": "[PLACEHOLDER] The office continues to use its established recruitment process.",
+  "placeholderNotice": "Prototype: bracketed PLACEHOLDER text, temporary numbers and labelled art spaces are waiting for the team’s final content."
+}

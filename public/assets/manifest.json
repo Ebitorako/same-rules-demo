@@ -1,0 +1,317 @@
+{
+  "characters/pawn_female": [
+    "assets/characters/pawn_female.svg",
+    "assets/characters/pawn_female.png",
+    "assets/characters/pawn_female.webp"
+  ],
+  "characters/pawn_male": [
+    "assets/characters/pawn_male.svg",
+    "assets/characters/pawn_male.png",
+    "assets/characters/pawn_male.webp"
+  ],
+  "bosses/gatekeeper": [
+    "assets/bosses/gatekeeper.svg",
+    "assets/bosses/gatekeeper.png",
+    "assets/bosses/gatekeeper.webp"
+  ],
+  "bosses/old_boys_network": [
+    "assets/bosses/old_boys_network.svg",
+    "assets/bosses/old_boys_network.png",
+    "assets/bosses/old_boys_network.webp"
+  ],
+  "bosses/ideal_worker": [
+    "assets/bosses/ideal_worker.svg",
+    "assets/bosses/ideal_worker.png",
+    "assets/bosses/ideal_worker.webp"
+  ],
+  "bosses/the_system": [
+    "assets/bosses/the_system.svg",
+    "assets/bosses/the_system.png",
+    "assets/bosses/the_system.webp"
+  ],
+  "cards/card_back": [
+    "assets/cards/card_back.svg",
+    "assets/cards/card_back.png",
+    "assets/cards/card_back.webp"
+  ],
+  "ui/title": [
+    "assets/ui/title.svg",
+    "assets/ui/title.png",
+    "assets/ui/title.webp"
+  ],
+  "ui/gallery_frame": [
+    "assets/ui/gallery_frame.svg",
+    "assets/ui/gallery_frame.png",
+    "assets/ui/gallery_frame.webp"
+  ],
+  "cards/ending_E01": [
+    "assets/cards/ending_E01.svg",
+    "assets/cards/ending_E01.png",
+    "assets/cards/ending_E01.webp"
+  ],
+  "cards/ending_E02": [
+    "assets/cards/ending_E02.svg",
+    "assets/cards/ending_E02.png",
+    "assets/cards/ending_E02.webp"
+  ],
+  "cards/ending_E03": [
+    "assets/cards/ending_E03.svg",
+    "assets/cards/ending_E03.png",
+    "assets/cards/ending_E03.webp"
+  ],
+  "cards/ending_E04": [
+    "assets/cards/ending_E04.svg",
+    "assets/cards/ending_E04.png",
+    "assets/cards/ending_E04.webp"
+  ],
+  "cards/ending_E05": [
+    "assets/cards/ending_E05.svg",
+    "assets/cards/ending_E05.png",
+    "assets/cards/ending_E05.webp"
+  ],
+  "cards/ending_E06": [
+    "assets/cards/ending_E06.svg",
+    "assets/cards/ending_E06.png",
+    "assets/cards/ending_E06.webp"
+  ],
+  "npc/recruiter_pleased": [
+    "assets/npc/recruiter_pleased.svg",
+    "assets/npc/recruiter_pleased.png",
+    "assets/npc/recruiter_pleased.webp"
+  ],
+  "npc/recruiter_neutral": [
+    "assets/npc/recruiter_neutral.svg",
+    "assets/npc/recruiter_neutral.png",
+    "assets/npc/recruiter_neutral.webp"
+  ],
+  "npc/recruiter_appraising": [
+    "assets/npc/recruiter_appraising.svg",
+    "assets/npc/recruiter_appraising.png",
+    "assets/npc/recruiter_appraising.webp"
+  ],
+  "npc/recruiter_frowning": [
+    "assets/npc/recruiter_frowning.svg",
+    "assets/npc/recruiter_frowning.png",
+    "assets/npc/recruiter_frowning.webp"
+  ],
+  "npc/recruiter_awkward": [
+    "assets/npc/recruiter_awkward.svg",
+    "assets/npc/recruiter_awkward.png",
+    "assets/npc/recruiter_awkward.webp"
+  ],
+  "npc/recruiter_cold": [
+    "assets/npc/recruiter_cold.svg",
+    "assets/npc/recruiter_cold.png",
+    "assets/npc/recruiter_cold.webp"
+  ],
+  "npc/senior-producer_pleased": [
+    "assets/npc/senior-producer_pleased.svg",
+    "assets/npc/senior-producer_pleased.png",
+    "assets/npc/senior-producer_pleased.webp"
+  ],
+  "npc/senior-producer_neutral": [
+    "assets/npc/senior-producer_neutral.svg",
+    "assets/npc/senior-producer_neutral.png",
+    "assets/npc/senior-producer_neutral.webp"
+  ],
+  "npc/senior-producer_appraising": [
+    "assets/npc/senior-producer_appraising.svg",
+    "assets/npc/senior-producer_appraising.png",
+    "assets/npc/senior-producer_appraising.webp"
+  ],
+  "npc/senior-producer_frowning": [
+    "assets/npc/senior-producer_frowning.svg",
+    "assets/npc/senior-producer_frowning.png",
+    "assets/npc/senior-producer_frowning.webp"
+  ],
+  "npc/senior-producer_awkward": [
+    "assets/npc/senior-producer_awkward.svg",
+    "assets/npc/senior-producer_awkward.png",
+    "assets/npc/senior-producer_awkward.webp"
+  ],
+  "npc/senior-producer_cold": [
+    "assets/npc/senior-producer_cold.svg",
+    "assets/npc/senior-producer_cold.png",
+    "assets/npc/senior-producer_cold.webp"
+  ],
+  "npc/line-manager_pleased": [
+    "assets/npc/line-manager_pleased.svg",
+    "assets/npc/line-manager_pleased.png",
+    "assets/npc/line-manager_pleased.webp"
+  ],
+  "npc/line-manager_neutral": [
+    "assets/npc/line-manager_neutral.svg",
+    "assets/npc/line-manager_neutral.png",
+    "assets/npc/line-manager_neutral.webp"
+  ],
+  "npc/line-manager_appraising": [
+    "assets/npc/line-manager_appraising.svg",
+    "assets/npc/line-manager_appraising.png",
+    "assets/npc/line-manager_appraising.webp"
+  ],
+  "npc/line-manager_frowning": [
+    "assets/npc/line-manager_frowning.svg",
+    "assets/npc/line-manager_frowning.png",
+    "assets/npc/line-manager_frowning.webp"
+  ],
+  "npc/line-manager_awkward": [
+    "assets/npc/line-manager_awkward.svg",
+    "assets/npc/line-manager_awkward.png",
+    "assets/npc/line-manager_awkward.webp"
+  ],
+  "npc/line-manager_cold": [
+    "assets/npc/line-manager_cold.svg",
+    "assets/npc/line-manager_cold.png",
+    "assets/npc/line-manager_cold.webp"
+  ],
+  "npc/team-member_pleased": [
+    "assets/npc/team-member_pleased.svg",
+    "assets/npc/team-member_pleased.png",
+    "assets/npc/team-member_pleased.webp"
+  ],
+  "npc/team-member_neutral": [
+    "assets/npc/team-member_neutral.svg",
+    "assets/npc/team-member_neutral.png",
+    "assets/npc/team-member_neutral.webp"
+  ],
+  "npc/team-member_appraising": [
+    "assets/npc/team-member_appraising.svg",
+    "assets/npc/team-member_appraising.png",
+    "assets/npc/team-member_appraising.webp"
+  ],
+  "npc/team-member_frowning": [
+    "assets/npc/team-member_frowning.svg",
+    "assets/npc/team-member_frowning.png",
+    "assets/npc/team-member_frowning.webp"
+  ],
+  "npc/team-member_awkward": [
+    "assets/npc/team-member_awkward.svg",
+    "assets/npc/team-member_awkward.png",
+    "assets/npc/team-member_awkward.webp"
+  ],
+  "npc/team-member_cold": [
+    "assets/npc/team-member_cold.svg",
+    "assets/npc/team-member_cold.png",
+    "assets/npc/team-member_cold.webp"
+  ],
+  "npc/gatekeeper_pleased": [
+    "assets/npc/gatekeeper_pleased.svg",
+    "assets/npc/gatekeeper_pleased.png",
+    "assets/npc/gatekeeper_pleased.webp"
+  ],
+  "npc/gatekeeper_neutral": [
+    "assets/npc/gatekeeper_neutral.svg",
+    "assets/npc/gatekeeper_neutral.png",
+    "assets/npc/gatekeeper_neutral.webp"
+  ],
+  "npc/gatekeeper_appraising": [
+    "assets/npc/gatekeeper_appraising.svg",
+    "assets/npc/gatekeeper_appraising.png",
+    "assets/npc/gatekeeper_appraising.webp"
+  ],
+  "npc/gatekeeper_frowning": [
+    "assets/npc/gatekeeper_frowning.svg",
+    "assets/npc/gatekeeper_frowning.png",
+    "assets/npc/gatekeeper_frowning.webp"
+  ],
+  "npc/gatekeeper_awkward": [
+    "assets/npc/gatekeeper_awkward.svg",
+    "assets/npc/gatekeeper_awkward.png",
+    "assets/npc/gatekeeper_awkward.webp"
+  ],
+  "npc/gatekeeper_cold": [
+    "assets/npc/gatekeeper_cold.svg",
+    "assets/npc/gatekeeper_cold.png",
+    "assets/npc/gatekeeper_cold.webp"
+  ],
+  "npc/old_boys_network_pleased": [
+    "assets/npc/old_boys_network_pleased.svg",
+    "assets/npc/old_boys_network_pleased.png",
+    "assets/npc/old_boys_network_pleased.webp"
+  ],
+  "npc/old_boys_network_neutral": [
+    "assets/npc/old_boys_network_neutral.svg",
+    "assets/npc/old_boys_network_neutral.png",
+    "assets/npc/old_boys_network_neutral.webp"
+  ],
+  "npc/old_boys_network_appraising": [
+    "assets/npc/old_boys_network_appraising.svg",
+    "assets/npc/old_boys_network_appraising.png",
+    "assets/npc/old_boys_network_appraising.webp"
+  ],
+  "npc/old_boys_network_frowning": [
+    "assets/npc/old_boys_network_frowning.svg",
+    "assets/npc/old_boys_network_frowning.png",
+    "assets/npc/old_boys_network_frowning.webp"
+  ],
+  "npc/old_boys_network_awkward": [
+    "assets/npc/old_boys_network_awkward.svg",
+    "assets/npc/old_boys_network_awkward.png",
+    "assets/npc/old_boys_network_awkward.webp"
+  ],
+  "npc/old_boys_network_cold": [
+    "assets/npc/old_boys_network_cold.svg",
+    "assets/npc/old_boys_network_cold.png",
+    "assets/npc/old_boys_network_cold.webp"
+  ],
+  "npc/ideal_worker_pleased": [
+    "assets/npc/ideal_worker_pleased.svg",
+    "assets/npc/ideal_worker_pleased.png",
+    "assets/npc/ideal_worker_pleased.webp"
+  ],
+  "npc/ideal_worker_neutral": [
+    "assets/npc/ideal_worker_neutral.svg",
+    "assets/npc/ideal_worker_neutral.png",
+    "assets/npc/ideal_worker_neutral.webp"
+  ],
+  "npc/ideal_worker_appraising": [
+    "assets/npc/ideal_worker_appraising.svg",
+    "assets/npc/ideal_worker_appraising.png",
+    "assets/npc/ideal_worker_appraising.webp"
+  ],
+  "npc/ideal_worker_frowning": [
+    "assets/npc/ideal_worker_frowning.svg",
+    "assets/npc/ideal_worker_frowning.png",
+    "assets/npc/ideal_worker_frowning.webp"
+  ],
+  "npc/ideal_worker_awkward": [
+    "assets/npc/ideal_worker_awkward.svg",
+    "assets/npc/ideal_worker_awkward.png",
+    "assets/npc/ideal_worker_awkward.webp"
+  ],
+  "npc/ideal_worker_cold": [
+    "assets/npc/ideal_worker_cold.svg",
+    "assets/npc/ideal_worker_cold.png",
+    "assets/npc/ideal_worker_cold.webp"
+  ],
+  "npc/the_system_pleased": [
+    "assets/npc/the_system_pleased.svg",
+    "assets/npc/the_system_pleased.png",
+    "assets/npc/the_system_pleased.webp"
+  ],
+  "npc/the_system_neutral": [
+    "assets/npc/the_system_neutral.svg",
+    "assets/npc/the_system_neutral.png",
+    "assets/npc/the_system_neutral.webp"
+  ],
+  "npc/the_system_appraising": [
+    "assets/npc/the_system_appraising.svg",
+    "assets/npc/the_system_appraising.png",
+    "assets/npc/the_system_appraising.webp"
+  ],
+  "npc/the_system_frowning": [
+    "assets/npc/the_system_frowning.svg",
+    "assets/npc/the_system_frowning.png",
+    "assets/npc/the_system_frowning.webp"
+  ],
+  "npc/the_system_awkward": [
+    "assets/npc/the_system_awkward.svg",
+    "assets/npc/the_system_awkward.png",
+    "assets/npc/the_system_awkward.webp"
+  ],
+  "npc/the_system_cold": [
+    "assets/npc/the_system_cold.svg",
+    "assets/npc/the_system_cold.png",
+    "assets/npc/the_system_cold.webp"
+  ]
+}

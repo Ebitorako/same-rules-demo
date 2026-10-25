@@ -1,0 +1,38 @@
+{
+  "_note": "PLACEHOLDER candidates for Chapter 4 hiring. The Ch4 writer will replace names, blurbs and numbers.",
+  "candidates": [
+    {
+      "id": "cand_a",
+      "name": "Mei",
+      "pawn": "female",
+      "blurb": "Strong at both creative and organisational work. Quiet in interviews.",
+      "stats": {
+        "Creativity": 7,
+        "Communication": 5,
+        "Skill": 7
+      }
+    },
+    {
+      "id": "cand_b",
+      "name": "Tom",
+      "pawn": "male",
+      "blurb": "Average portfolio. Presents with great confidence.",
+      "stats": {
+        "Creativity": 5,
+        "Communication": 7,
+        "Skill": 5
+      }
+    },
+    {
+      "id": "cand_c",
+      "name": "Lin",
+      "pawn": "female",
+      "blurb": "Talented and experienced. Needs flexible working for family care.",
+      "stats": {
+        "Creativity": 7,
+        "Communication": 6,
+        "Skill": 6
+      }
+    }
+  ]
+}

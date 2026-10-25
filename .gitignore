@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.tools/
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*
+!.env.example
+/nmc5369-codex-starter.zip

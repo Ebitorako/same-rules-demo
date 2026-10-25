@@ -1,0 +1,14 @@
+{
+  "name": "same-rules-demo",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "test": "vitest run",
+    "validate-data": "tsc -p tsconfig.tools.json && node .tools/scripts/validate-data.js"
+  },
+  "dependencies": { "papaparse": "^5.5.3" },
+  "devDependencies": { "@types/node": "^24.0.0", "@types/papaparse": "^5.3.16", "typescript": "^5.9.3", "vite": "^7.1.0", "vitest": "^3.2.4" }
+}

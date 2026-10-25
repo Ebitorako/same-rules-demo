@@ -1,0 +1,22 @@
+:root {
+  --ink: #141414;
+  --paper: #E6DFCF;
+  --board: #D3CBB8;
+  --panel: #EFE9DB;
+  --cream: #F4EFE3;
+  --ivory: #F7F2E6;
+  --tile-hidden: #2A2825;
+  --tile-hidden-mark: #5E584F;
+  --grey: #A39B8C;
+  --female: #C7716B;
+  --male: #5B7FA6;
+  --lit-1: #B9705F;
+  --lit-2: #CBAA5A;
+  --lit-3: #6F8DA6;
+  --font-title: 'Limelight', serif;
+  --font-body: 'Josefin Sans', sans-serif;
+  --hop-ms: 450ms;
+  --flip-half-ms: 150ms;
+  --light-ms: 400ms;
+  --idle-ms: 600ms;
+}
