@@ -2,25 +2,39 @@
 
 ## 当前状态
 
-本地游戏与 GitHub Pages 自动发布配置已准备。计划使用仓库名 `same-rules-demo`。远程仓库和试玩网址要在 GitHub 账号授权后建立；在这里记录真实链接前，不要把预期网址当作已经上线的网址。
+排期 T04 的首次上线已于 2026-10-25 完成：
+
+- **试玩网址：[Same Rules?](https://ebitorako.github.io/same-rules-demo/)**
+- **公开仓库：[Ebitorako / same-rules-demo](https://github.com/Ebitorako/same-rules-demo)**
+- **[首次发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/40188632600)：成功**
+
+仓库使用 `main` 分支，由 GitHub Actions 自动检查并发布到 GitHub Pages。公开仓库中的源码、剧情文件和图片均可查看。当前游戏仍使用占位剧情、临时数值和占位美术。
 
 本项目只发布 `Game Demo` 文件夹里的游戏文件。原始压缩包、已安装组件、临时检查文件和本地构建结果不进入 Git 仓库。课程其他作业、共享排期表也不在这个仓库范围内。
 
-## 第一次上线
+## 组员怎么试玩
 
-由 Codex 协助完成：
+1. 打开上面的试玩网址，无需 GitHub 账号，无需安装 Node.js 或 Git。
+2. 点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，再点击 **Enter the studio**。
+3. 棋盘上点击 **Next** 前进，选择卡牌选项，结果页点击 **Continue**。也可以用键盘 `1`、`2`、`3` 选择，`Enter` 继续。
 
-1. 使用已授权的 GitHub 账号建立 `same-rules-demo` 仓库，并上传 `main` 分支。GitHub Free 的 Pages 需要公开仓库；仓库中的源码、剧情文件和图片也会公开可见。
-2. 在仓库的 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**。
-3. 在 **Actions** 打开 **Publish game to GitHub Pages**。它会先检查剧情数据、运行游戏测试，再构建并发布。首次开启 Pages 后，可点击 **Run workflow** 手动启动。
-4. 等待发布成功，以 **Settings → Pages** 显示的真实网址为准，再用该网址检查首页、开始游戏、卡牌选项、刷新续玩与手机显示。
-5. 把验证过的试玩网址发给组员。只试玩的人无需 GitHub 账号，无需安装 Node.js 或 Git。
+## 首次上线的检查结果
+
+本地数据校验、35 项自动测试、生产构建，以及 GitHub 上的自动检查和发布全部成功。已在真实线上网址完成以下浏览器检查：
+
+- 首页、角色选择和 22 格棋盘能正常打开；首张卡显示 3 个可选项。
+- 选择后显示结果，刷新仍停留在同一结果；点击 **Continue** 后进度为 `01 / 20 CARDS`，可进入下一张卡。
+- 390 × 844 手机竖屏尺寸下，棋盘和卡牌显示正常，选项可用。
+- 实际按数字 `3` 和 `Enter` 可完成选择与继续；检查过程中浏览器控制台没有警告或错误。
+
+完整两轮职业流程已由逻辑集成测试覆盖。此次浏览器验收没有完成全部 20 张卡通关，也未在实体手机上试玩，这两项仍需团队验收。
 
 ## 以后更新剧情或美术
 
 1. 在 `public/data/` 更新剧情，在 `public/assets/` 添加图片；更改图片路径时同步更新 `manifest.json`。
 2. 双击根目录的 **检查项目.cmd**，然后双击 **启动游戏.cmd** 试玩受影响的部分。
 3. 让 Codex 把确认后的改动提交并上传 GitHub。`main` 分支每次更新都会自动检查并重新发布，试玩网址保持不变。
+4. 在仓库 **Actions → Publish game to GitHub Pages** 确认最新发布成功，再刷新试玩网址检查改动。组员继续使用原来的链接即可。
 
 改动只保存在电脑上时，线上版本不会变化。如果自动检查失败，查看 Actions 的错误信息并修正；上一次成功发布的网页会继续可用。
 
