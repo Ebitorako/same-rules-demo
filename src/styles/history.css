@@ -4,7 +4,7 @@
 
 .chosen-cards {
   --choice-width: clamp(32px, 3vw, 40px);
-  --choice-overlap: calc(var(--choice-width) * -.36);
+  --choice-overlap: max(calc(var(--choice-width) * -.36), calc(24px - var(--choice-width)));
   flex: 1 1 0;
   min-width: 0;
   min-height: calc(var(--choice-width) * 1.5 + 28px);
@@ -94,6 +94,26 @@
     background: var(--ivory);
     box-shadow: 2px 4px 0 var(--ink);
   }
+}
+
+/* Reserve space for raised cards while keeping the controls inside the board. */
+@media (min-width: 561px) {
+  .game-with-guide .board-centre { padding-block: 12px; }
+  .game-with-guide .deck-row { margin: 7px 0; }
+  .game-with-guide .deck { width: 48px; height: 64px; }
+  .game-with-guide .deck-question { top: 10px; left: 10px; width: 22px; font-size: 22px; line-height: 24px; }
+  .game-with-guide .chosen-pile { padding-block: 5px; }
+  .game-with-guide .board-next { margin-top: 7px; }
+  .game-with-guide .board-next > span { margin-top: 4px; }
+  .game-with-guide .board-centre .keyboard-note { margin-top: 3px; }
+}
+
+@media (min-width: 561px) and (max-height: 800px) {
+  .game-with-guide .board-centre { padding-block: 11px; }
+  .game-with-guide .deck-row { margin: 2px 0; }
+  .game-with-guide .deck { width: 36px; height: 48px; }
+  .game-with-guide .deck-question { top: 5px; left: 6px; width: 19px; font-size: 18px; line-height: 20px; }
+  .game-with-guide .deck .art-placeholder figcaption { padding-bottom: 8px; font-size: 6px; }
 }
 
 .history-card {
