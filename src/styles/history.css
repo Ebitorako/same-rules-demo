@@ -4,24 +4,21 @@
 
 .chosen-cards {
   --choice-width: clamp(32px, 3vw, 40px);
-  --choice-overlap: max(calc(var(--choice-width) * -.36), calc(24px - var(--choice-width)));
+  /* Tighten the spacing only when needed; reserve both edges for enlarged cards. */
+  --choice-step: min(calc(var(--choice-width) * .64), calc((100% - 24px - var(--choice-width)) / var(--choice-gaps, 1)));
   flex: 1 1 0;
   min-width: 0;
   min-height: calc(var(--choice-width) * 1.5 + 28px);
   align-items: flex-end;
   gap: 0;
   padding: 22px 12px 6px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-padding-inline: 12px;
-  scrollbar-width: thin;
+  overflow: visible;
   position: relative;
   isolation: isolate;
 }
 
 .chosen-cards .chosen-card {
   --card-tilt: -3deg;
-  flex: 0 0 var(--choice-width);
   width: var(--choice-width);
   min-width: 0;
   height: calc(var(--choice-width) * 1.5);
@@ -32,16 +29,14 @@
   background: var(--cream);
   color: var(--ink);
   font: clamp(10px, calc(var(--choice-width) * .36), 15px)/1 var(--font-title);
-  position: relative;
+  position: absolute;
+  inset-inline-start: calc(12px + (var(--card-order) - 1) * var(--choice-step));
+  bottom: 6px;
   z-index: var(--card-order);
   transform-origin: 50% 80%;
   transform: rotate(var(--card-tilt));
   box-shadow: 1px 2px 0 var(--grey);
   transition: transform .16s ease-out, box-shadow .16s ease-out;
-}
-
-.chosen-card + .chosen-card {
-  margin-inline-start: var(--choice-overlap);
 }
 
 .chosen-card:nth-child(even) {
@@ -257,7 +252,6 @@
 
   .chosen-cards {
     --choice-width: 30px;
-    --choice-overlap: -6px;
     min-height: 71px;
     padding-top: 20px;
   }

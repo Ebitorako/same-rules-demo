@@ -1,12 +1,14 @@
 # Genderpoly — Game Spec
 
-*Version 0.8, 31 Oct 2026.*
+*Version 0.9, 31 Oct 2026.*
+
+Version 0.9 fits every recorded **YOUR CHOICES** card inside the original hand area by increasing overlap as the card count grows. The hand has no horizontal scrolling or scrollbar, including with all 20 cards on narrow screens. Exposed card width adjusts to the available space; there is no fixed 24px minimum. Preserve hover/focus enlargement, click-to-review behavior, single-number ordinary faces and text-free metallic Boss faces. Verification is pending.
 
 Version 0.8 simplifies the history-card faces: ordinary cards show one centred number only, with no duplicate corner numbers or suit symbols. Boss cards show only their matching board metal finish—C1 red, C2 green, C3 blue, C4 purple—with no visible number or text. Their accessible labels and click-to-review actions remain. Preserve the approved overlap and hover/focus animation.
 
-Version 0.7 refines **YOUR CHOICES** into an overlapping hand of portrait playing cards. Hover or keyboard focus raises and enlarges a card above its neighbours; clicking or tapping opens the existing read-only review. Card numbers scale with the responsive layout. This changes presentation only, preserving all recorded choices, horizontal scrolling when needed, and the existing review behavior.
+Historical v0.7 introduced an overlapping hand of portrait playing cards, with hover/focus enlargement and responsive numbers. Its horizontal scrolling and minimum exposed-width layout have been superseded by v0.9; the read-only review remains.
 
-Version 0.6 makes the board's **YOUR CHOICES** mini cards clickable for a read-only review of the current career. All recorded choices remain available in a horizontally scrolling row. Reviewing a scene, its chosen option and the current pawn's result never rewinds or changes progress; the existing `run.choices` records support older saves without a new history format.
+Historical v0.6 introduced clickable **YOUR CHOICES** mini cards and a horizontally scrolling row, which v0.9 replaces with adaptive overlap. Reviewing a scene, its chosen option and the current pawn's result still never rewinds or changes progress; the existing `run.choices` records support older saves without a new history format.
 
 Version 0.5 names the game **Genderpoly** (title and header) and the in-game company **FreeDOM** (board centre). A failed numerical Boss check now opens the ending card immediately, without an intervening result screen or Continue button. Passing The Ideal Worker and becoming Creative Director through the promotion scene are required before Chapter 4. Numerical defaults and The System's existing no-fail check are unchanged. Retain the existing storage keys and repository/site addresses for compatibility.
 
@@ -99,7 +101,7 @@ Card area: three face-down piles (black card backs with a cream inner border and
 
 ### YOUR CHOICES review
 
-- Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, not only the most recent eight; allow horizontal scrolling when the row is full.
+- Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, up to 20, inside the original hand area. Automatically deepen the overlap as the number of cards grows or the available width shrinks; do not use horizontal scrolling or show a horizontal scrollbar. Exposed widths may shrink below 24px on narrow screens, so there is no fixed minimum exposure promise.
 - Use portrait playing-card proportions in an overlapping hand/pile. Ordinary cards show one centred number that scales to the available card size, without corner duplicates or suit symbols. Boss history cards show no visible number or text: `C1-B` uses the board's red metal finish, `C2-B` green, `C3-B` blue and `C4-B` purple. Keep their accessible labels and review actions.
 - Hovered and keyboard-focused cards rise and enlarge above adjacent cards, retaining the approved animation and overlap. Touch players tap a card directly; hover must not be required to open it. Retain focus visibility and reduced-motion support.
 - Clicking a mini card opens a read-only modal showing the scene, the option actually selected and the result text for the pawn that made that choice. Reuse the existing CSV content and candidate/policy JSON where applicable; do not add a separate story copy or show hidden stats.

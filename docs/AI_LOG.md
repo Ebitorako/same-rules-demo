@@ -68,3 +68,9 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
 - Done: replaced corner ranks and suit symbols with one centred responsive number on ordinary history cards. Reused the four board Boss metal finishes on text-free Boss history cards, preserving gradients during hover/focus. Updated the v0.8 specification, README and art guide; kept accessible labels and read-only review behavior.
 - Verification: all 78 tests, data validation and production build passed. Published code d59b566 to the existing GitHub Pages site (workflow 41213237664 succeeded). Verified all 20 recorded cards, all four Boss colors, exact number centring, actual 1.25× hover with the metal background retained, ordinary/Boss review selection, and mobile layout at 390 × 844 with no page overflow. Browser warning/error logs were empty. Saved desktop and mobile screenshots.
 - Human decisions: remove duplicate corner numbers and suit symbols; reuse the four board Boss colors without changing gameplay, card overlap or hover animation.
+
+## 2026-10-31 — Choice hand fits its original area (Codex)
+- Asked: automatically deepen YOUR CHOICES card overlap as more choices are recorded, fitting every card in the original area without horizontal scrolling while preserving hover enlargement and click-to-review behavior.
+- Done: updated the specification and README to v0.9, retaining single-number ordinary cards, metallic Boss cards and the read-only history. Earlier entries describing horizontal scrolling or at least 24px exposed width record the v0.6–v0.8 layouts; those requirements are superseded by adaptive overlap, with no fixed minimum exposed width on small screens.
+- Verification: pending implementation checks and publication evidence for this version.
+- Human decisions: keep all recorded cards within the existing area; retain hover/focus emphasis, touch access and review behavior without changing gameplay or progress.
