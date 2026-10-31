@@ -12,7 +12,8 @@ export function boardScreen(state: AppState, data: GameData): string {
   const chosenCards = getChoiceHistory(run, data).map(entry => {
     const title = entry.scenario?.title ?? 'Recorded choice';
     const number = String(entry.order).padStart(2,'0');
-    return `<button type="button" class="chosen-card" style="--card-order:${entry.order}" data-action="review-choice" data-card="${escape(entry.cardId)}" title="${escape(title)}" aria-label="Review choice ${entry.order}: ${escape(title)}" aria-haspopup="dialog"><span class="chosen-rank" aria-hidden="true">${number}</span><span class="chosen-suit" aria-hidden="true">◆</span><span class="chosen-rank chosen-rank-bottom" aria-hidden="true">${number}</span></button>`;
+    const metal = bossMetals[entry.cardId];
+    return `<button type="button" class="chosen-card${metal ? ` chosen-boss metal-${metal}` : ''}" style="--card-order:${entry.order}" data-action="review-choice" data-card="${escape(entry.cardId)}" ${metal ? '' : `title="${escape(title)}"`} aria-label="Review choice ${entry.order}: ${escape(title)}" aria-haspopup="dialog">${metal ? '' : `<span class="chosen-number" aria-hidden="true">${number}</span>`}</button>`;
   }).join('') || '<i>Waiting for your first card</i>';
   return `<section class="game-screen"><div class="career-strip"><div><span class="eyebrow">CAREER ${String(run.round).padStart(2,'0')}</span><h1>${escape(run.character.name)} <span>/ ${run.reachedDirector ? 'Creative Director' : 'New Hire'}</span></h1></div><span class="career-count">${String(selected).padStart(2,'0')} / 20 CARDS</span></div>
     <div class="board" role="group" aria-label="Career board, 22 spaces">${BOARD.map((tile,index) => {

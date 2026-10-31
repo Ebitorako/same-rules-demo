@@ -36,7 +36,8 @@
   --metal-edge: var(--metal-gold-edge);
 }
 
-.board .tile.metal-tile {
+.board .tile.metal-tile,
+.chosen-cards .chosen-card.chosen-boss {
   color: var(--ink);
   border-color: var(--metal-edge);
   background-color: var(--metal-base);

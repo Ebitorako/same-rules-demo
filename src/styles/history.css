@@ -31,7 +31,7 @@
   border-radius: 4px;
   background: var(--cream);
   color: var(--ink);
-  font: clamp(9px, calc(var(--choice-width) * .29), 12px)/1 var(--font-title);
+  font: clamp(10px, calc(var(--choice-width) * .36), 15px)/1 var(--font-title);
   position: relative;
   z-index: var(--card-order);
   transform-origin: 50% 80%;
@@ -57,31 +57,18 @@
   pointer-events: none;
 }
 
-.chosen-rank {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  pointer-events: none;
-}
-
-.chosen-rank-bottom {
-  inset: auto 5px 5px auto;
-  transform: rotate(180deg);
-}
-
-.chosen-suit {
+.chosen-number {
   position: absolute;
   inset: 0;
   display: grid;
   place-items: center;
-  font-size: .7em;
   pointer-events: none;
 }
 
 .chosen-cards .chosen-card:focus-visible {
   z-index: 30;
   transform: translateY(-6px) rotate(0deg) scale(1.25);
-  background: var(--ivory);
+  background-color: var(--ivory);
   box-shadow: 2px 4px 0 var(--ink);
   outline: 2px solid var(--ink);
   outline-offset: 1px;
@@ -91,7 +78,7 @@
   .chosen-cards .chosen-card:hover {
     z-index: 31;
     transform: translateY(-6px) rotate(0deg) scale(1.25);
-    background: var(--ivory);
+    background-color: var(--ivory);
     box-shadow: 2px 4px 0 var(--ink);
   }
 }

@@ -1,6 +1,8 @@
 # Genderpoly — Game Spec
 
-*Version 0.7, 31 Oct 2026.*
+*Version 0.8, 31 Oct 2026.*
+
+Version 0.8 simplifies the history-card faces: ordinary cards show one centred number only, with no duplicate corner numbers or suit symbols. Boss cards show only their matching board metal finish—C1 red, C2 green, C3 blue, C4 purple—with no visible number or text. Their accessible labels and click-to-review actions remain. Preserve the approved overlap and hover/focus animation.
 
 Version 0.7 refines **YOUR CHOICES** into an overlapping hand of portrait playing cards. Hover or keyboard focus raises and enlarges a card above its neighbours; clicking or tapping opens the existing read-only review. Card numbers scale with the responsive layout. This changes presentation only, preserving all recorded choices, horizontal scrolling when needed, and the existing review behavior.
 
@@ -8,7 +10,7 @@ Version 0.6 makes the board's **YOUR CHOICES** mini cards clickable for a read-o
 
 Version 0.5 names the game **Genderpoly** (title and header) and the in-game company **FreeDOM** (board centre). A failed numerical Boss check now opens the ending card immediately, without an intervening result screen or Continue button. Passing The Ideal Worker and becoming Creative Director through the promotion scene are required before Chapter 4. Numerical defaults and The System's existing no-fail check are unchanged. Retain the existing storage keys and repository/site addresses for compatibility.
 
-Version 0.4 records the designer's 31 Oct decisions: fixed metal finishes for the six special board tiles, an optional resident guide, and separate theory/reference sections on ending-card backs. The approved metal finishes override the earlier blanket restriction on gradients and the original special-tile palette; the exception is limited to these six tiles.
+Version 0.4 records the designer's 31 Oct decisions: fixed metal finishes for the six special board tiles, an optional resident guide, and separate theory/reference sections on ending-card backs. The approved metal finishes override the earlier blanket restriction on gradients and the original special-tile palette. This exception originally covered six tiles; v0.8 also permits their corresponding Boss history-card faces.
 
 A single-player 2D web game for a university course on gender and media (NMC5369, NUS). The player lives one career at FreeDOM in the creative industries, from New Hire to Creative Director and back to the start. Both pawns start equal; the workplace treats them differently, and the game never says so.
 
@@ -98,7 +100,8 @@ Card area: three face-down piles (black card backs with a cream inner border and
 ### YOUR CHOICES review
 
 - Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, not only the most recent eight; allow horizontal scrolling when the row is full.
-- Use portrait playing-card proportions in an overlapping hand/pile, with readable numbers that scale to the available card size. Hovered and keyboard-focused cards rise and enlarge above adjacent cards. Touch players tap a card directly; hover must not be required to open it. Retain the current palette, focus visibility and reduced-motion support.
+- Use portrait playing-card proportions in an overlapping hand/pile. Ordinary cards show one centred number that scales to the available card size, without corner duplicates or suit symbols. Boss history cards show no visible number or text: `C1-B` uses the board's red metal finish, `C2-B` green, `C3-B` blue and `C4-B` purple. Keep their accessible labels and review actions.
+- Hovered and keyboard-focused cards rise and enlarge above adjacent cards, retaining the approved animation and overlap. Touch players tap a card directly; hover must not be required to open it. Retain focus visibility and reduced-motion support.
 - Clicking a mini card opens a read-only modal showing the scene, the option actually selected and the result text for the pawn that made that choice. Reuse the existing CSV content and candidate/policy JSON where applicable; do not add a separate story copy or show hidden stats.
 - Previous/next controls browse only recorded choices from this career. They do not reveal upcoming cards or retrieve choices from earlier careers.
 - **Close** or **Escape** dismisses the modal and restores focus to the mini card that opened it. The dialog supports keyboard focus navigation; gameplay actions must not run behind it.
@@ -214,7 +217,7 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 
 ## 10. Art direction
 
-**Style:** 1930s black-and-white rubber-hose cartoon (think early animation), fully 2D, flat fills and thick black outlines. Colour is rare and muted. The designer approved a specific exception on 31 Oct: the four Boss tiles, Creative Director tile and START / finish tile use fixed brushed-metal gradients. Keep this exception on these six backgrounds only; characters, cards and ordinary tiles retain their existing flat treatment.
+**Style:** 1930s black-and-white rubber-hose cartoon (think early animation), fully 2D, flat fills and thick black outlines. Colour is rare and muted. The designer approved fixed brushed-metal gradients for the six special board tiles and, in v0.8, the four matching Boss history-card faces. Characters, ordinary history cards, full-size cards and ordinary tiles retain their existing flat treatment.
 
 **Characters:**
 
@@ -238,7 +241,7 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 | `--male` | `#5B7FA6` | Male lanyard and cheek symbols only |
 | `--lit-1/2/3` | `#B9705F` `#CBAA5A` `#6F8DA6` | Ordinary walked tiles (**open decision**, see §11) |
 
-Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-edge`. These colors form a fixed brushed-metal background; they do not respond to success, failure, pawn or choice.
+Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-edge`. These colors form a fixed brushed-metal background; the four Boss history-card faces reuse the matching red/green/blue/purple tokens. Colors do not respond to success, failure, pawn or choice.
 
 | Base token | Base / shadow / light / edge | Tile |
 |---|---|---|
@@ -251,7 +254,7 @@ Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-e
 
 **Type:** `Limelight` for titles, boss names and "?"; `Josefin Sans` for everything else (both from Google Fonts).
 
-**Shapes:** tiles 12px radius, 4px ink border; cards 12px radius with a 2px inner border inset 7px and small diamond corner ornaments; buttons are real `<button>` elements styled as ink-outlined cream cards.
+**Shapes:** tiles 12px radius, 4px ink border; full-size cards 12px radius with a 2px inner border inset 7px and small diamond corner ornaments; buttons are real `<button>` elements styled as ink-outlined cream cards. History mini-card faces follow the simpler markings in §3.
 
 **Film look:** a fixed full-screen grain overlay (SVG `feTurbulence`, greyscale, `mix-blend-mode: multiply`, opacity ~0.2) and an optional slow vignette.
 

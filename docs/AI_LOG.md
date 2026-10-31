@@ -62,3 +62,8 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
 - Done: implemented 2:3 portrait mini cards with responsive corner numbers, overlapping order, and a raised 1.25× hover/focus state. Preserved the existing review action and all recorded cards. Kept at least 24px of exposed width for each card and adjusted centre spacing so controls stay inside the board. Updated the v0.7 specification and README.
 - Verification: all 78 existing tests, data validation and the production build passed. Published to the existing GitHub Pages site. Verified actual hover styling and layer order, correct review selection, unchanged progress, and layouts at default desktop, 1440 × 900, 768 × 900 and 390 × 844. Confirmed raised cards and Next/help text remain within their containers; no browser warnings/errors were observed. Saved desktop hover and mobile screenshots.
 - Human decisions: refine the card presentation while keeping the existing palette, review behavior and game rules.
+
+## 2026-10-31 — Simplified history-card faces (Codex)
+- Asked: keep the existing overlap and hover animation, show one centred number on ordinary cards, and use only the matching red/green/blue/purple metal finish on Boss history cards without visible numbers or text.
+- Done: updated the specification to v0.8 and README instructions, and extended the documented metallic exception to the four Boss history-card faces. Kept accessible labels, keyboard/touch access and read-only review requirements. Verification and publication evidence are pending the task's final checks.
+- Human decisions: remove duplicate corner numbers and suit symbols; reuse the four board Boss colors without changing gameplay, card overlap or hover animation.
