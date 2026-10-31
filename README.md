@@ -12,6 +12,18 @@
 
 GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` 分支，会自动检查并更新同一个试玩网址；具体操作见[试玩网站发布说明](docs/DEPLOYMENT.zh-CN.md)。当前仍是包含占位剧情和占位美术的 Demo。
 
+10 月 31 日的功能已发布到上面的同一试玩网址。以后本地修改仍需完成检查并上传，才会更新网站。
+
+## 10 月 31 日更新：棋盘、引导与结局卡
+
+六个特殊地块使用固定的拉丝金属背景：沿路线四位 Boss 依次为 **Gatekeeper 红、Old Boys' Network 绿、Ideal Worker 蓝、The System 紫**；**Creative Director 银色，START / 终点金色**。走过后保留金属色并加勾记。离开 START 后，它仍是金色，只把标记翻成 `?`。
+
+常驻引导 NPC 在桌面棋盘旁、窄屏棋盘下方显示；选择卡中会先显示建议，再显示三个选项。点击 **Hide advice** 可以收起建议，**Ask the guide** 再次展开；有背景资料时，点击 **Open the rulebook** 查看行业背景、理论和文献。可以直接选择，不必先读完建议。隐藏偏好会保存，旧存档仍可继续；这些操作不会改变游戏数值或结果。
+
+引导的专属台词目前留空等组员填写，只有通用导航提示。填写位置是 [guide.csv](public/data/guide.csv)，角色名字与头像名称在 [guide.json](public/data/guide.json)；操作步骤见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md)。
+
+结局卡点击 **Turn the card over**，或 Gallery 中已解锁卡点击 **Turn over**，背面会分别显示 **Theory** 与 **References**。支持多行引用与长文滚动，内容来自原来的 `endings.csv`，程序不会生成文献。
+
 ## 在本机修改和试玩
 
 1. 在这个文件夹双击 **[启动游戏.cmd](启动游戏.cmd)**，保留它打开的窗口。
@@ -20,9 +32,7 @@ GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` �
 
 第一次启动需要联网准备项目依赖。以后依赖已在电脑上时，可以直接启动。不要双击 `index.html`；游戏的数据加载需要通过启动脚本提供的本地网址。
 
-这台电脑的依赖已于 2026-10-25 安装完成。本地构建、资料校验与 35 项自动检查全部通过，包含真实 CSV 的两轮职业流程；GitHub 上的自动检查和首次发布也已成功。
-
-线上浏览器已验证首页、角色选择、22 格棋盘、首张卡的 3 个选项、选择结果、刷新保留同一结果、继续后的 `01 / 20 CARDS` 进度及下一张卡。390 × 844 的手机竖屏尺寸下，棋盘和卡牌显示正常、选项可用；数字 `3` 和 `Enter` 的实际操作成功，浏览器控制台没有警告或错误。实体手机试玩及浏览器内完整 20 张卡通关仍待团队检查。
+10 月 31 日版本的数据校验、55 项自动测试及构建通过。在线验收确认了六色金属地块、指引收起与恢复、刷新保留偏好、规则书内容、手机竖屏选择，以及 E03 结局和画廊的 Theory / References 翻面；未发现浏览器警告或错误。手机检查使用 390 × 844 浏览器尺寸，正式展示前仍需安排实体手机及完整职业试玩。
 
 游戏会在当前浏览器自动记录进度，刷新页面会继续当前职业。浏览器、网址或端口变化可能使用另一份记录。标题页的 **Settings** 可重置全部进度；这会清除已解锁结局和历代角色。
 
@@ -40,13 +50,16 @@ GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` �
 
 | 位置 | 内容 | 日常操作 |
 |---|---|---|
-| [public/data/](public/data/) | 英文剧情、选项、结局、候选人、政策 | 组员交稿后更新这里，见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md) |
+| [public/data/](public/data/) | 英文剧情、选项、结局、候选人、政策、引导 NPC 台词 | 组员交稿后更新这里，见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md) |
+| [public/data/guide.csv](public/data/guide.csv) / [guide.json](public/data/guide.json) | 22 行引导模板，以及 NPC 名字、身份、头像名称 | 填写建议、行业背景、理论和引用；卡号保持唯一 |
 | [public/assets/](public/assets/) | 游戏实际使用的图片、音频、字体 | 你添加或替换资源，见[美术指南](docs/ART_GUIDE.zh-CN.md) |
 | [public/assets/manifest.json](public/assets/manifest.json) | 资源名称与文件路径的对应表 | 改图片名称或移动图片后同步修改路径 |
 | [docs/reference/](docs/reference/) | 草图、布局参考、风格参考 | 可以手动整理，不会自动作为游戏图片显示 |
 | [docs/starter-data/](docs/starter-data/) | 最初提供的剧情数据备份 | 留作对照，游戏不读取这里 |
 | [docs/GAME_SPEC.md](docs/GAME_SPEC.md) | 当前采用的游戏规则与设计规格 | 规则变更先在这里核对 |
 | [src/config/rules.ts](src/config/rules.ts) | 初始数值、Boss 门槛、开放设计选项 | 与 Codex 一起调整并测试 |
+| [src/styles/tokens.css](src/styles/tokens.css) | 界面色板和六种金属色 | 配色集中在这里，特殊地块不必另做背景图 |
+| [src/data/guide.ts](src/data/guide.ts) / [src/ui/guide.ts](src/ui/guide.ts) | 引导数据检查与显示框架 | 组员日常只需填写上面的 CSV / JSON |
 | [src/](src/) | 游戏流程、界面、样式 | 由 Codex 维护骨架 |
 | [docs/AI_LOG.md](docs/AI_LOG.md) | AI 使用记录 | 用于课程提交的附录 |
 
@@ -59,7 +72,7 @@ public/assets/
   manifest.json   资源路径表
   characters/     两种玩家棋子
   bosses/         四个 Boss
-  npc/            情境 NPC 与表情
+  npc/            情境 NPC、表情与 guide_neutral 引导头像
   cards/          卡背与结局图
   ui/             标题、边框等界面图片
   audio/          音效、音乐及授权说明
@@ -70,10 +83,10 @@ public/assets/
 
 ## 换一批内容的顺序
 
-1. 把最终剧情导出为 UTF-8 CSV，替换 `public/data` 中对应文件；先保留一份组员原稿。
+1. 把最终剧情或引导台词导出为 UTF-8 CSV，替换 `public/data` 中对应文件；先保留一份组员原稿。`guide.csv` 每个卡号只有一行，与剧情表每个选项一行的方式不同。
 2. 把美术成品放入 `public/assets` 的对应子文件夹，核对资源路径表。
 3. 双击 **[检查项目.cmd](检查项目.cmd)**，检查数据、游戏逻辑和发布构建。
-4. 启动游戏，完整试玩受到改动影响的部分。数据有大改时，通过 Settings 重置旧测试进度再开始。
+4. 启动游戏，完整试玩受到改动影响的部分。引导有改动时检查收起、展开及规则册；结局有改动时翻到 Theory / References 并检查长文滚动。数据有大改时，通过 Settings 重置旧测试进度再开始。
 
 提供的卡牌占位文字、候选人和政策只是接入样例。正式交稿前替换占位内容并删掉相应占位标记，核对文献出处、理论表述和结局。
 
@@ -97,4 +110,4 @@ npm run build
 
 排期 T04 的仓库和试玩网站已上线，[首次发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/40188632600)为成功状态。发布、更新和组员试玩方式见[试玩网站发布说明](docs/DEPLOYMENT.zh-CN.md)。在线版本仍由浏览器保存进度，不会跨设备同步。
 
-下一轮由团队确认：最终剧情和文献、初始数值与 Boss 门槛、结局条件、政策效果，以及已走格子的配色。当前六个结局按退出原因或是否推行正式招聘政策选择；**The System 最后一次选择如何对应不同结局，还需要团队定义**。当前可先沿用规格中的默认值继续制作。
+下一轮由团队确认：最终剧情、引导台词和文献、初始数值与 Boss 门槛、结局条件、政策效果，以及普通已走格子的配色。六个特殊地块的金属色按 10 月 31 日决定固定。当前六个结局按退出原因或是否推行正式招聘政策选择；**The System 最后一次选择如何对应不同结局，还需要团队定义**。当前可先沿用规格中的默认值继续制作。

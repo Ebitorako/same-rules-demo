@@ -1,6 +1,8 @@
 # Same Rules? — Game Spec
 
-*Working title. Version 0.3, 25 Oct 2026.*
+*Working title. Version 0.4, 31 Oct 2026.*
+
+Version 0.4 records the designer's 31 Oct decisions: fixed metal finishes for the six special board tiles, an optional resident guide, and separate theory/reference sections on ending-card backs. The approved metal finishes override the earlier blanket restriction on gradients and the original special-tile palette; the exception is limited to these six tiles.
 
 A single-player 2D web game for a university course on gender and media (NMC5369, NUS). The player lives one career in the creative industries, from New Hire to Creative Director and back to the start. Both pawns start equal; the workplace treats them differently, and the game never says so.
 
@@ -29,8 +31,8 @@ Design consequences that are **not negotiable**:
 2. **Hidden rules.** Stats and gender effects are never shown to the player (only in debug mode). Feedback comes only through text, NPC tone and NPC expressions.
 3. **Deterministic.** No dice, no randomness in outcomes. Same choices + same pawn = same result, every time. (The only allowed randomness is the optional first-round gender assignment, see §11.)
 4. **No undo.** No back button, no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice.
-5. **Colour records, never judges.** Walked tiles light up in muted colour; colour carries no good/bad meaning.
-6. **Never preach.** The game never states "this happened because you are a woman". Theory appears as background notes the player can open, and on the back of ending cards.
+5. **Colour records, never judges.** Ordinary walked tiles light up in muted colour. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
+6. **Never preach.** The game never states "this happened because you are a woman". Theory appears as background notes the player can open, through the optional guide's rulebook, and on the back of ending cards. The guide provides context without deciding for the player or revealing hidden numerical rules.
 
 ---
 
@@ -46,6 +48,8 @@ Back on the start tile ─▶ Ending card flips over ─▶ Gallery ─▶ "Next
 ```
 
 Always reachable from the title screen: **Gallery** and **Settings** (reset all progress, reduced motion, sound on/off).
+
+A resident guide sits beside the board on desktop and below it on narrow screens. On a choice card, the guide's advice appears before the options in document order; it never blocks or disables choosing. **Hide advice** collapses the advice; **Ask the guide** restores it. **Open the rulebook** reveals available industry context, theory and references. Reading or hiding advice never changes a choice, stat, boss result or ending.
 
 ---
 
@@ -72,13 +76,13 @@ Tile states:
 
 | State | Look |
 |---|---|
-| Hidden (not yet walked) | Dark `#2A2825`, a "?" in `#5E584F` (Limelight) |
-| Walked | Filled with a muted colour from the lit palette (§10); colour has no meaning |
-| START (before leaving) | Ivory `#F7F2E6` with a double inner border, "START / NEW HIRE →" |
-| START after the pawn leaves | **Flips into a hidden "?" tile.** When the pawn returns, it flips to reveal the ending |
-| Creative Director tile | Ivory like START, a star, "CREATIVE DIRECTOR". Not the ending |
-| Boss corner, not reached | Black `#141414`, light boss figure, name label |
-| Boss corner, reached | Muted colour, dark boss figure |
+| Ordinary hidden tile (not yet walked) | Dark `#2A2825`, a "?" in `#5E584F` (Limelight) |
+| Ordinary walked tile | Filled with a muted colour from the lit palette (§10); colour has no good/bad meaning |
+| START / finish (before leaving) | Gold metal finish with a double inner border, "START / NEW HIRE →" |
+| START after the pawn leaves | **Flips into a "?" tile while keeping its gold finish.** When the pawn returns, it flips to reveal the ending |
+| Creative Director tile | Silver metal finish, a star, "CREATIVE DIRECTOR". Not the ending |
+| Boss corners | In route order: Gatekeeper = red metal; Old Boys' Network = green metal; Ideal Worker = blue metal; The System = purple metal. Keep the figure and name legible |
+| Visited special tile | Keeps its assigned metal finish and adds a check mark; never switches to the ordinary walked palette |
 
 Card area: three face-down piles (black card backs with a cream inner border and "?" in a circle) and one face-up horizontal pile of chosen cards that grows as the player plays.
 
@@ -111,6 +115,15 @@ Conditions let an option (or a whole card variant) appear only if earlier things
 - `C1-02=2` → the player chose option 2 on card C1-02 this run
 - `policy:formal_recruitment` → that policy is active (set by a previous round's Creative Director)
 - `round>=2` → this is the second career or later
+
+### Resident guide
+
+The guide reads its identity from `public/data/guide.json` and authored notes from `public/data/guide.csv` (§12). The template contains `GENERAL`, `PROMOTION` and the 20 board card ids, one row per id. All card-specific advice, context, theory and references are initially blank for the team to write; `GENERAL` contains navigation guidance only. Do not invent quotations or theory claims to fill these blanks.
+
+- Use the current card's advice before its choice; a blank advice field falls back to `GENERAL` advice. `PROMOTION` covers the Creative Director scene.
+- If both the current guide row's industry context and theory are blank, use the current scenario's background and, unless explicitly supplied in the guide row, its reference.
+- If the guide row supplies its own industry context or theory, use that independent text and its own reference only. Do not silently borrow a scenario citation to support newly authored claims.
+- The guide is optional. Persist its visibility preference as `settings.guideHidden`; older saves without this setting remain valid and default to visible. This is a display preference, not a game-rule input.
 
 ---
 
@@ -148,8 +161,9 @@ Candidates and policies live in `public/data/candidates.json` and `public/data/p
 
 - A run ends when the pawn **returns to START** (the "?" tile flips over) or exits early (failed boss, burnout).
 - The ending is picked by an ordered list of rules in code (first match wins); its text comes from `endings.csv`.
-- Ending card: **front** = name + ending text + art; **back** = one or two sentences naming the theory concept + the reading. The player can flip it.
+- Ending card: **front** = name + ending text + art; **back** = separate **Theory** and **References** sections, sourced from `endings.csv` fields `背面：理论概念` and `对应文献`. The player can flip it. Preserve paragraph breaks and multiline citations; long text scrolls within the reading area. Empty references remain visibly unfilled, never generated or inferred.
 - **Gallery:** a grid of all ending cards. Unlocked cards show their front (click to flip); locked cards show a silhouette and "???". Each unlocked card records which pawn unlocked it.
+- The same theory/reference layout and scrolling behavior applies when an unlocked card is flipped in the Gallery.
 - Some endings can only be reached by one pawn. The gallery itself then shows the gap between the two pawns without the game ever saying it. **This is a key design idea; do not "fix" it.**
 - Target: 6–8 endings.
 
@@ -164,7 +178,7 @@ Saved in `localStorage` (one key prefix, e.g. `sameRules.`):
 | `currentRun` | Full state of the run in progress (auto-saved after every choice) |
 | `lineage` | One entry per finished career: character name, pawn, ending id, reached Creative Director?, policies set, intern hired |
 | `gallery` | Unlocked ending ids, with which pawn and which round |
-| `settings` | Reduced motion, sound |
+| `settings` | Reduced motion, sound, `guideHidden` (optional advice visibility; absent in older saves means visible) |
 
 New round:
 
@@ -180,14 +194,14 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 
 ## 10. Art direction
 
-**Style:** 1930s black-and-white rubber-hose cartoon (think early animation), fully 2D, flat fills, thick black outlines, no gradients. Colour is rare and muted.
+**Style:** 1930s black-and-white rubber-hose cartoon (think early animation), fully 2D, flat fills and thick black outlines. Colour is rare and muted. The designer approved a specific exception on 31 Oct: the four Boss tiles, Creative Director tile and START / finish tile use fixed brushed-metal gradients. Keep this exception on these six backgrounds only; characters, cards and ordinary tiles retain their existing flat treatment.
 
 **Characters:**
 
 - Player pawn = an **ID badge with rubber-hose limbs**: a landscape badge as the body, a clip and two lanyard straps on top, noodle arms on hips with white gloves, black round shoes. Gender shows **only** as the lanyard colour and the two small ♀/♂ symbols on the cheeks. Everything else is identical.
 - Faces (all characters): big white oval eyes with a thick black outline, black pupils, simple brows and mouth. Bosses use the same face construction.
 
-**Colour tokens** (put these in one CSS file; do not invent new colours):
+**Colour tokens** (centralize in `src/styles/tokens.css`; use the approved palette and metal finishes below):
 
 | Token | Hex | Use |
 |---|---|---|
@@ -196,13 +210,24 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 | `--board` | `#D3CBB8` | Board base (5px ink border, 10px hard ink shadow) |
 | `--panel` | `#EFE9DB` | Centre card area |
 | `--cream` | `#F4EFE3` | Card faces, light figures |
-| `--ivory` | `#F7F2E6` | START and Creative Director tiles |
+| `--ivory` | `#F7F2E6` | Existing light interface accents; special tiles now use the assigned metal finish |
 | `--tile-hidden` | `#2A2825` | Unwalked tiles |
 | `--tile-hidden-mark` | `#5E584F` | "?" on unwalked tiles |
 | `--grey` | `#A39B8C` | Secondary lines |
 | `--female` | `#C7716B` | Female lanyard and cheek symbols only |
 | `--male` | `#5B7FA6` | Male lanyard and cheek symbols only |
-| `--lit-1/2/3` | `#B9705F` `#CBAA5A` `#6F8DA6` | Walked tiles (**open decision**, see §11) |
+| `--lit-1/2/3` | `#B9705F` `#CBAA5A` `#6F8DA6` | Ordinary walked tiles (**open decision**, see §11) |
+
+Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-edge`. These colors form a fixed brushed-metal background; they do not respond to success, failure, pawn or choice.
+
+| Base token | Base / shadow / light / edge | Tile |
+|---|---|---|
+| `--metal-red` | `#A95050` / `#7B2E32` / `#E2B1A4` / `#5A2329` | The Gatekeeper |
+| `--metal-green` | `#678E73` / `#305A4F` / `#CFDCC0` / `#234439` | The Old Boys' Network |
+| `--metal-blue` | `#6F92B0` / `#315676` / `#D2E0E7` / `#263D53` | The Ideal Worker |
+| `--metal-purple` | `#92779E` / `#523A65` / `#DECEE4` / `#3D2B4B` | The System |
+| `--metal-silver` | `#BAC1C3` / `#72797C` / `#F0F2ED` / `#4C5357` | Creative Director |
+| `--metal-gold` | `#CDAA55` / `#876127` / `#F4E7AF` / `#65451D` | START and finish (the same tile) |
 
 **Type:** `Limelight` for titles, boss names and "?"; `Josefin Sans` for everything else (both from Google Fonts).
 
@@ -227,6 +252,7 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 | `characters/pawn_female.*`, `pawn_male.*` | Player pawn |
 | `bosses/gatekeeper.*`, `old_boys_network.*`, `ideal_worker.*`, `the_system.*` | Boss figures |
 | `npc/<npc-id>_<expression>.*` | NPC portraits; expressions `pleased`, `neutral`, `appraising`, `frowning`, `awkward`, `cold` |
+| `npc/guide_neutral.svg`, `.png` or `.webp` | Resident guide portrait; `guide.json` refers to manifest key `npc/guide_neutral` without an extension |
 | `cards/card_back.*`, `cards/ending_<id>.*` | Card back, ending card art |
 | `ui/title.*`, `ui/gallery_frame.*` | Title screen, gallery frame |
 
@@ -244,7 +270,7 @@ Put all of these in `src/config/rules.ts` so the team can change them without to
 | What a failed boss does | Run ends in that chapter's exit ending |
 | Starting stats and boss thresholds per pawn | All stats 5; placeholder thresholds |
 | Which policies exist and their next-round effects | Formal recruitment only (removes Gatekeeper "fit" penalty) |
-| Lit tile colours | Current three; the team may replace them because two are close to the gender colours |
+| Ordinary lit tile colours | Current three; the team may replace them because two are close to the gender colours. The six special-tile metal assignments are fixed by the 31 Oct decision |
 | Number of endings | 6–8 |
 
 ---
@@ -274,7 +300,7 @@ Headers are in Chinese as the team uses them; map them to these keys:
 | 结果 ♀ / 结果 ♂ | `resultF` / `resultM` | |
 | NPC 表情 ♀ / ♂ | `exprF` / `exprM` | 满意 pleased · 中性 neutral · 打量 appraising · 皱眉 frowning · 尴尬 awkward · 冷淡 cold |
 | 数值变化 ♀ / ♂ | `deltaF` / `deltaM` | `Network+1, Energy-1` |
-| 对应文献 | `reference` | Not shown in game |
+| 对应文献 | `reference` | Available in the guide's rulebook when its context falls back to this scenario |
 | 备注 | `notes` | Not shown in game |
 
 Rows of the same card repeat the card-level columns. Skip rows whose `optionText` is empty. Grey example rows in the sheet (card `C2-03`) are samples and may be deleted by the team.
@@ -294,9 +320,28 @@ Rows of the same card repeat the card-level columns. Skip rows whose `optionText
 | 美术需求 | `artNote` |
 | 备注 | `notes` |
 
+### `guide.csv` — one row per guide context
+
+The supplied template has 22 rows: `GENERAL`, `PROMOTION`, and all 20 scenario/Boss card ids. Keep each id unique; this file does not use the scenario table's one-row-per-option layout.
+
+| Sheet header | Key | Notes |
+|---|---|---|
+| 卡号 | `cardId` | `GENERAL`, `PROMOTION`, or an existing board card id |
+| 选择前建议 | `advice` | `GENERAL` is required; other blank advice falls back to it |
+| 行业背景 | `background` | Optional industry context |
+| 理论解释 | `theory` | Optional team-authored theoretical explanation |
+| 对应文献 | `reference` | References supporting this row's text; multiline text is supported |
+| 备注 | `notes` | Team notes, not displayed |
+
+If both `background` and `theory` are blank on a choice card, the guide uses that scenario's background and its reference, unless the guide row supplies a reference. When either independent context field is filled, no scenario reference is automatically inherited. `GENERAL` supplies navigation guidance, not invented card-specific claims. The team will fill the currently empty dedicated rows.
+
+`guide.json` contains nonempty `name`, `role` and `portrait` fields. The default portrait is `npc/guide_neutral`, which is a resource key in `public/assets/manifest.json`, not a filename or filesystem path.
+
 ### Validation
 
 `npm run validate-data` must check: every card gives **each pawn exactly 3 options**; card ids are unique and match the board's 20 slots; stat names in deltas are valid; conditions parse; every ending id referenced in code exists in `endings.csv`. Print readable errors (the team are not programmers).
+
+Guide validation checks the six CSV headers, recognized and unique context ids, required `GENERAL` advice, and nonempty guide identity fields with a valid `npc/...` portrait key. Blank dedicated advice and context are intentional and use the fallback rules above.
 
 ---
 
@@ -317,16 +362,20 @@ src/
   config/rules.ts        # all tunable numbers and open decisions (§11)
   data/load.ts           # CSV/JSON loading + header mapping
   data/validate.ts       # used by validate-data
+  data/guide.ts          # guide.csv / guide.json parsing and validation
   game/state.ts          # types + state machine
   game/conditions.ts     # condition parser
   game/bosses.ts         # boss rules
   game/endings.ts        # ordered ending rules
   game/persistence.ts    # localStorage
   ui/board.ts  ui/card.ts  ui/gallery.ts  ui/title.ts  ui/settings.ts
+  ui/guide.ts            # optional advice, context and references
   styles/tokens.css  styles/*.css
 public/
   assets/...             # art drawn by the designer (placeholders until added)
   data/*.csv  data/*.json
+  data/guide.csv         # 22 guide contexts, authored by the team
+  data/guide.json        # guide name, role and portrait resource key
 ```
 
 ---
