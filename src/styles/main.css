@@ -73,9 +73,7 @@ button:disabled { cursor: wait; }
 .boss-art figcaption { display: none; }
 .boss-name { font-family: var(--font-title); font-size: 10px; line-height: 1.1; text-align: center; margin-top: 5px; }
 .tile.walked { color: var(--ink); }
-.tile.lit-1 { background: var(--lit-1); }
-.tile.lit-2 { background: var(--lit-2); }
-.tile.lit-3 { background: var(--lit-3); }
+.tile.scenario.walked { background: var(--tile-walked); }
 .tile.walked .boss-art.art-placeholder { background: transparent; color: var(--ink); border-color: var(--ink); }
 .tile-number { font-family: var(--font-title); font-size: 30px; }
 .walked-mark { font-size: 8px; font-weight: 700; }

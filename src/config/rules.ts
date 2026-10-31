@@ -28,7 +28,6 @@ export const RULES = {
     'C4-B': [],
   } as Record<string, BossCheck[]>,
   endings: { idealWorker: 'E01', completed: 'E02', gatekeeper: 'E03', network: 'E04', burnout: 'E05', policy: 'E06' },
-  litTileColors: ['#B9705F', '#CBAA5A', '#6F8DA6'],
   animation: { hopMs: 450, flipHalfMs: 150, lightMs: 400, idleMs: 600 },
   storagePrefix: 'sameRules.',
 } as const;

@@ -1,6 +1,8 @@
 # Genderpoly — Game Spec
 
-*Version 0.9, 31 Oct 2026.*
+*Version 0.10, 31 Oct 2026.*
+
+Version 0.10 fixes ordinary board-tile colors: unvisited tiles keep their existing dark background, and visited tiles use cream `#F4EFE3` through `--tile-walked: var(--cream)`. The former red/blue/yellow visited palette and `lit-*` classes/tokens are retired. This is no longer an open design decision. The six special board tiles and four Boss history-card faces retain their assigned metal finishes; game rules and progress are unchanged.
 
 Version 0.9 fits every recorded **YOUR CHOICES** card inside the original hand area by increasing overlap as the card count grows. The hand has no horizontal scrolling or scrollbar, including with all 20 cards on narrow screens. Exposed card width adjusts to the available space; there is no fixed 24px minimum. Preserve hover/focus enlargement, click-to-review behavior, single-number ordinary faces and text-free metallic Boss faces.
 
@@ -41,7 +43,7 @@ Design consequences that are **not negotiable**:
 2. **Hidden rules.** Stats and gender effects are never shown to the player (only in debug mode). Feedback comes only through text, NPC tone and NPC expressions.
 3. **Deterministic.** No dice, no randomness in outcomes. Same choices + same pawn = same result, every time. (The only allowed randomness is the optional first-round gender assignment, see §11.)
 4. **No undo.** No action rewinds gameplay, and there are no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice. Browsing recorded choices (§3) is read-only and does not replay a decision.
-5. **Colour records, never judges.** Ordinary walked tiles light up in muted colour. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
+5. **Colour records, never judges.** Ordinary tiles change from the existing dark background to cream when visited. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
 6. **Never preach.** The game never states "this happened because you are a woman". Theory appears as background notes the player can open, through the optional guide's rulebook, and on the back of ending cards. The guide provides context without deciding for the player or revealing hidden numerical rules.
 
 ---
@@ -90,12 +92,12 @@ Tile states:
 | State | Look |
 |---|---|
 | Ordinary hidden tile (not yet walked) | Dark `#2A2825`, a "?" in `#5E584F` (Limelight) |
-| Ordinary walked tile | Filled with a muted colour from the lit palette (§10); colour has no good/bad meaning |
+| Ordinary walked tile | Cream `#F4EFE3` via `--tile-walked: var(--cream)`; no red/blue/yellow cycle or good/bad meaning |
 | START / finish (before leaving) | Gold metal finish with a double inner border, "START / NEW HIRE →" |
 | START after the pawn leaves | **Flips into a "?" tile while keeping its gold finish.** When the pawn returns, it flips to reveal the ending |
 | Creative Director tile | Silver metal finish, a star, "CREATIVE DIRECTOR". Not the ending |
 | Boss corners | In route order: Gatekeeper = red metal; Old Boys' Network = green metal; Ideal Worker = blue metal; The System = purple metal. Keep the figure and name legible |
-| Visited special tile | Keeps its assigned metal finish and adds a check mark; never switches to the ordinary walked palette |
+| Visited special tile | Keeps its assigned metal finish and adds a check mark; never switches to the ordinary cream background |
 
 Card area: three face-down piles (black card backs with a cream inner border and "?" in a circle) and one face-up horizontal pile of chosen cards that grows as the player plays.
 
@@ -228,7 +230,7 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 
 **Colour tokens** (centralize in `src/styles/tokens.css`; use the approved palette and metal finishes below):
 
-| Token | Hex | Use |
+| Token | Value | Use |
 |---|---|---|
 | `--ink` | `#141414` | Outlines, text, dark cards |
 | `--paper` | `#E6DFCF` | Page background |
@@ -236,12 +238,12 @@ Wording for the team: "you cannot save or undo within a career, but the game rem
 | `--panel` | `#EFE9DB` | Centre card area |
 | `--cream` | `#F4EFE3` | Card faces, light figures |
 | `--ivory` | `#F7F2E6` | Existing light interface accents; special tiles now use the assigned metal finish |
-| `--tile-hidden` | `#2A2825` | Unwalked tiles |
+| `--tile-hidden` | `#2A2825` | Ordinary unvisited tiles |
 | `--tile-hidden-mark` | `#5E584F` | "?" on unwalked tiles |
 | `--grey` | `#A39B8C` | Secondary lines |
 | `--female` | `#C7716B` | Female lanyard and cheek symbols only |
 | `--male` | `#5B7FA6` | Male lanyard and cheek symbols only |
-| `--lit-1/2/3` | `#B9705F` `#CBAA5A` `#6F8DA6` | Ordinary walked tiles (**open decision**, see §11) |
+| `--tile-walked` | `var(--cream)` = `#F4EFE3` | All ordinary visited tiles; fixed in v0.10 |
 
 Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-edge`. These colors form a fixed brushed-metal background; the four Boss history-card faces reuse the matching red/green/blue/purple tokens. Colors do not respond to success, failure, pawn or choice.
 
@@ -267,7 +269,7 @@ Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-e
 | Idle bob (pawn, bosses, NPCs) | translateY 0 → −4px with a slight squash, ~600ms ease-in-out, alternate, infinite |
 | Pawn hop | ~450ms arc to the next tile, small squash on landing |
 | Card flip | scaleX 1 → 0 (150ms), swap face, 0 → 1 (150ms) |
-| Tile light-up | colour spreads from the centre over ~400ms |
+| Tile light-up | the ordinary tile's cream fill spreads from the centre over ~400ms |
 | START → "?" flip | same flip as a card, when the pawn leaves START |
 
 **Art assets.** All art is drawn by the designer and added to `public/assets/` over time (SVG preferred, PNG allowed). Until a file exists, the game shows a clearly labelled placeholder box of the right size. Load art by these names so new files slot in without code changes:
@@ -294,8 +296,9 @@ Put all of these in `src/config/rules.ts` so the team can change them without to
 | Round 1 character: choose pawn or random | `"choose"` |
 | Starting stats and boss thresholds per pawn | All stats 5; placeholder thresholds |
 | Which policies exist and their next-round effects | Formal recruitment only (removes Gatekeeper "fit" penalty) |
-| Ordinary lit tile colours | Current three; the team may replace them because two are close to the gender colours. The six special-tile metal assignments are fixed by the 31 Oct decision |
 | Number of endings | 6–8 |
+
+Ordinary tile colors are settled in v0.10: dark before visiting, cream afterward. Maintain their tokens in `src/styles/tokens.css`; the old three-color visited palette is no longer a rule-config option. Special-tile and Boss history-card metals remain as specified in §10.
 
 ---
 
