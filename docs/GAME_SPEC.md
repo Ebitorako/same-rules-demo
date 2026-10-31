@@ -2,7 +2,7 @@
 
 *Version 0.9, 31 Oct 2026.*
 
-Version 0.9 fits every recorded **YOUR CHOICES** card inside the original hand area by increasing overlap as the card count grows. The hand has no horizontal scrolling or scrollbar, including with all 20 cards on narrow screens. Exposed card width adjusts to the available space; there is no fixed 24px minimum. Preserve hover/focus enlargement, click-to-review behavior, single-number ordinary faces and text-free metallic Boss faces. Verification is pending.
+Version 0.9 fits every recorded **YOUR CHOICES** card inside the original hand area by increasing overlap as the card count grows. The hand has no horizontal scrolling or scrollbar, including with all 20 cards on narrow screens. Exposed card width adjusts to the available space; there is no fixed 24px minimum. Preserve hover/focus enlargement, click-to-review behavior, single-number ordinary faces and text-free metallic Boss faces.
 
 Version 0.8 simplifies the history-card faces: ordinary cards show one centred number only, with no duplicate corner numbers or suit symbols. Boss cards show only their matching board metal finish—C1 red, C2 green, C3 blue, C4 purple—with no visible number or text. Their accessible labels and click-to-review actions remain. Preserve the approved overlap and hover/focus animation.
 
