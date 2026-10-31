@@ -1,6 +1,8 @@
 # Genderpoly — Game Spec
 
-*Version 0.5, 31 Oct 2026.*
+*Version 0.6, 31 Oct 2026.*
+
+Version 0.6 makes the board's **YOUR CHOICES** mini cards clickable for a read-only review of the current career. All recorded choices remain available in a horizontally scrolling row. Reviewing a scene, its chosen option and the current pawn's result never rewinds or changes progress; the existing `run.choices` records support older saves without a new history format.
 
 Version 0.5 names the game **Genderpoly** (title and header) and the in-game company **FreeDOM** (board centre). A failed numerical Boss check now opens the ending card immediately, without an intervening result screen or Continue button. Passing The Ideal Worker and becoming Creative Director through the promotion scene are required before Chapter 4. Numerical defaults and The System's existing no-fail check are unchanged. Retain the existing storage keys and repository/site addresses for compatibility.
 
@@ -32,7 +34,7 @@ Design consequences that are **not negotiable**:
 1. **Same start.** Both pawns have identical starting stats. Gender never changes ability; it changes how the world responds.
 2. **Hidden rules.** Stats and gender effects are never shown to the player (only in debug mode). Feedback comes only through text, NPC tone and NPC expressions.
 3. **Deterministic.** No dice, no randomness in outcomes. Same choices + same pawn = same result, every time. (The only allowed randomness is the optional first-round gender assignment, see §11.)
-4. **No undo.** No back button, no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice.
+4. **No undo.** No action rewinds gameplay, and there are no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice. Browsing recorded choices (§3) is read-only and does not replay a decision.
 5. **Colour records, never judges.** Ordinary walked tiles light up in muted colour. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
 6. **Never preach.** The game never states "this happened because you are a woman". Theory appears as background notes the player can open, through the optional guide's rulebook, and on the back of ending cards. The guide provides context without deciding for the player or revealing hidden numerical rules.
 
@@ -90,6 +92,14 @@ Tile states:
 | Visited special tile | Keeps its assigned metal finish and adds a check mark; never switches to the ordinary walked palette |
 
 Card area: three face-down piles (black card backs with a cream inner border and "?" in a circle) and one face-up horizontal pile of chosen cards that grows as the player plays.
+
+### YOUR CHOICES review
+
+- Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, not only the most recent eight; allow horizontal scrolling when the row is full.
+- Clicking a mini card opens a read-only modal showing the scene, the option actually selected and the result text for the pawn that made that choice. Reuse the existing CSV content and candidate/policy JSON where applicable; do not add a separate story copy or show hidden stats.
+- Previous/next controls browse only recorded choices from this career. They do not reveal upcoming cards or retrieve choices from earlier careers.
+- **Close** or **Escape** dismisses the modal and restores focus to the mini card that opened it. The dialog supports keyboard focus navigation; gameplay actions must not run behind it.
+- Opening, browsing and closing the review never changes the pawn's position, choices, stats, outcome or save progress. Use the existing `run.choices` records, so older valid saves also work. The selected review card is temporary UI state: refreshing closes the review and resumes the current board position.
 
 ---
 

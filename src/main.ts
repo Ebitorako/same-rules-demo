@@ -2,11 +2,13 @@ import './styles/main.css';
 import './styles/metal.css';
 import './styles/guide.css';
 import './styles/endings.css';
+import './styles/history.css';
 import { RULES } from './config/rules';
 import { loadData, loadGuideData } from './data/load';
 import type { GuideData } from './data/guide';
 import { validateData } from './data/validate';
 import { BOARD } from './game/board';
+import { getChoiceHistory } from './game/history';
 import { advance, chooseOption, createInitialState, startCareer, updateSettings } from './game/state';
 import { loadState, resetStorage, saveState } from './game/persistence';
 import type { AppState, GameData, Pawn } from './game/types';
@@ -18,6 +20,7 @@ import { endingScreen, galleryScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
 import { guidePanel } from './ui/guide';
+import { choiceHistoryDialog } from './ui/history';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const debug = new URLSearchParams(location.search).get('debug') === '1';
@@ -32,6 +35,8 @@ let endingBack = false;
 let savingFailed = false;
 let busy = false;
 let showingReturn = false;
+let historyCardId: string | null = null;
+let historyTriggerId: string | null = null;
 const galleryFlips = new Set<string>();
 const reduced = () => state.settings.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -43,7 +48,10 @@ function debugPanel(): string {
 function render(focus = true): void {
   document.body.classList.toggle('reduced-motion', reduced());
   const run = state.run;
-  const storyOpen = view === 'game' && run && ['card','result','promotion'].includes(run.phase);
+  const scenarioOpen = view === 'game' && run && ['card','result','promotion'].includes(run.phase);
+  const historyMarkup = view === 'game' && run?.phase === 'board' && historyCardId
+    ? choiceHistoryDialog(state, data, historyCardId) : '';
+  const storyOpen = scenarioOpen || Boolean(historyMarkup);
   let content: string;
   if (view === 'title') content = titleScreen(state,data,selectingPawn);
   else if (view === 'gallery') content = galleryScreen(state,data,galleryFlips);
@@ -51,7 +59,7 @@ function render(focus = true): void {
   else if (!run) { view = 'title'; content = titleScreen(state,data,selectingPawn); }
   else if (run.phase === 'intro') content = introScreen(state,data);
   else if (run.phase === 'ending' && !showingReturn) content = endingScreen(state,data,endingBack);
-  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${storyOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '') : ''}`;
+  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '') : historyMarkup}`;
   app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="Main navigation"><span class="prototype-stamp">PROTOTYPE</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? '<p class="save-warning" role="status">This browser could not save progress. Keep this tab open; refreshing may lose this career.</p>' : ''}${debugPanel()}`;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
@@ -61,6 +69,13 @@ function render(focus = true): void {
   }
 }
 function persist(): void { savingFailed = !saveState(state); }
+function closeHistory(): void {
+  const cardId = historyTriggerId;
+  historyCardId = null;
+  historyTriggerId = null;
+  render(false);
+  app.querySelector<HTMLElement>(`[data-action="review-choice"][data-card="${cardId}"]`)?.focus();
+}
 function start(pawn: Pawn): void {
   state = startCareer(state,pawn,data);
   view = 'game'; selectingPawn = false; endingBack = false; persist(); render();
@@ -119,6 +134,19 @@ app.addEventListener('click', event => {
   const target = (event.target as HTMLElement).closest<HTMLElement>('[data-action]');
   if (!target || busy) return;
   const action = target.dataset.action;
+  if (target.closest('[inert]')) return;
+  if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
+  if (action === 'review-choice') {
+    const cardId = target.dataset.card;
+    if (view === 'game' && state.run?.phase === 'board'
+      && getChoiceHistory(state.run, data).some(entry => entry.cardId === cardId)) {
+      if (!historyCardId) historyTriggerId = cardId!;
+      historyCardId = cardId!;
+      render();
+    }
+    return;
+  }
+  if (action === 'close-history') return closeHistory();
   if (action === 'toggle-guide') {
     state = updateSettings(state, { guideHidden: !state.settings.guideHidden });
     persist(); render(false);
@@ -159,10 +187,14 @@ document.addEventListener('keydown', event => {
   const target = event.target as HTMLElement;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (event.key === 'Tab' && dialog) {
-    const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled),summary,input')];
+    const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled),summary,input,[tabindex="0"]')];
     const first = focusable[0], last = focusable.at(-1);
     if (event.shiftKey && (target === first || target === dialog)) { event.preventDefault(); last?.focus(); }
     else if (!event.shiftKey && (target === last || target === dialog)) { event.preventDefault(); first?.focus(); }
+  }
+  if (historyCardId) {
+    if (event.key === 'Escape') { event.preventDefault(); closeHistory(); }
+    return;
   }
   if (target.matches('input,textarea,select')) return;
   if (view === 'game' && state.run?.phase === 'card' && /^[123]$/.test(event.key)) {

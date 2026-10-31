@@ -48,3 +48,10 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
   - Kept historical AI records and the original root specification intact. The repository/site address, storage identifiers, numerical defaults and The System's existing no-fail behavior remain unchanged.
   - Published the changes and cache fix to the existing GitHub Pages site. Verified both new names; a five-choice female route ending immediately at E03 after the Gatekeeper, including refresh; a complete 20-card career reaching E06 through Ideal Worker, the mandatory Creative Director scene, and Chapter 4; and refresh preserving the promotion scene. No browser warnings/errors were observed after the fix. Saved screenshots of the board, direct ending and promotion for review.
 - Human decisions: Genderpoly is the game name; FreeDOM is the company name with that capitalization. A genuine failed Boss check ends the career without a result-screen Continue step. The promotion scene remains mandatory before Chapter 4, and no new failure rule is introduced for The System.
+
+## 2026-10-31 — Read-only choice review (Codex)
+- Asked: make the YOUR CHOICES mini cards clickable so players can review their earlier choices.
+- Done:
+  - Specified a current-career review showing each recorded scene, the actual selected option and that pawn's result, with previous/next navigation, all mini cards in a horizontal scroll row, and Close/Escape returning focus to the opening card. Updated the specification to v0.6 and added README instructions.
+  - Reused existing run.choices and CSV/candidate/policy content; no undo, rule or progress changes, and no new history-save format. Verification and publication evidence are pending the task's final checks.
+- Human decisions: review is for the current career only; it reads prior choices without replaying or changing them. Refresh resumes the current board rather than restoring the open review window.
