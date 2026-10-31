@@ -59,5 +59,6 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
 
 ## 2026-10-31 — Overlapping portrait choice cards (Codex)
 - Asked: make YOUR CHOICES look like an overlapping hand of portrait playing cards, with responsive numbers and a raised, enlarged hover state before opening the review.
-- Done: updated the specification to v0.7 and the README instructions, including equivalent keyboard-focus emphasis and direct touch tapping. Preserved the read-only review, all recorded cards and horizontal scrolling when needed. Verification and publication evidence are pending the task's final checks.
+- Done: implemented 2:3 portrait mini cards with responsive corner numbers, overlapping order, and a raised 1.25× hover/focus state. Preserved the existing review action and all recorded cards. Kept at least 24px of exposed width for each card and adjusted centre spacing so controls stay inside the board. Updated the v0.7 specification and README.
+- Verification: all 78 existing tests, data validation and the production build passed. Published to the existing GitHub Pages site. Verified actual hover styling and layer order, correct review selection, unchanged progress, and layouts at default desktop, 1440 × 900, 768 × 900 and 390 × 844. Confirmed raised cards and Next/help text remain within their containers; no browser warnings/errors were observed. Saved desktop hover and mobile screenshots.
 - Human decisions: refine the card presentation while keeping the existing palette, review behavior and game rules.
