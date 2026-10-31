@@ -28,7 +28,9 @@ export function startCareer(state: AppState, pawn: Pawn, data: GameData): AppSta
 }
 
 export function getOptions(run: Run, data: GameData): ScenarioOption[] {
-  const cardId = BOARD[run.position]?.cardId;
+  const tile = BOARD[run.position];
+  if (tile?.chapter === 4 && !run.reachedDirector) return [];
+  const cardId = tile?.cardId;
   const eligible = data.scenarios.filter((row) => row.cardId === cardId
     && (row.pawn === 'both' || row.pawn === run.character.pawn)
     && matchesCondition(row.condition, run));
@@ -56,10 +58,29 @@ function finishCareer(state: AppState, run: Run): AppState {
   };
 }
 
+// Earlier saves stopped on a failed boss's result screen before recording the exit.
+export function completePendingBossExit(state: AppState): AppState {
+  const run = state.run;
+  return run?.phase === 'result' && run.result?.passed === false && run.exitReason !== null
+    ? finishCareer(state, run) : state;
+}
+
+function canReachDirector(run: Run): boolean {
+  const directorPosition = BOARD.findIndex((tile) => tile.kind === 'director');
+  const bossId = BOARD[directorPosition - 1]?.cardId;
+  const chosenOption = bossId ? run.choices[bossId] : undefined;
+  return Boolean(bossId && chosenOption !== undefined && run.exitReason === null
+    && passesBoss(run, bossId, chosenOption));
+}
+
 export function advance(state: AppState, _data: GameData): AppState {
   const run = state.run;
   if (!run) return state;
-  if (run.phase === 'intro' || run.phase === 'promotion') return { ...state, run: { ...run, phase: 'board' } };
+  if (run.phase === 'intro') return { ...state, run: { ...run, phase: 'board' } };
+  if (run.phase === 'promotion') {
+    if (BOARD[run.position]?.kind !== 'director' || !run.reachedDirector || !canReachDirector(run)) return state;
+    return { ...state, run: { ...run, phase: 'board' } };
+  }
   if (run.phase === 'result') {
     if (run.exitReason) return finishCareer(state, run);
     return { ...state, run: { ...run, phase: 'board', result: null } };
@@ -68,6 +89,8 @@ export function advance(state: AppState, _data: GameData): AppState {
   const position = (run.position + 1) % BOARD.length;
   if (position === 0) return finishCareer(state, { ...run, position, result: null });
   const tile = BOARD[position];
+  if (tile.kind === 'director' && !canReachDirector(run)) return state;
+  if (tile.chapter === 4 && tile.kind !== 'director' && !run.reachedDirector) return state;
   return {
     ...state,
     run: { ...run, position, visited: [...run.visited, position], result: null,
@@ -100,10 +123,10 @@ export function chooseOption(state: AppState, optionNumber: number, data: GameDa
   }
   const passed = option.type === 'boss' ? passesBoss(updated, option.cardId, optionNumber) : null;
   updated.exitReason = RULES.burnoutAtZero && stats.Energy === RULES.stats.minimum ? 'burnout'
-    : passed === false && RULES.bossFailure === 'exit' ? option.cardId : null;
+    : passed === false ? option.cardId : null;
   updated.result = { cardId: option.cardId, option: optionNumber, text: option.results[run.character.pawn],
     expression: option.expressions[run.character.pawn], npc: option.npc, passed };
-  return { ...state, run: updated };
+  return passed === false ? finishCareer(state, updated) : { ...state, run: updated };
 }
 
 export function updateSettings(state: AppState, partial: Partial<Settings>): AppState {

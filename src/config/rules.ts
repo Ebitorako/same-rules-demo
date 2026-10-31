@@ -9,7 +9,6 @@ export interface BossCheck {
 // These are prototype balancing values, kept together for the team's rules pass.
 export const RULES = {
   firstCareerPawn: 'choose' as 'choose' | 'random',
-  bossFailure: 'exit' as 'exit' | 'continue',
   stats: { initial: 5, minimum: 0, maximum: 10 },
   burnoutAtZero: true,
   powerTokens: 1,

@@ -25,7 +25,7 @@ function fixture(): GameData {
     ],
     policies: [{ id: 'formal_recruitment', name: 'Formal recruitment', benefit: 'Written criteria', cost: 'Hiring takes longer.', nextRoundEffect: 'Removes fit', mvp: true }],
     powerTokens: 1,
-    copy: { title: 'Same Rules?', subtitle: '', introduction: '', promotionTitle: '', promotionText: '',
+    copy: { title: 'Genderpoly', companyName: 'FreeDOM', subtitle: '', introduction: '', promotionTitle: '', promotionText: '',
       defaultNames: { female: 'Alex F', male: 'Alex M' }, defaultDirector: 'Director', gatekeeperReturning: '',
       gatekeeperFormal: '', gatekeeperUnchanged: '', placeholderNotice: '' },
   };
@@ -173,37 +173,102 @@ describe('bosses, exits and policy consequences', () => {
     expect(passesBoss({ ...run, stats: { ...run.stats, Energy: 1, Availability: 10 } }, 'C3-B', 1)).toBe(false);
   });
 
-  it('shows the failure result before unlocking an exit and resets the next Gatekeeper to default', () => {
+  it('immediately unlocks a failed-boss ending and resets the next Gatekeeper to default', () => {
     const data = fixture();
     const card = atCard(startCareer(createInitialState(), 'female', data), 'C1-B', data);
     const failed = chooseOption(card, 2, data);
-    expect(failed.run).toMatchObject({ phase: 'result', exitReason: 'C1-B', result: { passed: false } });
-    expect(failed.lineage).toHaveLength(0);
-    const ending = advance(failed, data);
-    expect(ending.run!.endingId).toBe('E03');
-    const next = startCareer(ending, 'male', data);
+    expect(failed.run).toMatchObject({ phase: 'ending', endingId: 'E03', exitReason: 'C1-B', result: { passed: false } });
+    expect(failed.lineage).toHaveLength(1);
+    expect(advance(failed, data)).toBe(failed);
+    const next = startCareer(failed, 'male', data);
     expect(next.run).toMatchObject({ round: 2, character: { name: 'Alex M', pawn: 'male' }, gatekeeper: null, activePolicies: [] });
   });
 
-  it.each([['C2-B', 'E04'], ['C3-B', 'E01']])('maps %s failure to %s', (cardId, endingId) => {
+  it.each([['C1-B', 2, 'E03'], ['C2-B', 3, 'E04'], ['C3-B', 3, 'E01']])('takes %s failure directly to its saved ending', (cardId, option, endingId) => {
+    memoryStorage();
     const data = fixture();
     const card = atCard(startCareer(createInitialState(), 'female', data), cardId, data);
-    const failed = chooseOption(card, 3, data);
-    expect(failed.run!.result!.passed).toBe(false);
-    expect(advance(failed, data).run!.endingId).toBe(endingId);
+    const failed = chooseOption(card, option, data);
+    expect(failed.run).toMatchObject({ phase: 'ending', endingId, result: { passed: false } });
+    expect(failed.run!.choices[cardId]).toBe(option);
+    expect(failed.lineage).toHaveLength(1);
+    expect(failed.gallery).toHaveLength(1);
+    expect(isValidState(failed)).toBe(true);
+    expect(saveState(failed)).toBe(true);
+    expect(loadState()).toEqual(failed);
+    expect(chooseOption(failed, option, data)).toBe(failed);
+    expect(advance(failed, data)).toBe(failed);
   });
 
-  it('shows burnout result before the ending and prioritizes burnout over boss failure', () => {
+  it('keeps the normal burnout result step and preserves it when refreshed', () => {
+    memoryStorage();
+    const data = fixture();
+    data.scenarios.find((row) => row.cardId === 'C1-01' && row.option === 1)!.deltas.female.Energy = -10;
+    const card = atCard(startCareer(createInitialState(), 'female', data), 'C1-01', data);
+    const result = chooseOption(card, 1, data);
+    expect(result.run).toMatchObject({ phase: 'result', exitReason: 'burnout', endingId: null, stats: { Energy: 0 } });
+    expect(saveState(result)).toBe(true);
+    expect(loadState()).toEqual(result);
+    expect(advance(result, data).run!.endingId).toBe('E05');
+  });
+
+  it('immediately ends a failed boss even when burnout is the selected ending reason', () => {
     const data = fixture();
     data.scenarios.find((row) => row.cardId === 'C1-B' && row.option === 2)!.deltas.female.Energy = -10;
     const card = atCard(startCareer(createInitialState(), 'female', data), 'C1-B', data);
     const result = chooseOption(card, 2, data);
-    expect(result.run).toMatchObject({ phase: 'result', exitReason: 'burnout', endingId: null, stats: { Energy: 0 } });
-    expect(advance(result, data).run!.endingId).toBe('E05');
+    expect(result.run).toMatchObject({ phase: 'ending', exitReason: 'burnout', endingId: 'E05', stats: { Energy: 0 } });
+    expect(isValidState(result)).toBe(true);
+  });
+
+  it('requires the Creative Director promotion scene between passing Ideal Worker and Chapter 4', () => {
+    memoryStorage();
+    const data = fixture();
+    const card = atCard(startCareer(createInitialState(), 'female', data), 'C3-B', data);
+    const passed = chooseOption(card, 1, data);
+    expect(passed.run).toMatchObject({ phase: 'result', reachedDirector: false, result: { passed: true } });
+    const promotion = advance(advance(passed, data), data);
+    expect(promotion.run).toMatchObject({ phase: 'promotion', position: 17, reachedDirector: true });
+    expect(chooseOption(promotion, 1, data)).toBe(promotion);
+    expect(saveState(promotion)).toBe(true);
+    expect(loadState()).toEqual(promotion);
+    const directorBoard = advance(promotion, data);
+    expect(directorBoard.run).toMatchObject({ phase: 'board', position: 17, reachedDirector: true });
+    const chapterFour = advance(directorBoard, data);
+    expect(chapterFour.run).toMatchObject({ phase: 'card', position: 18, reachedDirector: true });
+    expect(getOptions(chapterFour.run!, data)).toHaveLength(3);
+
+    const unpromoted = { ...directorBoard, run: { ...directorBoard.run!, reachedDirector: false } };
+    expect(advance(unpromoted, data)).toBe(unpromoted);
+    const inaccessibleCard = { ...chapterFour, run: { ...chapterFour.run!, reachedDirector: false } };
+    expect(getOptions(inaccessibleCard.run, data)).toEqual([]);
+    expect(chooseOption(inaccessibleCard, 1, data)).toBe(inaccessibleCard);
+    expect(isValidState(inaccessibleCard)).toBe(false);
+
+    const unresolvedBoss = { ...card, run: { ...card.run!, phase: 'board' as const } };
+    expect(advance(unresolvedBoss, data)).toBe(unresolvedBoss);
+    const failedBoss = { ...unresolvedBoss, run: { ...unresolvedBoss.run!, choices: { ...unresolvedBoss.run!.choices, 'C3-B': 3 } } };
+    expect(advance(failedBoss, data)).toBe(failedBoss);
   });
 });
 
 describe('automatic resume and storage resilience', () => {
+  it.each([['C1-B', 2], ['C2-B', 3], ['C3-B', 3]])('resumes an older %s failed-result save directly at the ending without duplicate records', (cardId, option) => {
+    memoryStorage();
+    const data = fixture();
+    const card = atCard(startCareer(createInitialState(), 'female', data), cardId, data);
+    const ending = chooseOption(card, option, data);
+    const legacy: AppState = { ...ending, run: { ...ending.run!, phase: 'result', endingId: null }, lineage: [], gallery: [] };
+    expect(isValidState(legacy)).toBe(true);
+    expect(saveState(legacy)).toBe(true);
+    expect(loadState()).toEqual(ending);
+    expect(advance(legacy, data)).toEqual(ending);
+    expect(saveState(loadState())).toBe(true);
+    expect(loadState()).toEqual(ending);
+    expect(loadState().lineage).toHaveLength(1);
+    expect(loadState().gallery).toHaveLength(1);
+  });
+
   it('resumes every phase through two complete careers without rewinding or duplicating unlocks', () => {
     memoryStorage();
     const data = fixture();

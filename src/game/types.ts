@@ -17,7 +17,7 @@ export interface Ending {
 export interface Candidate extends Character { id: string; blurb: string; stats: Partial<Stats> }
 export interface Policy { id: string; name: string; benefit: string; cost: string; nextRoundEffect: string; mvp: boolean }
 export interface CopyData {
-  title: string; subtitle: string; introduction: string; promotionTitle: string; promotionText: string;
+  title: string; companyName: string; subtitle: string; introduction: string; promotionTitle: string; promotionText: string;
   defaultNames: Record<Pawn, string>; defaultDirector: string; gatekeeperReturning: string;
   gatekeeperFormal: string; gatekeeperUnchanged: string; placeholderNotice: string;
 }

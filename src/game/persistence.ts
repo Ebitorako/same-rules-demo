@@ -1,7 +1,7 @@
 import { RULES } from '../config/rules';
 import { BOARD } from './board';
 import { ENDING_IDS } from './endings';
-import { createInitialState } from './state';
+import { completePendingBossExit, createInitialState } from './state';
 import { STAT_NAMES, type AppState, type Career, type Character, type Run } from './types';
 
 const prefix = RULES.storagePrefix;
@@ -105,7 +105,7 @@ export function loadState(): AppState {
     const raw = localStorage.getItem(`${prefix}snapshot`);
     if (!raw) return createInitialState();
     const parsed: unknown = JSON.parse(raw);
-    return isValidState(parsed) ? parsed : createInitialState();
+    return isValidState(parsed) ? completePendingBossExit(parsed) : createInitialState();
   } catch {
     return createInitialState();
   }

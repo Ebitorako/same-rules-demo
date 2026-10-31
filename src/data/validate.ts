@@ -6,7 +6,7 @@ import { STAT_NAMES, type GameData, type Pawn, type ScenarioOption } from '../ga
 import { EXPRESSIONS } from './parse';
 
 const PAWNS: Pawn[] = ['female', 'male'];
-const COPY_FIELDS = ['title', 'subtitle', 'introduction', 'promotionTitle', 'promotionText', 'defaultDirector', 'gatekeeperReturning', 'gatekeeperFormal', 'gatekeeperUnchanged', 'placeholderNotice'] as const;
+const COPY_FIELDS = ['title', 'companyName', 'subtitle', 'introduction', 'promotionTitle', 'promotionText', 'defaultDirector', 'gatekeeperReturning', 'gatekeeperFormal', 'gatekeeperUnchanged', 'placeholderNotice'] as const;
 const COLUMN_NAMES: Record<string, string> = { chapter: '章节', tile: '格子', type: '类型', title: '场景标题', scene: '场景描述', background: '背景信息（游戏内可翻看）', npc: 'NPC', optionText: '选项文字', id: '编号', name: '结局名称', front: '结局文字（正面）', back: '背面：理论概念' };
 const applies = (row: ScenarioOption, pawn: Pawn): boolean => row.pawn === 'both' || row.pawn === pawn;
 const nonempty = (value: unknown): value is string => typeof value === 'string' && !!value.trim();

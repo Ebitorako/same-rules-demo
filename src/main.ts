@@ -180,6 +180,7 @@ async function boot(): Promise<void> {
     [data, guide] = await Promise.all([loadData(),loadGuideData(),loadAssets()]);
     const issues = validateData(data);
     if (issues.length) throw new Error(issues.join('\n'));
+    document.title = data.copy.title;
     RULES.litTileColors.forEach((color,index)=>document.documentElement.style.setProperty(`--lit-${index+1}`,color));
     document.documentElement.style.setProperty('--idle-ms',`${RULES.animation.idleMs}ms`);
     document.documentElement.style.setProperty('--light-ms',`${RULES.animation.lightMs}ms`);

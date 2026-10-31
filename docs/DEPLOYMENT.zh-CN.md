@@ -4,7 +4,7 @@
 
 排期 T04 的首次上线已于 2026-10-25 完成：
 
-- **试玩网址：[Same Rules?](https://ebitorako.github.io/same-rules-demo/)**
+- **试玩网址：[Genderpoly](https://ebitorako.github.io/same-rules-demo/)**
 - **公开仓库：[Ebitorako / same-rules-demo](https://github.com/Ebitorako/same-rules-demo)**
 - **[首次发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/40188632600)：成功**
 

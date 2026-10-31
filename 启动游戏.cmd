@@ -16,7 +16,7 @@ if not exist "node_modules\vite\bin\vite.js" (
     exit /b 1
   )
 )
-echo Same Rules? - local preview
+echo Genderpoly - local preview
 echo Keep this window open while playing. Press Ctrl+C to stop.
 echo Open http://127.0.0.1:5173/ in your browser.
 call npm.cmd run dev -- --open

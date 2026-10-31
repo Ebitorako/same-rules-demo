@@ -1,10 +1,12 @@
-# Same Rules? — Game Spec
+# Genderpoly — Game Spec
 
-*Working title. Version 0.4, 31 Oct 2026.*
+*Version 0.5, 31 Oct 2026.*
+
+Version 0.5 names the game **Genderpoly** (title and header) and the in-game company **FreeDOM** (board centre). A failed numerical Boss check now opens the ending card immediately, without an intervening result screen or Continue button. Passing The Ideal Worker and becoming Creative Director through the promotion scene are required before Chapter 4. Numerical defaults and The System's existing no-fail check are unchanged. Retain the existing storage keys and repository/site addresses for compatibility.
 
 Version 0.4 records the designer's 31 Oct decisions: fixed metal finishes for the six special board tiles, an optional resident guide, and separate theory/reference sections on ending-card backs. The approved metal finishes override the earlier blanket restriction on gradients and the original special-tile palette; the exception is limited to these six tiles.
 
-A single-player 2D web game for a university course on gender and media (NMC5369, NUS). The player lives one career in the creative industries, from New Hire to Creative Director and back to the start. Both pawns start equal; the workplace treats them differently, and the game never says so.
+A single-player 2D web game for a university course on gender and media (NMC5369, NUS). The player lives one career at FreeDOM in the creative industries, from New Hire to Creative Director and back to the start. Both pawns start equal; the workplace treats them differently, and the game never says so.
 
 Hard deadline: the team submits on **5 Nov 2026**; the course deadline is 6 Nov 23:59. Feature freeze is **3 Nov**.
 
@@ -42,12 +44,15 @@ Design consequences that are **not negotiable**:
 Title ─▶ Character intro (pawn + name) ─▶ Board
 Board: [Next] ─▶ pawn hops 1 tile ─▶ tile lights up ─▶ Scenario card (3 options)
        ─▶ Result (text + NPC reaction) ─▶ card goes to the "chosen" pile ─▶ back to Board
-Boss corner ─▶ Boss card (3 options) ─▶ pass ─▶ continue │ fail ─▶ Exit ending
-Creative Director tile ─▶ promotion scene ─▶ Chapter 4 (hiring + policy)
+Boss corner ─▶ Boss card (3 options) ─▶ numerical pass ─▶ Result ─▶ Continue
+                                     └▶ numerical fail ─▶ Ending card immediately
+Pass Ideal Worker ─▶ Creative Director tile ─▶ promotion scene ─▶ Chapter 4 (hiring + policy)
 Back on the start tile ─▶ Ending card flips over ─▶ Gallery ─▶ "Next career" (new round)
 ```
 
 Always reachable from the title screen: **Gallery** and **Settings** (reset all progress, reduced motion, sound on/off).
+
+Use **Genderpoly** as the game name in the title/header and **FreeDOM** as the company name in the board centre. Both names come from `public/data/copy.json` (`title` and `companyName` respectively).
 
 A resident guide sits beside the board on desktop and below it on narrow screens. On a choice card, the guide's advice appears before the options in document order; it never blocks or disables choosing. **Hide advice** collapses the advice; **Ask the guide** restores it. **Open the rulebook** reveals available industry context, theory and references. Reading or hiding advice never changes a choice, stat, boss result or ending.
 
@@ -108,7 +113,7 @@ Debug mode: add `?debug=1` to the URL to show a small stats panel and the curren
 
 ## 5. Scenario cards
 
-Each scenario card shows: chapter label, title, scene text, NPC portrait (with expression), and a small **"Why does this happen?"** toggle that reveals the card's background note (theory + reading). The player picks 1 of 3 options (click, or keys `1` `2` `3`). The result screen shows the result text and the NPC's new expression, then **Continue**.
+Each scenario card shows: chapter label, title, scene text, NPC portrait (with expression), and a small **"Why does this happen?"** toggle that reveals the card's background note (theory + reading). The player picks 1 of 3 options (click, or keys `1` `2` `3`). Ordinary choices and passed Boss checks show the result text and the NPC's new expression, then **Continue**. A failed Boss check skips this result screen and opens the ending card immediately.
 
 Conditions let an option (or a whole card variant) appear only if earlier things happened. Syntax, combined with `;` meaning AND:
 
@@ -131,22 +136,24 @@ The guide reads its identity from `public/data/guide.json` and authored notes fr
 
 A boss is a 3-option card like any other, but its outcome is **pass** or **fail**, decided by a rule: current stats vs. the boss's per-pawn threshold, plus the chosen option's modifier. Deterministic.
 
-| Boss | What it checks (from the design doc) | On fail (default) |
+Use the actual numerical check, not wording in a result cell, to determine success. If that check fails, end the career and show its ending card immediately; there is no separate failure-result Continue step. Starting values, stat deltas, thresholds and modifiers are not rebalanced by this flow change.
+
+| Boss | What it checks (from the design doc) | On failed numerical check |
 |---|---|---|
 | The Gatekeeper | Skill + professional image, plus a hidden "fit" check | Exit ending: never got in |
 | The Old Boys' Network | Skill **and** Network ("merit alone is not enough") | Exit ending: stalled |
 | The Ideal Worker | Energy and Availability (always available, no care duties) | Exit ending: "a personal choice" |
-| The System | Balancing Profit, Reputation, Worker Wellbeing, Diversity, Deadline | No fail; the choice shapes the ending |
+| The System | Balancing Profit, Reputation, Worker Wellbeing, Diversity, Deadline (design intent); the current numerical check has no fail threshold | No new failure condition; retain the existing no-fail behavior. Its final-choice ending mapping remains a team decision |
 
 **Round 2 and later:** the Gatekeeper is **the previous round's Creative Director** (same name, pawn and badge colour). Their dialogue reflects the policies they set. If the previous round never reached Creative Director, the Gatekeeper is a default NPC director ("someone else got the chair").
 
-Fail consequences are an open decision (§11): keep the exit rule in one config so it can change.
+Immediate exit on a failed Boss check is confirmed by the designer in v0.5. The System remains exempt because its existing check has no failing threshold; do not introduce one as part of this change.
 
 ---
 
 ## 7. Chapter 4: hiring and policy
 
-After the Creative Director tile, the player is now on the other side of the table.
+The player must first pass The Ideal Worker's actual Boss check, then reach the Creative Director tile and see the promotion scene before entering Chapter 4. Failing The Ideal Worker opens an ending immediately and cannot lead to hiring or policy choices. Preserve the promotion scene: it marks the change from employee to decision-maker.
 
 - **Hiring:** choose 1 of 3 intern candidates. Each has a name, gender, skills and a short blurb (e.g. a woman excellent at both creative and organisational work, a man with average skills who presents confidently, a candidate who needs flexible working). **The chosen intern becomes the playable character of the next round.**
 - **Policy:** spend a limited number of Power Tokens (MVP: pick 1) on rules such as formal recruitment, childcare support, flexible working, an anti-harassment policy, intimacy coordination. Each has a cost and a benefit. Chosen policies are stored and **change the next round** (via `policy:` conditions and boss rules).
@@ -267,7 +274,6 @@ Put all of these in `src/config/rules.ts` so the team can change them without to
 | Decision | Default for now |
 |---|---|
 | Round 1 character: choose pawn or random | `"choose"` |
-| What a failed boss does | Run ends in that chapter's exit ending |
 | Starting stats and boss thresholds per pawn | All stats 5; placeholder thresholds |
 | Which policies exist and their next-round effects | Formal recruitment only (removes Gatekeeper "fit" penalty) |
 | Ordinary lit tile colours | Current three; the team may replace them because two are close to the gender colours. The six special-tile metal assignments are fixed by the 31 Oct decision |
@@ -278,6 +284,8 @@ Put all of these in `src/config/rules.ts` so the team can change them without to
 ## 12. Data (written by the team in Google Sheets)
 
 The writers fill a shared Google Sheet; the developer exports each tab as CSV into `public/data/`. **All story text comes from these files. Never hard-code story text.** Game text is in English; some helper columns are in Chinese.
+
+`copy.json` supplies shared narrative text and the two distinct names: `title: "Genderpoly"` for the game and `companyName: "FreeDOM"` for the workplace shown in the board centre. Renaming either display name does not rename browser storage, the repository or the existing public URL.
 
 ### `scenarios.csv` — one row per option
 

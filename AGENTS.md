@@ -2,7 +2,7 @@
 
 ## Project
 
-**Same Rules?** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
+**Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
 **Read `docs/GAME_SPEC.md` before any task.** It is the source of truth for rules, data format, art direction and milestones. If a request conflicts with the spec, point it out and ask before changing a rule.
 

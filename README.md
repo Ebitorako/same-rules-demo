@@ -1,18 +1,26 @@
-# Same Rules? — 游戏 Demo
+# Genderpoly — 游戏 Demo
 
-这是 NMC5369 Media Project 的网页游戏骨架。游戏界面使用英文；给组员和美术的操作说明使用中文。剧情、结局与图片分别放在独立文件夹，后续可逐批替换。
+这是 NMC5369 Media Project 的网页游戏骨架。游戏名为 **Genderpoly**，游戏内公司名为 **FreeDOM**。游戏界面使用英文；给组员和美术的操作说明使用中文。剧情、结局与图片分别放在独立文件夹，后续可逐批替换。
 
 目前内容包含完整流程所需的 **20 张卡位：16 张情境卡 + 4 张 Boss 卡**。除了保留的 `C2-03` 原始示例，其余新增文字用于测试流程，不是组员的最终稿。初始数值、Boss 门槛和结局判定也需要团队确认；能通关不代表已经完成游戏平衡。
 
 ## 在线试玩
 
-**[打开 Same Rules? 试玩](https://ebitorako.github.io/same-rules-demo/)** · **[GitHub 项目仓库](https://github.com/Ebitorako/same-rules-demo)**
+**[打开 Genderpoly 试玩](https://ebitorako.github.io/same-rules-demo/)** · **[GitHub 项目仓库](https://github.com/Ebitorako/same-rules-demo)**
 
-把试玩链接发给组员即可，浏览器打开就能玩，无需 GitHub 账号或安装软件。点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，再点击 **Enter the studio**。棋盘上点击 **Next** 前进，选择卡牌选项后点击 **Continue**。
+把试玩链接发给组员即可，浏览器打开就能玩，无需 GitHub 账号或安装软件。点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，再点击 **Enter the studio**。棋盘上点击 **Next** 前进，普通选项或通过 Boss 后点击 **Continue**；Boss 实际数值检查失败时直接显示结局卡。
 
 GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` 分支，会自动检查并更新同一个试玩网址；具体操作见[试玩网站发布说明](docs/DEPLOYMENT.zh-CN.md)。当前仍是包含占位剧情和占位美术的 Demo。
 
-10 月 31 日的功能已发布到上面的同一试玩网址。以后本地修改仍需完成检查并上传，才会更新网站。
+10 月 31 日上一轮的金属地块、引导与结局卡背功能已发布到上面的同一试玩网址。之后的本地修改仍需完成检查并上传，才会更新网站。游戏改名后继续使用这个网址，仓库名称和浏览器存档标识保持不变。
+
+## v0.5：游戏名、公司名与 Boss 流程
+
+标题和页头显示 **Genderpoly**，棋盘中央显示公司名 **FreeDOM**。名称分别放在 [copy.json](public/data/copy.json) 的 `title` 和 `companyName` 字段，后续可直接编辑文字。
+
+前三位 Boss 按原来的隐藏数值、门槛与选项修正进行检查。实际检查失败就立即进入结局卡，不会先出现结果页要求再按 Continue。通过 **The Ideal Worker** 后，玩家到达银色 **Creative Director** 格，经历晋升场景，才能进入第四章的招聘和政策选择。**The System** 目前没有失败门槛，保持原来的行为。
+
+本次调整不改变初始数值和 Boss 门槛，也不清除已有存档。这一节记录本地 v0.5 的目标行为；上线状态以本次发布结果为准。
 
 ## 10 月 31 日更新：棋盘、引导与结局卡
 
@@ -28,11 +36,11 @@ GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` �
 
 1. 在这个文件夹双击 **[启动游戏.cmd](启动游戏.cmd)**，保留它打开的窗口。
 2. 按窗口提示打开本地网址 `http://127.0.0.1:5173/`。若提示端口被占用，先确认是否已有一个游戏启动窗口在运行；不要反复启动多个副本。
-3. 点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，然后点击 **Enter the studio**。棋盘上点击 **Next** 前进，再选择卡牌选项，结果页点击 **Continue**。也可以用键盘 `1`、`2`、`3` 选项和 `Enter` 继续。
+3. 点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，然后点击 **Enter the studio**。棋盘上点击 **Next** 前进，再选择卡牌选项；普通选择或通过 Boss 后在结果页点击 **Continue**，Boss 检查失败则直接显示结局卡。也可以用键盘 `1`、`2`、`3` 选项和 `Enter` 继续。
 
 第一次启动需要联网准备项目依赖。以后依赖已在电脑上时，可以直接启动。不要双击 `index.html`；游戏的数据加载需要通过启动脚本提供的本地网址。
 
-10 月 31 日版本的数据校验、55 项自动测试及构建通过。在线验收确认了六色金属地块、指引收起与恢复、刷新保留偏好、规则书内容、手机竖屏选择，以及 E03 结局和画廊的 Theory / References 翻面；未发现浏览器警告或错误。手机检查使用 390 × 844 浏览器尺寸，正式展示前仍需安排实体手机及完整职业试玩。
+上一轮金属地块与引导版本已完成数据校验、自动测试、构建和在线验收，涵盖指引偏好、规则册、手机宽度选择，以及 E03 结局和画廊的 Theory / References 翻面。这些记录不代表本次 v0.5 已完成验收；正式展示前仍需安排实体手机及完整职业试玩。
 
 游戏会在当前浏览器自动记录进度，刷新页面会继续当前职业。浏览器、网址或端口变化可能使用另一份记录。标题页的 **Settings** 可重置全部进度；这会清除已解锁结局和历代角色。
 
@@ -52,6 +60,7 @@ GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` �
 |---|---|---|
 | [public/data/](public/data/) | 英文剧情、选项、结局、候选人、政策、引导 NPC 台词 | 组员交稿后更新这里，见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md) |
 | [public/data/guide.csv](public/data/guide.csv) / [guide.json](public/data/guide.json) | 22 行引导模板，以及 NPC 名字、身份、头像名称 | 填写建议、行业背景、理论和引用；卡号保持唯一 |
+| [public/data/copy.json](public/data/copy.json) | 游戏名 Genderpoly、公司名 FreeDOM 与共用叙事文字 | 修改 `title`、`companyName` 或对应说明文字 |
 | [public/assets/](public/assets/) | 游戏实际使用的图片、音频、字体 | 你添加或替换资源，见[美术指南](docs/ART_GUIDE.zh-CN.md) |
 | [public/assets/manifest.json](public/assets/manifest.json) | 资源名称与文件路径的对应表 | 改图片名称或移动图片后同步修改路径 |
 | [docs/reference/](docs/reference/) | 草图、布局参考、风格参考 | 可以手动整理，不会自动作为游戏图片显示 |
