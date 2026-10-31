@@ -11,7 +11,8 @@ export function boardScreen(state: AppState, data: GameData): string {
   const selected = Object.keys(run.choices).length;
   const chosenCards = getChoiceHistory(run, data).map(entry => {
     const title = entry.scenario?.title ?? 'Recorded choice';
-    return `<button type="button" class="chosen-card" data-action="review-choice" data-card="${escape(entry.cardId)}" title="${escape(title)}" aria-label="Review choice ${entry.order}: ${escape(title)}" aria-haspopup="dialog">${String(entry.order).padStart(2,'0')}</button>`;
+    const number = String(entry.order).padStart(2,'0');
+    return `<button type="button" class="chosen-card" style="--card-order:${entry.order}" data-action="review-choice" data-card="${escape(entry.cardId)}" title="${escape(title)}" aria-label="Review choice ${entry.order}: ${escape(title)}" aria-haspopup="dialog"><span class="chosen-rank" aria-hidden="true">${number}</span><span class="chosen-suit" aria-hidden="true">◆</span><span class="chosen-rank chosen-rank-bottom" aria-hidden="true">${number}</span></button>`;
   }).join('') || '<i>Waiting for your first card</i>';
   return `<section class="game-screen"><div class="career-strip"><div><span class="eyebrow">CAREER ${String(run.round).padStart(2,'0')}</span><h1>${escape(run.character.name)} <span>/ ${run.reachedDirector ? 'Creative Director' : 'New Hire'}</span></h1></div><span class="career-count">${String(selected).padStart(2,'0')} / 20 CARDS</span></div>
     <div class="board" role="group" aria-label="Career board, 22 spaces">${BOARD.map((tile,index) => {

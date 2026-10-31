@@ -1,6 +1,8 @@
 # Genderpoly — Game Spec
 
-*Version 0.6, 31 Oct 2026.*
+*Version 0.7, 31 Oct 2026.*
+
+Version 0.7 refines **YOUR CHOICES** into an overlapping hand of portrait playing cards. Hover or keyboard focus raises and enlarges a card above its neighbours; clicking or tapping opens the existing read-only review. Card numbers scale with the responsive layout. This changes presentation only, preserving all recorded choices, horizontal scrolling when needed, and the existing review behavior.
 
 Version 0.6 makes the board's **YOUR CHOICES** mini cards clickable for a read-only review of the current career. All recorded choices remain available in a horizontally scrolling row. Reviewing a scene, its chosen option and the current pawn's result never rewinds or changes progress; the existing `run.choices` records support older saves without a new history format.
 
@@ -96,6 +98,7 @@ Card area: three face-down piles (black card backs with a cream inner border and
 ### YOUR CHOICES review
 
 - Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, not only the most recent eight; allow horizontal scrolling when the row is full.
+- Use portrait playing-card proportions in an overlapping hand/pile, with readable numbers that scale to the available card size. Hovered and keyboard-focused cards rise and enlarge above adjacent cards. Touch players tap a card directly; hover must not be required to open it. Retain the current palette, focus visibility and reduced-motion support.
 - Clicking a mini card opens a read-only modal showing the scene, the option actually selected and the result text for the pawn that made that choice. Reuse the existing CSV content and candidate/policy JSON where applicable; do not add a separate story copy or show hidden stats.
 - Previous/next controls browse only recorded choices from this career. They do not reveal upcoming cards or retrieve choices from earlier careers.
 - **Close** or **Escape** dismisses the modal and restores focus to the mini card that opened it. The dialog supports keyboard focus navigation; gameplay actions must not run behind it.

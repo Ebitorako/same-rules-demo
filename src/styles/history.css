@@ -3,39 +3,97 @@
 }
 
 .chosen-cards {
+  --choice-width: clamp(32px, 3vw, 40px);
+  --choice-overlap: calc(var(--choice-width) * -.36);
   flex: 1 1 0;
   min-width: 0;
-  min-height: 58px;
-  gap: 6px;
-  padding: 5px;
+  min-height: calc(var(--choice-width) * 1.5 + 28px);
+  align-items: flex-end;
+  gap: 0;
+  padding: 22px 12px 6px;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-padding-inline: 5px;
+  scroll-padding-inline: 12px;
   scrollbar-width: thin;
+  position: relative;
+  isolation: isolate;
 }
 
 .chosen-cards .chosen-card {
-  flex: 0 0 44px;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 8px 4px;
+  --card-tilt: -3deg;
+  flex: 0 0 var(--choice-width);
+  width: var(--choice-width);
+  min-width: 0;
+  height: calc(var(--choice-width) * 1.5);
+  min-height: 0;
+  padding: 0;
   border: 1px solid var(--ink);
   border-radius: 4px;
   background: var(--cream);
   color: var(--ink);
-  font: 14px/1.2 var(--font-title);
+  font: clamp(9px, calc(var(--choice-width) * .29), 12px)/1 var(--font-title);
+  position: relative;
+  z-index: var(--card-order);
+  transform-origin: 50% 80%;
+  transform: rotate(var(--card-tilt));
+  box-shadow: 1px 2px 0 var(--grey);
+  transition: transform .16s ease-out, box-shadow .16s ease-out;
 }
 
-.chosen-cards .chosen-card:hover,
-.chosen-cards .chosen-card:active {
-  transform: none;
-  box-shadow: none;
-  background: var(--ivory);
+.chosen-card + .chosen-card {
+  margin-inline-start: var(--choice-overlap);
+}
+
+.chosen-card:nth-child(even) {
+  --card-tilt: 2deg;
+}
+
+.chosen-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--grey);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.chosen-rank {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  pointer-events: none;
+}
+
+.chosen-rank-bottom {
+  inset: auto 5px 5px auto;
+  transform: rotate(180deg);
+}
+
+.chosen-suit {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: .7em;
+  pointer-events: none;
 }
 
 .chosen-cards .chosen-card:focus-visible {
+  z-index: 30;
+  transform: translateY(-6px) rotate(0deg) scale(1.25);
+  background: var(--ivory);
+  box-shadow: 2px 4px 0 var(--ink);
   outline: 2px solid var(--ink);
-  outline-offset: 2px;
+  outline-offset: 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chosen-cards .chosen-card:hover {
+    z-index: 31;
+    transform: translateY(-6px) rotate(0deg) scale(1.25);
+    background: var(--ivory);
+    box-shadow: 2px 4px 0 var(--ink);
+  }
 }
 
 .history-card {
@@ -191,7 +249,10 @@
   }
 
   .chosen-cards {
-    gap: 4px;
+    --choice-width: 30px;
+    --choice-overlap: -6px;
+    min-height: 71px;
+    padding-top: 20px;
   }
 
   .board-next {
