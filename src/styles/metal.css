@@ -1,0 +1,159 @@
+/* A fixed brushed surface: reflections never move or communicate a game outcome. */
+.metal-red {
+  --metal-base: var(--metal-red);
+  --metal-shadow: var(--metal-red-shadow);
+  --metal-light: var(--metal-red-light);
+  --metal-edge: var(--metal-red-edge);
+}
+.metal-green {
+  --metal-base: var(--metal-green);
+  --metal-shadow: var(--metal-green-shadow);
+  --metal-light: var(--metal-green-light);
+  --metal-edge: var(--metal-green-edge);
+}
+.metal-blue {
+  --metal-base: var(--metal-blue);
+  --metal-shadow: var(--metal-blue-shadow);
+  --metal-light: var(--metal-blue-light);
+  --metal-edge: var(--metal-blue-edge);
+}
+.metal-purple {
+  --metal-base: var(--metal-purple);
+  --metal-shadow: var(--metal-purple-shadow);
+  --metal-light: var(--metal-purple-light);
+  --metal-edge: var(--metal-purple-edge);
+}
+.metal-silver {
+  --metal-base: var(--metal-silver);
+  --metal-shadow: var(--metal-silver-shadow);
+  --metal-light: var(--metal-silver-light);
+  --metal-edge: var(--metal-silver-edge);
+}
+.metal-gold {
+  --metal-base: var(--metal-gold);
+  --metal-shadow: var(--metal-gold-shadow);
+  --metal-light: var(--metal-gold-light);
+  --metal-edge: var(--metal-gold-edge);
+}
+
+.board .tile.metal-tile {
+  color: var(--ink);
+  border-color: var(--metal-edge);
+  background-color: var(--metal-base);
+  background-image:
+    repeating-linear-gradient(0deg,
+      color-mix(in srgb, var(--ivory) 14%, transparent) 0 1px,
+      transparent 1px 3px,
+      color-mix(in srgb, var(--ink) 8%, transparent) 3px 4px),
+    linear-gradient(128deg,
+      var(--metal-shadow) 0%, var(--metal-base) 16%,
+      var(--metal-light) 28%, var(--metal-base) 39%,
+      var(--metal-shadow) 58%, var(--metal-base) 72%,
+      var(--metal-light) 90%, var(--metal-base) 100%);
+  box-shadow:
+    0 2px 0 var(--ink),
+    inset 1px 1px 0 var(--metal-light),
+    inset -1px -2px 0 var(--metal-shadow);
+}
+.board .tile.metal-tile::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border: 1px solid var(--metal-light);
+  border-right-color: var(--metal-shadow);
+  border-bottom-color: var(--metal-shadow);
+  border-radius: 6px;
+  pointer-events: none;
+}
+.board .tile.metal-tile.special::after {
+  inset: 5px;
+  border-color: var(--metal-edge);
+  opacity: .75;
+  pointer-events: none;
+}
+.board .tile.metal-tile.current {
+  outline: 2px solid var(--ivory);
+  outline-offset: 2px;
+  box-shadow:
+    0 0 0 4px var(--ink),
+    inset 1px 1px 0 var(--metal-light),
+    inset -1px -2px 0 var(--metal-shadow);
+}
+
+/* Solid plaques keep names readable across the light and dark reflection bands. */
+.board .metal-tile .boss-name {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 4px);
+  padding: 3px 2px;
+  margin-top: 3px;
+  border-radius: 3px;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 10px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.board .tile.metal-tile .boss-art.art-placeholder {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--metal-edge);
+}
+.board .metal-tile .special-name {
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 14px);
+  padding: 3px 2px;
+  border: 1px solid var(--metal-edge);
+  border-radius: 3px;
+  background: var(--ivory);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.2;
+}
+.board .metal-tile .special-symbol {
+  position: relative;
+  z-index: 1;
+  color: var(--ink);
+  text-shadow: 0 1px 0 var(--metal-light);
+}
+.board .metal-gold .tile-question {
+  position: relative;
+  z-index: 1;
+  width: 1.05em;
+  border: 1px solid var(--metal-edge);
+  border-radius: 50%;
+  background: var(--ivory);
+  color: var(--ink);
+  line-height: 1.05;
+  text-align: center;
+}
+.board .metal-gold .tile-index { color: var(--ink); font-weight: 700; }
+.board .metal-tile .tile-visit-mark {
+  position: absolute;
+  z-index: 4;
+  top: -5px;
+  right: -5px;
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ivory);
+  color: var(--ink);
+  font: 700 11px/1 var(--font-body);
+}
+
+@media (max-width: 800px) {
+  .board .metal-tile .boss-name { font-size: 8px; }
+}
+@media (max-width: 560px) {
+  .board .tile.metal-tile::before { inset: 1px; border-radius: 3px; }
+  .board .tile.metal-tile.special::after { inset: 3px; border-radius: 2px; }
+  .board .tile.metal-tile.current { outline-width: 1px; outline-offset: 1px; box-shadow: 0 0 0 2px var(--ink), inset 1px 1px 0 var(--metal-light), inset -1px -1px 0 var(--metal-shadow); }
+  .board .metal-tile .boss-art { height: 29px; width: 86%; }
+  .board .metal-tile .boss-name { width: 100%; font-family: var(--font-body); font-size: 6.5px; font-weight: 800; line-height: 1.15; padding: 2px 1px; margin-top: 2px; }
+  .board .metal-tile .special-name { width: calc(100% - 5px); font-size: 6.5px; padding: 3px 1px; letter-spacing: -.02em; }
+  .board .metal-tile .tile-visit-mark { top: -3px; right: -3px; width: 12px; height: 12px; font-size: 8px; }
+}

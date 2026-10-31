@@ -313,5 +313,10 @@
     "assets/npc/the_system_cold.svg",
     "assets/npc/the_system_cold.png",
     "assets/npc/the_system_cold.webp"
+  ],
+  "npc/guide_neutral": [
+    "assets/npc/guide_neutral.svg",
+    "assets/npc/guide_neutral.png",
+    "assets/npc/guide_neutral.webp"
   ]
 }

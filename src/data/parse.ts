@@ -7,7 +7,7 @@ export const EXPRESSIONS = ['pleased', 'neutral', 'appraising', 'frowning', 'awk
 const EXPRESSION_MAP: Record<string, string> = { 满意: 'pleased', 中性: 'neutral', 打量: 'appraising', 皱眉: 'frowning', 尴尬: 'awkward', 冷淡: 'cold' };
 type CsvRow = Record<string, string>;
 
-function readCsv(text: string, required: string[], filename: string): CsvRow[] {
+export function readCsv(text: string, required: string[], filename: string): CsvRow[] {
   const cleanText = text.replace(/^\uFEFF/, '');
   const rawHeaders = Papa.parse<string[]>(cleanText, { preview: 1 }).data[0]?.map((header) => header.trim()) ?? [];
   const duplicates = rawHeaders.filter((header, index) => rawHeaders.indexOf(header) !== index);

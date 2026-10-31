@@ -73,6 +73,7 @@ function isRun(value: unknown): value is Run {
 export function isValidState(value: unknown): value is AppState {
   if (!isObject(value) || value.version !== 1 || !isObject(value.settings)
     || typeof value.settings.reducedMotion !== 'boolean' || typeof value.settings.sound !== 'boolean'
+    || (value.settings.guideHidden !== undefined && typeof value.settings.guideHidden !== 'boolean')
     || !Array.isArray(value.lineage) || !value.lineage.every((career, index) => isCareer(career) && career.round === index + 1)
     || !Array.isArray(value.gallery) || !(value.run === null || isRun(value.run))) return false;
   const state = value as unknown as AppState;

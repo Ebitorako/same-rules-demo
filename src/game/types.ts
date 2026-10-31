@@ -38,6 +38,6 @@ export interface Career {
   policiesSet: string[]; hiredIntern: string | null;
 }
 export interface Unlock { endingId: string; pawn: Pawn; round: number; name: string }
-export interface Settings { reducedMotion: boolean; sound: boolean }
+export interface Settings { reducedMotion: boolean; sound: boolean; guideHidden?: boolean }
 export interface AppState { version: 1; run: Run | null; lineage: Career[]; gallery: Unlock[]; settings: Settings }
 export interface BoardTile { id: string; label: string; row: number; col: number; kind: 'start' | 'scenario' | 'boss' | 'director'; cardId?: string; chapter: number }

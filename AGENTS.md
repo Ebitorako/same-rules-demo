@@ -37,7 +37,7 @@ Keep these script names working; create them during M0 if they do not exist yet.
 3. **No undo.** No back button or save slots; auto-save the current run so a refresh resumes, not rewinds.
 4. **Story text comes from data** (`public/data/*.csv`, `*.json`). Never hard-code story, option, result or ending text in code.
 5. **Gender logic is data-driven** (per-pawn options, results, deltas, boss thresholds). No `if (female)` story branches in UI code.
-6. **The designer draws all art.** Use only the art files she adds under `public/assets/` (names in the spec's asset list). Until a file exists, show a clearly labelled placeholder box. Never draw, generate or download character art yourself. Use the colour tokens in the spec; do not invent colours, gradients, emoji or new fonts.
+6. **The designer draws all art.** Use only the art files she adds under `public/assets/` (names in the spec's asset list). Until a file exists, show a clearly labelled placeholder box. Never draw, generate or download character art yourself. Use the colour tokens in the spec; do not invent colours, emoji or new fonts. The designer's 31 Oct request permits static metallic gradients on the six special tiles; other surfaces remain flat.
 7. **No `window.alert` / `confirm` / `prompt`.** Use in-page dialogs.
 8. **Accessibility:** real `<button>`s, keyboard play (`1` `2` `3`, `Enter`), visible focus, respect `prefers-reduced-motion`.
 

@@ -108,7 +108,9 @@ export function chooseOption(state: AppState, optionNumber: number, data: GameDa
 
 export function updateSettings(state: AppState, partial: Partial<Settings>): AppState {
   return { ...state, settings: {
+    ...state.settings,
     reducedMotion: typeof partial.reducedMotion === 'boolean' ? partial.reducedMotion : state.settings.reducedMotion,
     sound: typeof partial.sound === 'boolean' ? partial.sound : state.settings.sound,
+    ...(typeof partial.guideHidden === 'boolean' ? { guideHidden: partial.guideHidden } : {}),
   } };
 }

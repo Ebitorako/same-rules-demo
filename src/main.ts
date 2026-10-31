@@ -1,6 +1,10 @@
 import './styles/main.css';
+import './styles/metal.css';
+import './styles/guide.css';
+import './styles/endings.css';
 import { RULES } from './config/rules';
-import { loadData } from './data/load';
+import { loadData, loadGuideData } from './data/load';
+import type { GuideData } from './data/guide';
 import { validateData } from './data/validate';
 import { BOARD } from './game/board';
 import { advance, chooseOption, createInitialState, startCareer, updateSettings } from './game/state';
@@ -13,11 +17,13 @@ import { button, escape } from './ui/dom';
 import { endingScreen, galleryScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
+import { guidePanel } from './ui/guide';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const debug = new URLSearchParams(location.search).get('debug') === '1';
 let state: AppState = loadState();
 let data: GameData;
+let guide: GuideData;
 let view: 'title' | 'game' | 'gallery' | 'settings' = state.run ? 'game' : 'title';
 let returnView: 'title' | 'game' = view;
 let selectingPawn = false;
@@ -45,7 +51,7 @@ function render(focus = true): void {
   else if (!run) { view = 'title'; content = titleScreen(state,data,selectingPawn); }
   else if (run.phase === 'intro') content = introScreen(state,data);
   else if (run.phase === 'ending' && !showingReturn) content = endingScreen(state,data,endingBack);
-  else content = `<div ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}</div>${storyOpen ? scenarioDialog(state,data) : ''}`;
+  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${storyOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '') : ''}`;
   app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="Main navigation"><span class="prototype-stamp">PROTOTYPE</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? '<p class="save-warning" role="status">This browser could not save progress. Keep this tab open; refreshing may lose this career.</p>' : ''}${debugPanel()}`;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
@@ -113,6 +119,12 @@ app.addEventListener('click', event => {
   const target = (event.target as HTMLElement).closest<HTMLElement>('[data-action]');
   if (!target || busy) return;
   const action = target.dataset.action;
+  if (action === 'toggle-guide') {
+    state = updateSettings(state, { guideHidden: !state.settings.guideHidden });
+    persist(); render(false);
+    app.querySelector<HTMLElement>('[data-action="toggle-guide"]:not([inert] *)')?.focus();
+    return;
+  }
   if (action === 'select-pawn' || action === 'next-career') return newCareer();
   if (action === 'start-female' || action === 'start-male') return start(action.slice(6) as Pawn);
   if (action === 'advance') return void makeMove(()=>advance(state,data));
@@ -165,7 +177,7 @@ matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>doc
 
 async function boot(): Promise<void> {
   try {
-    [data] = await Promise.all([loadData(),loadAssets()]);
+    [data, guide] = await Promise.all([loadData(),loadGuideData(),loadAssets()]);
     const issues = validateData(data);
     if (issues.length) throw new Error(issues.join('\n'));
     RULES.litTileColors.forEach((color,index)=>document.documentElement.style.setProperty(`--lit-${index+1}`,color));

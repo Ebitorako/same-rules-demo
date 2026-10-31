@@ -3,7 +3,15 @@ import { art } from './assets';
 import { button, escape, richText } from './dom';
 
 function endingFace(ending: Ending, back: boolean): string {
-  return back ? `<p class="eyebrow">BEHIND THE CAREER</p><h2>${escape(ending.name)}</h2><p class="ending-theory">${richText(ending.back)}</p><p class="reading">${escape(ending.reference)}</p>` : `${art(`cards/ending_${ending.id}`,`ending ${ending.id}`,'ending-art')}<p class="eyebrow">${escape(ending.id)} / A CAREER REMEMBERED</p><h2>${escape(ending.name)}</h2><p>${richText(ending.front)}</p>`;
+  if (!back) return `${art(`cards/ending_${ending.id}`,`ending ${ending.id}`,'ending-art')}<p class="eyebrow">${escape(ending.id)} / A CAREER REMEMBERED</p><h2>${escape(ending.name)}</h2><p>${richText(ending.front)}</p>`;
+  const text = (value: string) => richText(value.replace(/\r\n?/g, '\n'));
+  return `<p class="eyebrow">BEHIND THE CAREER</p><h2>${escape(ending.name)}</h2>
+    <div class="ending-reading-scroll" role="region" tabindex="0" aria-label="${escape(`Theory and references for ${ending.name}`)}">
+      <section class="ending-reading-section"><h3>Theory</h3><p class="ending-theory">${text(ending.back)}</p></section>
+      <section class="ending-reading-section ending-references"><h3>References</h3>${ending.reference.trim()
+        ? `<p class="ending-reference-text">${text(ending.reference)}</p>`
+        : '<p class="ending-empty-note">References have not been added to this card yet.</p>'}</section>
+    </div>`;
 }
 export function endingScreen(state: AppState, data: GameData, back: boolean): string {
   const ending = data.endings.find(ending=>ending.id===state.run!.endingId)!;
@@ -15,6 +23,6 @@ export function galleryScreen(state: AppState, data: GameData, flipped: Set<stri
     const entries = state.gallery.filter(item=>item.endingId===ending.id);
     const frame = art('ui/gallery_frame','gallery frame','gallery-frame-art');
     if (!entries.length) return `<article class="gallery-card locked paper-card" aria-label="Locked ending">${frame}<span class="locked-mark">?</span><h2>???</h2><p>ANOTHER CAREER, ANOTHER STORY.</p></article>`;
-    return `<article class="gallery-card paper-card">${frame}${endingFace(ending,flipped.has(ending.id))}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · career ${entry.round}`).join('<br>')}</p>${button(flipped.has(ending.id) ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button', `data-ending="${escape(ending.id)}"`)}</article>`;
+    return `<article class="gallery-card paper-card ${flipped.has(ending.id) ? 'back-face' : ''}">${frame}${endingFace(ending,flipped.has(ending.id))}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · career ${entry.round}`).join('<br>')}</p>${button(flipped.has(ending.id) ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button', `data-ending="${escape(ending.id)}"`)}</article>`;
   }).join('')}</div>${button('Back', 'back', 'page-back')}</section>`;
 }

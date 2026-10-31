@@ -1,13 +1,14 @@
 import type { Candidate, CopyData, GameData, Policy } from '../game/types';
 import { parseEndings, parseScenarios } from './parse';
 import { validateData } from './validate';
+import { parseGuide, type GuideData } from './guide';
 
-export async function loadData(): Promise<GameData> {
-  async function fetchText(filename: string): Promise<string> {
+async function fetchText(filename: string): Promise<string> {
     const response = await fetch(`${import.meta.env.BASE_URL}data/${filename}`);
     if (!response.ok) throw new Error(`无法读取 data/${filename}（${response.status}），请检查文件是否放在 public/data/。`);
     return response.text();
-  }
+}
+export async function loadData(): Promise<GameData> {
   const [scenarios, endings, candidatesText, policiesText, copyText] = await Promise.all([
     fetchText('scenarios.csv'), fetchText('endings.csv'), fetchText('candidates.json'), fetchText('policies.json'), fetchText('copy.json'),
   ]);
@@ -24,4 +25,12 @@ export async function loadData(): Promise<GameData> {
   const issues = validateData(data);
   if (issues.length) throw new Error(`剧情资料需要修正：\n${issues.join('\n')}`);
   return data;
+}
+
+export async function loadGuideData(): Promise<GuideData> {
+  const [csv, config] = await Promise.all([fetchText('guide.csv'), fetchText('guide.json')]);
+  let parsed: unknown;
+  try { parsed = JSON.parse(config); }
+  catch { throw new Error('guide.json 格式无效，请检查逗号、引号和括号。'); }
+  return parseGuide(csv, parsed);
 }

@@ -1,0 +1,62 @@
+.ending-card.back-face,
+.gallery-card.back-face {
+  min-width: 0;
+}
+
+.ending-reading-scroll {
+  width: 100%;
+  min-width: 0;
+  max-height: min(48dvh, 30rem);
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  scrollbar-gutter: stable;
+  padding: 4px 12px 4px 4px;
+  text-align: left;
+}
+
+.ending-reading-scroll:focus-visible {
+  outline-offset: 2px;
+}
+
+.ending-reading-section + .ending-reading-section {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--grey);
+}
+
+.ending-reading-section h3 {
+  margin: 0 0 9px;
+  color: var(--ink);
+  font: 700 13px/1.4 var(--font-body);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ending-reading-section .ending-theory {
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.ending-reading-section .ending-reference-text,
+.ending-reading-section .ending-empty-note {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.gallery-card .ending-reading-scroll {
+  max-height: min(48dvh, 24rem);
+}
+
+.gallery-card .ending-reading-section .ending-theory {
+  font-size: 16px;
+}
+
+.back-face > .text-button {
+  flex-shrink: 0;
+}
+
+@media (max-width: 560px) {
+  .ending-reading-scroll {
+    padding-right: 8px;
+  }
+}

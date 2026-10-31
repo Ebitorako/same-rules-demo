@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { parseEndings, parseScenarios } from '../src/data/parse';
 import { getDataWarnings, validateData } from '../src/data/validate';
 import type { GameData } from '../src/game/types';
+import { parseGuide } from '../src/data/guide';
 
 try {
   const read = (file: string): string => {
@@ -22,11 +23,13 @@ try {
     copy: json('copy.json'),
   };
   const issues = validateData(data);
+  const guide = parseGuide(read('guide.csv'), json('guide.json'));
   if (issues.length) {
     console.error(`资料检查未通过，共 ${issues.length} 项：\n${issues.map((issue) => `- ${issue}`).join('\n')}`);
     process.exitCode = 1;
   } else {
     console.log(`资料检查通过：20 张卡、${data.scenarios.length} 行选项、${data.endings.length} 个结局。`);
+    console.log(`指引资料检查通过：${guide.notes.length} 行，NPC 为 ${guide.name}。`);
     for (const warning of getDataWarnings(data)) console.warn(`提醒：${warning}`);
   }
 } catch (error) {
