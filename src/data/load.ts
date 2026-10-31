@@ -4,7 +4,8 @@ import { validateData } from './validate';
 import { parseGuide, type GuideData } from './guide';
 
 async function fetchText(filename: string): Promise<string> {
-    const response = await fetch(`${import.meta.env.BASE_URL}data/${filename}`);
+    // Keep a new build from combining its code with cached text from an older release.
+    const response = await fetch(`${import.meta.env.BASE_URL}data/${filename}?v=${__DATA_VERSION__}`, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`无法读取 data/${filename}（${response.status}），请检查文件是否放在 public/data/。`);
     return response.text();
 }
