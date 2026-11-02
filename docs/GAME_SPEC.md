@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.14, 3 Nov 2026. Team-authored Chinese edition with an English/Chinese language switch; verification/publication recorded in README and AI_LOG.*
+*Version 0.15, 3 Nov 2026. Uniform ending collection, full-card review dialogs and bilingual visual polish; verification/publication recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
@@ -19,7 +19,7 @@ The Chinese edition uses the explicit `ch1中文版`–`ch4中文版` tabs, save
 - Card ids in the runtime use fixed board slots. Retain source ids separately: C1-03F/M → C1-03; C2-04A/B/C/D → C2-04; C3-03a/b, C3-04a/b and C3-05a/b share their numbered slots.
 - Ordinary unvisited tiles are dark `#2A2825`; visited tiles are cream `#F4EFE3`. The four Bosses retain red, green, blue and purple metal respectively; Creative Director is silver and START/finish is gold. Special tiles retain metal after visiting.
 - YOUR CHOICES fits all recorded choices by increasing overlap, with no horizontal scrollbar. Ordinary mini cards show one centred number, Bosses show metal without visible wording. Hover/focus raises and enlarges; click opens a read-only review. Reading never replays or changes progress.
-- Retain cream/ink paper cards, Limelight titles, Josefin Sans body text, grain overlay, existing colour tokens and reduced-motion support. Designer-supplied art only; use labelled placeholders until files are provided.
+- Retain cream/ink paper cards, Limelight English titles and brand lettering, Josefin Sans body text, grain overlay, existing colour tokens and reduced-motion support. Chinese headings use bold sans-serif fallbacks; Latin text shares Josefin Sans in both languages. Boss, Creative Director and YOU nameplates share rounded corners and bold body lettering. Designer-supplied art only; use labelled placeholders until files are provided.
 
 ## 3. Six abilities and disclosure
 
@@ -113,7 +113,9 @@ A completed Creative Director, or the explicit E05 exception, becomes the next G
 | E13 | A Small Step Forward | Finish with coordinator |
 | E14 | Rewriting the Rules | Finish with transparent |
 
-CH1-E01 Through the Door and CH2-E07 Moving Up are separate milestone ids. Their displayed source ids remain E01 and E07, preserving authorship while avoiding the two distinct E07 cards colliding. Milestones flip to theory/references during the chapter transition and continue the same career. They do not appear in Gallery, archive a terminal report or disclose stats. Gallery contains only the 13 terminal endings.
+CH1-E01 Through the Door and CH2-E07 Moving Up remain separate internal milestone ids. On the designer's 3 Nov instruction, their headings, artwork labels and placeholders show only “A CHAPTER MILESTONE” and their names, without an E number. Original source ids and asset mappings remain unchanged. Milestones flip to theory/references during the chapter transition and continue the same career. They do not appear in Gallery, archive a terminal report or disclose stats. Gallery contains only the 13 terminal endings.
+
+Gallery uses equally sized compact cards with artwork, a title and a clamped description. Clicking an unlocked card opens a modal with the full ending, earned pawn variants and separate final values/choice reviews for each completed career; Theory and References stay on the back. Clicking a locked card briefly displays a bilingual locked notice without disclosing its identity or story. Dialogs trap keyboard focus, close with Escape or Close, return focus to the originating card and permit language switching without modifying career progress.
 
 Terminal fronts show source text, source rulebook note and six final values. Backs show Theory, References and the per-career numerical review. Explain the abilities from the data copy; distinguish actual changes at limits. Missing references are shown as missing. Reports remain separate for each completed career and include chapter-entry effects; the Chapter 3 maternal-assumption explanation is revealed only in this ending recap through `recapText`, never in the opening scene. Recorded outcome text can be expanded under What followed. Gallery keeps locked cards undisclosed, and reveals only the pawn fronts that have been earned.
 

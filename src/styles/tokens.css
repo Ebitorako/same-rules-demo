@@ -37,7 +37,7 @@
   --metal-gold-light: #F4E7AF;
   --metal-gold-edge: #65451D;
   --font-title: 'Limelight', serif;
-  --font-body: 'Josefin Sans', sans-serif;
+  --font-body: 'Josefin Sans', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', sans-serif;
   --hop-ms: 450ms;
   --flip-half-ms: 150ms;
   --light-ms: 400ms;

@@ -6,7 +6,7 @@ import { advance, chooseOption, createInitialState, startCareer } from '../game/
 import type { AppState, Career, EndingRecap, GameData, Stats } from '../game/types';
 import { boardScreen } from './board';
 import { scenarioDialog } from './card';
-import { endingScreen, galleryScreen } from './gallery';
+import { endingScreen, galleryDetailDialog, galleryScreen } from './gallery';
 import { choiceHistoryDialog } from './history';
 import { finalValues, numericalReview } from './recap';
 
@@ -96,13 +96,19 @@ describe('ending-only numerical disclosure', () => {
     second.steps[0].actualDelta!.Network = -3;
     state.lineage.push(career(second));
     state.run = { ...state.run!, round: 3, phase: 'board', endingId: null, stats: values({ Network: 9 }) };
-    const html = galleryScreen(state, data, new Set());
+    const html = galleryDetailDialog(state, data, 'E02', false);
     expect(html).toContain('Career 1 · Player 1');
     expect(html).toContain('Career 2 · Player 2');
     expect(html).toContain('<dt>Network</dt><dd>2</dd>');
     expect(html).not.toContain('<dt>Network</dt><dd>9</dd>');
     expect(html).not.toContain('Career 3');
-    expect(galleryScreen(createInitialState(), data, new Set(['E02']))).not.toContain('Final values');
+    expect(galleryScreen(createInitialState(), data)).not.toContain('Final values');
+    const review = galleryDetailDialog(state, data, 'E02', true);
+    expect(review).toContain('Career 1 · Player 1');
+    expect(review).toContain('Career 2 · Player 2');
+    expect(review).toContain('A demanding brief');
+    expect(galleryScreen(state, data)).not.toContain('Final values');
+    expect(galleryScreen(state, data)).not.toContain('A demanding brief');
   });
 
   it('escapes saved story text and editable ability explanations', () => {

@@ -1,5 +1,4 @@
-.ending-card.back-face,
-.gallery-card.back-face {
+.ending-card.back-face {
   min-width: 0;
 }
 
@@ -78,7 +77,6 @@
 .gallery-recaps { margin-top: 20px; }
 .gallery-career-recap { border-top: 1px solid var(--grey); padding: 12px 0; }
 .gallery-career-recap .ending-values { border: 0; padding-top: 12px; margin-top: 0; }
-.gallery-card .ending-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
 .gallery-career-recap .numerical-review { margin-top: 16px; }
 .gallery-career-recap .recap-totals,
 .gallery-career-recap .recap-changes li { font-size: 12px; }
@@ -123,12 +121,42 @@
   line-height: 1.65;
 }
 
-.gallery-card .ending-reading-scroll {
-  max-height: min(48dvh, 24rem);
+.gallery-scrim { align-items: center; padding: 24px; }
+.gallery-dialog {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: min(720px, 100%);
+  max-height: calc(100dvh - 48px);
+  padding: 6px 16px 18px 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
-
-.gallery-card .ending-reading-section .ending-theory {
-  font-size: 16px;
+.gallery-dialog > .dialog-language { margin: 0; justify-content: flex-start; }
+.gallery-dialog > .dialog-language .language-switch { background: var(--cream); }
+.gallery-dialog-toolbar { display: flex; justify-content: flex-end; }
+.gallery-dialog > .dialog-language, .gallery-dialog-toolbar { position: sticky; top: 0; z-index: 2; }
+.gallery-dialog .ending-card { grid-column: 1 / -1; width: 100%; max-width: none; min-width: 0; min-height: 0; margin: 0; align-items: stretch; text-align: left; }
+.gallery-dialog .ending-reading-scroll { max-height: none; overflow: visible; padding: 0; scrollbar-gutter: auto; }
+.gallery-dialog .ending-card > .text-button { margin-top: 22px; align-self: flex-start; }
+.gallery-dialog .unlocked-by { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--grey); font-size: 12px; }
+.gallery-toast {
+  position: fixed;
+  inset: auto 20px 26px;
+  z-index: 30;
+  width: fit-content;
+  max-width: calc(100% - 40px);
+  margin: auto;
+  padding: 12px 22px;
+  border: 2px solid var(--cream);
+  border-radius: 10px;
+  background: var(--ink);
+  color: var(--cream);
+  box-shadow: 4px 4px 0 var(--grey);
+  text-align: center;
+  font-size: 15px;
 }
 
 .back-face > .text-button {
@@ -136,6 +164,9 @@
 }
 
 @media (max-width: 560px) {
+  .gallery-scrim { padding: 12px 6px; align-items: center; }
+  .gallery-dialog { max-height: calc(100dvh - 24px); padding-right: 12px; }
+  .gallery-dialog .ending-card { padding: 26px 20px; }
   .ending-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .ending-screen { padding-inline: 14px; }
   .ending-card { padding: 22px 18px; }

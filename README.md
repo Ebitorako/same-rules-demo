@@ -4,9 +4,9 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.14：中英文双语版本。** 正式 CH1–4、规则书、选项、结果、结局与复盘支持语言切换；共用六项能力、已拆分角色、场景音频与获准的 E03 调平。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.15：结局收藏与双语界面优化。** 收藏卡统一尺寸，点击后弹出完整结局及历次生涯复盘；中文字体与英文界面协调，棋盘标签统一圆角。正式 CH1–4、六项能力、音频和 E03 调平均沿用已确认的版本。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
-本轮验证：134 项测试、数据检查和构建通过；浏览器走通中文 E03 和完整 E14，确认剧情／历史／结局可切换语言，刷新保留中文与进度，390px 手机布局无横向溢出。
+本轮验证：138 项测试、数据检查和构建通过。浏览器确认 13 张收藏卡在桌面与 390px 手机上等高、无横向溢出；E03 多次生涯及 E14 完整复盘可查看、翻面和切换语言，Esc 关闭后返回原卡片；实际游玩走通两张章节里程碑，均不显示 E 编号。
 
 [中文试玩](https://ebitorako.github.io/same-rules-demo/?lang=zh-CN) · [English](https://ebitorako.github.io/same-rules-demo/?lang=en) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 
@@ -15,6 +15,8 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 点击右上角 **中文 / English** 随时切换；剧情弹窗及历史回顾里也有切换按钮。中文版点击 **开始职业生涯 → 女性棋子 / 男性棋子 → 进入工作室**。语言偏好会保存，刷新不会变回英文；切换不重开、不重选，也不会重复加减数值。旧原型收藏仍保留当时的原始文本。
 
 旧原型存档保留在 Gallery 的 **Earlier prototype records**，正式剧情和旧结局不混用。不需要为更新主动清空存档。
+
+点击 **结局收藏 / Gallery → 任意已解锁卡片** 查看完整描述及最终数值，**翻面 / Turn over** 查看理论、文献和每次生涯的数值复盘。点击 **关闭 / Close** 或按 **Esc** 返回收藏；点击黑色未解锁卡片只会短暂提示。途中晋升卡显示“章节里程碑”，不再显示结局编号。
 
 ## 本轮内容
 

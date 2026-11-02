@@ -1,14 +1,18 @@
 import type { AppState, GameData, Ending, Pawn } from '../game/types';
 import { getCareerRecap, getEndingRecap } from '../game/recap';
-import { art } from './assets';
+import { art, assetPath } from './assets';
 import { button, escape, richText } from './dom';
 import { finalValues, numericalReview } from './recap';
 import { t, tf } from './i18n';
 
-function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn): string {
-  if (!back) return `${art(`cards/ending_${ending.id}`,tf('ending {id}', { id: ending.sourceId ?? ending.id }),'ending-art')}<p class="eyebrow">${escape(ending.sourceId ?? ending.id)} / ${t(ending.kind === 'milestone' ? 'A CHAPTER MILESTONE' : 'A CAREER REMEMBERED')}</p><h2>${escape(ending.name)}</h2><p>${richText(pawn ? ending.frontByPawn?.[pawn] ?? ending.front : ending.front)}</p>${ending.guideAdvice ? `<aside class="ending-guide"><span>${t('THE RULEBOOK')}</span><p>${richText(ending.guideAdvice)}</p></aside>` : ''}${recap}`;
+function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn, headingId?: string): string {
+  const milestone = ending.kind === 'milestone';
+  const heading = `<h2${headingId ? ` id="${escape(headingId)}"` : ''}>${escape(ending.name)}</h2>`;
+  const label = milestone ? `${t('A CHAPTER MILESTONE')} · ${ending.name}` : tf('ending {id}', { id: ending.sourceId ?? ending.id });
+  const eyebrow = milestone ? t('A CHAPTER MILESTONE') : `${escape(ending.sourceId ?? ending.id)} / ${t('A CAREER REMEMBERED')}`;
+  if (!back) return `${art(`cards/ending_${ending.id}`,label,'ending-art')}<p class="eyebrow">${eyebrow}</p>${heading}<p>${richText(pawn ? ending.frontByPawn?.[pawn] ?? ending.front : ending.front)}</p>${ending.guideAdvice ? `<aside class="ending-guide"><span>${t('THE RULEBOOK')}</span><p>${richText(ending.guideAdvice)}</p></aside>` : ''}${recap}`;
   const text = (value: string) => richText(value.replace(/\r\n?/g, '\n'));
-  return `<p class="eyebrow">${t('BEHIND THE CAREER')}</p><h2>${escape(ending.name)}</h2>
+  return `<p class="eyebrow">${t('BEHIND THE CAREER')}</p>${heading}
     <div class="ending-reading-scroll" role="region" tabindex="0" aria-label="${escape(tf('Theory, references and numerical review for {ending}', { ending: ending.name }))}">
       <section class="ending-reading-section"><h3>${t('Theory')}</h3><p class="ending-theory">${text(ending.back)}</p></section>
       <section class="ending-reading-section ending-references"><h3>${t('References')}</h3>${ending.reference.trim()
@@ -48,20 +52,37 @@ function galleryRecaps(state: AppState, data: GameData, ending: Ending, back: bo
       ? getEndingRecap(run, data) : getCareerRecap(career);
   });
   if (!reports.length) return '';
-  return `<section class="${back ? 'ending-reading-section ' : ''}gallery-recaps"><h3>${t(back ? 'Career reviews' : 'Career values')}</h3>${reports.map(report => `<details class="gallery-career-recap"><summary>${t('Career')} ${report.round} · ${escape(report.character.name)} · ${tf('{pawn} pawn', { pawn: t(report.character.pawn === 'female' ? 'Female' : 'Male') })}</summary>${back ? numericalReview(report, data.copy) : finalValues(report)}</details>`).join('')}</section>`;
+  return `<section class="${back ? 'ending-reading-section ' : ''}gallery-recaps"><h3>${t(back ? 'Career reviews' : 'Career values')}</h3>${reports.map((report, index) => `<details class="gallery-career-recap"${index === 0 ? ' open' : ''}><summary>${t('Career')} ${report.round} · ${escape(report.character.name)} · ${tf('{pawn} pawn', { pawn: t(report.character.pawn === 'female' ? 'Female' : 'Male') })}</summary>${back ? numericalReview(report, data.copy) : finalValues(report)}</details>`).join('')}</section>`;
 }
 
-export function galleryScreen(state: AppState, data: GameData, flipped: Set<string>): string {
+function cardArt(key: string, label: string, className: string): string {
+  return art(key, label, className).replace(/<(\/?)figure\b/g, '<$1span').replace(/<(\/?)figcaption\b/g, '<$1span');
+}
+
+export function galleryScreen(state: AppState, data: GameData): string {
   const unlocked = new Set(state.gallery.map(item=>item.endingId));
   const cards = data.endings;
   return `<section class="gallery-screen"><div class="page-heading"><div><p class="eyebrow">${t('THE CAREERS WE KEEP')}</p><h1>${t('Gallery')}</h1></div><p>${unlocked.size} / ${cards.length} ${t('DISCOVERED')}</p></div><div class="gallery-grid">${cards.map(ending=> {
     const entries = state.gallery.filter(item=>item.endingId===ending.id);
-    const frame = art('ui/gallery_frame','gallery frame','gallery-frame-art');
-    if (!entries.length) return `<article class="gallery-card locked paper-card" aria-label="${t('Locked ending')}">${frame}<span class="locked-mark">?</span><h2>???</h2><p>${t('ANOTHER CAREER, ANOTHER STORY.')}</p></article>`;
-    const back = flipped.has(ending.id);
-    const variants = !back && ending.frontByPawn ? [...new Set(entries.map(entry => entry.pawn))].filter(pawn => pawn !== entries[0].pawn).map(pawn => `<details class="ending-variant"><summary>${tf('{pawn} pawn’s ending', { pawn: t(pawn === 'female' ? 'Female' : 'Male') })}</summary><p>${richText(ending.frontByPawn?.[pawn] ?? ending.front)}</p></details>`).join('') : '';
-    return `<article class="gallery-card paper-card ${back ? 'back-face' : ''}">${frame}${endingFace(ending,back,galleryRecaps(state,data,ending,back), entries[0].pawn)}${variants}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · ${t('career')} ${entry.round}`).join('<br>')}</p>${button(back ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button', `data-ending="${escape(ending.id)}"`)}</article>`;
+    const frame = assetPath('ui/gallery_frame') ? `<span class="gallery-frame-layer" aria-hidden="true">${cardArt('ui/gallery_frame','gallery frame','gallery-frame-art')}</span>` : '';
+    const attributes = `type="button" id="gallery-ending-${escape(ending.id)}" data-action="open-ending" data-ending="${escape(ending.id)}"`;
+    if (!entries.length) return `<button ${attributes} class="gallery-card locked paper-card" aria-label="${t('Locked ending')}">${frame}<span class="locked-mark" aria-hidden="true">?</span><span class="gallery-card-title">???</span><span class="gallery-card-description">${t('ANOTHER CAREER, ANOTHER STORY.')}</span></button>`;
+    const titleId = `gallery-title-${ending.id}`;
+    return `<button ${attributes} class="gallery-card paper-card" aria-haspopup="dialog" aria-labelledby="${escape(titleId)}">${frame}${cardArt(`cards/ending_${ending.id}`, ending.name, 'ending-art gallery-preview-art')}<span class="gallery-card-title" id="${escape(titleId)}">${escape(ending.name)}</span><span class="gallery-card-description">${escape((ending.frontByPawn?.[entries[0].pawn] ?? ending.front).replace(/\s+/g, ' ').trim())}</span></button>`;
   }).join('')}</div>${legacyGallery(state, data)}${button('Back', 'back', 'page-back')}</section>`;
+}
+
+export function galleryDetailDialog(state: AppState, data: GameData, id: string, back: boolean): string {
+  const entries = state.gallery.filter(entry => entry.endingId === id);
+  const ending = data.endings.find(item => item.id === id);
+  if (!entries.length || !ending) return '';
+  const variants = !back && ending.frontByPawn ? [...new Set(entries.map(entry => entry.pawn))]
+    .filter(pawn => pawn !== entries[0].pawn)
+    .map(pawn => `<details class="ending-variant"><summary>${tf('{pawn} pawn’s ending', { pawn: t(pawn === 'female' ? 'Female' : 'Male') })}</summary><p>${richText(ending.frontByPawn?.[pawn] ?? ending.front)}</p></details>`).join('') : '';
+  return `<div class="sheet-scrim gallery-scrim"><section class="gallery-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-detail-heading" tabindex="-1">
+    <header class="gallery-dialog-toolbar">${button('Close', 'close-gallery', 'gallery-close')}</header>
+    <article class="ending-card paper-card ${back ? 'back-face' : ''}">${endingFace(ending, back, galleryRecaps(state, data, ending, back), entries[0].pawn, 'gallery-detail-heading')}${variants}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · ${t('career')} ${entry.round}`).join('<br>')}</p>${button(back ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button', `data-ending="${escape(ending.id)}"`)}</article>
+  </section></div>`;
 }
 
 function legacyGallery(state: AppState, data: GameData): string {

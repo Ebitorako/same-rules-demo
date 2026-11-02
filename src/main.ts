@@ -22,7 +22,7 @@ import { transitionSounds } from './ui/audio-routes';
 import { boardScreen } from './ui/board';
 import { scenarioDialog } from './ui/card';
 import { button, escape } from './ui/dom';
-import { endingScreen, epilogueScreen, galleryScreen, milestoneScreen } from './ui/gallery';
+import { endingScreen, epilogueScreen, galleryDetailDialog, galleryScreen, milestoneScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
 import { guidePanel } from './ui/guide';
@@ -48,7 +48,9 @@ let busy = false;
 let showingReturn = false;
 let historyCardId: string | null = null;
 let historyTriggerId: string | null = null;
-const galleryFlips = new Set<string>();
+let galleryEndingId: string | null = null;
+let galleryBack = false;
+let galleryNoticeTimer: number | undefined;
 const reduced = () => state.settings.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function debugPanel(): string {
@@ -69,11 +71,14 @@ function render(focus = true): void {
   const scenarioOpen = view === 'game' && run && ['card','result','promotion','chapter'].includes(run.phase);
   const historyMarkup = view === 'game' && run?.phase === 'board' && historyCardId
     ? choiceHistoryDialog(displayState, displayData, historyCardId) : '';
-  const storyOpen = scenarioOpen || Boolean(historyMarkup);
+  const galleryMarkup = view === 'gallery' && galleryEndingId
+    ? galleryDetailDialog(displayState, displayData, galleryEndingId, galleryBack) : '';
+  const storyOpen = scenarioOpen || Boolean(historyMarkup) || Boolean(galleryMarkup);
   document.body.classList.toggle('story-open', Boolean(storyOpen));
   let content: string;
   if (view === 'title') content = titleScreen(displayState,displayData,selectingPawn);
-  else if (view === 'gallery') content = galleryScreen(displayState,displayData,galleryFlips);
+  else if (view === 'gallery') content = galleryScreen(displayState,displayData) + galleryMarkup
+    + '<p id="gallery-notice" class="gallery-toast" role="status" aria-live="polite" hidden></p>';
   else if (view === 'settings') content = settingsScreen(state.settings,confirmingReset);
   else if (!run) { view = 'title'; content = titleScreen(displayState,displayData,selectingPawn); }
   else if (run.phase === 'intro') content = introScreen(displayState,displayData,guidePanel(displayState,displayData,displayGuide,'intro-guide'));
@@ -85,6 +90,7 @@ function render(focus = true): void {
   app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}${languageButton}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (dialog) dialog.insertAdjacentHTML('afterbegin', `<div class="dialog-language">${languageButton}</div>`);
+  if (galleryMarkup) app.querySelectorAll<HTMLElement>('#main-content > :not(.gallery-scrim)').forEach(item => item.inert = true);
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
   if (focus) {
     const target = dialog ?? app.querySelector<HTMLElement>('#main-content h1, #main-content h2');
@@ -92,6 +98,21 @@ function render(focus = true): void {
   }
 }
 function persist(): void { savingFailed = !saveState(state); }
+function closeGallery(): void {
+  const id = galleryEndingId;
+  galleryEndingId = null;
+  galleryBack = false;
+  render(false);
+  document.getElementById(`gallery-ending-${id}`)?.focus({ preventScroll: true });
+}
+function showLockedEndingNotice(): void {
+  const notice = document.getElementById('gallery-notice');
+  if (!notice) return;
+  window.clearTimeout(galleryNoticeTimer);
+  notice.textContent = t('This ending has not been unlocked yet.', '这个结局还未解锁。');
+  notice.hidden = false;
+  galleryNoticeTimer = window.setTimeout(() => { notice.hidden = true; notice.textContent = ''; }, 2400);
+}
 function closeHistory(): void {
   const cardId = historyTriggerId;
   historyCardId = null;
@@ -166,6 +187,7 @@ app.addEventListener('click', event => {
   const action = target.dataset.action;
   if (target.closest('[inert]')) return;
   if (historyCardId && action !== 'review-choice' && action !== 'close-history' && action !== 'language') return;
+  if (galleryEndingId && !['close-gallery', 'flip-gallery', 'language'].includes(action ?? '')) return;
   if (action === 'language') {
     state = updateSettings(state, { locale: state.settings.locale === 'zh-CN' ? 'en' : 'zh-CN' });
     const url = new URL(location.href);
@@ -193,6 +215,18 @@ app.addEventListener('click', event => {
     return;
   }
   if (action === 'close-history') return closeHistory();
+  if (action === 'open-ending' && view === 'gallery') {
+    const id = target.dataset.ending;
+    if (!id || !data.endings.some(ending => ending.id === id)) return;
+    if (!state.gallery.some(entry => entry.endingId === id)) { showLockedEndingNotice(); return; }
+    window.clearTimeout(galleryNoticeTimer);
+    galleryEndingId = id;
+    galleryBack = false;
+    playSound('card');
+    render();
+    return;
+  }
+  if (action === 'close-gallery') return closeGallery();
   if (action === 'toggle-guide') {
     state = updateSettings(state, { guideHidden: !state.settings.guideHidden });
     persist(); render(false);
@@ -204,14 +238,14 @@ app.addEventListener('click', event => {
   if (action === 'advance') return void makeMove(()=>advance(state,data));
   if (action === 'choose') return void makeMove(()=>chooseOption(state,Number(target.dataset.option),data));
   if (action === 'flip-ending') return void flip(target,()=>{ endingBack = !endingBack; });
-  if (action === 'flip-gallery') return void flip(target,()=>{ const id=target.dataset.ending!; galleryFlips.has(id) ? galleryFlips.delete(id) : galleryFlips.add(id); });
+  if (action === 'flip-gallery' && galleryEndingId) return void flip(target,()=>{ galleryBack = !galleryBack; });
   if (action === 'home') { view = 'title'; selectingPawn = false; }
   if (action === 'resume') { view = 'game'; selectingPawn = false; }
   if (action === 'gallery' || action === 'settings') { if (view === 'game' || view === 'title') returnView = view; view = action; }
   if (action === 'back') { view = returnView; confirmingReset = false; }
   if (action === 'confirm-reset') confirmingReset = true;
   if (action === 'cancel-reset') confirmingReset = false;
-  if (action === 'reset') { resetStorage(); state = createInitialState(); confirmingReset = false; selectingPawn = false; endingBack = false; view = 'title'; galleryFlips.clear(); persist(); }
+  if (action === 'reset') { resetStorage(); state = createInitialState(); confirmingReset = false; selectingPawn = false; endingBack = false; view = 'title'; galleryEndingId = null; persist(); }
   render();
 });
 app.addEventListener('change', event => {
@@ -235,13 +269,18 @@ document.addEventListener('keydown', event => {
   const target = event.target as HTMLElement;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (event.key === 'Tab' && dialog) {
-    const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled),summary,input,[tabindex="0"]')];
+    const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not(:disabled),summary,input,[tabindex="0"]')]
+      .filter(element => element.getClientRects().length > 0 && !element.closest('[hidden], [inert]'));
     const first = focusable[0], last = focusable.at(-1);
     if (event.shiftKey && (target === first || target === dialog)) { event.preventDefault(); last?.focus(); }
     else if (!event.shiftKey && (target === last || target === dialog)) { event.preventDefault(); first?.focus(); }
   }
   if (historyCardId) {
     if (event.key === 'Escape') { event.preventDefault(); closeHistory(); }
+    return;
+  }
+  if (galleryEndingId) {
+    if (event.key === 'Escape') { event.preventDefault(); closeGallery(); }
     return;
   }
   if (target.matches('input,textarea,select')) return;

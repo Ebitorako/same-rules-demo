@@ -116,7 +116,7 @@ describe('rendered formal story connections', () => {
 
   it('keeps all unearned endings and milestones private', () => {
     const data = fixture();
-    const html = galleryScreen(createInitialState(), data, new Set());
+    const html = galleryScreen(createInitialState(), data);
     expect(html.match(/aria-label="Locked ending"/g)).toHaveLength(13);
     expect(html).not.toContain(data.endings[0].front);
     expect(html).not.toContain(data.milestones![0].front);
