@@ -1,14 +1,18 @@
 # Genderpoly — 游戏 Demo
 
-NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **FreeDOM**；剧情保持组员英文原文。
+NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **FreeDOM**；中英文剧情均使用组员表格原文。
 
 ## 当前版本与试玩
 
-**v0.13：正式 CH1–4、六项能力、已拆分角色、场景音频与第一章调平。** 本地验收完成：123 项测试、数据检查和构建通过；男女 E03 路线与完整 E14 路线通过浏览器实测，12 个音频文件均可解码，场景切换和静音正常，390px 手机布局没有横向溢出。过程见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.14：中英文双语版本。** 正式 CH1–4、规则书、选项、结果、结局与复盘支持语言切换；共用六项能力、已拆分角色、场景音频与获准的 E03 调平。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
-[在线试玩](https://ebitorako.github.io/same-rules-demo/) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
+本轮验证：134 项测试、数据检查和构建通过；浏览器走通中文 E03 和完整 E14，确认剧情／历史／结局可切换语言，刷新保留中文与进度，390px 手机布局无横向溢出。
+
+[中文试玩](https://ebitorako.github.io/same-rules-demo/?lang=zh-CN) · [English](https://ebitorako.github.io/same-rules-demo/?lang=en) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 
 本地双击 [启动游戏.cmd](启动游戏.cmd)，或运行 `npm run dev`，打开提示的网址。选择 **Female pawn / Male pawn → Enter the studio**；用 **Next** 前进、点击选项并 **Continue**。键盘支持 `1`–`4`、`D`、`Enter`。声音可在 **Settings → Sound** 开关。
+
+点击右上角 **中文 / English** 随时切换；剧情弹窗及历史回顾里也有切换按钮。中文版点击 **开始职业生涯 → 女性棋子 / 男性棋子 → 进入工作室**。语言偏好会保存，刷新不会变回英文；切换不重开、不重选，也不会重复加减数值。旧原型收藏仍保留当时的原始文本。
 
 旧原型存档保留在 Gallery 的 **Earlier prototype records**，正式剧情和旧结局不混用。不需要为更新主动清空存档。
 
@@ -62,6 +66,7 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ```bash
 node scripts/import-team-content.mjs
+node scripts/import-chinese-content.mjs
 npm run validate-data
 npm test
 npm run build

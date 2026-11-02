@@ -101,6 +101,7 @@ export function isValidState(value: unknown): value is AppState {
   if (!object(value) || value.version !== 1 || value.contentVersion !== CONTENT_VERSION || !object(value.settings)
     || typeof value.settings.reducedMotion !== 'boolean' || typeof value.settings.sound !== 'boolean'
     || (value.settings.guideHidden !== undefined && typeof value.settings.guideHidden !== 'boolean')
+    || (value.settings.locale !== undefined && value.settings.locale !== 'en' && value.settings.locale !== 'zh-CN')
     || !Array.isArray(value.lineage) || !value.lineage.every((career, index) => isCareer(career) && career.round === index + 1)
     || !Array.isArray(value.gallery) || !(value.run === null || isRun(value.run))
     || (value.migrationNotice !== undefined && typeof value.migrationNotice !== 'boolean')

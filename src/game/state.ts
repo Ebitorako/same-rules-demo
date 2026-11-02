@@ -188,5 +188,6 @@ export function updateSettings(state: AppState, partial: Partial<Settings>): App
     reducedMotion: typeof partial.reducedMotion === 'boolean' ? partial.reducedMotion : state.settings.reducedMotion,
     sound: typeof partial.sound === 'boolean' ? partial.sound : state.settings.sound,
     ...(typeof partial.guideHidden === 'boolean' ? { guideHidden: partial.guideHidden } : {}),
+    ...(partial.locale === 'en' || partial.locale === 'zh-CN' ? { locale: partial.locale } : {}),
   } };
 }

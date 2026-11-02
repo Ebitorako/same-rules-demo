@@ -1,0 +1,27 @@
+.language-switch { white-space: nowrap; }
+.header-nav .language-switch { border: 1px solid var(--ink); padding: 6px 10px; }
+.dialog-language { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
+.dialog-language .language-switch { font-size: 12px; padding: 6px 10px; background: transparent; }
+html:lang(zh-CN) {
+  --font-title: 'Limelight', 'Songti SC', 'SimSun', serif;
+  --font-body: 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', sans-serif;
+}
+html:lang(zh-CN) .brand, html:lang(zh-CN) .board-centre h2 { font-family: 'Limelight', serif; }
+html:lang(zh-CN) .eyebrow, html:lang(zh-CN) .keyboard-note,
+html:lang(zh-CN) .card-meta, html:lang(zh-CN) .card-bottom,
+html:lang(zh-CN) .centre-subtitle { letter-spacing: .06em; }
+html:lang(zh-CN) .scene-text, html:lang(zh-CN) .guide-panel p,
+html:lang(zh-CN) .ending-card p { line-height: 1.8; }
+html:lang(zh-CN) .option { line-height: 1.65; }
+html:lang(zh-CN) .title-copy h1 { font-family: 'Limelight', serif; }
+html:lang(zh-CN) .boss-name { letter-spacing: .05em; }
+@media (max-width: 560px) {
+  .title-layout { grid-template-columns: minmax(0, 1fr); }
+  .title-copy h1 { font-size: clamp(38px, 13.5vw, 68px); letter-spacing: -2px; }
+  .title-copy { min-width: 0; }
+  .app-header { flex-wrap: wrap; gap: 8px; }
+  .header-nav { flex-wrap: wrap; gap: 3px; }
+  .header-nav button { padding: 7px 8px; }
+  .header-nav .prototype-stamp { display: none; }
+  html:lang(zh-CN) .card-meta, html:lang(zh-CN) .card-bottom { font-size: 10px; }
+}

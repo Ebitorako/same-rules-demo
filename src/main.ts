@@ -4,8 +4,10 @@ import './styles/guide.css';
 import './styles/endings.css';
 import './styles/history.css';
 import './styles/story.css';
+import './styles/language.css';
 import { RULES } from './config/rules';
-import { loadData, loadGuideData } from './data/load';
+import { loadChineseCatalog, loadData, loadGuideData } from './data/load';
+import { localizeData, localizeGuide, localizeState, type TranslationCatalog } from './data/localize';
 import type { GuideData } from './data/guide';
 import { validateData } from './data/validate';
 import { BOARD } from './game/board';
@@ -25,12 +27,15 @@ import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
 import { guidePanel } from './ui/guide';
 import { choiceHistoryDialog } from './ui/history';
+import { setLocale, setStoryTranslations, t } from './ui/i18n';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const debug = new URLSearchParams(location.search).get('debug') === '1';
+const requestedLocale = new URLSearchParams(location.search).get('lang');
 let state: AppState = loadState();
 let data: GameData;
 let guide: GuideData;
+let chinese: TranslationCatalog;
 let view: 'title' | 'game' | 'gallery' | 'settings' = state.run ? 'game' : 'title';
 let returnView: 'title' | 'game' = view;
 let selectingPawn = false;
@@ -52,26 +57,34 @@ function debugPanel(): string {
   return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p><p id="audio-debug">${escape(audioStatus())}</p></aside>`;
 }
 function render(focus = true): void {
+  const locale = state.settings.locale ?? 'en';
+  setLocale(locale);
+  document.documentElement.lang = locale;
+  const displayState = localizeState(state, chinese, locale);
+  const displayData = localizeData(data, chinese, locale);
+  const displayGuide = localizeGuide(guide, chinese, locale);
   syncAudio(state, false, view === 'game' && epilogueVisible ? 'epilogue' : view);
   document.body.classList.toggle('reduced-motion', reduced());
   const run = state.run;
   const scenarioOpen = view === 'game' && run && ['card','result','promotion','chapter'].includes(run.phase);
   const historyMarkup = view === 'game' && run?.phase === 'board' && historyCardId
-    ? choiceHistoryDialog(state, data, historyCardId) : '';
+    ? choiceHistoryDialog(displayState, displayData, historyCardId) : '';
   const storyOpen = scenarioOpen || Boolean(historyMarkup);
   document.body.classList.toggle('story-open', Boolean(storyOpen));
   let content: string;
-  if (view === 'title') content = titleScreen(state,data,selectingPawn);
-  else if (view === 'gallery') content = galleryScreen(state,data,galleryFlips);
+  if (view === 'title') content = titleScreen(displayState,displayData,selectingPawn);
+  else if (view === 'gallery') content = galleryScreen(displayState,displayData,galleryFlips);
   else if (view === 'settings') content = settingsScreen(state.settings,confirmingReset);
-  else if (!run) { view = 'title'; content = titleScreen(state,data,selectingPawn); }
-  else if (run.phase === 'intro') content = introScreen(state,data,guidePanel(state,data,guide,'intro-guide'));
-  else if (run.phase === 'milestone') content = milestoneScreen(state,data,endingBack);
-  else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && data.epilogue ? epilogueScreen(data) : endingScreen(state,data,endingBack);
-  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
-  if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>The team’s completed story is ready.</strong><p>This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.</p>${button('Got it', 'dismiss-migration', 'text-button')}</aside>${content}`;
-  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="Main navigation"><span class="prototype-stamp">PROTOTYPE</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? '<p class="save-warning" role="status">This browser could not save progress. Keep this tab open; refreshing may lose this career.</p>' : ''}${debugPanel()}`;
+  else if (!run) { view = 'title'; content = titleScreen(displayState,displayData,selectingPawn); }
+  else if (run.phase === 'intro') content = introScreen(displayState,displayData,guidePanel(displayState,displayData,displayGuide,'intro-guide'));
+  else if (run.phase === 'milestone') content = milestoneScreen(displayState,displayData,endingBack);
+  else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && displayData.epilogue ? epilogueScreen(displayData) : endingScreen(displayState,displayData,endingBack);
+  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(displayState,displayData)}${guidePanel(displayState,displayData,displayGuide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(displayState,displayData,run.phase !== 'result' ? guidePanel(displayState,displayData,displayGuide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
+  if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>${t('The team’s completed story is ready.','组员的正式剧情已准备就绪。')}</strong><p>${t('This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.','本版本使用六项能力值和新的剧情分支。早期原型记录已保留在结局收藏中，开始新的职业生涯即可体验更新后的剧情。')}</p>${button(t('Got it','知道了'), 'dismiss-migration', 'text-button')}</aside>${content}`;
+  const languageButton = `<button type="button" class="language-switch" data-action="language" lang="${locale === 'en' ? 'zh-CN' : 'en'}" aria-label="${locale === 'en' ? '切换为中文' : 'Switch to English'}">${locale === 'en' ? '中文' : 'English'}</button>`;
+  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}${languageButton}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
+  if (dialog) dialog.insertAdjacentHTML('afterbegin', `<div class="dialog-language">${languageButton}</div>`);
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
   if (focus) {
     const target = dialog ?? app.querySelector<HTMLElement>('#main-content h1, #main-content h2');
@@ -152,7 +165,18 @@ app.addEventListener('click', event => {
   syncAudio(state, true, view);
   const action = target.dataset.action;
   if (target.closest('[inert]')) return;
-  if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
+  if (historyCardId && action !== 'review-choice' && action !== 'close-history' && action !== 'language') return;
+  if (action === 'language') {
+    state = updateSettings(state, { locale: state.settings.locale === 'zh-CN' ? 'en' : 'zh-CN' });
+    const url = new URL(location.href);
+    if (url.searchParams.has('lang')) {
+      url.searchParams.set('lang', state.settings.locale!);
+      history.replaceState(null, '', url);
+    }
+    persist(); render(false);
+    app.querySelector<HTMLElement>('[data-action="language"]:not([inert] *)')?.focus();
+    return;
+  }
   if (action === 'dismiss-migration') { state = { ...state, migrationNotice: false }; persist(); render(); return; }
   if (action === 'epilogue') { epilogueVisible = true; render(); return; }
   if (action === 'unavailable') { unavailableOption = Number(target.dataset.option); render(false); app.querySelector<HTMLElement>('.unavailable-note')?.focus(); return; }
@@ -233,9 +257,14 @@ matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>doc
 
 async function boot(): Promise<void> {
   try {
-    [data, guide] = await Promise.all([loadData(),loadGuideData(),loadAssets()]);
+    [data, guide, chinese] = await Promise.all([loadData(),loadGuideData(),loadChineseCatalog(),loadAssets()]);
+    setStoryTranslations(chinese.translations);
     const issues = validateData(data);
     if (issues.length) throw new Error(issues.join('\n'));
+    if (requestedLocale === 'en' || requestedLocale === 'zh-CN') {
+      state = updateSettings(state, { locale: requestedLocale });
+      persist();
+    }
     const archived = archiveEndingRecap(state, data);
     if (archived !== state) { state = archived; persist(); }
     document.title = data.copy.title;

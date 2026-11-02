@@ -1,5 +1,6 @@
 import assetFiles from 'virtual:art-index';
 import { escape } from './dom';
+import { getLocale, t, tf } from './i18n';
 
 let manifest: Record<string, string[]> = {};
 const available = new Set(assetFiles);
@@ -26,19 +27,20 @@ export function assetPath(key: string): string | undefined {
 }
 export function art(key: string, label: string, className = ''): string {
   const path = assetPath(key);
-  if (path) return `<figure class="art ${className}" aria-label="${escape(label)}"><img src="${escape(import.meta.env.BASE_URL + path)}" alt="${escape(label)}"><figcaption class="failed-art" hidden>ART PLACEHOLDER<br>${escape(label)}</figcaption></figure>`;
-  return `<figure class="art art-placeholder ${className}" role="img" aria-label="Art placeholder: ${escape(label)}"><span>ART<br>PLACEHOLDER</span><figcaption>${escape(label)}</figcaption></figure>`;
+  const translated = t(label);
+  if (path) return `<figure class="art ${className}" aria-label="${escape(translated)}"><img src="${escape(import.meta.env.BASE_URL + path)}" alt="${escape(translated)}"><figcaption class="failed-art" hidden>${t('ART PLACEHOLDER')}<br>${escape(translated)}</figcaption></figure>`;
+  return `<figure class="art art-placeholder ${className}" role="img" aria-label="${escape(tf('Art placeholder: {label}', { label: translated }))}"><span>${getLocale() === 'zh-CN' ? '美术<br>占位' : 'ART<br>PLACEHOLDER'}</span><figcaption>${escape(translated)}</figcaption></figure>`;
 }
 export function pawnArt(pawn: string, className = ''): string { return art(`characters/pawn_${pawn}`, `${pawn} pawn`, className); }
 export function npcArt(npc: string, expression: string): string {
   const id = npc.toLowerCase().replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
   const key = `npc/${id}_${expression || 'neutral'}`;
-  return art(assetPath(key) ? key : `npc/${id}_neutral`, `${npc} · ${expression || 'neutral'}`, 'npc-art');
+  return art(assetPath(key) ? key : `npc/${id}_neutral`, `${t(npc)} · ${t(expression || 'neutral')}`, 'npc-art');
 }
 const bossKeys: Record<string, string> = { 'C1-B': 'gatekeeper', 'C2-B': 'old_boys_network', 'C3-B': 'ideal_worker', 'C4-B': 'the_system' };
 export function storyArt(cardId: string, npc: string, expression: string): string {
   const boss = bossKeys[cardId];
   if (!boss) return npcArt(npc, expression);
   const reaction = `bosses/${boss}_${expression || 'neutral'}`;
-  return art(assetPath(reaction) ? reaction : `bosses/${boss}`, `${npc} · ${expression || 'neutral'}`, 'npc-art');
+  return art(assetPath(reaction) ? reaction : `bosses/${boss}`, `${t(npc)} · ${t(expression || 'neutral')}`, 'npc-art');
 }

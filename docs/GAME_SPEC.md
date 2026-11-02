@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.13, 3 Nov 2026. Approved art/audio integration, Chapter 1 balancing and project cleanup; final acceptance/publication recorded in README and AI_LOG.*
+*Version 0.14, 3 Nov 2026. Team-authored Chinese edition with an English/Chinese language switch; verification/publication recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
@@ -8,7 +8,9 @@ The designer explicitly requested replacing the provisional game content and rul
 
 The exact read-only source is `docs/source/2026-11-03-team-sheet.json`. `scripts/import-team-content.mjs` produces `public/data/team-content.json`, which is the runtime authority. The scenario/ending CSVs and copy/candidate/policy JSONs are readable exports. Import does not fetch Google Sheets automatically. Preserve authored story, results, advice and citations. On 3 Nov the designer explicitly authorised a minimal Chapter 1 balance correction, extraction of the six supplied characters, integration of uploaded audio, appropriate supplementary effects and project/GitHub cleanup. The only numeric override is recorded in `src/config/chapter-one-balance.json`; the original spreadsheet snapshot remains unchanged. Missing citations and policy dialogue are not permission to invent them.
 
-The project remains a single-player, deterministic, two-dimensional browser game about structural inequality in the creative industries. The game name is **Genderpoly** and the board company is **FreeDOM**. Preserve the team’s body-text casing. UI is English; handoff documentation is Chinese. Keep the established repository, public URL and storage key.
+The project remains a single-player, deterministic, two-dimensional browser game about structural inequality in the creative industries. The game name is **Genderpoly** and the board company is **FreeDOM**. Preserve the team’s body-text casing. UI and authored story are available in English and Simplified Chinese; handoff documentation is Chinese. Keep the established repository, public URL and storage key.
+
+The Chinese edition uses the explicit `ch1中文版`–`ch4中文版` tabs, saved in `docs/source/2026-11-03-chinese-sheet.json`. `scripts/import-chinese-content.mjs` generates the text catalog `public/data/zh-CN.json`; it does not change mechanics or the approved E03 correction. The header and open story/history dialogs offer a language switch, saved as an optional setting. Existing saves default to English. Switching re-renders display text only: progress, numeric effects, policy context and canonical choice/recap snapshots remain unchanged. Exact historical text without a matching authored translation stays in its recorded language instead of being replaced with a different current branch. Earlier prototype records retain their original story. Interface labels and neutral help text may be translated; missing team dialogue or citations remain missing. The Chinese importer documents source inconsistencies, including ch2中文版!G14's truncated background, resolved from identical complete background cells of the same scene.
 
 ## 2. Fixed presentation and board
 

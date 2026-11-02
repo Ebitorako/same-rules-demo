@@ -1,6 +1,7 @@
 import type { CopyData, Ending, GameData } from '../game/types';
 import { parseTeamContent } from './team';
 import { parseGuide, type GuideData } from './guide';
+import { parseTranslationCatalog, type TranslationCatalog } from './localize';
 
 async function fetchText(filename: string): Promise<string> {
     // Keep a new build from combining its code with cached text from an older release.
@@ -23,4 +24,8 @@ export async function loadGuideData(): Promise<GuideData> {
   try { parsed = JSON.parse(config); }
   catch { throw new Error('guide.json 格式无效，请检查逗号、引号和括号。'); }
   return parseGuide(csv, parsed);
+}
+
+export async function loadChineseCatalog(): Promise<TranslationCatalog> {
+  return parseTranslationCatalog(await fetchText('zh-CN.json'));
 }

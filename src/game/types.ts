@@ -3,6 +3,7 @@ export const LEGACY_STAT_NAMES = ['Creativity', 'Communication', 'Skill', 'Energ
 export type StatName = typeof STAT_NAMES[number];
 export type Stats = Record<StatName, number> & Partial<Record<'Skill' | 'Money', number>>;
 export type Pawn = 'female' | 'male';
+export type Locale = 'en' | 'zh-CN';
 export interface Character { name: string; pawn: Pawn }
 export interface StoryEffect {
   when?: string; pawn?: Pawn; setFlags?: Record<string, string | boolean>;
@@ -91,7 +92,7 @@ export interface Career {
   gatekeeperEligible?: boolean;
 }
 export interface Unlock { endingId: string; pawn: Pawn; round: number; name: string }
-export interface Settings { reducedMotion: boolean; sound: boolean; guideHidden?: boolean }
+export interface Settings { reducedMotion: boolean; sound: boolean; guideHidden?: boolean; locale?: Locale }
 export interface LegacyArchive { sourceVersion: string; run: Run | null; lineage: Career[]; gallery: Unlock[] }
 export interface AppState {
   version: 1; run: Run | null; lineage: Career[]; gallery: Unlock[]; settings: Settings;
