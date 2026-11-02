@@ -29,3 +29,9 @@
   .legacy-record { padding: 14px; }
 }
 .story-open { overflow: hidden; }
+.title-pawn-pair { display: flex; align-items: center; height: 330px; }
+.title-pawn-pair .art { width: 50%; height: 100%; }
+.board-pawn:has(img) { width: 84%; left: 8%; height: 96%; bottom: 6%; }
+.board-pawn .art:not(.art-placeholder) { border: 0; padding: 0; box-shadow: none; filter: drop-shadow(1px 2px 1px var(--grey)); }
+.board .boss-art:not(.art-placeholder) { position: absolute; inset: 2px 3px 22px; width: calc(100% - 6px); height: auto; min-height: 0; padding: 0; }
+.board .tile.boss:has(img) .boss-name { margin-top: auto; font-size: 8px; padding: 2px 1px; }

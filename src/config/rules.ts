@@ -1,4 +1,5 @@
 import type { Pawn, Stats, StatName } from '../game/types';
+import chapterOneBalance from './chapter-one-balance.json';
 
 export interface BossCheck {
   stats: StatName[]; minimum: Record<Pawn, number>; optionModifiers: Record<number, number>;
@@ -14,6 +15,7 @@ export const RULES = {
   startingStats: { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 } as Stats,
   burnoutAtZero: true,
   lowEnergyWarning: 1,
+  approvedBalance: chapterOneBalance,
   powerTokens: 0,
   hiring: { cardId: 'C4-01', candidates: {} as Record<number, string> },
   policy: { cardId: 'C4-03', options: { 1: 'zero_tolerance', 2: 'coordinator', 3: 'transparent' } as Record<number, string>, formalRecruitment: 'transparent', tokenCost: 0 },

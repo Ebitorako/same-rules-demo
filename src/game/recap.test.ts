@@ -78,7 +78,7 @@ describe('six-stat reports and recorded automatic events', () => {
     const frozen = structuredClone(first.lineage[0].recap);
     const next = startCareer(first, 'female', data);
     const second = play(next, data, { 'C1-02': 3, 'C1-04': 3 });
-    expect(second.run!.endingId).toBe('E02');
+    expect(second.run!.endingId).toBe('E03');
     expect(second.lineage).toHaveLength(2);
     expect(second.lineage[0].recap).toEqual(frozen);
     expect(second.lineage[1].recap!.steps.at(-1)!.cardId).toBe('C1-B');

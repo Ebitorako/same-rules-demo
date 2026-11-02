@@ -2,11 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { BOARD } from './board';
 import { advance, chooseOption } from './state';
 import { fresh, loadTeamData, play } from './test-helpers';
-import type { Pawn } from './types';
+import type { GameData, Pawn } from './types';
 
-describe('source-rule reachability without numerical rebalancing', () => {
-  it('enumerates all 162 first-chapter paths and exposes the authored unreachable rejection ending', () => {
-    const data = loadTeamData();
+function chapterOneCounts(data: GameData): Record<Pawn, Record<string, number>> {
     const counts: Record<Pawn, Record<string, number>> = { female: {}, male: {} };
     for (const pawn of ['female', 'male'] as const) {
       for (let code = 0; code < 81; code++) {
@@ -23,16 +21,32 @@ describe('source-rule reachability without numerical rebalancing', () => {
         counts[pawn][outcome] = (counts[pawn][outcome] ?? 0) + 1;
       }
     }
-    expect(Object.values(counts.female).reduce((a, b) => a + b, 0)).toBe(81);
-    expect(Object.values(counts.male).reduce((a, b) => a + b, 0)).toBe(81);
-    expect(counts.female.E03 ?? 0).toBe(0);
-    expect(counts.male.E03 ?? 0).toBe(0);
-    expect(counts.female['CH1-E01']).toBeGreaterThan(0);
-    expect(counts.male['CH1-E01']).toBeGreaterThan(0);
+    return counts;
+}
+
+describe('approved minimal first-chapter balance and ending reachability', () => {
+  it('records the original 162-route baseline without changing the source snapshot', () => {
+    const original = loadTeamData();
+    const adjusted = original.scenarios.find(row => row.cardId === 'C1-04' && row.option === 3)!;
+    adjusted.deltas.female.Communication = 1;
+    adjusted.deltas.male.Communication = 1;
+    expect(chapterOneCounts(original)).toEqual({
+      female: { 'CH1-E01': 21, E02: 60 },
+      male: { 'CH1-E01': 51, E02: 30 },
+    });
+  });
+
+  it('makes all three outcomes reachable for both pawns while preserving the number of promotion routes', () => {
+    expect(chapterOneCounts(loadTeamData())).toEqual({
+      female: { 'CH1-E01': 21, E02: 45, E03: 15 },
+      male: { 'CH1-E01': 51, E02: 18, E03: 12 },
+    });
   });
 
   it.each([
     ['female', { 'C1-02': 2, 'C1-04': 2 }, 'E02'],
+    ['female', { 'C1-01': 1, 'C1-02': 1, 'C1-03': 1, 'C1-04': 3 }, 'E03'],
+    ['male', { 'C1-01': 1, 'C1-02': 2, 'C1-03': 1, 'C1-04': 3 }, 'E03'],
     ['male', { 'C3-B': 3 }, 'E04'],
     ['male', { 'C3-02': 1, 'C3-03': 2, 'C3-04': 3, 'C3-05': 3 }, 'E05'],
     ['female', { 'C3-B': 2 }, 'E06'],

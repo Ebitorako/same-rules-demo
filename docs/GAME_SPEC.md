@@ -1,12 +1,12 @@
 # Genderpoly — Game Spec
 
-*Version 0.12, 3 Nov 2026. Formal team content integrated and verified locally; publication pending.*
+*Version 0.13, 3 Nov 2026. Approved art/audio integration, Chapter 1 balancing and project cleanup; final acceptance/publication recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
 The designer explicitly requested replacing the provisional game content and rules with the completed `ch1`, `ch2`, `ch3`, `ch4` tabs and `ch3相关规则说明` in the [team spreadsheet](https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit). This v0.12 decision supersedes the earlier prototype’s numerical defaults, fixed three-choice rule, generic Boss checks and forced next-career intern inheritance.
 
-The exact read-only source is `docs/source/2026-11-03-team-sheet.json`. `scripts/import-team-content.mjs` produces `public/data/team-content.json`, which is the runtime authority. The scenario/ending CSVs and copy/candidate/policy JSONs are readable exports. Import does not fetch Google Sheets automatically. Preserve authored story, results, deltas, advice and citations; changes to mapping or rules require tests. Missing citations and policy dialogue are not permission to invent them.
+The exact read-only source is `docs/source/2026-11-03-team-sheet.json`. `scripts/import-team-content.mjs` produces `public/data/team-content.json`, which is the runtime authority. The scenario/ending CSVs and copy/candidate/policy JSONs are readable exports. Import does not fetch Google Sheets automatically. Preserve authored story, results, advice and citations. On 3 Nov the designer explicitly authorised a minimal Chapter 1 balance correction, extraction of the six supplied characters, integration of uploaded audio, appropriate supplementary effects and project/GitHub cleanup. The only numeric override is recorded in `src/config/chapter-one-balance.json`; the original spreadsheet snapshot remains unchanged. Missing citations and policy dialogue are not permission to invent them.
 
 The project remains a single-player, deterministic, two-dimensional browser game about structural inequality in the creative industries. The game name is **Genderpoly** and the board company is **FreeDOM**. Preserve the team’s body-text casing. UI is English; handoff documentation is Chinese. Keep the established repository, public URL and storage key.
 
@@ -30,7 +30,7 @@ The project remains a single-player, deterministic, two-dimensional browser game
 | Availability | 2 |
 | Energy | 7 |
 
-Skill and Money belong only to archived prototype reports. Current effects use the six abilities above. Retain bounds 0–10 because the final sheets specify starting values and burnout but do not supply a replacement maximum. Do not rebalance the authored numbers on the team’s behalf.
+Skill and Money belong only to archived prototype reports. Current effects use the six abilities above. Retain bounds 0–10 because the final sheets specify starting values and burnout but do not supply a replacement maximum. The authorised balance override changes C1-04 option 3 Communication +1 to 0 for both pawns, without changing any starting value, other delta or Boss threshold. Further balancing needs a new explicit direction.
 
 During play, results and ordinary choice review, hide numerical changes and values except in `?debug=1`. Terminal ending fronts reveal six final values; backs append numerical review after Theory and References. Record the requested and applied changes, limits, and the automatic Chapter 3 entry event. Chapter milestones do not reveal stats.
 
@@ -62,6 +62,8 @@ Each selected scenario is frozen with its actual text, gender-specific result an
 ### Gatekeeper — C1-B
 
 One “Open the email” action; evaluate current stats before applying effects. Creativity ≥ 5 leads to CH1-E01, a Junior Producer milestone that continues to Chapter 2. Otherwise Communication ≥ 5 ends at E02 Production Coordinator; otherwise E03 rejection. The three outcomes are selected automatically, not offered as choices.
+
+The C1-04 option-3 override makes all three outcomes reachable without changing promotion routes. Across 81 routes per pawn: female CH1-E01 21 / E02 45 / E03 15; male CH1-E01 51 / E02 18 / E03 12. The original 21 and 51 promotion counts are unchanged. Import asserts the source row still has the expected +1 before applying the documented 0, so a later team edit cannot be silently overwritten.
 
 ### Old Boys’ Network — C2-B
 
@@ -129,22 +131,24 @@ The earlier prototype used different stat and ending meanings. On migration, pre
 
 ## 10. Art and audio handoff
 
-The designer has prepared two player pawns, four Boss designs and audio but has not placed them in the project yet. Do not regenerate those designs or claim they are integrated. The detailed, source-based list and generation prompts are in [ART_REQUIREMENTS.zh-CN.html](ART_REQUIREMENTS.zh-CN.html); do not make every NPC produce every expression if its scenes do not use them.
+The designer supplied a dual-pawn image and a four-Boss sheet. They have been split into six 1254×1254 transparent PNGs, retaining the approved badge characters and symbolic Boss concepts. Originals are preserved in `docs/reference/players` and `docs/reference/bosses`. The detailed source-based list and prompts are in [ART_REQUIREMENTS.zh-CN.html](ART_REQUIREMENTS.zh-CN.html), the single human-facing art handoff. Its generator and machine manifest live in `docs/tools/`. Do not make every NPC produce every expression if its scenes do not use them.
+
+Ordinary NPCs use the same living employee-badge visual world. The Chapter 2 Creative Director portrait may reuse the central Old Boys’ Network character as a single figure. Boss variants preserve the whole group or symbolic apparatus: Old Boys’ keeps all three figures, Ideal Worker keeps every arm and prop, and System keeps its gears/chimney/base. Pawns need no extra expression files at their current board scale. Remaining required art is 11 base portraits, 27 reaction portraits, 13 ending illustrations and one shared card back; nine Boss reactions and two milestone illustrations are optional.
 
 Runtime art lives under `public/assets/characters`, `bosses`, `npc`, `cards`, `ui`; source/reference material under `docs/reference/players`, `bosses`, `audio`. `public/assets/manifest.json` maps stable resource keys to editable file locations. Users may move files and update paths without changing story ids. Rebuild/restart after adding assets as required by the asset index.
 
-Audio entry keys are `audio/bgm_main`, `audio/bgm_boss`, `audio/sfx_move`, `audio/sfx_card`, `audio/sfx_choose`, `audio/sfx_ending`. Store files in `public/assets/audio` or update the manifest. The framework supports optional main/Boss loops and neutral event sounds, waits for a user gesture, respects Settings Sound and remains silent when files are absent. Actual files still require playback/loop/volume checks after delivery.
+Audio mappings and provenance are maintained in `public/assets/audio/catalog.json`: nine supplied files and three original synthesized effects. Music lives in `audio/music`, short effects in `audio/effects`. Keep the long originals locally in ignored `docs/reference/audio`; publish only the prepared runtime excerpts. Intro music covers title/chapter/promotion/epilogue, the bar track covers C2-03, the party track covers C3-05, and ordinary scenes use the main loop. Movement, landing, card opening, valid choices and Chapter 1 hiring use the supplied cues. Supplementary Boss arrival, neutral ending and card-flip cues use no external samples. Wait for a user gesture, respect Sound/mute, fade music transitions and never use audio to reveal hidden stats or label choices as right/wrong. Actual browser playback evidence belongs in the current verification record.
 
 ## 11. Source issues and verification
 
-**E03 is currently unreachable under the authored numbers.** Exhaustive Chapter 1 coverage of 162 routes (81 per pawn) always ends with Creativity ≥ 5 or Communication ≥ 5. Keep E03 and the original values; the team must explicitly choose any change that makes rejection collectible. This is a source-design outcome, not a branch-engine failure. The other 12 terminal endings each have a verified path using real choices.
+**E03 is reachable after the approved single-row correction.** All 162 Chapter 1 routes and all 13 terminal endings have real-choice coverage. The source-design issue and before/after counts are preserved in `docs/source/2026-11-03-ch1-balance.json`; the original snapshot remains faithful to the sheet.
 
 See `docs/source/2026-11-03-import-report.json` for all handling decisions. In particular, first-chapter ending references are missing; coordinator/transparent replacement dialogue is not provided; C2-04B’s note conflicts with its +1 cell; C2-B transparent changes result wording without overriding explicit delta cells; the male Ideal Worker locked thought is absent; optional E14 suffixes are omitted; the existing maximum is retained. Do not silently fill, translate additional story, rebalance, or manufacture citations.
 
-Use `npm run validate-data`, `npm test`, `npm run build`, then browser-test the changed flow. The validation enumerates visible branches instead of enforcing three choices everywhere. Import fidelity tests compare all 111 original rows and the documented derived variants. The final local checks passed: 115 tests across 12 files, data validation with 11 documented source warnings, and production build. Browser acceptance covered the female E14 full career, male D-route E10, locked-option thoughts and reload, ending values/reviews, epilogue, next-career selection and 390px layouts, with no desktop warning/error logs. Policy inheritance and archive migration are automated-test coverage, not a claim of a full additional manual walkthrough. Asset-checklist search and prompt expansion were checked; audio playback remains unverified until files arrive. Publication has not occurred; detailed local evidence is in README and AI_LOG.
+Use `npm run validate-data`, `npm test`, `npm run build`, then browser-test the changed flow. Validation enumerates visible branches instead of enforcing three choices everywhere. Import fidelity tests compare all 111 original rows and derived variants, allowing only the explicitly approved C1-04 numeric exception. The balance checks cover all 162 first-chapter routes and actual paths to every terminal ending. Validate the six extracted images, mobile fitting, Sound on/off, contextual music, cue timing, ending recap and source-based asset checklist. Record the latest test counts, browser/audio evidence and publication result in README and AI_LOG instead of repeating a stale release status here.
 
 Implementation remains Vite + strict TypeScript, no UI framework/backend/game engine. Game state transitions are pure functions; UI reads resolved data. The course AI appendix is maintained in `AI_LOG.md`.
 
 ## 12. Historical reference
 
-The v0.11 specification and older README/content-guide snapshots are under `docs/source/prototype-v0.11/`. Their eight-stat baseline, fixed three-option layout, generic Boss checks and forced intern inheritance describe the old prototype, not current requirements. Existing visual interactions and designer-approved metallic surfaces remain current unless explicitly superseded above.
+Superseded specification/manual copies were removed from the current tree; Git history preserves them. `docs/source/prototype-v0.11/` and `docs/starter-data/` retain only data fixtures still used by automated tests. `public/data/legacy-data.json` remains required for old-save interpretation. The original starter ZIP was moved out of the active project to `../_archive/`; installed dependencies and local builds remain ignored. Existing visual interactions and approved metallic surfaces remain current unless explicitly superseded above.

@@ -1,8 +1,11 @@
 import type { AppState, GameData } from '../game/types';
-import { art, pawnArt } from './assets';
+import { art, assetPath, pawnArt } from './assets';
 import { button, escape, richText } from './dom';
 
 export function titleScreen(state: AppState, data: GameData, selecting: boolean): string {
+  const titleArt = !assetPath('ui/title') && assetPath('characters/pawn_female') && assetPath('characters/pawn_male')
+    ? `<div class="title-pawn-pair">${pawnArt('female')}${pawnArt('male')}</div>`
+    : art('ui/title', 'title illustration', 'title-art');
   return `<section class="title-screen" aria-labelledby="title-heading">
     <div class="edition"><span>NMC5369 · MEDIA PROJECT</span><span>PLAYABLE PROTOTYPE / 01</span></div>
     <div class="title-layout"><div class="title-copy"><p class="eyebrow">A CAREER IN THE CREATIVE INDUSTRIES</p>
@@ -10,7 +13,7 @@ export function titleScreen(state: AppState, data: GameData, selecting: boolean)
     <div class="title-rule"></div><p class="title-description">${escape(data.copy.introduction)}</p>
     ${selecting ? `<div class="pawn-selection" aria-label="Choose a pawn">${(['female','male'] as const).map(pawn => `<button class="pawn-choice" data-action="start-${pawn}">${pawnArt(pawn)}<span>${pawn === 'female' ? 'Female pawn' : 'Male pawn'}</span></button>`).join('')}</div>` : `<div class="title-actions">${button(state.run ? 'Continue career' : 'Start a career', state.run ? 'resume' : 'select-pawn', 'primary')}${button('Gallery', 'gallery')}${button('Settings', 'settings')}</div>`}
     <p class="keyboard-note">ONE CAREER AT A TIME · EVERY CHOICE STAYS</p></div>
-    <div class="title-art-panel">${art('ui/title', 'title illustration', 'title-art')}<span class="art-caption">NEW HIRE → CREATIVE DIRECTOR → ?</span></div></div>
+    <div class="title-art-panel">${titleArt}<span class="art-caption">NEW HIRE → CREATIVE DIRECTOR → ?</span></div></div>
     <div class="title-bottom"><span>01 / BREAKING IN</span><span>02 / GETTING AHEAD</span><span>03 / THE CAREER CLIFF</span><span>04 / THE OTHER SIDE</span></div>
     <p class="prototype-note">${escape(data.copy.placeholderNotice)}</p>
   </section>`;

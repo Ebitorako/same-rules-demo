@@ -319,42 +319,6 @@
     "assets/npc/guide_neutral.png",
     "assets/npc/guide_neutral.webp"
   ],
-  "audio/bgm_main": [
-    "assets/audio/bgm_main.mp3",
-    "assets/audio/bgm_main.wav",
-    "assets/audio/bgm_main.ogg",
-    "assets/audio/bgm_main.m4a"
-  ],
-  "audio/bgm_boss": [
-    "assets/audio/bgm_boss.mp3",
-    "assets/audio/bgm_boss.wav",
-    "assets/audio/bgm_boss.ogg",
-    "assets/audio/bgm_boss.m4a"
-  ],
-  "audio/sfx_move": [
-    "assets/audio/sfx_move.mp3",
-    "assets/audio/sfx_move.wav",
-    "assets/audio/sfx_move.ogg",
-    "assets/audio/sfx_move.m4a"
-  ],
-  "audio/sfx_card": [
-    "assets/audio/sfx_card.mp3",
-    "assets/audio/sfx_card.wav",
-    "assets/audio/sfx_card.ogg",
-    "assets/audio/sfx_card.m4a"
-  ],
-  "audio/sfx_choose": [
-    "assets/audio/sfx_choose.mp3",
-    "assets/audio/sfx_choose.wav",
-    "assets/audio/sfx_choose.ogg",
-    "assets/audio/sfx_choose.m4a"
-  ],
-  "audio/sfx_ending": [
-    "assets/audio/sfx_ending.mp3",
-    "assets/audio/sfx_ending.wav",
-    "assets/audio/sfx_ending.ogg",
-    "assets/audio/sfx_ending.m4a"
-  ],
   "npc/hiring-manager_neutral": [
     "assets/npc/hiring-manager_neutral.svg",
     "assets/npc/hiring-manager_neutral.png",
@@ -624,5 +588,41 @@
     "assets/cards/ending_CH2-E07.svg",
     "assets/cards/ending_CH2-E07.png",
     "assets/cards/ending_CH2-E07.webp"
+  ],
+  "audio/bgm_main": [
+    "assets/audio/music/main.m4a"
+  ],
+  "audio/bgm_intro": [
+    "assets/audio/music/introduction.m4a"
+  ],
+  "audio/bgm_bar": [
+    "assets/audio/music/ch2_bar.m4a"
+  ],
+  "audio/bgm_party": [
+    "assets/audio/music/ch3_party.m4a"
+  ],
+  "audio/sfx_move": [
+    "assets/audio/effects/move.m4a"
+  ],
+  "audio/sfx_land": [
+    "assets/audio/effects/land.m4a"
+  ],
+  "audio/sfx_card": [
+    "assets/audio/effects/card.m4a"
+  ],
+  "audio/sfx_choose": [
+    "assets/audio/effects/choose.m4a"
+  ],
+  "audio/sfx_hired": [
+    "assets/audio/effects/ch1_hired.m4a"
+  ],
+  "audio/sfx_boss": [
+    "assets/audio/effects/boss.wav"
+  ],
+  "audio/sfx_ending": [
+    "assets/audio/effects/ending.wav"
+  ],
+  "audio/sfx_flip": [
+    "assets/audio/effects/flip.wav"
   ]
 }

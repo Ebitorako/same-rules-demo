@@ -15,7 +15,8 @@ import { loadState, resetStorage, saveState } from './game/persistence';
 import { archiveEndingRecap } from './game/recap';
 import type { AppState, GameData, Pawn } from './game/types';
 import { loadAssets } from './ui/assets';
-import { playSound, syncAudio } from './ui/audio';
+import { audioStatus, playSound, syncAudio } from './ui/audio';
+import { transitionSounds } from './ui/audio-routes';
 import { boardScreen } from './ui/board';
 import { scenarioDialog } from './ui/card';
 import { button, escape } from './ui/dom';
@@ -48,10 +49,10 @@ const reduced = () => state.settings.reducedMotion || matchMedia('(prefers-reduc
 function debugPanel(): string {
   const run = state.run;
   if (!debug || !run) return '';
-  return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p></aside>`;
+  return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p><p id="audio-debug">${escape(audioStatus())}</p></aside>`;
 }
 function render(focus = true): void {
-  syncAudio(state);
+  syncAudio(state, false, view === 'game' && epilogueVisible ? 'epilogue' : view);
   document.body.classList.toggle('reduced-motion', reduced());
   const run = state.run;
   const scenarioOpen = view === 'game' && run && ['card','result','promotion','chapter'].includes(run.phase);
@@ -96,15 +97,13 @@ function newCareer(): void {
   else { view = 'title'; selectingPawn = true; render(); }
 }
 async function makeMove(action: () => AppState): Promise<void> {
+  const previousState = state;
   const oldPosition = state.run?.position;
   const oldRect = app.querySelector('.board-pawn')?.getBoundingClientRect();
-  const oldPhase = state.run?.phase;
-  const oldChoices = Object.keys(state.run?.choices ?? {}).length;
   state = action(); endingBack = false; unavailableOption = null; persist();
-  syncAudio(state, true);
-  if (state.run?.phase === 'ending' && oldPhase !== 'ending') playSound('ending');
-  else if (Object.keys(state.run?.choices ?? {}).length > oldChoices) playSound('choose');
-  else if (oldPosition !== state.run?.position) playSound('move');
+  syncAudio(state, true, view);
+  const sounds = transitionSounds(previousState, state);
+  sounds.start.forEach(playSound);
   const hop = oldRect && oldPosition !== state.run?.position && !reduced();
   showingReturn = Boolean(hop && state.run?.phase === 'ending' && state.run.position === 0);
   if (hop) { busy = true; app.classList.add('moving'); }
@@ -132,10 +131,10 @@ async function makeMove(action: () => AppState): Promise<void> {
     app.classList.remove('moving'); busy = false;
     app.querySelector<HTMLElement>('[role=dialog]')?.focus({preventScroll:true});
   }
-  if (state.run?.phase === 'card' && oldPhase !== 'card') playSound('card');
+  sounds.arrival.forEach(playSound);
 }
 async function flip(target: HTMLElement, change: () => void): Promise<void> {
-  playSound('card');
+  playSound('flip');
   busy = true;
   const card = target.closest<HTMLElement>('.ending-card,.gallery-card');
   if (card && !reduced()) await card.animate([{ transform: 'scaleX(1)' },{ transform: 'scaleX(0)' }], {duration:RULES.animation.flipHalfMs}).finished.catch(()=>{});
@@ -150,7 +149,7 @@ async function flip(target: HTMLElement, change: () => void): Promise<void> {
 app.addEventListener('click', event => {
   const target = (event.target as HTMLElement).closest<HTMLElement>('[data-action]');
   if (!target || busy) return;
-  syncAudio(state, true);
+  syncAudio(state, true, view);
   const action = target.dataset.action;
   if (target.closest('[inert]')) return;
   if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
@@ -164,6 +163,7 @@ app.addEventListener('click', event => {
       && getChoiceHistory(state.run, data).some(entry => entry.cardId === cardId)) {
       if (!historyCardId) historyTriggerId = cardId!;
       historyCardId = cardId!;
+      playSound('card');
       render();
     }
     return;
@@ -193,7 +193,9 @@ app.addEventListener('click', event => {
 app.addEventListener('change', event => {
   const input = event.target as HTMLInputElement;
   if (!['reducedMotion','sound'].includes(input.dataset.setting ?? '')) return;
-  state = updateSettings(state,{[input.dataset.setting!]:input.checked}); persist(); render(false);
+  state = updateSettings(state,{[input.dataset.setting!]:input.checked}); persist();
+  if (input.dataset.setting === 'sound') syncAudio(state, true, view);
+  render(false);
   app.querySelector<HTMLElement>(`[data-setting="${input.dataset.setting}"]`)?.focus();
 });
 app.addEventListener('error', event => {

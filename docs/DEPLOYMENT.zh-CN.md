@@ -8,7 +8,7 @@
 - **公开仓库：[Ebitorako / same-rules-demo](https://github.com/Ebitorako/same-rules-demo)**
 - **[首次发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/40188632600)：成功**
 
-仓库使用 `main` 分支，由 GitHub Actions 自动检查并发布到 GitHub Pages。公开仓库中的源码、剧情文件和图片均可查看。当前游戏仍使用占位剧情、临时数值和占位美术。
+仓库使用 `main` 分支，由 GitHub Actions 自动检查并发布到 GitHub Pages。公开仓库中的源码、剧情文件和图片均可查看。当前本地已使用组员正式剧情和六项能力；最新版本及实际发布结果以根目录 README 和 AI_LOG 为准。
 
 本项目只发布 `Game Demo` 文件夹里的游戏文件。原始压缩包、已安装组件、临时检查文件和本地构建结果不进入 Git 仓库。课程其他作业、共享排期表也不在这个仓库范围内。
 
@@ -16,7 +16,7 @@
 
 1. 打开上面的试玩网址，无需 GitHub 账号，无需安装 Node.js 或 Git。
 2. 点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，再点击 **Enter the studio**。
-3. 棋盘上点击 **Next** 前进，选择卡牌选项，结果页点击 **Continue**。也可以用键盘 `1`、`2`、`3` 选择，`Enter` 继续。
+3. 棋盘上点击 **Next** 前进，选择卡牌选项，结果页点击 **Continue**。也可以用键盘 `1`–`4`、`D` 选择，`Enter` 继续。声音在 Settings 的 Sound 中开启。
 
 ## 首次上线的检查结果
 

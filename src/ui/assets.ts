@@ -26,7 +26,7 @@ export function assetPath(key: string): string | undefined {
 }
 export function art(key: string, label: string, className = ''): string {
   const path = assetPath(key);
-  if (path) return `<figure class="art ${className}"><img src="${escape(import.meta.env.BASE_URL + path)}" alt="${escape(label)}"><figcaption class="failed-art" hidden>ART PLACEHOLDER<br>${escape(label)}</figcaption></figure>`;
+  if (path) return `<figure class="art ${className}" aria-label="${escape(label)}"><img src="${escape(import.meta.env.BASE_URL + path)}" alt="${escape(label)}"><figcaption class="failed-art" hidden>ART PLACEHOLDER<br>${escape(label)}</figcaption></figure>`;
   return `<figure class="art art-placeholder ${className}" role="img" aria-label="Art placeholder: ${escape(label)}"><span>ART<br>PLACEHOLDER</span><figcaption>${escape(label)}</figcaption></figure>`;
 }
 export function pawnArt(pawn: string, className = ''): string { return art(`characters/pawn_${pawn}`, `${pawn} pawn`, className); }

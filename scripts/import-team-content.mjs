@@ -7,6 +7,8 @@ const read = (name) => readFileSync(resolve(root, name), 'utf8');
 const write = (name, value) => writeFileSync(resolve(root, name), JSON.stringify(value, null, 2) + '\n');
 const snapshot = JSON.parse(read('docs/source/2026-11-03-team-sheet.json'));
 const statNames = ['Creativity', 'Communication', 'Network', 'Reputation', 'Availability', 'Energy'];
+const initialStats = { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 };
+const chapterOneBalance = JSON.parse(read('src/config/chapter-one-balance.json'));
 const expressionMap = { 满意: 'pleased', 中性: 'neutral', 打量: 'appraising', 皱眉: 'frowning', 尴尬: 'awkward', 冷淡: 'cold' };
 const pawn = (value) => /仅\s*♀/.test(value) ? 'female' : /仅\s*♂/.test(value) ? 'male' : 'both';
 const parseDelta = (text = '') => Object.fromEntries(text.split(/[,，]/).filter(v => v.trim()).map(part => {
@@ -139,6 +141,51 @@ for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) {
   });
 }
 
+function chapterOneRoutes(rows, creativityGate = 5, communicationGate = 5) {
+  const summary = {};
+  for (const pawn of ['female', 'male']) {
+    const counts = { 'CH1-E01': 0, E02: 0, E03: 0 }, examples = {};
+    for (let code = 0; code < 81; code++) {
+      let number = code;
+      const stats = { ...initialStats }, choices = [];
+      for (let card = 1; card <= 4; card++) {
+        const option = number % 3 + 1;
+        number = Math.floor(number / 3);
+        choices.push(option);
+        const row = rows.find(row => row.cardId === `C1-0${card}` && row.option === option && ['both', pawn].includes(row.pawn));
+        for (const [stat, amount] of Object.entries(row.deltas[pawn])) stats[stat] = Math.max(0, Math.min(10, stats[stat] + amount));
+      }
+      const ending = stats.Creativity >= creativityGate ? 'CH1-E01' : stats.Communication >= communicationGate ? 'E02' : 'E03';
+      counts[ending]++;
+      examples[ending] ??= { choices: [...choices, 1], stats };
+    }
+    summary[pawn] = { counts, examples };
+  }
+  return summary;
+}
+
+// Keep the read-only sheet intact and apply only the designer-approved exception.
+const originalChapterOne = structuredClone(scenarios.filter(row => row.chapter === 'Ch1'));
+const balanceRows = scenarios.filter(row => row.sourceSheet === chapterOneBalance.sourceSheet && row.sourceRow === chapterOneBalance.sourceRow && row.cardId === chapterOneBalance.cardId && row.option === chapterOneBalance.option);
+if (balanceRows.length !== 1 || !statNames.includes(chapterOneBalance.stat)) throw new Error('The approved Chapter 1 balance no longer matches the source. Review it before importing.');
+for (const pawn of chapterOneBalance.pawns) {
+  const delta = balanceRows[0].deltas[pawn];
+  if (delta[chapterOneBalance.stat] !== chapterOneBalance.from) throw new Error(`The source ${pawn} delta changed; review the approved balance before importing.`);
+  delta[chapterOneBalance.stat] = chapterOneBalance.to;
+}
+write('docs/source/2026-11-03-ch1-balance.json', {
+  adjustment: chapterOneBalance,
+  sourceCells: ['ch1!Q19', 'ch1!R19'],
+  before: chapterOneRoutes(originalChapterOne),
+  after: chapterOneRoutes(scenarios),
+  alternatives: [
+    { change: 'Creativity entry threshold 5 to 6', reasonNotChosen: 'Female E03 remains unreachable and female promotions fall from 21 to 3.', routes: chapterOneRoutes(originalChapterOne, 6, 5) },
+    { change: 'Communication entry threshold 5 to 6', reasonNotChosen: 'Male E02 becomes unreachable.', routes: chapterOneRoutes(originalChapterOne, 5, 6) },
+    { change: 'Both entry thresholds 5 to 6', reasonNotChosen: 'Male E02 becomes unreachable and female promotions fall from 21 to 3.', routes: chapterOneRoutes(originalChapterOne, 6, 6) },
+  ],
+  interpretation: 'Counts enumerate all 81 choice sequences per pawn, not empirical player probabilities. The selected adjustment preserves every promotion route and changes only some E02 exits to E03.',
+});
+
 for (const row of [...scenarios]) {
   if (row.cardId !== 'C3-01') continue;
   scenarios.push({ ...structuredClone(row), pawn: 'female', condition: 'flag:previous_family_man=true',
@@ -163,7 +210,7 @@ const policies = [
   { id: 'transparent', name: 'Transparent hiring and flexible working', benefit: 'Every role advertised openly, written review criteria, and flexible hours available to all staff.', cost: 'Change hiring, review and working arrangements', nextRoundEffect: 'Changes the next career’s C2-02 decision process, C2-B recognition and Chapter 3 entry penalty.', mvp: true },
 ];
 const warnings = [
-  '第一章两枚棋子共162条完整路线已穷举：E03拒绝录用不可达，最终总有Creativity≥5或Communication≥5。保留原值与E03，若希望可收集需团队确认调整；其余12个终局已有真实可达路线验证。',
+  '已按设计者授权最小调平：C1-04选项3的Communication由+1改为0，男女一致；其余加分、起点与门槛不变。第一章81条路线中，女棋子晋升21/E02 45/E03 15，男棋子晋升51/E02 18/E03 12；原表快照保留，例外见src/config/chapter-one-balance.json。',
   'ch1!A22:J25 的结局表没有文献列：CH1-E01、E02、E03 的 References 保留空白。',
   'ch2!T30 说取消 Reputation−1，但 Q30 实际为 Reputation+1；保留 +1，不额外加分。',
   'transparent 在 C2-B 选项2的“结果与男性相同”按结果文案与表情处理；保留数值列的女性 Communication+1、Reputation+1，不擅自改为男性数值。',
@@ -172,11 +219,11 @@ const warnings = [
   'ch3 C3-B 男棋子门槛不足没有专属独白；仅显示不可用状态，不编写独白。',
   'ch4 终章触发范围表述不一致；按末行及完整职业正文，仅 E12/E13/E14 后展示终章。',
   'ch4 E14 的男女末尾句标为可选，本次不追加。',
-  '上限10沿用原骨架；正式表只指定初始值及Burnout下限，没有新的最大值。未自行调平。',
+  '上限10沿用原骨架；正式表只指定初始值及Burnout下限，没有新的最大值。除已授权的C1-04选项3例外外，未调整其他数值。',
   'Energy≤1 提示来自中文规则表，本次提供忠实英文界面译文。',
 ];
 const data = { contentVersion: 'team-2026-11-03', source: { spreadsheetId: snapshot.spreadsheetId, url: snapshot.url, retrievedDate: snapshot.retrievedDate },
-  statNames, initialStats: { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 },
+  statNames, initialStats,
   scenarios, chapters, endings: endings.sort((a,b) => Number(a.id.slice(1))-Number(b.id.slice(1))), milestones, epilogue, candidates, policies, powerTokens: 1, copy, warnings };
 write('public/data/team-content.json', data);
 const csvCell = value => '"' + String(value ?? '').replaceAll('"', '""') + '"';

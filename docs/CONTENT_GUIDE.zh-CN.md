@@ -1,4 +1,4 @@
-# 组员正式剧情接入指南（v0.12）
+# 组员正式剧情接入指南（v0.13）
 
 当前正式内容来自 [共享表](https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit) 的 `ch1`、`ch2`、`ch3`、`ch4` 和 `ch3相关规则说明`。这次只读取表格，没有改变组员共享文件。旧“剧本模板”“结局卡”页的示例不再作为游戏正文。
 
@@ -41,7 +41,7 @@
 
 当前只有六项：Creativity、Communication、Network、Reputation、Availability、Energy。两枚棋子开局都是 **3、3、2、2、2、7**。数值列保留 `Network+1, Energy-1` 形式；空白表示不变。
 
-沿用 0–10 上下限，Energy ≤ 1 提示，Energy ≤ 0 立即 E11 Burnout。没有对正式稿重新平衡。第三章开场的 Availability −1 是系统事件，只适用于带 maternal_assumption 的女棋子，透明政策取消它；刷新不能重复扣。
+沿用 0–10 上下限，Energy ≤ 1 提示，Energy ≤ 0 立即 E11 Burnout。获准的第一章微调只有一处：C1-04 选项3男女 Communication +1 改为0，让 E03 可达；其余数值和门槛不变。该覆盖位于 `src/config/chapter-one-balance.json`，导入脚本会保留它，原表快照不改。第三章开场的 Availability −1 是系统事件，只适用于带 maternal_assumption 的女棋子，透明政策取消它；刷新不能重复扣。
 
 数值仍只在终局揭示：正面显示最终值；反面 Theory、References 下方按顺序列选择和系统变化，区分原效果、实际变化与上下限。普通 YOUR CHOICES 显示当时剧情和结果，不揭示数值，也不允许重选。能力解释保存在运行数据的 `copy.statDescriptions`；不要把文学理论引用当作能力标签说明。
 
@@ -68,7 +68,7 @@
 
 ## 本轮保留的源表问题
 
-**E03 需要组内优先确认。** 第一章男女各81条、共162条选择路线已经全部检查，最终总有 Creativity 或 Communication 至少一项达到5，因此没有路径会触发 E03 拒绝录用。原值和这张卡都保留，没有为了凑齐收藏自行改数值。其余12个终局均验证有真实可达路线；若希望E03也可收集，请组内明确调整方案。
+**E03 已完成获准微调。** 第一章男女各81条路线中，女性现在晋升21条、E02 45条、E03 15条；男性晋升51条、E02 18条、E03 12条。晋升路线数量保持不变，13个终局均验证可达。具体原值、覆盖值和路线记录见 `docs/source/2026-11-03-ch1-balance.json`。
 
 1. 第一章结局小表没有文献列：CH1-E01、E02、E03 的 References 为空，不从 Boss 自动借引用。
 2. C2-04B 选项2的 Q30 是 Reputation +1，备注说取消 −1；保留 +1，不额外加分。
@@ -90,6 +90,6 @@ npm run dev
 
 用男女棋子分别检查改动卡、四选项/灰显独白、章节开场、提前终局、完整通关、下一局政策和结局复盘。正式数据自动验证会枚举各可见分支；来源测试核对原文字和数值。浏览器验收与本轮发布仍待最终记录，不能只凭构建成功宣称上线。
 
-两枚棋子、四位 Boss 和音频已由你制作，但尚未放入项目。按 [美术与音频清单](ART_REQUIREMENTS.zh-CN.html) 中的文件名放到 `public/assets/`，原稿放 `docs/reference/`；移动文件时改 `public/assets/manifest.json` 的路径。不要改资源 key 或用旧编号覆盖新结局的图片。音频框架已接，收到文件后还需试听和检查循环，缺文件时不会自动生成声音。
+两枚棋子与四位 Boss 已从你提供的两张原稿分拆为透明 PNG，原稿保留在 `docs/reference/players` 与 `bosses`。后续可继续把美术发到聊天，由 Codex 整理接入；所需表情与完整 Prompt 统一见 [美术与音频清单](ART_REQUIREMENTS.zh-CN.html)。9份音频的原始大文件本地保存于 `docs/reference/audio`，不提交到 Git；游戏使用 `public/assets/audio` 的轻量版本，具体用途与来源以该目录的 `catalog.json` 为准。移动运行文件时同步改 `public/assets/manifest.json`，不要改资源 key。
 
-历史原型的资料保存在 `docs/source/prototype-v0.11/`。那里关于八项能力、三选一和旧 Boss/结局的说明只用于旧档追溯，不能作为本版规则。
+旧版说明从当前目录移除，可通过 Git 历史找回。`docs/source/prototype-v0.11/` 与 `docs/starter-data/` 只保留现有自动测试需要的数据样本，不能作为本版剧情输入。`public/data/legacy-data.json` 仍用于保留旧存档的原始含义，不能删除。

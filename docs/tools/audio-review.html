@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Genderpoly 音频验收</title>
+<style>body{font:16px/1.6 system-ui;background:#f4efe3;color:#141414;margin:30px auto;padding:0 20px;max-width:1000px}article{border-top:1px solid #aaa;padding:18px 0}h1{margin-bottom:5px}code{overflow-wrap:anywhere}button{padding:10px 18px;cursor:pointer}audio{width:min(100%,420px)}.result{font-family:monospace;white-space:pre-wrap}small{display:block}#status{font-weight:bold}</style>
+<h1>音频验收</h1><p>本地检查工具，不进入游戏页面。音频来自目录中的原文件；“解码检查”只计算数据，不播放。试听使用每项播放器。主背景、酒吧、聚会为原 AAC 片段，其余用户文件保持完整。</p>
+<button id="analyse">逐项解码检查</button><p id="status" role="status">正在读取清单…</p><main id="list"></main>
+<script type="module">
+const catalogue=await fetch('/assets/audio/catalog.json').then(r=>r.json());
+const assets=catalogue.assets;
+document.getElementById('status').textContent=`共 ${assets.length} 个文件 · 用户9项 + 原创补充3项`;
+const list=document.getElementById('list');
+assets.forEach((entry,i)=>{
+ const article=document.createElement('article');
+ const heading=document.createElement('h2');heading.textContent=entry.key;article.append(heading);
+ const desc=document.createElement('p');desc.textContent=entry.context;article.append(desc);
+ const path=document.createElement('code');path.textContent=entry.path;article.append(path);
+ const info=document.createElement('small');info.textContent=`预期 ${entry.seconds}s · ${(entry.bytes/1024).toFixed(1)}KB · ${entry.provenance}`;article.append(info);
+ const audio=document.createElement('audio');audio.controls=true;audio.preload='metadata';audio.src='/'+entry.path;audio.volume=.25;article.append(audio);
+ const state=document.createElement('small');state.textContent='等待播放';article.append(state);
+ audio.addEventListener('loadedmetadata',()=>state.textContent=`可播放 · 浏览器时长 ${audio.duration.toFixed(3)}s`);
+ audio.addEventListener('play',()=>{document.querySelectorAll('audio').forEach(other=>{if(other!==audio)other.pause();});state.textContent='正在播放';});
+ audio.addEventListener('pause',()=>state.textContent=`已暂停 · ${audio.currentTime.toFixed(2)}s`);
+ audio.addEventListener('ended',()=>state.textContent='播放完成');
+ audio.addEventListener('error',()=>state.textContent=`播放错误 ${audio.error?.code}`);
+ const result=document.createElement('p');result.id='result-'+i;result.className='result';result.textContent='尚未解码检查';article.append(result);list.append(article);
+});
+document.getElementById('analyse').addEventListener('click',async event=>{
+ event.currentTarget.disabled=true;const context=new AudioContext();let ok=0;
+ for(let i=0;i<assets.length;i++){
+  const e=assets[i],output=document.getElementById('result-'+i);
+  document.getElementById('status').textContent=`检查 ${i+1}/${assets.length}：${e.key}`;
+  try{
+   const buffer=await fetch('/'+e.path).then(r=>r.arrayBuffer()).then(b=>context.decodeAudioData(b));
+   let peak=0,sum=0,first=buffer.length,last=-1;
+   for(let c=0;c<buffer.numberOfChannels;c++){
+    const samples=buffer.getChannelData(c);
+    for(let j=0;j<samples.length;j++){
+     const value=Math.abs(samples[j]);peak=Math.max(peak,value);sum+=value*value;
+     if(value>0.00316){first=Math.min(first,j);last=Math.max(last,j);}
+    }
+   }
+   const db=value=>value? (20*Math.log10(value)).toFixed(2):'-∞';
+   const diff=Math.abs(buffer.duration-e.seconds);
+   if(diff>.2)throw new Error(`时长不符：预期${e.seconds}s，解码${buffer.duration}s`);
+   output.textContent=`PASS · ${buffer.duration.toFixed(3)}s · ${buffer.sampleRate}Hz · ${buffer.numberOfChannels}声道\nPeak ${db(peak)}dBFS · RMS ${db(Math.sqrt(sum/(buffer.length*buffer.numberOfChannels)))}dBFS\n有效声音（高于−50dBFS）：${last<0?'无':(first/buffer.sampleRate).toFixed(3)+'–'+(last/buffer.sampleRate).toFixed(3)+'s'}`;
+   ok++;
+  }catch(error){output.textContent='FAIL · '+error.message;}
+ }
+ await context.close();document.getElementById('status').textContent=`解码完成：${ok}/${assets.length} PASS；主观音质与循环仍需试听。`;event.currentTarget.disabled=false;
+});
+</script></html>

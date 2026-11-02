@@ -1,0 +1,236 @@
+{
+  "date": "2026-11-03",
+  "sourceMasters": "docs/reference/audio（本地原稿，不进入发布包）",
+  "listeningStatus": "浏览器12项解码、时长和实际播放状态已验证；响度数据用于统一播放音量，不代表人耳主观音质评价。",
+  "assets": [
+    {
+      "key": "audio/bgm_main",
+      "path": "assets/audio/music/main.m4a",
+      "originalFile": "全程游戏音乐bgm.m4a",
+      "originalSeconds": 7377.165,
+      "seconds": 119.978,
+      "sourceSha256": "47ec4b6abd43eedc4c4c486bdc6fc63df1a72fc680666e6c5b7397bf2e816803",
+      "outputSha256": "8407e95d05b628d0d8e085688b212d29ccd4222567f1fb77954ba99f7ced5c54",
+      "bytes": 1420117,
+      "context": "普通棋盘和场景的背景循环",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前120秒，不重编码；播放端淡入淡出",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -0.77,
+        "rmsDbfs": -18.14
+      }
+    },
+    {
+      "key": "audio/bgm_intro",
+      "path": "assets/audio/music/introduction.m4a",
+      "originalFile": "放背景介绍bgm.m4a",
+      "originalSeconds": 116.354,
+      "seconds": 116.354,
+      "sourceSha256": "031b622eb3b2b055dbbd05ad27d8182b67e7b58d03726a5e36bec65bbf376cde",
+      "outputSha256": "031b622eb3b2b055dbbd05ad27d8182b67e7b58d03726a5e36bec65bbf376cde",
+      "bytes": 1846422,
+      "context": "标题、章节开场、Creative Director晋升与终章",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "保持原始音频数据",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -0.06,
+        "rmsDbfs": -15.73
+      }
+    },
+    {
+      "key": "audio/bgm_bar",
+      "path": "assets/audio/music/ch2_bar.m4a",
+      "originalFile": "Chapter2—03—酒吧情节bgm.m4a",
+      "originalSeconds": 361.39,
+      "seconds": 89.977,
+      "sourceSha256": "b1e1abcbfd3ae0dedf08efcb4727c78c23342fe540227224eb6aaba65d6ef5cd",
+      "outputSha256": "968210c4d8637e0b2dfdf61c8cbe5652b0bf18b0d99ebc794772bb5cab51f97d",
+      "bytes": 1240172,
+      "context": "C2-03酒吧场景及其选择结果",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前90秒，不重编码；播放端淡入淡出",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": 0.4,
+        "rmsDbfs": -22.12
+      }
+    },
+    {
+      "key": "audio/bgm_party",
+      "path": "assets/audio/music/ch3_party.m4a",
+      "originalFile": "Chapter3—05—圣诞派对bgm.m4a",
+      "originalSeconds": 928.84,
+      "seconds": 89.977,
+      "sourceSha256": "c0873547adc652293da69c58d8084c9cf82a462abff070db29752daf82411acd",
+      "outputSha256": "c11e78ca27e89198af01c5a3938ce9d831725993e5f404d1d95c242db850de05",
+      "bytes": 1474034,
+      "context": "C3-05圣诞聚会场景及其选择结果",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前90秒，不重编码；播放端淡入淡出；播放从3.0秒开始，跳过前导静音",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -0.46,
+        "rmsDbfs": -16.98
+      }
+    },
+    {
+      "key": "audio/sfx_move",
+      "path": "assets/audio/effects/move.m4a",
+      "originalFile": "玩家走格子音效.m4a",
+      "originalSeconds": 3.017,
+      "seconds": 0.627,
+      "sourceSha256": "754734b5d809090ea33734652e93f04f17e22d6a7839dc6874cdc5e141ff4bbc",
+      "outputSha256": "4617ed0830c498f74dca04998ec355636f633145a1ead62966da4660b4c28346",
+      "bytes": 4898,
+      "context": "棋子开始移动",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前0.65秒，不重编码；仅裁掉有效声音之后的静音尾部",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -1.58
+      }
+    },
+    {
+      "key": "audio/sfx_land",
+      "path": "assets/audio/effects/land.m4a",
+      "originalFile": "玩家落地格子音效.m4a",
+      "originalSeconds": 3.017,
+      "seconds": 1.091,
+      "sourceSha256": "6fe64fac55300294df85d8e79cf52588098b662d8759ac8fcda8d64255b12880",
+      "outputSha256": "c9c575f2cb86602990c69cd519f9b9f552557671d5005b0eacc904f6618bc2b4",
+      "bytes": 9345,
+      "context": "棋子移动完成落地",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前1.1秒，不重编码；仅裁掉有效声音之后的静音尾部",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -8.04
+      }
+    },
+    {
+      "key": "audio/sfx_card",
+      "path": "assets/audio/effects/card.m4a",
+      "originalFile": "抽跳出卡牌-触发音.m4a",
+      "originalSeconds": 3.017,
+      "seconds": 0.348,
+      "sourceSha256": "47bab55562f8e27a2fdcb3eb3efe9ca79f10a1a1a70cef09567bc2a26006e7d6",
+      "outputSha256": "d6e564101d0b4b822e72fe3668ef7b07b96d87f952973dafb845a37df4c11b10",
+      "bytes": 2346,
+      "context": "打开剧情卡或历史卡",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前0.35秒，不重编码；仅裁掉有效声音之后的静音尾部",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": 0.57
+      }
+    },
+    {
+      "key": "audio/sfx_choose",
+      "path": "assets/audio/effects/choose.m4a",
+      "originalFile": "应用游戏全局-选项确认时音效.m4a",
+      "originalSeconds": 3.017,
+      "seconds": 0.395,
+      "sourceSha256": "055c34dea37e0d31143e58731bad1e262361d40aa9fa4aac6c692a880b03325c",
+      "outputSha256": "19e237db98136e9d20010a741f91b3c43d955349cc25c045c346ff09767bafd5",
+      "bytes": 2335,
+      "context": "确认有效选项；锁定项和普通导航不触发",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "原AAC数据前0.4秒，不重编码；仅裁掉有效声音之后的静音尾部",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": 0.17
+      }
+    },
+    {
+      "key": "audio/sfx_hired",
+      "path": "assets/audio/effects/ch1_hired.m4a",
+      "originalFile": "Chapter1-结局-成功入职触发音效.m4a",
+      "originalSeconds": 3.342,
+      "seconds": 3.342,
+      "sourceSha256": "c270a5fcf617bfb3429b19f9e155ac3abcf1b81708d7a6143af0e2f6f737c8dd",
+      "outputSha256": "c270a5fcf617bfb3429b19f9e155ac3abcf1b81708d7a6143af0e2f6f737c8dd",
+      "bytes": 52225,
+      "context": "第一章CH1-E01或E02录用；拒绝/Burnout不触发",
+      "provenance": "用户提供；原始文件本地保留，未补造授权信息",
+      "processing": "保持原始音频数据",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true,
+        "peakDbfs": -3.67
+      }
+    },
+    {
+      "key": "audio/sfx_boss",
+      "path": "assets/audio/effects/boss.wav",
+      "seconds": 0.64,
+      "bytes": 56492,
+      "outputSha256": "489c3ae60ea81126ab50c9b68f0d6378b11849439a0f52d90a12d54fb48156d7",
+      "peakDbfs": -17.88,
+      "rmsDbfs": -30.51,
+      "context": "Boss卡首次打开，短促低音提示",
+      "provenance": "本项目代码原创合成，无外部采样；scripts/prepare-audio.py",
+      "processing": "44.1kHz单声道16位PCM；固定种子、边缘渐变防爆音",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true
+      }
+    },
+    {
+      "key": "audio/sfx_ending",
+      "path": "assets/audio/effects/ending.wav",
+      "seconds": 1.25,
+      "bytes": 110294,
+      "outputSha256": "d0979893c7b22959c7c7a56b765afe68bbed0405c163d60e4ed960be388623fc",
+      "peakDbfs": -15.74,
+      "rmsDbfs": -28.57,
+      "context": "终局首次出现；全部结局同一中性提示",
+      "provenance": "本项目代码原创合成，无外部采样；scripts/prepare-audio.py",
+      "processing": "44.1kHz单声道16位PCM；固定种子、边缘渐变防爆音",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true
+      }
+    },
+    {
+      "key": "audio/sfx_flip",
+      "path": "assets/audio/effects/flip.wav",
+      "seconds": 0.22,
+      "bytes": 19448,
+      "outputSha256": "10bf43cd3f71f31c1f729a306a4283bb368dcc74e3d9d1648673b40781a6889f",
+      "peakDbfs": -12.74,
+      "rmsDbfs": -24.58,
+      "context": "结局/收藏卡翻面，轻微纸张声",
+      "provenance": "本项目代码原创合成，无外部采样；scripts/prepare-audio.py",
+      "processing": "44.1kHz单声道16位PCM；固定种子、边缘渐变防爆音",
+      "browserDecode": {
+        "status": "PASS",
+        "durationMatches": true
+      }
+    }
+  ],
+  "verification": {
+    "date": "2026-11-03",
+    "decoder": "Chromium AudioContext",
+    "result": "12/12 PASS after trimming silence tails",
+    "playback": [
+      "Settings Sound ON/OFF",
+      "intro → board main",
+      "C2-03 bar",
+      "C3-05 party starts at3s",
+      "20 choices → E14 ending cue"
+    ],
+    "warnings": [],
+    "evidence": ".verification/2026-11-03-assets-audio/",
+    "auditoryTaste": "未进行人耳主观评判"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-03",
+  "method": "Built-in imagegen: background-extraction from user-supplied approved artwork. Derived isolated sprites; not pixel-identical crops.",
+  "originals": [
+    "docs/reference/players/player-pawns-original.png",
+    "docs/reference/bosses/four-bosses-original.png"
+  ],
+  "outputFormat": "1254×1254 RGBA PNG with genuine alpha, extrema 0–255",
+  "outputs": [
+    "public/assets/characters/pawn_female.png",
+    "public/assets/characters/pawn_male.png",
+    "public/assets/bosses/gatekeeper.png",
+    "public/assets/bosses/old_boys_network.png",
+    "public/assets/bosses/ideal_worker.png",
+    "public/assets/bosses/the_system.png"
+  ],
+  "prompt": "Extract only the specified complete approved character (all three characters together for Old Boys). Preserve original silhouette, pose, proportions, facial expression, clothing, props, ink contours, cream fills and colors. Remove other panels, frame, Roman numeral, lettering, dark circle, paper background and floor shadow. Center full figure with generous transparent margins. No redesign, added text, props or clipped extremities. Empty space between arms and body is transparent.",
+  "constraints": [
+    "All three Old Boys remain one sprite.",
+    "Ideal Worker retains six arms and all six work props.",
+    "System retains both gears, chimney/smoke, hand and base.",
+    "Female coral markers and male blue markers retained."
+  ],
+  "newCharactersGenerated": false
+}

@@ -23,9 +23,10 @@ describe('the team’s published story content', () => {
     expect(data.epilogue?.eligibleEndings).toEqual(['E12', 'E13', 'E14']);
   });
 
-  it('preserves all 111 source choices, both result texts, numerical changes, notes and guide advice', () => {
+  it('preserves all 111 source choices and texts with only the approved C1-04 communication adjustment', () => {
     const data = fixture();
     let sourceCount = 0;
+    let adjustedRows = 0;
     for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) source.sheets[sheet].values.forEach((r, index) => {
       if (!/^C[1-4]-(?:0[1-5][FMABCDab]?|B)$/.test(r[0] ?? '')) return;
       sourceCount++;
@@ -33,10 +34,19 @@ describe('the team’s published story content', () => {
       expect(row, `${sheet}:${index + 1}`).toBeDefined();
       expect([row.title, row.scene, row.background, row.npc, row.optionText]).toEqual([r[4], r[5], r[6], r[7], r[11]]);
       expect(row.results).toEqual({ female: r[12] ?? '', male: r[13] ?? '' });
-      expect(row.deltas).toEqual({ female: parseDelta(r[16] ?? ''), male: parseDelta(r[17] ?? '') });
+      const expectedDeltas = { female: parseDelta(r[16] ?? ''), male: parseDelta(r[17] ?? '') };
+      if (sheet === 'ch1' && index + 1 === 19 && r[0] === 'C1-04' && r[9] === '3') {
+        expect(expectedDeltas.female.Communication).toBe(1);
+        expect(expectedDeltas.male.Communication).toBe(1);
+        expectedDeltas.female.Communication = 0;
+        expectedDeltas.male.Communication = 0;
+        adjustedRows++;
+      }
+      expect(row.deltas).toEqual(expectedDeltas);
       expect([row.reference, row.notes, row.guideAdvice, row.sourceCardId]).toEqual([r[18] ?? '', r[19] ?? '', r[20] ?? '', r[0]]);
     });
     expect(sourceCount).toBe(111);
+    expect(adjustedRows).toBe(1);
   });
 
   it('uses six authored starting values and removes the two temporary abilities', () => {

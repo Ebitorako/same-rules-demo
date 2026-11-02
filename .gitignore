@@ -8,3 +8,5 @@ Thumbs.db
 .env.*
 !.env.example
 /nmc5369-codex-starter.zip
+/docs/reference/audio/
+/.verification/

@@ -1,0 +1,13 @@
+{
+  "id": "ch1-e03-2026-11-03",
+  "approvedDate": "2026-11-03",
+  "sourceSheet": "ch1",
+  "sourceRow": 19,
+  "cardId": "C1-04",
+  "option": 3,
+  "stat": "Communication",
+  "from": 1,
+  "to": 0,
+  "pawns": ["female", "male"],
+  "reason": "The designer approved a minimal first-chapter rebalance to make E03 reachable. Talking to senior producers keeps its authored Network gains and male Creativity gain, but no longer also grants Communication. Entry thresholds, starting values and every other choice stay unchanged."
+}
