@@ -4,9 +4,11 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.18：默认有声与快捷静音。** 新玩家默认开启声音，首次点击游戏后开始播放；已有声音偏好继续保留。页面及剧情、历史、收藏弹窗右上角都有黑白扬声器按钮：声波表示开启，斜线表示静音；图标在黑色圆角按钮中居中，点击即可切换，设置页同步。选项编号、棋盘布局和正式 CH1–4 规则继续保留。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.19：修复主界面与游戏音乐叠加。** 进入棋盘和普通剧情选择时切换到游戏 BGM，并释放旧曲目。同一浏览器、同一网址下，操作当前游戏页会暂停其他游戏页；切到后台或离开窗口也会暂停，返回后按当前场景恢复。新玩家仍默认开启声音，已有声音偏好保留。右上角黑白扬声器按钮与 Settings 共用声音设置。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
-本轮验证：155 项测试、数据检查和构建通过。浏览器确认新玩家默认开启、点击后播放、快捷静音与取消静音、刷新记忆、设置同步，以及剧情/历史/收藏弹窗中的按钮。切换不重建页面、不收起正在阅读的背景说明。390px 手机按钮为 44×44，页面无横向溢出。
+本轮验证：162 项测试、数据检查和构建通过。浏览器复现了两个试玩页分别播放主界面和游戏 BGM 的情况；修复后确认当前页接管声音、静音页也能暂停旧页，以及从开场进入棋盘、第一张剧情卡时正确切换音乐。后台暂停不修改存档或声音偏好。
+
+**本次更新后，请关闭其他旧试玩标签页，并刷新当前游戏页一次。** 已打开的旧版本仍在运行旧代码，需要重新加载才能使用防叠加逻辑；不用清空存档。
 
 [中文试玩](https://ebitorako.github.io/same-rules-demo/?lang=zh-CN) · [English](https://ebitorako.github.io/same-rules-demo/?lang=en) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 

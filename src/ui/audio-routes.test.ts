@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { BOARD } from '../game/board';
-import { createInitialState, startCareer } from '../game/state';
+import { advance, createInitialState, startCareer } from '../game/state';
 import { loadTeamData } from '../game/test-helpers';
 import { musicFor, transitionSounds } from './audio-routes';
 
@@ -8,6 +8,18 @@ const data = loadTeamData();
 function career() { return startCareer(createInitialState(), 'female', data); }
 
 describe('authored audio placement', () => {
+  it('switches the actual entry flow from the title/opening track to gameplay before the first choice', () => {
+    let state = createInitialState();
+    expect(musicFor(state, 'title')).toBe('intro');
+    state = startCareer(state, 'female', data);
+    expect(musicFor(state, 'game')).toBe('intro');
+    state = advance(state, data);
+    expect(state.run!.phase).toBe('board');
+    expect(musicFor(state, 'game')).toBe('main');
+    state = advance(state, data);
+    expect(state.run!.phase).toBe('card');
+    expect(musicFor(state, 'game')).toBe('main');
+  });
   it('keeps introduction music separate and places bar and party music only in their live scenes/results', () => {
     const state = career();
     expect(musicFor(state)).toBe('intro');

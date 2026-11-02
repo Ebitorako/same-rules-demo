@@ -4,7 +4,7 @@
 
 **Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
-**Read `docs/GAME_SPEC.md` before any task.** Version 0.18 adds default-on sound and centered monochrome quick mute, following numeric choice consistency, unobstructed board labels, Settings-only language selection and the uniform bilingual Gallery. The designer explicitly authorised these updates on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
+**Read `docs/GAME_SPEC.md` before any task.** Version 0.19 prevents background/duplicate-page audio overlap, following default-on sound, monochrome quick mute, numeric choice consistency and the uniform bilingual Gallery. The designer explicitly authorised these updates on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
 
 ## Who you are working with
 
