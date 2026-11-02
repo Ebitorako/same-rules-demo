@@ -3,6 +3,7 @@ import { BOARD } from '../game/board';
 import { getChoiceHistory, type ChoiceHistoryEntry } from '../game/history';
 import type { AppState, GameData, Run } from '../game/types';
 import { storyArt, pawnArt } from './assets';
+import { isAutomaticChoice } from './choice-label';
 import { button, escape, richText } from './dom';
 import { t } from './i18n';
 
@@ -10,7 +11,7 @@ const text = (value: string): string => richText(value.replace(/\r\n?/g, '\n'));
 
 function selectedChoice(entry: ChoiceHistoryEntry, run: Run, data: GameData): string {
   if (!entry.scenario) return `<p class="history-missing">${t('The text for this recorded choice is currently unavailable.')}</p>`;
-  if (data.contentVersion) return `<p class="history-chosen-text">${entry.scenario.automatic ? t('Continue') : text(entry.scenario.optionText)}</p>`;
+  if (data.contentVersion) return `<p class="history-chosen-text">${isAutomaticChoice(entry.scenario) ? t('Continue') : text(entry.scenario.optionText)}</p>`;
   if (entry.cardId === RULES.hiring.cardId) {
     const id = run.hiredIntern ?? RULES.hiring.candidates[entry.choice];
     const candidate = data.candidates.find(item => item.id === id);
@@ -47,7 +48,7 @@ export function choiceHistoryDialog(state: AppState, data: GameData, cardId: str
     <div class="history-content" role="region" aria-label="${t('Recorded scene, choice and result')}" tabindex="0">
       <h2 id="history-heading">${escape(scenario?.title ?? t('Recorded choice'))}</h2>
       ${scenario ? `<div class="history-scene"><div class="portrait-column">${portrait}<span class="npc-label">${escape(t(npc ?? ''))}</span></div><section><h3>${t('The scene')}</h3><p>${text(scenario.scene)}</p></section></div>` : ''}
-      <section class="history-selection"><h3>${t('Your choice · Option')} ${escape(scenario?.optionLabel === '自动' || scenario?.optionLabel === 'Continue' ? t('Continue') : scenario?.optionLabel ?? String(entry.choice))}</h3>${selectedChoice(entry, run, data)}</section>
+      <section class="history-selection"><h3>${t('Your choice · Option')} ${escape(isAutomaticChoice(scenario) ? t('Continue') : String(entry.choice))}</h3>${selectedChoice(entry, run, data)}</section>
       ${scenario ? `<section class="history-result"><h3>${t('What followed')}</h3><p>${scenario.results[run.character.pawn].trim() ? text(scenario.results[run.character.pawn]) : `<span class="history-missing">${t('The result text for this recorded choice is currently unavailable.')}</span>`}</p></section>` : ''}
     </div>
     <footer class="history-footer"><p>${t('Reviewing this choice does not change your career.')}</p>${previous || next ? `<nav class="history-navigation" aria-label="${t('Recorded choice navigation')}">${previous ? button('Previous choice', 'review-choice', 'history-previous', `data-card="${escape(previous.cardId)}"`) : ''}${next ? button('Next choice', 'review-choice', 'history-next', `data-card="${escape(next.cardId)}"`) : ''}</nav>` : ''}</footer>

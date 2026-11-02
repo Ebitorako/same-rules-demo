@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
-import { beforeAll, afterAll, describe, expect, it, vi } from 'vitest';
+import { beforeAll, afterAll, afterEach, describe, expect, it, vi } from 'vitest';
+import { localizeData, parseTranslationCatalog } from '../data/localize';
 import { chooseOption, createInitialState, getOptions, startCareer } from '../game/state';
 import { BOARD } from '../game/board';
 import type { AppState, GameData, Pawn } from '../game/types';
@@ -9,9 +10,12 @@ import { scenarioDialog } from './card';
 import { galleryScreen } from './gallery';
 import { introScreen } from './title';
 import { richText } from './dom';
+import { setLocale, t } from './i18n';
 
 vi.mock('virtual:art-index', () => ({ default: ['assets/npc/old_boys_network_neutral.png', 'assets/ui/gallery_frame.png', 'assets/characters/final/female.png'] }));
 const fixture = (): GameData => JSON.parse(readFileSync('public/data/team-content.json', 'utf8'));
+const translations = parseTranslationCatalog(readFileSync('public/data/zh-CN.json', 'utf8'));
+afterEach(() => setLocale('en'));
 beforeAll(async () => {
   vi.stubGlobal('fetch', vi.fn(async () => ({ ok: true, json: async () => ({
     'characters/pawn_female': ['assets/characters/missing.svg','assets/characters/final/female.png'],
@@ -51,18 +55,72 @@ describe('rendered formal story connections', () => {
     expect(introScreen(startCareer(createInitialState(), 'male', data), data)).toContain(richText(data.chapters![0].scene));
   });
 
-  it('supports the source’s fourth D option and female-only resignation option', () => {
-    const data = fixture();
+  it.each(['en', 'zh-CN'] as const)('shows four numeric choices in %s while preserving the source D branch and female-only resignation option', locale => {
+    setLocale(locale);
+    const data = localizeData(fixture(), translations, locale);
     const drinks = scenarioDialog(atCard('C2-03', data), data);
     expect(drinks.match(/data-action="choose"/g)).toHaveLength(4);
-    expect(drinks).toContain('<span class="option-number">D</span>');
-    expect(drinks).toContain('4 / D');
+    expect(drinks.match(/<span class="option-number">[^<]+<\/span>/g)).toEqual(
+      [1, 2, 3, 4].map(number => `<span class="option-number">${number}</span>`));
+    expect(drinks).toContain(`${t('KEYS')} 1 / 2 / 3 / 4`);
+    expect(drinks).not.toContain('4 / D');
+    expect(data.scenarios.filter(row => row.cardId === 'C2-03' && row.option === 4).every(row => row.optionLabel === 'D')).toBe(true);
     const female = scenarioDialog(atCard('C2-04', data), data);
     const male = scenarioDialog(atCard('C2-04', data, 'male'), data);
     expect(female.match(/data-action="choose"/g)).toHaveLength(4);
     expect(male.match(/data-action="choose"/g)).toHaveLength(3);
-    expect(female).toContain('Resign and leave the company.');
-    expect(male).not.toContain('Resign and leave the company.');
+    const resignation = data.scenarios.find(row => row.sourceCardId === 'C2-04A' && row.option === 4)!;
+    expect(female).toContain(richText(resignation.optionText));
+    expect(male).not.toContain(richText(resignation.optionText));
+  });
+
+  it.each(['en', 'zh-CN'] as const)('keeps numeric badges consistent across all authored branches in %s', locale => {
+    setLocale(locale);
+    const data = localizeData(fixture(), translations, locale);
+    const rendered = new Set<string>();
+    for (const tile of BOARD.filter(tile => tile.cardId)) {
+      for (const pawn of ['female', 'male'] as const) for (const child of [false, true])
+        for (const branch of ['A', 'B', 'C', 'D']) for (const policy of ['zero_tolerance', 'coordinator', 'transparent'])
+          for (const previousFamilyMan of [false, true]) {
+            if (tile.chapter >= 3 && branch === 'D') continue;
+            const state = atCard(tile.cardId!, data, pawn);
+            state.run!.flags = { has_child: child, c2_branch: branch, policy, previous_family_man: previousFamilyMan };
+            const options = getOptions(state.run!, data);
+            const key = `${pawn}:${options.map(row => row.sourceSheet + ':' + row.sourceRow).join(',')}`;
+            if (rendered.has(key)) continue;
+            rendered.add(key);
+            const html = scenarioDialog(state, data);
+            const badges = [...html.matchAll(/<span class="option-number">([^<]+)<\/span>/g)].map(match => match[1]);
+            expect(badges, key).toEqual(tile.cardId === 'C2-04' && branch === 'D' ? ['→']
+              : Array.from({ length: options.length }, (_, index) => String(index + 1)));
+          }
+    }
+    expect(rendered.size).toBeGreaterThan(40);
+  });
+
+  it.each(['en', 'zh-CN'] as const)('keeps automatic acknowledgements distinct from genuine single choices in %s', locale => {
+    setLocale(locale);
+    for (const marker of [
+      { automatic: true, optionLabel: undefined },
+      { automatic: false, optionLabel: 'Continue' },
+      { automatic: false, optionLabel: '自动' },
+    ]) {
+      const data = localizeData(fixture(), translations, locale);
+      for (const row of data.scenarios.filter(row => row.sourceCardId === 'C2-04D')) Object.assign(row, marker);
+      const state = atCard('C2-04', data);
+      state.run!.flags!.c2_branch = 'D';
+      const html = scenarioDialog(state, data);
+      expect(html).toContain('<span class="option-number">→</span>');
+      expect(html).toContain(`<span>${t('Continue')}</span>`);
+      expect(html).toContain('data-enter="true"');
+      expect(html).toContain(`${t('KEYS')} ENTER`);
+      expect(html).not.toContain(`${t('KEYS')} 1`);
+    }
+    const data = localizeData(fixture(), translations, locale);
+    const gatekeeper = scenarioDialog(atCard('C1-B', data), data);
+    expect(gatekeeper).toContain('<span class="option-number">1</span>');
+    expect(gatekeeper).toContain(`${t('KEYS')} 1 / ENTER`);
+    expect(gatekeeper).toContain('data-enter="true"');
   });
 
   it('shows locked boss options as thoughts without allowing a choice or leaking thresholds', () => {

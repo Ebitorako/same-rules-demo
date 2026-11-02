@@ -108,7 +108,7 @@ const interfaceCopy = {
   'The Guide': '指引人',
   'Your studio companion': '你的工作室同行者',
   'Take a moment to read the scene. I can offer some context, but you decide what to do. You can hide my advice and ask for it again whenever you like.': '先花一点时间阅读情境。我可以补充背景，但如何行动由你决定。你可以隐藏建议，也可以随时再次向我寻求提示。',
-  'Move with Next. Read the situation and choose one of three options. After the result, Continue takes you back to the board.': '点击“下一步”前进，阅读情境并选择一个可用选项。查看结果后，点击“继续”回到棋盘。',
+  'Move with Next. Read the situation and choose an available option. After the result, Continue takes you back to the board.': '点击“下一步”前进，阅读情境并选择一个可用选项。查看结果后，点击“继续”回到棋盘。',
   'Zero tolerance statement': '零容忍声明',
   'Dedicated coordinator': '专职协调员',
   'Transparent hiring and flexible working': '透明招聘与弹性工作制',

@@ -4,13 +4,13 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.16：棋盘标签与语言设置整理。** Boss 名牌单行自适应并与立绘分区；总监名称置底、星星居中；起点去掉旧文字牌，卡牌堆只留居中问号。语言选择统一移到 Settings／设置。统一尺寸的结局收藏、完整复盘及正式 CH1–4 规则继续保留。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.17：选项编号一致性修正。** 剧情卡、按键提示、历史记录与结局复盘统一使用数字编号，第二章酒局第四项显示为 4；原表 D 分支与数值保留。自动剧情继续显示“继续”，单项操作补齐 Enter 提示，规则书不再假定每张卡只有三个选项。棋盘布局、结局收藏和 Settings／设置中的语言切换继续保留。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
-本轮验证：140 项测试、数据检查和构建通过。桌面与 390px 手机检查确认名牌单行、完整显示，与立绘间隔 4px；星星、起点箭头和卡牌问号居中。设置中切换语言后返回或刷新，生涯进度保留；页顶、剧情、历史与收藏弹窗均无语言按钮。
+本轮验证：151 项测试、数据检查和构建通过；检查全部 20 张卡的 1,680 种分支组合，数字编号连续且无重复。英文男性与中文女性实测均通过第四选项进入原定 E10，历史及结局复盘显示 4；中文自动剧情复盘显示“继续”。390px 手机页面和剧情弹窗无横向溢出。
 
 [中文试玩](https://ebitorako.github.io/same-rules-demo/?lang=zh-CN) · [English](https://ebitorako.github.io/same-rules-demo/?lang=en) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 
-本地双击 [启动游戏.cmd](启动游戏.cmd)，或运行 `npm run dev`，打开提示的网址。选择 **Female pawn / Male pawn → Enter the studio**；用 **Next** 前进、点击选项并 **Continue**。键盘支持 `1`–`4`、`D`、`Enter`。声音可在 **Settings → Sound** 开关。
+本地双击 [启动游戏.cmd](启动游戏.cmd)，或运行 `npm run dev`，打开提示的网址。选择 **Female pawn / Male pawn → Enter the studio**；用 **Next** 前进、点击选项并 **Continue**。键盘支持 `1`–`4`、`Enter`，按键与屏幕编号一致。声音可在 **Settings → Sound** 开关。
 
 点击右上角 **Settings／设置 → Language／语言 → English／中文** 切换，再点击 **Back／返回** 继续。语言入口只保留在设置页。中文版点击 **开始职业生涯 → 女性棋子 / 男性棋子 → 进入工作室**。语言偏好会保存，刷新不会变回英文；切换不重开、不重选，也不会重复加减数值。旧原型收藏仍保留当时的原始文本。
 

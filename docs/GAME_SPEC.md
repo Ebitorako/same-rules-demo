@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.16, 3 Nov 2026. Unobstructed single-line board labels, centered symbols and language selection in Settings; verification/publication recorded in README and AI_LOG.*
+*Version 0.17, 3 Nov 2026. Consistent numeric choices across cards, keyboard hints, history and ending review; verification/publication recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
@@ -43,14 +43,14 @@ Energy ≤ 1 shows the source’s exhaustion guidance (faithfully translated fro
 
 There are four chapter introductions. An introduction is not an extra board choice. The Creative Director silver tile presents Chapter 4’s authored opening after the player has accepted the Ideal Worker promotion and survived its effects.
 
-Cards need not have exactly three options. C1-B has one action. C2-03 has 1, 2, 3 and D (internal choice 4). C2-04 A/B/C has an additional resignation choice for the female pawn. C2-04D is the authored forced-exit route, ending in E10 without reaching its Boss; its Continue action is narrative acknowledgement, not a new decision.
+Cards need not have exactly three options. C1-B has one action. C2-03 shows 1, 2, 3 and 4; its fourth option retains the source's D label and branch internally. All genuine choices use numeric option values consistently in cards, keyboard hints, history and numerical review, including older saved D-labelled choices. C2-04 A/B/C has an additional resignation choice for the female pawn. C2-04D is the authored forced-exit route, ending in E10 without reaching its Boss; its Continue action is narrative acknowledgement, not a new decision, and uses an arrow and Enter hint.
 
-Resolve visible variants using pawn and state flags. Numeric availability is separate: an unavailable Boss choice remains visible, grey and noncommitting; it can show only its authored thought. No stat number is revealed in the lock label. Available choices retain their authored effects. Use real buttons, keyboard 1–4/D/Enter, focus visibility and accessible reading areas.
+Resolve visible variants using pawn and state flags. Numeric availability is separate: an unavailable Boss choice remains visible, grey and noncommitting; it can show only its authored thought. No stat number is revealed in the lock label. Available choices retain their authored effects. Use real buttons, keyboard 1–4/Enter, focus visibility and accessible reading areas. Single real actions show their number plus Enter in the hint; generic help must not assume exactly three options.
 
 | Flag | Set/read rule |
 |---|---|
 | `maternal_assumption` | All C1-03F responses set true. At Ch3 entry, female Availability −1 unless inherited transparent policy is active. Record once as a system event. |
-| `c2_branch` | C2-03 choices 1/2/3/D set A/B/C/D; controls C2-04 and C4-02 option 2. D exits in Chapter 2. |
+| `c2_branch` | C2-03 choices 1/2/3/4 set A/B/C/D; controls C2-04 and C4-02 option 2. D exits in Chapter 2. |
 | `promised_no_kids` | Female C3-01 option 3; choosing a child at C3-02 later also applies Reputation −1. |
 | `has_child` | C3-02 option 1 true, options 2/3 false; controls C3-03/04/05 and relevant Ideal Worker text. |
 | `partner_primary` | Male C3-03a option 2; accepting Ideal Worker promotion ends in E05 instead of continuing. |
@@ -108,7 +108,7 @@ A completed Creative Director, or the explicit E05 exception, becomes the next G
 | E07 | Maybe It Was Just Me | Female without child exits at Ideal Worker |
 | E08 | Personal Reasons | Female resignation in C2-04 A/B/C |
 | E09 | Off the List | Female requests transparent review at C2-B |
-| E10 | The Official Version | C2-03 D then C2-04D |
+| E10 | The Official Version | C2-03 choice 4 (source branch D), then C2-04D |
 | E11 | Burnout | Energy ≤ 0 at any chapter |
 | E12 | Nothing Changed | Finish with zero_tolerance or no policy |
 | E13 | A Small Step Forward | Finish with coordinator |

@@ -49,7 +49,7 @@ const labels: Record<string, string> = {
   'Ask the guide': '询问指引人', 'Hide advice': '隐藏建议', 'BEFORE YOU CHOOSE': '在你选择之前', 'BESIDE THE BOARD': '棋盘旁的提示',
   'Advice is optional. The choice is yours.': '建议仅供参考，选择由你决定。',
   'Take a moment to read the scene. I can offer some context, but you decide what to do. You can hide my advice and ask for it again whenever you like.': '先读一读当前情境吧。我可以提供一些背景，但由你决定怎么做。你可以随时隐藏建议，需要时再来问我。',
-  'Move with Next. Read the situation and choose one of three options. After the result, Continue takes you back to the board.': '点击“下一步”前进，阅读情境后选择一个选项。看完结果后，点击“继续”回到棋盘。',
+  'Move with Next. Read the situation and choose an available option. After the result, Continue takes you back to the board.': '点击“下一步”前进，阅读情境后选择一个可用选项。看完结果后，点击“继续”回到棋盘。',
   'The text for this recorded choice is currently unavailable.': '暂时无法读取这次选择的文字记录。',
   'The candidate information for this recorded choice is currently unavailable.': '暂时无法读取这次选择的候选人信息。',
   'The policy information for this recorded choice is currently unavailable.': '暂时无法读取这次选择的政策信息。',

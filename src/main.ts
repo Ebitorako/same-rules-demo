@@ -289,8 +289,8 @@ document.addEventListener('keydown', event => {
     return;
   }
   if (target.matches('input,textarea,select')) return;
-  if (view === 'game' && state.run?.phase === 'card' && /^[1234dD]$/.test(event.key)) {
-    event.preventDefault(); app.querySelector<HTMLButtonElement>(`[data-option="${/d/i.test(event.key) ? 4 : event.key}"]:not(:disabled)`)?.click();
+  if (view === 'game' && state.run?.phase === 'card' && /^[1-4]$/.test(event.key)) {
+    event.preventDefault(); app.querySelector<HTMLButtonElement>(`[data-option="${event.key}"]:not(:disabled)`)?.click();
   }
   if (event.key === 'Enter' && !target.closest('button,summary')) {
     const next = dialog?.querySelector<HTMLButtonElement>('[data-enter]') ?? app.querySelector<HTMLButtonElement>('[data-enter]:not([inert] *)');

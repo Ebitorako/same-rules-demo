@@ -1,12 +1,16 @@
 import { readFileSync } from 'node:fs';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { localizeData, localizeState, parseTranslationCatalog } from '../data/localize';
 import { BOARD } from '../game/board';
 import { chooseOption, createInitialState, getOptions, startCareer } from '../game/state';
 import type { AppState, GameData, Pawn } from '../game/types';
 import { richText } from './dom';
 import { choiceHistoryDialog } from './history';
+import { setLocale, t } from './i18n';
 
 vi.mock('virtual:art-index', () => ({ default: [] }));
+const translations = parseTranslationCatalog(readFileSync('public/data/zh-CN.json', 'utf8'));
+afterEach(() => setLocale('en'));
 
 function fixture(pawn: Pawn = 'female'): { state: AppState; data: GameData } {
   const data: GameData = JSON.parse(readFileSync('public/data/team-content.json', 'utf8'));
@@ -25,6 +29,38 @@ function record(state: AppState, data: GameData, id: string, option: number): Ap
 }
 
 describe('recorded formal story dialog', () => {
+  it.each(['en', 'zh-CN'] as const)('shows saved source D as option 4 in %s without rewriting the recorded choice', locale => {
+    setLocale(locale);
+    for (const pawn of ['female', 'male'] as const) {
+      const { state, data } = fixture(pawn);
+      const saved: AppState = JSON.parse(JSON.stringify(record(state, data, 'C2-03', 4)));
+      expect(saved.run!.chosenScenarios!['C2-03'].optionLabel).toBe('D');
+      expect(saved.run!.flags!.c2_branch).toBe('D');
+      const before = JSON.stringify(saved);
+      const shown = localizeState(saved, translations, locale);
+      const html = choiceHistoryDialog(shown, localizeData(data, translations, locale), 'C2-03');
+      expect(html).toContain(`${t('Your choice · Option')} 4</h3>`);
+      expect(html).not.toContain(`${t('Your choice · Option')} D`);
+      expect(html).toContain(richText(shown.run!.chosenScenarios!['C2-03'].optionText));
+      expect(html).toContain(richText(shown.run!.chosenScenarios!['C2-03'].results[pawn]));
+      expect(JSON.stringify(saved)).toBe(before);
+    }
+  });
+
+  it.each(['en', 'zh-CN'] as const)('keeps the forced exit acknowledgement as Continue in %s history', locale => {
+    setLocale(locale);
+    const { state, data } = fixture();
+    const chosen = record(record(state, data, 'C2-03', 4), data, 'C2-04', 1);
+    expect(chosen.run!.endingId).toBe('E10');
+    // The automatic flag is sufficient even if an earlier save lacks the source label.
+    delete chosen.run!.chosenScenarios!['C2-04'].optionLabel;
+    const shown = localizeState(chosen, translations, locale);
+    const html = choiceHistoryDialog(shown, localizeData(data, translations, locale), 'C2-04');
+    expect(html).toContain(`${t('Your choice · Option')} ${t('Continue')}</h3>`);
+    expect(html).toContain(`<p class="history-chosen-text">${t('Continue')}</p>`);
+    expect(html).not.toContain(`${t('Your choice · Option')} 1`);
+  });
+
   it.each(['female', 'male'] as const)('shows the selected %s response without exposing other results or numerical changes', pawn => {
     const { state, data } = fixture(pawn);
     const chosen = record(state, data, 'C2-03', 2);

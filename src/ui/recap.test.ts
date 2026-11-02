@@ -1,18 +1,25 @@
 import { readFileSync } from 'node:fs';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { localizeData, localizeState, parseTranslationCatalog } from '../data/localize';
 import { initialStats } from '../config/rules';
+import { BOARD } from '../game/board';
+import { getEndingRecap } from '../game/recap';
 import { parseEndings, parseScenarios } from '../data/parse';
 import { advance, chooseOption, createInitialState, startCareer } from '../game/state';
 import type { AppState, Career, EndingRecap, GameData, Stats } from '../game/types';
 import { boardScreen } from './board';
 import { scenarioDialog } from './card';
+import { richText } from './dom';
 import { endingScreen, galleryDetailDialog, galleryScreen } from './gallery';
 import { choiceHistoryDialog } from './history';
 import { finalValues, numericalReview } from './recap';
+import { setLocale, t } from './i18n';
 
 vi.mock('virtual:art-index', () => ({ default: [] }));
 
 const read = (file: string) => readFileSync(`public/data/${file}`, 'utf8');
+const translations = parseTranslationCatalog(read('zh-CN.json'));
+afterEach(() => setLocale('en'));
 const policies = JSON.parse(read('policies.json'));
 const data: GameData = {
   ...JSON.parse(read('team-content.json')),
@@ -45,6 +52,37 @@ function finished(): AppState {
 }
 
 describe('ending-only numerical disclosure', () => {
+  it.each(['en', 'zh-CN'] as const)('retains the option 4 branch and effects while showing numeric option 4 in the %s ending recap', locale => {
+    setLocale(locale);
+    for (const pawn of ['female', 'male'] as const) {
+      let state = startCareer(createInitialState(), pawn, data);
+      state.run!.phase = 'card';
+      state.run!.position = BOARD.findIndex(tile => tile.cardId === 'C2-03');
+      state = chooseOption(state, 4, data);
+      expect(state.run!.chosenScenarios!['C2-03'].optionLabel).toBe('D');
+      expect(state.run!.flags!.c2_branch).toBe('D');
+      state = advance(advance(state, data), data);
+      expect(state.run!.position).toBe(BOARD.findIndex(tile => tile.cardId === 'C2-04'));
+      state = chooseOption(state, 1, data);
+      expect(state.run!.endingId).toBe('E10');
+      expect(state.run!.chosenScenarios!['C2-04'].automatic).toBe(true);
+      const recorded = getEndingRecap(state.run!, data);
+      expect(recorded.steps.map(step => [step.cardId, step.choice])).toEqual([['C2-03', 4], ['C2-04', 1]]);
+      const source = data.scenarios.find(row => row.cardId === 'C2-03' && row.option === 4 && row.pawn === pawn)!;
+      for (const [stat, delta] of Object.entries(source.deltas[pawn])) {
+        expect(recorded.steps[0].requestedDelta![stat as keyof Stats]).toBe(delta);
+      }
+      const before = JSON.stringify(state);
+      const shown = localizeState(state, translations, locale);
+      const html = numericalReview(getEndingRecap(shown.run!, data), localizeData(data, translations, locale).copy);
+      expect(html).toContain(`<p class="recap-option">${t('Option')} 4 · `);
+      expect(html).not.toContain(`<p class="recap-option">${t('Option')} D`);
+      expect(html).toContain(`<p class="recap-option">${t('Option')} 1 · ${t('Continue')}</p>`);
+      expect(html).toContain(richText(shown.run!.chosenScenarios!['C2-03'].optionText));
+      expect(JSON.stringify(state)).toBe(before);
+    }
+  });
+
   it('puts six saved final values below the ending story and review after references', () => {
     const state = finished();
     const front = endingScreen(state, data, false), back = endingScreen(state, data, true);
