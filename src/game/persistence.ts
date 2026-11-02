@@ -2,6 +2,7 @@ import { RULES } from '../config/rules';
 import { BOARD } from './board';
 import { ENDING_IDS } from './endings';
 import { completePendingBossExit, createInitialState } from './state';
+import { hasConsistentStatHistory, isEndingRecap, isStats, sameStats } from './recap';
 import { STAT_NAMES, type AppState, type Career, type Character, type Run } from './types';
 
 const prefix = RULES.storagePrefix;
@@ -23,7 +24,9 @@ function isCareer(value: unknown): value is Career {
   return isObject(value) && isRound(value.round) && isCharacter(value.character)
     && isEnding(value.endingId) && typeof value.reachedDirector === 'boolean'
     && isPolicies(value.policiesSet) && isIntern(value.hiredIntern)
-    && (value.reachedDirector || (value.policiesSet.length === 0 && value.hiredIntern === null));
+    && (value.reachedDirector || (value.policiesSet.length === 0 && value.hiredIntern === null))
+    && (value.recap === undefined || (isEndingRecap(value.recap) && value.recap.round === value.round
+      && value.recap.character.name === value.character.name && value.recap.character.pawn === value.character.pawn));
 }
 
 function isRun(value: unknown): value is Run {
@@ -45,6 +48,7 @@ function isRun(value: unknown): value is Run {
     || !(value.exitReason === null || ['burnout', 'C1-B', 'C2-B', 'C3-B'].includes(String(value.exitReason)))) return false;
 
   const run = value as unknown as Run;
+  if (!hasConsistentStatHistory(run)) return false;
   const completed = run.phase === 'ending' && run.exitReason === null;
   if (run.visited.length !== (completed ? BOARD.length : run.position + 1)) return false;
   if (completed && run.position !== 0) return false;
@@ -95,6 +99,7 @@ export function isValidState(value: unknown): value is AppState {
     if (latest.endingId !== state.run.endingId || latest.character.name !== state.run.character.name
       || latest.character.pawn !== state.run.character.pawn || latest.reachedDirector !== state.run.reachedDirector
       || latest.hiredIntern !== state.run.hiredIntern || latest.policiesSet.join() !== state.run.policiesSet.join()) return false;
+    if (latest.recap?.finalStats && !sameStats(latest.recap.finalStats, state.run.stats)) return false;
   }
   return true;
 }
@@ -104,11 +109,33 @@ export function loadState(): AppState {
     if (typeof localStorage === 'undefined') return createInitialState();
     const raw = localStorage.getItem(`${prefix}snapshot`);
     if (!raw) return createInitialState();
-    const parsed: unknown = JSON.parse(raw);
+    const parsed: unknown = discardInvalidRecapMetadata(JSON.parse(raw));
     return isValidState(parsed) ? completePendingBossExit(parsed) : createInitialState();
   } catch {
     return createInitialState();
   }
+}
+
+function discardInvalidRecapMetadata(value: unknown): unknown {
+  if (!isObject(value)) return value;
+  const state = { ...value };
+  if (isObject(state.run) && state.run.statHistory !== undefined && isObject(state.run.choices) && isStats(state.run.stats)) {
+    const run = { ...state.run };
+    if (!hasConsistentStatHistory(run as unknown as Run)) delete run.statHistory;
+    state.run = run;
+  }
+  if (Array.isArray(state.lineage)) state.lineage = state.lineage.map((value) => {
+    if (!isObject(value) || value.recap === undefined) return value;
+    const career = { ...value };
+    const recap = career.recap;
+    const run = isObject(state.run) ? state.run : null;
+    if (!isEndingRecap(recap) || recap.round !== career.round || !isCharacter(career.character)
+      || recap.character.name !== career.character.name || recap.character.pawn !== career.character.pawn
+      || (run?.phase === 'ending' && run.round === career.round && isStats(run.stats)
+        && recap.finalStats !== null && !sameStats(recap.finalStats, run.stats))) delete career.recap;
+    return career;
+  });
+  return state;
 }
 
 export function saveState(state: AppState): boolean {

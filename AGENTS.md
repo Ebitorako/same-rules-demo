@@ -32,7 +32,7 @@ Keep these script names working; create them during M0 if they do not exist yet.
 
 ## Non-negotiable rules
 
-1. **Same start, hidden rules.** Both pawns start with identical stats. Stats and gender effects are never shown, except with `?debug=1`.
+1. **Same start, hidden rules during play.** Both pawns start with identical stats. Hide numerical stats and gender effects during play and YOUR CHOICES review, except with `?debug=1`. The designer's 3 Nov decision permits an ending-only reveal: eight final stats and a read-only numerical recap of that completed career. This does not change starting values, thresholds or outcomes.
 2. **Deterministic.** No randomness in outcomes. `Math.random` is allowed only for the optional round-1 random gender (config).
 3. **No undo.** No back button or save slots; auto-save the current run so a refresh resumes, not rewinds.
 4. **Story text comes from data** (`public/data/*.csv`, `*.json`). Never hard-code story, option, result or ending text in code.

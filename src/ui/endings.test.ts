@@ -27,9 +27,9 @@ describe('ending card theory and references', () => {
     const { state, data } = fixture();
     const end = endingScreen(state, data, true);
     const gallery = galleryScreen(state, data, new Set(['E01']));
-    const reading = (html: string) => html.match(/<div class="ending-reading-scroll"[\s\S]*?<\/div>/)?.[0];
+    const reading = (html: string) => html.match(/<section class="ending-reading-section(?: ending-references)?">[\s\S]*?<\/section>/g);
     expect(reading(end)).toBeTruthy();
-    expect(reading(gallery)).toBe(reading(end));
+    expect(reading(gallery)).toEqual(reading(end));
     for (const html of [end, gallery]) {
       expect(html).toContain('<h3>Theory</h3>');
       expect(html).toContain('<h3>References</h3>');
@@ -89,7 +89,7 @@ describe('ending card theory and references', () => {
     data.endings[0].back = 'Long theory paragraph.\n'.repeat(200) + 'THEORY END';
     data.endings[0].reference = 'Long reference entry.\n'.repeat(200) + 'REFERENCE END';
     for (const html of [endingScreen(state, data, true), galleryScreen(state, data, new Set(['E01']))]) {
-      expect(html).toContain('role="region" tabindex="0" aria-label="Theory and references for ');
+      expect(html).toContain('role="region" tabindex="0" aria-label="Theory, references and numerical review for ');
       expect(html).toContain('THEORY END');
       expect(html).toContain('REFERENCE END');
     }

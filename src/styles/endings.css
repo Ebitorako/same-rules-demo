@@ -3,6 +3,86 @@
   min-width: 0;
 }
 
+.ending-card { max-width: 620px; }
+
+.ending-values {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--grey);
+  text-align: left;
+}
+
+.ending-values h3,
+.gallery-recaps > h3 {
+  margin: 0 0 10px;
+  font: 700 13px/1.4 var(--font-body);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ending-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0 0;
+}
+
+.ending-stats > div {
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid var(--grey);
+  border-radius: 4px;
+  text-align: center;
+}
+
+.ending-stats dt { font-size: 12px; overflow-wrap: anywhere; }
+.ending-stats dd { margin: 7px 0 0; font: 28px/1.1 var(--font-title); }
+.ending-values .recap-note,
+.numerical-review .recap-note { font-size: 13px; line-height: 1.6; }
+
+.numerical-review { text-align: left; }
+.numerical-review .recap-notice {
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid var(--grey);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.recap-totals { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+.recap-totals caption { text-align: left; padding-bottom: 10px; font-weight: 700; }
+.recap-totals th,
+.recap-totals td { padding: 7px 4px; border-bottom: 1px solid var(--grey); text-align: right; overflow-wrap: anywhere; }
+.recap-totals th:first-child { width: 43%; text-align: left; }
+.recap-definitions { margin: 18px 0; padding: 12px 0; border-block: 1px solid var(--grey); }
+.recap-definitions summary,
+.gallery-career-recap > summary { cursor: pointer; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.recap-definitions summary { min-height: 24px; }
+.recap-definitions dl { margin-top: 14px; }
+.recap-definitions dl > div + div { margin-top: 12px; }
+.recap-definitions dt { font-weight: 700; font-size: 13px; }
+.recap-definitions dd { margin: 4px 0 0; font-size: 13px; line-height: 1.6; }
+
+.recap-steps { list-style: none; margin: 18px 0 0; padding: 0; }
+.recap-steps > li { padding: 18px 0; border-top: 1px solid var(--grey); }
+.recap-steps .recap-step-label { font-size: 10px; line-height: 1.5; letter-spacing: .8px; }
+.recap-steps h4 { margin: 7px 0; font-size: 17px; }
+.recap-steps .recap-option { font-size: 13px; line-height: 1.6; }
+.recap-changes { list-style: none; padding: 0; margin: 12px 0 0; }
+.recap-changes li { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 8px; padding: 7px 0; font-size: 13px; }
+.recap-changes strong { font-variant-numeric: tabular-nums; }
+.recap-changes small { grid-column: 1 / -1; font-size: 12px; line-height: 1.6; }
+.recap-delta { white-space: nowrap; }
+
+.gallery-recaps { margin-top: 20px; }
+.gallery-career-recap { border-top: 1px solid var(--grey); padding: 12px 0; }
+.gallery-career-recap .ending-values { border: 0; padding-top: 12px; margin-top: 0; }
+.gallery-card .ending-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.gallery-career-recap .numerical-review { margin-top: 16px; }
+.gallery-career-recap .recap-totals,
+.gallery-career-recap .recap-changes li { font-size: 12px; }
+
 .ending-reading-scroll {
   width: 100%;
   min-width: 0;
@@ -56,6 +136,11 @@
 }
 
 @media (max-width: 560px) {
+  .ending-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .ending-screen { padding-inline: 14px; }
+  .ending-card { padding: 22px 18px; }
+  .recap-totals { font-size: 12px; }
+  .recap-changes li { font-size: 12px; }
   .ending-reading-scroll {
     padding-right: 8px;
   }

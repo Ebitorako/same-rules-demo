@@ -1,6 +1,8 @@
 # Genderpoly — Game Spec
 
-*Version 0.10, 31 Oct 2026.*
+*Version 0.11, 3 Nov 2026.*
+
+Version 0.11 records the designer's explicit ending-only numerical reveal. Keep stats hidden during play and YOUR CHOICES review. After a career ends, its ending-card front shows all eight final stats beneath the narrative; the back adds a chronological choice-and-stat recap after Theory and References. Explain each stat, distinguish requested changes from actual changes limited by stat bounds, and keep each completed career's report separate in the Gallery. This is a presentation and record-keeping change, not a change to starting values, Boss thresholds or outcomes. Verification and publication of v0.11 are pending.
 
 Version 0.10 fixes ordinary board-tile colors: unvisited tiles keep their existing dark background, and visited tiles use cream `#F4EFE3` through `--tile-walked: var(--cream)`. The former red/blue/yellow visited palette and `lit-*` classes/tokens are retired. This is no longer an open design decision. The six special board tiles and four Boss history-card faces retain their assigned metal finishes; game rules and progress are unchanged.
 
@@ -40,7 +42,7 @@ The conceptual lens the game is built on:
 Design consequences that are **not negotiable**:
 
 1. **Same start.** Both pawns have identical starting stats. Gender never changes ability; it changes how the world responds.
-2. **Hidden rules.** Stats and gender effects are never shown to the player (only in debug mode). Feedback comes only through text, NPC tone and NPC expressions.
+2. **Hidden rules during play.** Stats and numerical gender effects remain hidden during choices, results and YOUR CHOICES review (except in debug mode). Feedback during play comes through text, NPC tone and NPC expressions. Once a career ends, reveal its eight final stats and recorded numerical choice recap (§8), as approved by the designer on 3 Nov; this does not expose upcoming choices or change any rule.
 3. **Deterministic.** No dice, no randomness in outcomes. Same choices + same pawn = same result, every time. (The only allowed randomness is the optional first-round gender assignment, see §11.)
 4. **No undo.** No action rewinds gameplay, and there are no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice. Browsing recorded choices (§3) is read-only and does not replay a decision.
 5. **Colour records, never judges.** Ordinary tiles change from the existing dark background to cream when visited. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
@@ -113,9 +115,9 @@ Card area: three face-down piles (black card backs with a cream inner border and
 
 ---
 
-## 4. Hidden stats
+## 4. Stats: hidden during play, revealed at the ending
 
-Eight stats, all hidden. Both pawns start with the same values (placeholder: all `5`, range 0–10; final numbers come from the team's rules doc).
+Eight stats stay hidden until the career ends, including in ordinary choice-history review. Both pawns start with the same values (placeholder: all `5`, range 0–10; final numbers come from the team's rules doc). The ending-only reveal in §8 is the normal-mode exception; it does not change these values or limits.
 
 `Creativity` · `Communication` · `Skill` · `Energy` · `Network` · `Reputation` · `Availability` · `Money`
 
@@ -127,7 +129,7 @@ Gender enters the game in exactly three data-driven ways:
 
 Default rule (configurable): if `Energy` reaches 0, the run ends in a burnout exit ending.
 
-Debug mode: add `?debug=1` to the URL to show a small stats panel and the current card id. Never visible otherwise.
+Debug mode: add `?debug=1` to the URL to show the development stats panel and current card id during play. That panel remains debug-only; the completed-career summary is available without debug mode.
 
 ---
 
@@ -188,9 +190,11 @@ Candidates and policies live in `public/data/candidates.json` and `public/data/p
 
 - A run ends when the pawn **returns to START** (the "?" tile flips over) or exits early (failed boss, burnout).
 - The ending is picked by an ordered list of rules in code (first match wins); its text comes from `endings.csv`.
-- Ending card: **front** = name + ending text + art; **back** = separate **Theory** and **References** sections, sourced from `endings.csv` fields `背面：理论概念` and `对应文献`. The player can flip it. Preserve paragraph breaks and multiline citations; long text scrolls within the reading area. Empty references remain visibly unfilled, never generated or inferred.
+- Ending card: **front** = name + ending text + art, followed by all eight final stats beneath the narrative; **back** = separate **Theory** and **References** sections, sourced from `endings.csv` fields `背面：理论概念` and `对应文献`, followed by the completed career's numerical recap. The player can flip it. Preserve paragraph breaks and multiline citations; long text scrolls within the reading area. Empty references remain visibly unfilled, never generated or inferred.
+- The recap lists the actual selected options in chronological order, their requested increases/decreases and their actual applied changes. When a stat limit changes the effect, make the difference explicit (for example, a requested `+3` at `9` applies only `+1` with a maximum of `10`). Explain all eight stats using interface descriptions from `copy.json.statDescriptions`; these explanations are not replacement story text or formal theory. Do not introduce new citations or balancing rules.
+- Record numerical events when choices are applied and preserve the finished career's final values and report. Older saves remain playable. If exact historical snapshots are unavailable, disclose missing or reconstructed records clearly; never present a reconstructed value as an exact historical snapshot or borrow another career's values.
 - **Gallery:** a grid of all ending cards. Unlocked cards show their front (click to flip); locked cards show a silhouette and "???". Each unlocked card records which pawn unlocked it.
-- The same theory/reference layout and scrolling behavior applies when an unlocked card is flipped in the Gallery.
+- The same theory/reference layout, numerical report and scrolling behavior applies in the Gallery. Keep completed-career reports separate and label their career/round number, including when multiple careers unlock the same ending. Legacy unlocks without a report remain accessible with a clear missing-record notice.
 - Some endings can only be reached by one pawn. The gallery itself then shows the gap between the two pawns without the game ever saying it. **This is a key design idea; do not "fix" it.**
 - Target: 6–8 endings.
 
@@ -202,8 +206,8 @@ Saved in `localStorage` (one key prefix, e.g. `sameRules.`):
 
 | Key | Content |
 |---|---|
-| `currentRun` | Full state of the run in progress (auto-saved after every choice) |
-| `lineage` | One entry per finished career: character name, pawn, ending id, reached Creative Director?, policies set, intern hired |
+| `currentRun` | Full state of the run in progress, including numerical choice-event snapshots (auto-saved after every choice; hidden during play) |
+| `lineage` | One entry per finished career: character name, pawn, ending id, reached Creative Director?, policies set, intern hired, and an archived final-stat/choice report when available |
 | `gallery` | Unlocked ending ids, with which pawn and which round |
 | `settings` | Reduced motion, sound, `guideHidden` (optional advice visibility; absent in older saves means visible) |
 
@@ -216,6 +220,8 @@ New round:
 Settings has **Reset all progress** (clears everything, with a confirm step built as an in-page dialog, not `window.confirm`).
 
 Wording for the team: "you cannot save or undo within a career, but the game remembers your past careers".
+
+Keep the existing storage prefix and accept older saves without report fields. Archive each completed career once; refreshing an ending or starting the next career must not duplicate a report or overwrite an earlier career's numbers. Missing or reconstructed legacy records must be identified as such in the ending/Gallery display.
 
 ---
 
@@ -307,6 +313,8 @@ Ordinary tile colors are settled in v0.10: dark before visiting, cream afterward
 The writers fill a shared Google Sheet; the developer exports each tab as CSV into `public/data/`. **All story text comes from these files. Never hard-code story text.** Game text is in English; some helper columns are in Chinese.
 
 `copy.json` supplies shared narrative text and the two distinct names: `title: "Genderpoly"` for the game and `companyName: "FreeDOM"` for the workplace shown in the board centre. Renaming either display name does not rename browser storage, the repository or the existing public URL.
+
+Its optional `statDescriptions` object supplies editable interface explanations keyed by the eight stat names in §4. These descriptions explain the ending summary; changing them does not change stat mechanics. Story, ending narrative, formal theory and references remain authored by the team in the existing CSV files. Do not add a separate `stats.json` file.
 
 ### `scenarios.csv` — one row per option
 

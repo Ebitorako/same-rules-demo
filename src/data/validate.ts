@@ -150,6 +150,13 @@ export function validateData(data: GameData): string[] {
   else {
     for (const field of COPY_FIELDS) if (!nonempty(data.copy[field])) issues.push(`copy.json：${field} 不能为空。`);
     for (const pawn of PAWNS) if (!nonempty(data.copy.defaultNames?.[pawn])) issues.push(`copy.json：defaultNames.${pawn} 不能为空。`);
+    const descriptions = data.copy.statDescriptions;
+    if (descriptions !== undefined) {
+      if (!descriptions || typeof descriptions !== 'object' || Array.isArray(descriptions)) issues.push('copy.json：statDescriptions 应为能力名称与说明组成的对象。');
+      else for (const [stat, description] of Object.entries(descriptions)) {
+        if (!(STAT_NAMES as readonly string[]).includes(stat) || !nonempty(description)) issues.push(`copy.json：statDescriptions.${stat} 的能力名称或说明无效。`);
+      }
+    }
   }
   return [...new Set(issues)];
 }

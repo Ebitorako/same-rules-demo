@@ -3,6 +3,7 @@ import { BOARD } from './board';
 import { passesBoss } from './bosses';
 import { matchesCondition } from './conditions';
 import { selectEnding } from './endings';
+import { getEndingRecap, recordStatChange } from './recap';
 import { STAT_NAMES, type AppState, type GameData, type Pawn, type Run, type ScenarioOption, type Settings } from './types';
 
 export function createInitialState(): AppState {
@@ -15,14 +16,17 @@ export function startCareer(state: AppState, pawn: Pawn, data: GameData): AppSta
   const director = previous?.reachedDirector ? previous : null;
   const intern = director ? data.candidates.find((candidate) => candidate.id === director.hiredIntern) : null;
   const character = intern ? { name: intern.name, pawn: intern.pawn } : { name: data.copy.defaultNames[pawn], pawn };
+  const stats = initialStats();
   return {
     ...state,
     run: {
-      round: (previous?.round ?? 0) + 1, character, stats: initialStats(),
+      round: (previous?.round ?? 0) + 1, character, stats,
       position: 0, visited: [0], phase: 'intro', choices: {},
       activePolicies: [...(director?.policiesSet ?? [])], policiesSet: [], hiredIntern: null,
       reachedDirector: false, gatekeeper: director ? { ...director.character } : null,
       result: null, endingId: null, exitReason: null,
+      statHistory: { version: 1, initialStats: { ...stats },
+        bounds: { minimum: RULES.stats.minimum, maximum: RULES.stats.maximum }, steps: [] },
     },
   };
 }
@@ -43,7 +47,7 @@ export function getOptions(run: Run, data: GameData): ScenarioOption[] {
   });
 }
 
-function finishCareer(state: AppState, run: Run): AppState {
+function finishCareer(state: AppState, run: Run, data?: GameData): AppState {
   const endingId = selectEnding(run);
   const finished: Run = { ...run, phase: 'ending', endingId };
   if (state.lineage.some((career) => career.round === run.round)) return { ...state, run: finished };
@@ -52,6 +56,7 @@ function finishCareer(state: AppState, run: Run): AppState {
     lineage: [...state.lineage, {
       round: run.round, character: { ...run.character }, endingId, reachedDirector: run.reachedDirector,
       policiesSet: [...run.policiesSet], hiredIntern: run.hiredIntern,
+      recap: getEndingRecap(finished, data),
     }],
     gallery: state.gallery.some((unlock) => unlock.endingId === endingId && unlock.pawn === run.character.pawn)
       ? state.gallery : [...state.gallery, { endingId, pawn: run.character.pawn, round: run.round, name: run.character.name }],
@@ -73,7 +78,7 @@ function canReachDirector(run: Run): boolean {
     && passesBoss(run, bossId, chosenOption));
 }
 
-export function advance(state: AppState, _data: GameData): AppState {
+export function advance(state: AppState, data: GameData): AppState {
   const run = state.run;
   if (!run) return state;
   if (run.phase === 'intro') return { ...state, run: { ...run, phase: 'board' } };
@@ -82,12 +87,12 @@ export function advance(state: AppState, _data: GameData): AppState {
     return { ...state, run: { ...run, phase: 'board' } };
   }
   if (run.phase === 'result') {
-    if (run.exitReason) return finishCareer(state, run);
+    if (run.exitReason) return finishCareer(state, run, data);
     return { ...state, run: { ...run, phase: 'board', result: null } };
   }
   if (run.phase !== 'board') return state;
   const position = (run.position + 1) % BOARD.length;
-  if (position === 0) return finishCareer(state, { ...run, position, result: null });
+  if (position === 0) return finishCareer(state, { ...run, position, result: null }, data);
   const tile = BOARD[position];
   if (tile.kind === 'director' && !canReachDirector(run)) return state;
   if (tile.chapter === 4 && tile.kind !== 'director' && !run.reachedDirector) return state;
@@ -126,7 +131,8 @@ export function chooseOption(state: AppState, optionNumber: number, data: GameDa
     : passed === false ? option.cardId : null;
   updated.result = { cardId: option.cardId, option: optionNumber, text: option.results[run.character.pawn],
     expression: option.expressions[run.character.pawn], npc: option.npc, passed };
-  return passed === false ? finishCareer(state, updated) : { ...state, run: updated };
+  updated.statHistory = recordStatChange(run, option, stats, data);
+  return passed === false ? finishCareer(state, updated, data) : { ...state, run: updated };
 }
 
 export function updateSettings(state: AppState, partial: Partial<Settings>): AppState {

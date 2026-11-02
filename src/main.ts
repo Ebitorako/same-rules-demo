@@ -11,6 +11,7 @@ import { BOARD } from './game/board';
 import { getChoiceHistory } from './game/history';
 import { advance, chooseOption, createInitialState, startCareer, updateSettings } from './game/state';
 import { loadState, resetStorage, saveState } from './game/persistence';
+import { archiveEndingRecap } from './game/recap';
 import type { AppState, GameData, Pawn } from './game/types';
 import { loadAssets } from './ui/assets';
 import { boardScreen } from './ui/board';
@@ -212,6 +213,8 @@ async function boot(): Promise<void> {
     [data, guide] = await Promise.all([loadData(),loadGuideData(),loadAssets()]);
     const issues = validateData(data);
     if (issues.length) throw new Error(issues.join('\n'));
+    const archived = archiveEndingRecap(state, data);
+    if (archived !== state) { state = archived; persist(); }
     document.title = data.copy.title;
     document.documentElement.style.setProperty('--idle-ms',`${RULES.animation.idleMs}ms`);
     document.documentElement.style.setProperty('--light-ms',`${RULES.animation.lightMs}ms`);

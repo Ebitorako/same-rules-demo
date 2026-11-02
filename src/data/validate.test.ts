@@ -71,4 +71,14 @@ describe('complete game content validation', () => {
     expect(errors).toContain('cand_b');
     expect(errors).toContain('formal_recruitment');
   });
+
+  it('accepts optional ability descriptions and reports malformed editable descriptions', () => {
+    const data = fixture();
+    delete data.copy.statDescriptions;
+    expect(validateData(data)).toEqual([]);
+    data.copy.statDescriptions = { Skill: 'Professional craft.' };
+    expect(validateData(data)).toEqual([]);
+    data.copy.statDescriptions.Skill = '   ';
+    expect(validateData(data).join('\n')).toContain('statDescriptions.Skill');
+  });
 });
