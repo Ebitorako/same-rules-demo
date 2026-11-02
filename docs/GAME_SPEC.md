@@ -139,6 +139,8 @@ Ordinary NPCs use the same living employee-badge visual world. The Chapter 2 Cre
 
 Runtime art lives under `public/assets/characters`, `bosses`, `npc`, `cards`, `ui`; source/reference material under `docs/reference/players`, `bosses`, `audio`. `public/assets/manifest.json` maps stable resource keys to editable file locations. Users may move files and update paths without changing story ids. Rebuild/restart after adding assets as required by the asset index.
 
+The homepage's `ui/title` now uses the designer's supplied complete game-presentation poster, stored unchanged as `public/assets/ui/title.png`. Preserve its original aspect ratio and full content, show it on mobile as well as desktop, and share the same artwork across English and Chinese. This replaces only the homepage's paired-pawn fallback; individual gameplay pawn assets remain in use.
+
 Audio mappings and provenance are maintained in `public/assets/audio/catalog.json`: nine supplied files and three original synthesized effects. Music lives in `audio/music`, short effects in `audio/effects`. Keep the long originals locally in ignored `docs/reference/audio`; publish only the prepared runtime excerpts. Intro music covers title/chapter/promotion/epilogue, the bar track covers C2-03, the party track covers C3-05, and ordinary scenes use the main loop. Movement, landing, card opening, valid choices and Chapter 1 hiring use the supplied cues. Supplementary Boss arrival, neutral ending and card-flip cues use no external samples. Wait for a user gesture, respect Sound/mute, fade music transitions and never use audio to reveal hidden stats or label choices as right/wrong. Actual browser playback evidence belongs in the current verification record.
 
 ## 11. Source issues and verification

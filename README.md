@@ -21,6 +21,7 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 - 20 个剧情位置、4 段章节开场、13 个终局，两个章节晋升卡只在过渡时查看，不进入 Gallery。
 - 六项能力初始值：Creativity 3、Communication 3、Network 2、Reputation 2、Availability 2、Energy 7。游玩中隐藏数值，终局正面显示最终值，反面显示选择及系统规则复盘。
 - 两枚棋子和四位 Boss 已按提供的两张图分拆为透明 PNG；原稿保留。其余人物与结局仍按清单补齐，不自行创作新的角色。
+- 首页展示最新提供的完整游戏效果图，保存于 `public/assets/ui/title.png`；中英文及手机共用原图，按比例完整显示。
 - 9份已提供音频对应背景介绍、普通游玩、酒吧、圣诞派对、移动、落地、抽卡、选择、入职；另补 Boss 登场、终局、翻面3个原创短音效。
 - 大音频原稿本地保留；游戏只发布轻量节选。音频场合、来源、时长统一维护在 [catalog.json](public/assets/audio/catalog.json)。
 
