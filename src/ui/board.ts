@@ -27,11 +27,26 @@ export function boardScreen(state: AppState, data: GameData): string {
       const metal = tile.kind === 'boss' ? bossMetals[tile.cardId!] : tile.kind === 'start' ? 'gold' : tile.kind === 'director' ? 'silver' : '';
       const metalVisited = Boolean(metal) && walked && tile.kind !== 'start';
       let inner = `<span class="tile-question" aria-hidden="true">?</span><span class="tile-index">${String(index).padStart(2,'0')}</span>`;
-      if (tile.kind === 'boss') inner = `${tile.cardId === 'C1-B' && run.gatekeeper ? pawnArt(run.gatekeeper.pawn, 'boss-art') : art(`bosses/${bossKeys[tile.cardId!]}`, tile.label, 'boss-art')}<span class="boss-name">${tile.cardId === 'C1-B' && run.gatekeeper ? escape(run.gatekeeper.name) : escape(t(tile.label))}</span>`;
-      else if (special) inner = `<span class="special-symbol">${tile.kind === 'start' ? '→' : '☆'}</span><span class="special-name">${tile.kind === 'start' ? `${t('START')}<br>${t('NEW HIRE')}` : t('CREATIVE<br>DIRECTOR', '创意总监')}</span>`;
+      if (tile.kind === 'boss') inner = `${tile.cardId === 'C1-B' && run.gatekeeper ? pawnArt(run.gatekeeper.pawn, 'boss-art') : art(`bosses/${bossKeys[tile.cardId!]}`, tile.label, 'boss-art')}<span class="boss-name tile-nameplate"><span class="tile-name-text">${tile.cardId === 'C1-B' && run.gatekeeper ? escape(run.gatekeeper.name) : escape(t(tile.label))}</span></span>`;
+      else if (special) inner = `<span class="special-symbol" aria-hidden="true">${tile.kind === 'start' ? '→' : '☆'}</span>${tile.kind === 'director' ? `<span class="special-name tile-nameplate"><span class="tile-name-text">${escape(t('CREATIVE DIRECTOR'))}</span></span>` : ''}`;
       else if (walked && tile.kind !== 'start') inner = `<span class="tile-number">${String(index).padStart(2,'0')}</span><span class="walked-mark">${t('CHAPTER')} ${tile.chapter}</span>`;
       return `<div data-tile="${index}" class="tile ${tile.kind} ${walked && !startHidden && !special ? 'walked' : ''} ${special ? 'special' : ''} ${metal ? `metal-tile metal-${metal}` : ''} ${metalVisited ? 'metal-visited' : ''} ${here ? 'current' : ''}" style="grid-row:${tile.row};grid-column:${tile.col}" ${here ? 'aria-current="location"' : ''} aria-label="${escape(t(tile.label))}${here ? t(', current position') : ''}${walked ? t(', visited') : ''}">${inner}${metalVisited ? '<span class="tile-visit-mark" aria-hidden="true">✓</span>' : ''}${here ? `<div class="board-pawn">${pawnArt(run.character.pawn)}<span class="you-label">${t('YOU')}</span></div>` : ''}</div>`;
     }).join('')}
-    <div class="board-centre"><div class="centre-topline"><span>${t('THE STUDIO')}</span><span>${t('EST. EVERY DAY')}</span></div><h2>${escape(data.copy.companyName)}</h2><p class="centre-subtitle">${t('THE CREATIVE CAREER GAME')}</p><div class="deck-row">${[1,2,3].map(n=>`<div class="deck" aria-label="${tf('Face-down card pile {number}', { number: n })}">${art('cards/card_back','card back','deck-art')}<span class="deck-question" aria-hidden="true">?</span></div>`).join('')}</div><div class="chosen-pile"><span>${t('YOUR CHOICES')}</span><div class="chosen-cards" style="--choice-gaps:${Math.max(1, history.length - 1)}" role="group" aria-label="${t('Your recorded choices')}">${chosenCards}</div></div><div class="board-next">${button('Next', 'advance', 'primary', 'data-enter="true"')}<span>${t('ONE STEP FORWARD')}</span></div><p class="keyboard-note">${t('ENTER · NEXT')} &nbsp; / &nbsp; ${t('NUMBER KEYS · CHOOSE')}</p></div>
+    <div class="board-centre"><div class="centre-topline"><span>${t('THE STUDIO')}</span><span>${t('EST. EVERY DAY')}</span></div><h2>${escape(data.copy.companyName)}</h2><p class="centre-subtitle">${t('THE CREATIVE CAREER GAME')}</p><div class="deck-row">${[1,2,3].map(n=>`<div class="deck" role="img" aria-label="${tf('Face-down card pile {number}', { number: n })}"><span class="deck-question" aria-hidden="true">?</span></div>`).join('')}</div><div class="chosen-pile"><span>${t('YOUR CHOICES')}</span><div class="chosen-cards" style="--choice-gaps:${Math.max(1, history.length - 1)}" role="group" aria-label="${t('Your recorded choices')}">${chosenCards}</div></div><div class="board-next">${button('Next', 'advance', 'primary', 'data-enter="true"')}<span>${t('ONE STEP FORWARD')}</span></div><p class="keyboard-note">${t('ENTER · NEXT')} &nbsp; / &nbsp; ${t('NUMBER KEYS · CHOOSE')}</p></div>
     </div><p class="board-footer">${t('Progress is saved in this browser after every choice.')}</p></section>`;
+}
+
+export function fitBoardLabels(root: ParentNode): void {
+  for (const label of root.querySelectorAll<HTMLElement>('.tile-nameplate')) {
+    const text = label.querySelector<HTMLElement>('.tile-name-text');
+    if (!text) continue;
+    text.style.fontSize = '';
+    const style = getComputedStyle(label);
+    const available = label.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+    const width = text.getBoundingClientRect().width;
+    if (width > available && available > 0) {
+      const size = parseFloat(getComputedStyle(text).fontSize);
+      text.style.fontSize = `${size * available / width * .98}px`;
+    }
+  }
 }

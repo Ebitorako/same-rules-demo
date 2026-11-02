@@ -3,11 +3,11 @@
   "date": "2026-11-03",
   "summary": {
     "existing": 6,
-    "firstBatchNew": 25,
+    "firstBatchNew": 24,
     "reactionAdditions": 27,
     "optionalBoss": 9,
     "optionalMilestone": 2,
-    "total": 69
+    "total": 68
   },
   "assets": [
     {
@@ -629,16 +629,6 @@
       "note": "原表美术需求：公告栏上贴着的晋升名单和评审标准",
       "source": "ch4!39",
       "path": "public/assets/cards/ending_E14.png",
-      "prepared": false
-    },
-    {
-      "key": "cards/card_back",
-      "group": "卡背",
-      "priority": "P0",
-      "title": "通用卡背",
-      "size": "900×1200 · 竖版3:4",
-      "note": "只需一张，三个抽牌堆复用。没有扑克牌花色和角标数字。",
-      "path": "public/assets/cards/card_back.png",
       "prepared": false
     },
     {

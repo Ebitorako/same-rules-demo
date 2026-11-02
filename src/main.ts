@@ -19,7 +19,7 @@ import type { AppState, GameData, Pawn } from './game/types';
 import { loadAssets } from './ui/assets';
 import { audioStatus, playSound, syncAudio } from './ui/audio';
 import { transitionSounds } from './ui/audio-routes';
-import { boardScreen } from './ui/board';
+import { boardScreen, fitBoardLabels } from './ui/board';
 import { scenarioDialog } from './ui/card';
 import { button, escape } from './ui/dom';
 import { endingScreen, epilogueScreen, galleryDetailDialog, galleryScreen, milestoneScreen } from './ui/gallery';
@@ -30,6 +30,7 @@ import { choiceHistoryDialog } from './ui/history';
 import { setLocale, setStoryTranslations, t } from './ui/i18n';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
+const boardResizeObserver = new ResizeObserver(() => fitBoardLabels(app));
 const debug = new URLSearchParams(location.search).get('debug') === '1';
 const requestedLocale = new URLSearchParams(location.search).get('lang');
 let state: AppState = loadState();
@@ -86,10 +87,12 @@ function render(focus = true): void {
   else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && displayData.epilogue ? epilogueScreen(displayData) : endingScreen(displayState,displayData,endingBack);
   else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(displayState,displayData)}${guidePanel(displayState,displayData,displayGuide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(displayState,displayData,run.phase !== 'result' ? guidePanel(displayState,displayData,displayGuide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
   if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>${t('The team’s completed story is ready.','组员的正式剧情已准备就绪。')}</strong><p>${t('This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.','本版本使用六项能力值和新的剧情分支。早期原型记录已保留在结局收藏中，开始新的职业生涯即可体验更新后的剧情。')}</p>${button(t('Got it','知道了'), 'dismiss-migration', 'text-button')}</aside>${content}`;
-  const languageButton = `<button type="button" class="language-switch" data-action="language" lang="${locale === 'en' ? 'zh-CN' : 'en'}" aria-label="${locale === 'en' ? '切换为中文' : 'Switch to English'}">${locale === 'en' ? '中文' : 'English'}</button>`;
-  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}${languageButton}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
+  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
+  boardResizeObserver.disconnect();
+  fitBoardLabels(app);
+  const board = app.querySelector('.board');
+  if (board) boardResizeObserver.observe(board);
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
-  if (dialog) dialog.insertAdjacentHTML('afterbegin', `<div class="dialog-language">${languageButton}</div>`);
   if (galleryMarkup) app.querySelectorAll<HTMLElement>('#main-content > :not(.gallery-scrim)').forEach(item => item.inert = true);
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
   if (focus) {
@@ -186,17 +189,19 @@ app.addEventListener('click', event => {
   syncAudio(state, true, view);
   const action = target.dataset.action;
   if (target.closest('[inert]')) return;
-  if (historyCardId && action !== 'review-choice' && action !== 'close-history' && action !== 'language') return;
-  if (galleryEndingId && !['close-gallery', 'flip-gallery', 'language'].includes(action ?? '')) return;
-  if (action === 'language') {
-    state = updateSettings(state, { locale: state.settings.locale === 'zh-CN' ? 'en' : 'zh-CN' });
+  if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
+  if (galleryEndingId && !['close-gallery', 'flip-gallery'].includes(action ?? '')) return;
+  if (action === 'set-language') {
+    const selectedLocale = target.dataset.locale;
+    if (view !== 'settings' || confirmingReset || (selectedLocale !== 'en' && selectedLocale !== 'zh-CN')) return;
+    state = updateSettings(state, { locale: selectedLocale });
     const url = new URL(location.href);
     if (url.searchParams.has('lang')) {
       url.searchParams.set('lang', state.settings.locale!);
       history.replaceState(null, '', url);
     }
     persist(); render(false);
-    app.querySelector<HTMLElement>('[data-action="language"]:not([inert] *)')?.focus();
+    app.querySelector<HTMLElement>(`[data-action="set-language"][data-locale="${selectedLocale}"]`)?.focus();
     return;
   }
   if (action === 'dismiss-migration') { state = { ...state, migrationNotice: false }; persist(); render(); return; }

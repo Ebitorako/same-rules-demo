@@ -124,7 +124,7 @@
 .gallery-scrim { align-items: center; padding: 24px; }
 .gallery-dialog {
   display: grid;
-  grid-template-columns: minmax(0,1fr) auto;
+  grid-template-columns: minmax(0,1fr);
   align-items: center;
   gap: 12px;
   width: min(720px, 100%);
@@ -134,10 +134,8 @@
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
 }
-.gallery-dialog > .dialog-language { margin: 0; justify-content: flex-start; }
-.gallery-dialog > .dialog-language .language-switch { background: var(--cream); }
 .gallery-dialog-toolbar { display: flex; justify-content: flex-end; }
-.gallery-dialog > .dialog-language, .gallery-dialog-toolbar { position: sticky; top: 0; z-index: 2; }
+.gallery-dialog-toolbar { position: sticky; top: 0; z-index: 2; }
 .gallery-dialog .ending-card { grid-column: 1 / -1; width: 100%; max-width: none; min-width: 0; min-height: 0; margin: 0; align-items: stretch; text-align: left; }
 .gallery-dialog .ending-reading-scroll { max-height: none; overflow: visible; padding: 0; scrollbar-gutter: auto; }
 .gallery-dialog .ending-card > .text-button { margin-top: 22px; align-self: flex-start; }

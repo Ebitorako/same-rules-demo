@@ -1,7 +1,7 @@
-.language-switch { white-space: nowrap; }
-.header-nav .language-switch { border: 1px solid var(--ink); padding: 6px 10px; }
-.dialog-language { display: flex; justify-content: flex-end; margin: -6px 0 10px; }
-.dialog-language .language-switch { font-size: 12px; padding: 6px 10px; background: transparent; }
+.language-setting { flex-wrap: wrap; gap: 12px; }
+.language-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.language-options button { padding: 10px 14px; }
+.language-options button[aria-pressed="true"] { background: var(--ink); color: var(--cream); }
 html:lang(zh-CN) {
   --font-title: 'Limelight', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans CJK SC', sans-serif;
 }
@@ -28,25 +28,6 @@ html:lang(zh-CN) .scene-text, html:lang(zh-CN) .guide-panel p,
 html:lang(zh-CN) .ending-card p { line-height: 1.8; }
 html:lang(zh-CN) .option { line-height: 1.65; }
 
-/* The same nameplate treatment follows both languages and the returning Alex. */
-.board .metal-tile .boss-name,
-.board .metal-tile .special-name,
-.board .you-label {
-  font-family: var(--font-body);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: .02em;
-  border-radius: 4px;
-  text-align: center;
-}
-.board .metal-tile .boss-name,
-.board .tile.boss:has(img) .boss-name {
-  font-size: clamp(8px, .72vw, 10px);
-  padding: 3px 2px;
-}
-.board .metal-tile .special-name { padding: 4px 3px; }
-.board .you-label { padding: 2px 6px; white-space: nowrap; }
-
 @media (max-width: 560px) {
   .title-layout { grid-template-columns: minmax(0, 1fr); }
   .title-copy h1 { font-size: clamp(38px, 13.5vw, 68px); letter-spacing: -2px; }
@@ -56,15 +37,4 @@ html:lang(zh-CN) .option { line-height: 1.65; }
   .header-nav button { padding: 7px 8px; }
   .header-nav .prototype-stamp { display: none; }
   html:lang(zh-CN) .card-meta, html:lang(zh-CN) .card-bottom { font-size: 10px; }
-  .board .metal-tile .boss-name,
-  .board .tile.boss:has(img) .boss-name {
-    font-size: clamp(5.5px, 1.6vw, 7px);
-    padding: 2px 1px;
-    letter-spacing: 0;
-  }
-  .board .metal-tile .special-name { padding: 3px 1px; letter-spacing: 0; }
-  .board .you-label { padding: 1px 4px; }
-  .board .metal-tile .boss-name,
-  .board .metal-tile .special-name,
-  .board .you-label { border-radius: 3px; }
 }

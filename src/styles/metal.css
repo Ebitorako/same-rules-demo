@@ -81,19 +81,38 @@
     inset -1px -2px 0 var(--metal-shadow);
 }
 
-/* Solid plaques keep names readable across the light and dark reflection bands. */
-.board .metal-tile .boss-name {
-  position: relative;
+/* Reserve a separate bottom row so the nameplate cannot cover the illustration. */
+.board .metal-tile { --nameplate-height: 18px; --nameplate-inset: 4px; }
+.board .metal-tile .tile-nameplate {
+  position: absolute;
   z-index: 1;
-  width: calc(100% - 4px);
-  padding: 3px 2px;
-  margin-top: 3px;
-  border-radius: 3px;
+  inset: auto var(--nameplate-inset) var(--nameplate-inset);
+  height: var(--nameplate-height);
+  padding: 2px 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font: 700 10px/1 var(--font-body);
+  white-space: nowrap;
+  text-align: center;
+}
+.tile-name-text { display: inline-block; white-space: nowrap; }
+.board .metal-tile .boss-name {
   background: var(--ink);
   color: var(--cream);
-  font-size: 10px;
-  line-height: 1.15;
-  overflow-wrap: anywhere;
+}
+.board .metal-tile .boss-art {
+  position: absolute;
+  inset: 3px 3px calc(var(--nameplate-height) + var(--nameplate-inset) + 4px);
+  width: auto;
+  height: auto;
+  padding: 0;
+}
+.board .metal-tile .boss-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .board .tile.metal-tile .boss-art.art-placeholder {
   background: var(--cream);
@@ -101,19 +120,15 @@
   border-color: var(--metal-edge);
 }
 .board .metal-tile .special-name {
-  position: relative;
-  z-index: 1;
-  width: calc(100% - 14px);
-  padding: 3px 2px;
   border: 1px solid var(--metal-edge);
-  border-radius: 3px;
   background: var(--ivory);
   color: var(--ink);
-  font-weight: 800;
-  line-height: 1.2;
 }
 .board .metal-tile .special-symbol {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
   color: var(--ink);
   text-shadow: 0 1px 0 var(--metal-light);
@@ -146,15 +161,11 @@
   font: 700 11px/1 var(--font-body);
 }
 
-@media (max-width: 800px) {
-  .board .metal-tile .boss-name { font-size: 8px; }
-}
 @media (max-width: 560px) {
+  .board .metal-tile { --nameplate-height: 11px; --nameplate-inset: 2px; }
   .board .tile.metal-tile::before { inset: 1px; border-radius: 3px; }
   .board .tile.metal-tile.special::after { inset: 3px; border-radius: 2px; }
   .board .tile.metal-tile.current { outline-width: 1px; outline-offset: 1px; box-shadow: 0 0 0 2px var(--ink), inset 1px 1px 0 var(--metal-light), inset -1px -1px 0 var(--metal-shadow); }
-  .board .metal-tile .boss-art { height: 29px; width: 86%; }
-  .board .metal-tile .boss-name { width: 100%; font-family: var(--font-body); font-size: 6.5px; font-weight: 800; line-height: 1.15; padding: 2px 1px; margin-top: 2px; }
-  .board .metal-tile .special-name { width: calc(100% - 5px); font-size: 6.5px; padding: 3px 1px; letter-spacing: -.02em; }
+  .board .metal-tile .tile-nameplate { font-size: 6.5px; padding: 1px; border-radius: 3px; }
   .board .metal-tile .tile-visit-mark { top: -3px; right: -3px; width: 12px; height: 12px; font-size: 8px; }
 }

@@ -4,7 +4,7 @@
 
 **Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
-**Read `docs/GAME_SPEC.md` before any task.** Version 0.15 adds uniform compact Gallery cards with full-detail dialogs, bilingual font/nameplate polish, and milestone labels without E codes to the completed Chinese/English story, approved balancing and supplied art/audio. The designer explicitly authorised these updates on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
+**Read `docs/GAME_SPEC.md` before any task.** Version 0.16 reserves separate artwork/nameplate regions, fits board names on one line, centers board symbols and keeps language selection only in Settings, following the uniform Gallery and bilingual edition. The designer explicitly authorised these updates on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
 
 ## Who you are working with
 
