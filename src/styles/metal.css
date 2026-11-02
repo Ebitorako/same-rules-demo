@@ -134,15 +134,15 @@
   text-shadow: 0 1px 0 var(--metal-light);
 }
 .board .metal-gold .tile-question {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1;
-  width: 1.05em;
-  border: 1px solid var(--metal-edge);
-  border-radius: 50%;
-  background: var(--ivory);
-  color: var(--ink);
-  line-height: 1.05;
-  text-align: center;
+  font: 400 23px/1 var(--font-body);
+  color: transparent;
+  -webkit-text-stroke: .7px var(--ink);
+  filter: drop-shadow(0 1px 0 var(--metal-light));
 }
 .board .metal-gold .tile-index { color: var(--ink); font-weight: 700; }
 .board .metal-tile .tile-visit-mark {
@@ -162,6 +162,7 @@
 }
 
 @media (max-width: 560px) {
+  .board .metal-gold .tile-question { font-size: 18px; }
   .board .metal-tile { --nameplate-height: 11px; --nameplate-inset: 2px; }
   .board .tile.metal-tile::before { inset: 1px; border-radius: 3px; }
   .board .tile.metal-tile.special::after { inset: 3px; border-radius: 2px; }

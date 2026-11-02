@@ -128,3 +128,9 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
 - Verification: 140 tests, data validation and build pass. Desktop and 390px browser checks show every name on one line with no overflow or portrait overlap; symbol and card-question centers align within 0.01px. A real next career shows no starting plaque. Switching English to Chinese in Settings, returning and refreshing retains the same 10 choices and board position. Story, history and Gallery dialogs have no language control; existing reading/close interactions still work. No browser errors. Screenshots are in .verification/2026-11-03-board-labels. Publication uses the existing main-branch Pages workflow.
 - Asset handoff: removed the no-longer-used card-back image from the active art brief and regenerated its HTML/manifest. First-priority additions are now 24, and the full list contains 68 entries; the board question marks are drawn by the interface.
 - Human decisions: prioritize unobstructed art and complete single-line names; keep language choices in Settings only. No rule, source story, save schema, dependency or supplied image changes.
+
+## 2026-11-03 — Outline finish question mark (Codex)
+- Asked: make the gold finish tile question mark resemble the thin outlined Creative Director star instead of the stylized black question mark on a white round badge.
+- Done: scoped the gold tile question to a centered, transparent-fill sans-serif outline with a subtle metal highlight; removed its circular border and background. Desktop/mobile sizing matches the star at 23px/18px.
+- Verification: all 140 existing tests, data validation and build pass. Browser confirms transparent background, 0.7px ink outline, centered placement, mobile sizing and no errors. Screenshots are in .verification/2026-11-03-finish-symbol.
+- Human decisions: use the Director star's light outline style for this finish symbol. Other question marks and game rules stay as approved.
