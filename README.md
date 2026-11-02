@@ -4,13 +4,13 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.18：默认有声与快捷静音。** 新玩家默认开启声音，首次点击游戏后开始播放；已有声音偏好继续保留。页面及剧情、历史、收藏弹窗右上角都有 🔊／🔇 按钮，点击即可切换，设置页同步。选项编号、棋盘布局和正式 CH1–4 规则继续保留。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.18：默认有声与快捷静音。** 新玩家默认开启声音，首次点击游戏后开始播放；已有声音偏好继续保留。页面及剧情、历史、收藏弹窗右上角都有黑白扬声器按钮：声波表示开启，斜线表示静音；图标在黑色圆角按钮中居中，点击即可切换，设置页同步。选项编号、棋盘布局和正式 CH1–4 规则继续保留。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
 本轮验证：155 项测试、数据检查和构建通过。浏览器确认新玩家默认开启、点击后播放、快捷静音与取消静音、刷新记忆、设置同步，以及剧情/历史/收藏弹窗中的按钮。切换不重建页面、不收起正在阅读的背景说明。390px 手机按钮为 44×44，页面无横向溢出。
 
 [中文试玩](https://ebitorako.github.io/same-rules-demo/?lang=zh-CN) · [English](https://ebitorako.github.io/same-rules-demo/?lang=en) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 
-本地双击 [启动游戏.cmd](启动游戏.cmd)，或运行 `npm run dev`，打开提示的网址。选择 **Female pawn / Male pawn → Enter the studio**；用 **Next** 前进、点击选项并 **Continue**。键盘支持 `1`–`4`、`Enter`，按键与屏幕编号一致。点击右上角 **🔊／🔇** 快捷切换声音，也可使用 **Settings → Sound**；浏览器要求先有一次点击才允许播放。
+本地双击 [启动游戏.cmd](启动游戏.cmd)，或运行 `npm run dev`，打开提示的网址。选择 **Female pawn / Male pawn → Enter the studio**；用 **Next** 前进、点击选项并 **Continue**。键盘支持 `1`–`4`、`Enter`，按键与屏幕编号一致。点击右上角 **黑白扬声器图标** 快捷切换声音，也可使用 **Settings → Sound**；浏览器要求先有一次点击才允许播放。
 
 点击右上角 **Settings／设置 → Language／语言 → English／中文** 切换，再点击 **Back／返回** 继续。语言入口只保留在设置页。中文版点击 **开始职业生涯 → 女性棋子 / 男性棋子 → 进入工作室**。语言偏好会保存，刷新不会变回英文；切换不重开、不重选，也不会重复加减数值。旧原型收藏仍保留当时的原始文本。
 

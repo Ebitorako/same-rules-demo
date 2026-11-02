@@ -17,8 +17,11 @@ button:disabled { cursor: wait; }
 .brand:hover { box-shadow: none; }
 .header-nav { display: flex; gap: 8px; align-items: center; }
 .header-nav button { background: none; border: 0; padding: 8px 12px; font-size: 14px; }
-.sound-toggle, .header-nav .sound-toggle { display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 8px; border: 2px solid var(--ink); border-radius: 8px; background: var(--ink); color: var(--cream); font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; font-size: 22px; line-height: 1; letter-spacing: 0; }
+.sound-toggle, .header-nav .sound-toggle { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 44px; height: 44px; padding: 0; border: 2px solid var(--ink); border-radius: 8px; background: var(--ink); color: var(--cream); line-height: 1; }
+.sound-icon { display: block; flex: none; width: 24px; height: 24px; pointer-events: none; }
+.sound-toggle[aria-pressed="true"] .sound-slash, .sound-toggle[aria-pressed="false"] .sound-waves { display: none; }
 .sound-toolbar { display: flex; justify-content: flex-end; width: 100%; flex-shrink: 0; margin-bottom: 12px; }
+.sound-toolbar .sound-toggle { margin: 0; }
 .history-header > :first-child { margin-right: auto; }
 .gallery-dialog-toolbar { gap: 8px; }
 .prototype-stamp { font-size: 10px; letter-spacing: 2px; padding: 4px 7px; border: 1px solid var(--ink); }

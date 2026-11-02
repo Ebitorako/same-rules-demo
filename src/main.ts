@@ -60,7 +60,7 @@ function debugPanel(): string {
   return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p><p id="audio-debug">${escape(audioStatus())}</p></aside>`;
 }
 function soundButton(): string {
-  return `<button type="button" class="sound-toggle" data-action="toggle-sound" aria-label="${t('Sound')}" aria-pressed="${state.settings.sound}"><span aria-hidden="true">${state.settings.sound ? '🔊' : '🔇'}</span></button>`;
+  return `<button type="button" class="sound-toggle" data-action="toggle-sound" aria-label="${t('Sound')}" aria-pressed="${state.settings.sound}"><svg class="sound-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9H7L12 5V19L7 15H3Z"/><g class="sound-waves"><path d="M15 8.5Q19 12 15 15.5M18 5Q24 12 18 19"/></g><path class="sound-slash" d="M3 3L21 21"/></svg></button>`;
 }
 function render(focus = true): void {
   const locale = state.settings.locale ?? 'en';
@@ -200,7 +200,6 @@ app.addEventListener('click', event => {
     persist();
     syncAudio(state, true, view === 'game' && epilogueVisible ? 'epilogue' : view);
     target.setAttribute('aria-pressed', String(state.settings.sound));
-    target.querySelector('span')!.textContent = state.settings.sound ? '🔊' : '🔇';
     const setting = app.querySelector<HTMLInputElement>('[data-setting="sound"]');
     if (setting) setting.checked = state.settings.sound;
     return;

@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.18, 3 Nov 2026. Sound enabled by default for new profiles and an emoji-only quick mute control; verification/publication recorded in README and AI_LOG.*
+*Version 0.18, 3 Nov 2026. Sound enabled by default for new profiles and a centered monochrome quick mute control; verification/publication recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
@@ -146,7 +146,7 @@ The homepage's `ui/title` now uses the designer's supplied complete game-present
 
 Audio mappings and provenance are maintained in `public/assets/audio/catalog.json`: nine supplied files and three original synthesized effects. Music lives in `audio/music`, short effects in `audio/effects`. Keep the long originals locally in ignored `docs/reference/audio`; publish only the prepared runtime excerpts. Intro music covers title/chapter/promotion/epilogue, the bar track covers C2-03, the party track covers C3-05, and ordinary scenes use the main loop. Movement, landing, card opening, valid choices and Chapter 1 hiring use the supplied cues. Supplementary Boss arrival, neutral ending and card-flip cues use no external samples. Wait for a user gesture, respect Sound/mute, fade music transitions and never use audio to reveal hidden stats or label choices as right/wrong. Actual browser playback evidence belongs in the current verification record.
 
-Sound defaults to enabled for new/reset profiles; retain explicit saved preferences during reload and prototype migration. Playback still waits for a user gesture. A 44px emoji-only 🔊/🔇 button appears in the page header or active dialog toolbar, with a localized accessible Sound label and pressed state. It shares the Settings preference, can mute during animations and dialog reading, and updates in place without resetting scroll or expanded content. Muting immediately pauses all music/effects; unmuting resumes the contextual music without replaying completed/paused cues.
+Sound defaults to enabled for new/reset profiles; retain explicit saved preferences during reload and prototype migration. Playback still waits for a user gesture. A 44px icon-only button appears in the page header or active dialog toolbar, with a localized accessible Sound label and pressed state. The designer replaced the original colored emoji with a centered 24px monochrome outline speaker: waves mean sound on, a diagonal slash means muted. Use cream strokes on the ink button, not platform emoji fonts. It shares the Settings preference, can mute during animations and dialog reading, and updates in place without resetting scroll or expanded content. Muting immediately pauses all music/effects; unmuting resumes the contextual music without replaying completed/paused cues.
 
 ## 11. Source issues and verification
 
