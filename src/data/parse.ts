@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { STAT_NAMES, type Ending, type Pawn, type ScenarioOption, type Stats, type StatName } from '../game/types';
+import { LEGACY_STAT_NAMES, type Ending, type Pawn, type ScenarioOption, type Stats, type StatName } from '../game/types';
 
 const SCENARIO_HEADERS = ['卡号', '章节', '格子', '类型', '场景标题', '场景描述', '背景信息（游戏内可翻看）', 'NPC', '出现条件（可选）', '选项', '适用棋子', '选项文字', '结果 ♀', '结果 ♂', 'NPC 表情 ♀', 'NPC 表情 ♂', '数值变化 ♀', '数值变化 ♂', '对应文献', '备注'];
 const ENDING_HEADERS = ['编号', '结局名称', '触发条件', '适用棋子', '结局文字（正面）', '背面：理论概念', '对应文献', '对下一局的影响', '美术需求', '备注'];
@@ -35,7 +35,7 @@ export function parseDelta(text: string, label = '数值变化'): Partial<Stats>
     const match = /^([A-Za-z]+)\s*([+-])\s*(\d+(?:\.\d+)?)$/.exec(part.trim());
     if (!match) throw new Error(`${label}：“${part.trim()}”格式无效，例如 Network+1, Energy-1。`);
     const name = match[1] as StatName;
-    if (!STAT_NAMES.includes(name)) throw new Error(`${label}：未知数值“${name}”，可用 ${STAT_NAMES.join('、')}。`);
+    if (!(LEGACY_STAT_NAMES as readonly string[]).includes(name)) throw new Error(`${label}：未知数值“${name}”，可用 ${LEGACY_STAT_NAMES.join('、')}。`);
     if (name in result) throw new Error(`${label}：“${name}”重复，请合并为一个变化值。`);
     const value = Number(`${match[2]}${match[3]}`);
     if (!Number.isFinite(value)) throw new Error(`${label}：“${part}”不是有限数值。`);
@@ -49,7 +49,7 @@ export function parseScenarios(text: string): ScenarioOption[] {
     if (!row['选项文字']) return [];
     const label = `scenarios.csv 第 ${index + 2} 行（${row['卡号']} 选项 ${row['选项']}）`;
     if (!['情境', 'Boss'].includes(row['类型'])) throw new Error(`${label}：类型应为 情境 或 Boss。`);
-    if (!/^[123]$/.test(row['选项'])) throw new Error(`${label}：选项必须为 1、2 或 3。`);
+    if (!/^[1234]$/.test(row['选项'])) throw new Error(`${label}：选项必须为 1、2、3 或 4。`);
     return [{
       cardId: row['卡号'], chapter: row['章节'], tile: row['格子'], type: row['类型'] === 'Boss' ? 'boss' : 'scenario',
       title: row['场景标题'], scene: row['场景描述'], background: row['背景信息（游戏内可翻看）'], npc: row.NPC,

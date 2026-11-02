@@ -1,46 +1,29 @@
 {
-  "_note": "PLACEHOLDER policies for Chapter 4. Only formal_recruitment needs a working next-round effect for the MVP.",
   "powerTokens": 1,
   "policies": [
     {
-      "id": "formal_recruitment",
-      "name": "Formal recruitment",
-      "benefit": "Hiring follows written criteria instead of 'fit'.",
-      "cost": "Hiring takes longer.",
-      "nextRoundEffect": "Removes the hidden 'fit' penalty at the Gatekeeper.",
+      "id": "zero_tolerance",
+      "name": "Zero tolerance statement",
+      "benefit": "Publish a “zero tolerance” statement.",
+      "cost": "Statement only",
+      "nextRoundEffect": "No change in the next career.",
       "mvp": true
     },
     {
-      "id": "childcare_support",
-      "name": "Childcare support",
-      "benefit": "Parents can stay on key projects.",
-      "cost": "Uses budget.",
-      "nextRoundEffect": "TBD",
-      "mvp": false
+      "id": "coordinator",
+      "name": "Dedicated coordinator",
+      "benefit": "Hire an intimacy coordinator / people coordinator dedicated to handling complaints on set and at team events.",
+      "cost": "A dedicated role",
+      "nextRoundEffect": "Removes the negative Reputation change for women in the applicable C2-04 conversations.",
+      "mvp": true
     },
     {
-      "id": "flexible_working",
-      "name": "Flexible working",
-      "benefit": "Availability is no longer the measure of commitment.",
-      "cost": "Harder scheduling.",
-      "nextRoundEffect": "TBD (e.g. lowers the Ideal Worker's Availability threshold)",
-      "mvp": false
-    },
-    {
-      "id": "anti_harassment",
-      "name": "Anti-harassment policy",
-      "benefit": "Speaking up no longer costs your career.",
-      "cost": "Training time.",
-      "nextRoundEffect": "TBD (e.g. changes Chapter 2 outcomes)",
-      "mvp": false
-    },
-    {
-      "id": "intimacy_coordination",
-      "name": "Intimacy coordination",
-      "benefit": "Safer sets and clearer consent.",
-      "cost": "Higher production cost.",
-      "nextRoundEffect": "TBD",
-      "mvp": false
+      "id": "transparent",
+      "name": "Transparent hiring and flexible working",
+      "benefit": "Every role advertised openly, written review criteria, and flexible hours available to all staff.",
+      "cost": "Change hiring, review and working arrangements",
+      "nextRoundEffect": "Changes the next career’s C2-02 decision process, C2-B recognition and Chapter 3 entry penalty.",
+      "mvp": true
     }
   ]
 }

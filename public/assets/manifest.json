@@ -318,5 +318,311 @@
     "assets/npc/guide_neutral.svg",
     "assets/npc/guide_neutral.png",
     "assets/npc/guide_neutral.webp"
+  ],
+  "audio/bgm_main": [
+    "assets/audio/bgm_main.mp3",
+    "assets/audio/bgm_main.wav",
+    "assets/audio/bgm_main.ogg",
+    "assets/audio/bgm_main.m4a"
+  ],
+  "audio/bgm_boss": [
+    "assets/audio/bgm_boss.mp3",
+    "assets/audio/bgm_boss.wav",
+    "assets/audio/bgm_boss.ogg",
+    "assets/audio/bgm_boss.m4a"
+  ],
+  "audio/sfx_move": [
+    "assets/audio/sfx_move.mp3",
+    "assets/audio/sfx_move.wav",
+    "assets/audio/sfx_move.ogg",
+    "assets/audio/sfx_move.m4a"
+  ],
+  "audio/sfx_card": [
+    "assets/audio/sfx_card.mp3",
+    "assets/audio/sfx_card.wav",
+    "assets/audio/sfx_card.ogg",
+    "assets/audio/sfx_card.m4a"
+  ],
+  "audio/sfx_choose": [
+    "assets/audio/sfx_choose.mp3",
+    "assets/audio/sfx_choose.wav",
+    "assets/audio/sfx_choose.ogg",
+    "assets/audio/sfx_choose.m4a"
+  ],
+  "audio/sfx_ending": [
+    "assets/audio/sfx_ending.mp3",
+    "assets/audio/sfx_ending.wav",
+    "assets/audio/sfx_ending.ogg",
+    "assets/audio/sfx_ending.m4a"
+  ],
+  "npc/hiring-manager_neutral": [
+    "assets/npc/hiring-manager_neutral.svg",
+    "assets/npc/hiring-manager_neutral.png",
+    "assets/npc/hiring-manager_neutral.webp"
+  ],
+  "npc/hiring-manager_pleased": [
+    "assets/npc/hiring-manager_pleased.svg",
+    "assets/npc/hiring-manager_pleased.png",
+    "assets/npc/hiring-manager_pleased.webp"
+  ],
+  "npc/hiring-manager_frowning": [
+    "assets/npc/hiring-manager_frowning.svg",
+    "assets/npc/hiring-manager_frowning.png",
+    "assets/npc/hiring-manager_frowning.webp"
+  ],
+  "npc/hiring-manager_awkward": [
+    "assets/npc/hiring-manager_awkward.svg",
+    "assets/npc/hiring-manager_awkward.png",
+    "assets/npc/hiring-manager_awkward.webp"
+  ],
+  "npc/hiring-manager_cold": [
+    "assets/npc/hiring-manager_cold.svg",
+    "assets/npc/hiring-manager_cold.png",
+    "assets/npc/hiring-manager_cold.webp"
+  ],
+  "npc/creative-director_neutral": [
+    "assets/npc/creative-director_neutral.svg",
+    "assets/npc/creative-director_neutral.png",
+    "assets/npc/creative-director_neutral.webp"
+  ],
+  "npc/creative-director_pleased": [
+    "assets/npc/creative-director_pleased.svg",
+    "assets/npc/creative-director_pleased.png",
+    "assets/npc/creative-director_pleased.webp"
+  ],
+  "npc/creative-director_frowning": [
+    "assets/npc/creative-director_frowning.svg",
+    "assets/npc/creative-director_frowning.png",
+    "assets/npc/creative-director_frowning.webp"
+  ],
+  "npc/creative-director_awkward": [
+    "assets/npc/creative-director_awkward.svg",
+    "assets/npc/creative-director_awkward.png",
+    "assets/npc/creative-director_awkward.webp"
+  ],
+  "npc/creative-director_cold": [
+    "assets/npc/creative-director_cold.svg",
+    "assets/npc/creative-director_cold.png",
+    "assets/npc/creative-director_cold.webp"
+  ],
+  "npc/sophie_neutral": [
+    "assets/npc/sophie_neutral.svg",
+    "assets/npc/sophie_neutral.png",
+    "assets/npc/sophie_neutral.webp"
+  ],
+  "npc/sophie_pleased": [
+    "assets/npc/sophie_pleased.svg",
+    "assets/npc/sophie_pleased.png",
+    "assets/npc/sophie_pleased.webp"
+  ],
+  "npc/sophie_frowning": [
+    "assets/npc/sophie_frowning.svg",
+    "assets/npc/sophie_frowning.png",
+    "assets/npc/sophie_frowning.webp"
+  ],
+  "npc/sophie_cold": [
+    "assets/npc/sophie_cold.svg",
+    "assets/npc/sophie_cold.png",
+    "assets/npc/sophie_cold.webp"
+  ],
+  "npc/executive-producer_neutral": [
+    "assets/npc/executive-producer_neutral.svg",
+    "assets/npc/executive-producer_neutral.png",
+    "assets/npc/executive-producer_neutral.webp"
+  ],
+  "npc/executive-producer_pleased": [
+    "assets/npc/executive-producer_pleased.svg",
+    "assets/npc/executive-producer_pleased.png",
+    "assets/npc/executive-producer_pleased.webp"
+  ],
+  "npc/executive-producer_appraising": [
+    "assets/npc/executive-producer_appraising.svg",
+    "assets/npc/executive-producer_appraising.png",
+    "assets/npc/executive-producer_appraising.webp"
+  ],
+  "npc/executive-producer_frowning": [
+    "assets/npc/executive-producer_frowning.svg",
+    "assets/npc/executive-producer_frowning.png",
+    "assets/npc/executive-producer_frowning.webp"
+  ],
+  "npc/your-partner_neutral": [
+    "assets/npc/your-partner_neutral.svg",
+    "assets/npc/your-partner_neutral.png",
+    "assets/npc/your-partner_neutral.webp"
+  ],
+  "npc/your-partner_pleased": [
+    "assets/npc/your-partner_pleased.svg",
+    "assets/npc/your-partner_pleased.png",
+    "assets/npc/your-partner_pleased.webp"
+  ],
+  "npc/your-partner_appraising": [
+    "assets/npc/your-partner_appraising.svg",
+    "assets/npc/your-partner_appraising.png",
+    "assets/npc/your-partner_appraising.webp"
+  ],
+  "npc/your-partner_awkward": [
+    "assets/npc/your-partner_awkward.svg",
+    "assets/npc/your-partner_awkward.png",
+    "assets/npc/your-partner_awkward.webp"
+  ],
+  "npc/your-partner-commissioner_neutral": [
+    "assets/npc/your-partner-commissioner_neutral.svg",
+    "assets/npc/your-partner-commissioner_neutral.png",
+    "assets/npc/your-partner-commissioner_neutral.webp"
+  ],
+  "npc/your-partner-commissioner_pleased": [
+    "assets/npc/your-partner-commissioner_pleased.svg",
+    "assets/npc/your-partner-commissioner_pleased.png",
+    "assets/npc/your-partner-commissioner_pleased.webp"
+  ],
+  "npc/your-partner-commissioner_awkward": [
+    "assets/npc/your-partner-commissioner_awkward.svg",
+    "assets/npc/your-partner-commissioner_awkward.png",
+    "assets/npc/your-partner-commissioner_awkward.webp"
+  ],
+  "npc/hr-manager_neutral": [
+    "assets/npc/hr-manager_neutral.svg",
+    "assets/npc/hr-manager_neutral.png",
+    "assets/npc/hr-manager_neutral.webp"
+  ],
+  "npc/hr-manager_pleased": [
+    "assets/npc/hr-manager_pleased.svg",
+    "assets/npc/hr-manager_pleased.png",
+    "assets/npc/hr-manager_pleased.webp"
+  ],
+  "npc/hr-manager_appraising": [
+    "assets/npc/hr-manager_appraising.svg",
+    "assets/npc/hr-manager_appraising.png",
+    "assets/npc/hr-manager_appraising.webp"
+  ],
+  "npc/intern-mia_neutral": [
+    "assets/npc/intern-mia_neutral.svg",
+    "assets/npc/intern-mia_neutral.png",
+    "assets/npc/intern-mia_neutral.webp"
+  ],
+  "npc/intern-mia_pleased": [
+    "assets/npc/intern-mia_pleased.svg",
+    "assets/npc/intern-mia_pleased.png",
+    "assets/npc/intern-mia_pleased.webp"
+  ],
+  "npc/intern-mia_awkward": [
+    "assets/npc/intern-mia_awkward.svg",
+    "assets/npc/intern-mia_awkward.png",
+    "assets/npc/intern-mia_awkward.webp"
+  ],
+  "npc/intern-mia_cold": [
+    "assets/npc/intern-mia_cold.svg",
+    "assets/npc/intern-mia_cold.png",
+    "assets/npc/intern-mia_cold.webp"
+  ],
+  "npc/ceo_neutral": [
+    "assets/npc/ceo_neutral.svg",
+    "assets/npc/ceo_neutral.png",
+    "assets/npc/ceo_neutral.webp"
+  ],
+  "npc/ceo_pleased": [
+    "assets/npc/ceo_pleased.svg",
+    "assets/npc/ceo_pleased.png",
+    "assets/npc/ceo_pleased.webp"
+  ],
+  "npc/ceo_appraising": [
+    "assets/npc/ceo_appraising.svg",
+    "assets/npc/ceo_appraising.png",
+    "assets/npc/ceo_appraising.webp"
+  ],
+  "cards/ending_E08": [
+    "assets/cards/ending_E08.svg",
+    "assets/cards/ending_E08.png",
+    "assets/cards/ending_E08.webp"
+  ],
+  "cards/ending_E09": [
+    "assets/cards/ending_E09.svg",
+    "assets/cards/ending_E09.png",
+    "assets/cards/ending_E09.webp"
+  ],
+  "cards/ending_E10": [
+    "assets/cards/ending_E10.svg",
+    "assets/cards/ending_E10.png",
+    "assets/cards/ending_E10.webp"
+  ],
+  "cards/ending_E07": [
+    "assets/cards/ending_E07.svg",
+    "assets/cards/ending_E07.png",
+    "assets/cards/ending_E07.webp"
+  ],
+  "cards/ending_E11": [
+    "assets/cards/ending_E11.svg",
+    "assets/cards/ending_E11.png",
+    "assets/cards/ending_E11.webp"
+  ],
+  "cards/ending_E12": [
+    "assets/cards/ending_E12.svg",
+    "assets/cards/ending_E12.png",
+    "assets/cards/ending_E12.webp"
+  ],
+  "cards/ending_E13": [
+    "assets/cards/ending_E13.svg",
+    "assets/cards/ending_E13.png",
+    "assets/cards/ending_E13.webp"
+  ],
+  "cards/ending_E14": [
+    "assets/cards/ending_E14.svg",
+    "assets/cards/ending_E14.png",
+    "assets/cards/ending_E14.webp"
+  ],
+  "bosses/old_boys_network_pleased": [
+    "assets/bosses/old_boys_network_pleased.svg",
+    "assets/bosses/old_boys_network_pleased.png",
+    "assets/bosses/old_boys_network_pleased.webp"
+  ],
+  "bosses/old_boys_network_appraising": [
+    "assets/bosses/old_boys_network_appraising.svg",
+    "assets/bosses/old_boys_network_appraising.png",
+    "assets/bosses/old_boys_network_appraising.webp"
+  ],
+  "bosses/old_boys_network_cold": [
+    "assets/bosses/old_boys_network_cold.svg",
+    "assets/bosses/old_boys_network_cold.png",
+    "assets/bosses/old_boys_network_cold.webp"
+  ],
+  "bosses/ideal_worker_pleased": [
+    "assets/bosses/ideal_worker_pleased.svg",
+    "assets/bosses/ideal_worker_pleased.png",
+    "assets/bosses/ideal_worker_pleased.webp"
+  ],
+  "bosses/ideal_worker_frowning": [
+    "assets/bosses/ideal_worker_frowning.svg",
+    "assets/bosses/ideal_worker_frowning.png",
+    "assets/bosses/ideal_worker_frowning.webp"
+  ],
+  "bosses/ideal_worker_cold": [
+    "assets/bosses/ideal_worker_cold.svg",
+    "assets/bosses/ideal_worker_cold.png",
+    "assets/bosses/ideal_worker_cold.webp"
+  ],
+  "bosses/the_system_pleased": [
+    "assets/bosses/the_system_pleased.svg",
+    "assets/bosses/the_system_pleased.png",
+    "assets/bosses/the_system_pleased.webp"
+  ],
+  "bosses/the_system_frowning": [
+    "assets/bosses/the_system_frowning.svg",
+    "assets/bosses/the_system_frowning.png",
+    "assets/bosses/the_system_frowning.webp"
+  ],
+  "bosses/the_system_cold": [
+    "assets/bosses/the_system_cold.svg",
+    "assets/bosses/the_system_cold.png",
+    "assets/bosses/the_system_cold.webp"
+  ],
+  "cards/ending_CH1-E01": [
+    "assets/cards/ending_CH1-E01.svg",
+    "assets/cards/ending_CH1-E01.png",
+    "assets/cards/ending_CH1-E01.webp"
+  ],
+  "cards/ending_CH2-E07": [
+    "assets/cards/ending_CH2-E07.svg",
+    "assets/cards/ending_CH2-E07.png",
+    "assets/cards/ending_CH2-E07.webp"
   ]
 }

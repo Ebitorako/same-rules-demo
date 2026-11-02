@@ -1,6 +1,6 @@
 import type { AppState, GameData } from '../game/types';
 import { art, pawnArt } from './assets';
-import { button, escape } from './dom';
+import { button, escape, richText } from './dom';
 
 export function titleScreen(state: AppState, data: GameData, selecting: boolean): string {
   return `<section class="title-screen" aria-labelledby="title-heading">
@@ -16,7 +16,8 @@ export function titleScreen(state: AppState, data: GameData, selecting: boolean)
   </section>`;
 }
 
-export function introScreen(state: AppState, data: GameData): string {
+export function introScreen(state: AppState, data: GameData, guide = ''): string {
   const run = state.run!;
-  return `<section class="intro-screen paper-card" aria-labelledby="intro-heading"><p class="eyebrow">CAREER ${String(run.round).padStart(2,'0')} · NEW HIRE</p>${pawnArt(run.character.pawn, 'intro-pawn')}<h1 id="intro-heading">${escape(run.character.name)}</h1><p>${escape(data.copy.introduction)}</p>${button('Enter the studio', 'advance', 'primary', 'data-enter="true"')}<p class="keyboard-note">PRESS ENTER TO BEGIN</p></section>`;
+  const chapter = data.chapters?.find(chapter => chapter.chapter === 1);
+  return `<section class="intro-screen paper-card" aria-labelledby="intro-heading"><p class="eyebrow">CAREER ${String(run.round).padStart(2,'0')} · ${escape(run.character.name)}</p>${pawnArt(run.character.pawn, 'intro-pawn')}<h1 id="intro-heading">${escape(chapter?.title ?? run.character.name)}</h1><p>${richText(chapter?.scene ?? data.copy.introduction)}</p>${guide}${button('Enter the studio', 'advance', 'primary', 'data-enter="true"')}<p class="keyboard-note">PRESS ENTER TO BEGIN</p></section>`;
 }

@@ -4,6 +4,7 @@ import { parseEndings, parseScenarios } from '../data/parse';
 import { createInitialState, startCareer } from '../game/state';
 import type { AppState, GameData } from '../game/types';
 import { endingScreen, galleryScreen } from './gallery';
+import { richText } from './dom';
 
 vi.mock('virtual:art-index', () => ({ default: [] }));
 
@@ -11,14 +12,15 @@ function fixture(): { state: AppState; data: GameData } {
   const read = (file: string) => readFileSync(`public/data/${file}`, 'utf8');
   const policies = JSON.parse(read('policies.json'));
   const data: GameData = {
-    scenarios: parseScenarios(read('scenarios.csv')), endings: parseEndings(read('endings.csv')),
+    ...JSON.parse(read('team-content.json')),
+    scenarios: JSON.parse(read('team-content.json')).scenarios, endings: JSON.parse(read('team-content.json')).endings,
     candidates: JSON.parse(read('candidates.json')).candidates,
     policies: policies.policies, powerTokens: policies.powerTokens, copy: JSON.parse(read('copy.json')),
   };
   const state = startCareer(createInitialState(), 'female', data);
   state.run!.phase = 'ending';
-  state.run!.endingId = 'E01';
-  state.gallery = [{ endingId: 'E01', pawn: 'female', name: 'Alex', round: 1 }];
+  state.run!.endingId = 'E02';
+  state.gallery = [{ endingId: 'E02', pawn: 'female', name: 'Alex', round: 1 }];
   return { state, data };
 }
 
@@ -26,26 +28,26 @@ describe('ending card theory and references', () => {
   it('uses the same labelled back and original CSV writing on both screens', () => {
     const { state, data } = fixture();
     const end = endingScreen(state, data, true);
-    const gallery = galleryScreen(state, data, new Set(['E01']));
+    const gallery = galleryScreen(state, data, new Set(['E02']));
     const reading = (html: string) => html.match(/<section class="ending-reading-section(?: ending-references)?">[\s\S]*?<\/section>/g);
     expect(reading(end)).toBeTruthy();
     expect(reading(gallery)).toEqual(reading(end));
     for (const html of [end, gallery]) {
       expect(html).toContain('<h3>Theory</h3>');
       expect(html).toContain('<h3>References</h3>');
-      expect(html).toContain(data.endings[0].back);
-      expect(html).toContain(data.endings[0].reference);
-      expect(html).not.toContain(data.endings[0].front);
+      expect(html).toContain(richText(data.endings[0].back));
+      expect(html).toContain(richText(data.endings[0].reference));
+      expect(html).not.toContain(richText(data.endings[0].front));
     }
     expect(end).toContain('data-action="flip-ending"');
-    expect(gallery).toContain('data-action="flip-gallery" data-ending="E01"');
+    expect(gallery).toContain('data-action="flip-gallery" data-ending="E02"');
   });
 
   it('keeps line breaks while escaping writer-supplied HTML and URL text', () => {
     const { state, data } = fixture();
     data.endings[0].back = 'First paragraph.\r\nSecond <script>not executable</script>.';
     data.endings[0].reference = 'Author & Co. (2026).\n<img src=x onerror="bad()">\rjavascript:bad()';
-    for (const html of [endingScreen(state, data, true), galleryScreen(state, data, new Set(['E01']))]) {
+    for (const html of [endingScreen(state, data, true), galleryScreen(state, data, new Set(['E02']))]) {
       expect(html).toContain('First paragraph.<br>Second &lt;script&gt;');
       expect(html).toContain('Author &amp; Co. (2026).<br>&lt;img');
       expect(html).toContain('&quot;bad()&quot;&gt;<br>javascript:bad()');
@@ -63,7 +65,7 @@ describe('ending card theory and references', () => {
       expect(html).not.toContain(ending.name);
       expect(html).not.toContain(ending.front);
       expect(html).not.toContain(ending.back);
-      expect(html).not.toContain(ending.reference);
+      if (ending.reference) expect(html).not.toContain(ending.reference);
     }
     expect(html).not.toContain('ending-reading-scroll');
     expect(html).not.toContain('data-action="flip-gallery"');
@@ -71,14 +73,14 @@ describe('ending card theory and references', () => {
 
   it('preserves front/back actions and all pawn unlock records', () => {
     const { state, data } = fixture();
-    state.gallery.push({ endingId: 'E01', pawn: 'male', name: '<Sam>', round: 2 });
-    for (const flipped of [new Set<string>(), new Set(['E01'])]) {
+    state.gallery.push({ endingId: 'E02', pawn: 'male', name: '<Sam>', round: 2 });
+    for (const flipped of [new Set<string>(), new Set(['E02'])]) {
       const html = galleryScreen(state, data, flipped);
       expect(html).toContain('Alex · ♀ · career 1<br>&lt;Sam&gt; · ♂ · career 2');
-      expect(html).toContain('data-action="flip-gallery" data-ending="E01"');
+      expect(html).toContain('data-action="flip-gallery" data-ending="E02"');
     }
     const front = endingScreen(state, data, false);
-    expect(front).toContain(data.endings[0].front);
+    expect(front).toContain(richText(data.endings[0].front));
     expect(front).not.toContain('ending-reading-scroll');
     expect(front).toContain('data-action="gallery"');
     expect(front).toContain('data-action="next-career"');
@@ -88,7 +90,7 @@ describe('ending card theory and references', () => {
     const { state, data } = fixture();
     data.endings[0].back = 'Long theory paragraph.\n'.repeat(200) + 'THEORY END';
     data.endings[0].reference = 'Long reference entry.\n'.repeat(200) + 'REFERENCE END';
-    for (const html of [endingScreen(state, data, true), galleryScreen(state, data, new Set(['E01']))]) {
+    for (const html of [endingScreen(state, data, true), galleryScreen(state, data, new Set(['E02']))]) {
       expect(html).toContain('role="region" tabindex="0" aria-label="Theory, references and numerical review for ');
       expect(html).toContain('THEORY END');
       expect(html).toContain('REFERENCE END');

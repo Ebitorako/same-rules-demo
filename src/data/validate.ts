@@ -4,6 +4,7 @@ import { parseCondition, type ConditionClause } from '../game/conditions';
 import { ENDING_IDS } from '../game/endings';
 import { STAT_NAMES, type GameData, type Pawn, type ScenarioOption } from '../game/types';
 import { EXPRESSIONS } from './parse';
+import { validateTeamData } from './team';
 
 const PAWNS: Pawn[] = ['female', 'male'];
 const COPY_FIELDS = ['title', 'companyName', 'subtitle', 'introduction', 'promotionTitle', 'promotionText', 'defaultDirector', 'gatekeeperReturning', 'gatekeeperFormal', 'gatekeeperUnchanged', 'placeholderNotice'] as const;
@@ -24,6 +25,7 @@ function conditionsOverlap(a: ConditionClause[], b: ConditionClause[]): boolean 
 }
 
 export function validateData(data: GameData): string[] {
+  if (data.contentVersion) return validateTeamData(data);
   const issues: string[] = [];
   for (const key of ['scenarios', 'endings', 'candidates', 'policies'] as const) {
     if (!Array.isArray(data[key])) issues.push(`${key} 资料缺失或不是列表，请检查对应 CSV / JSON。`);
@@ -162,6 +164,7 @@ export function validateData(data: GameData): string[] {
 }
 
 export function getDataWarnings(data: GameData): string[] {
+  if (data.contentVersion) return data.warnings ?? [];
   const cards = new Set(data.scenarios.filter((row) => /PLACEHOLDER/i.test(`${row.scene} ${row.notes}`)).map((row) => row.cardId));
   const endings = data.endings.filter((ending) => /PLACEHOLDER/i.test(`${ending.front} ${ending.notes}`));
   const warnings: string[] = [];

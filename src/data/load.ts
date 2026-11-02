@@ -1,6 +1,5 @@
-import type { Candidate, CopyData, GameData, Policy } from '../game/types';
-import { parseEndings, parseScenarios } from './parse';
-import { validateData } from './validate';
+import type { CopyData, Ending, GameData } from '../game/types';
+import { parseTeamContent } from './team';
 import { parseGuide, type GuideData } from './guide';
 
 async function fetchText(filename: string): Promise<string> {
@@ -10,22 +9,12 @@ async function fetchText(filename: string): Promise<string> {
     return response.text();
 }
 export async function loadData(): Promise<GameData> {
-  const [scenarios, endings, candidatesText, policiesText, copyText] = await Promise.all([
-    fetchText('scenarios.csv'), fetchText('endings.csv'), fetchText('candidates.json'), fetchText('policies.json'), fetchText('copy.json'),
-  ]);
-  function json<T>(text: string, filename: string): T {
-    try { return JSON.parse(text) as T; }
-    catch { throw new Error(`${filename} 格式无效，请检查逗号、引号和括号。`); }
-  }
-  const candidates = json<{ candidates: Candidate[] }>(candidatesText, 'candidates.json');
-  const policies = json<{ policies: Policy[]; powerTokens: number }>(policiesText, 'policies.json');
-  const data: GameData = {
-    scenarios: parseScenarios(scenarios), endings: parseEndings(endings), candidates: candidates?.candidates,
-    policies: policies?.policies, powerTokens: policies?.powerTokens, copy: json<CopyData>(copyText, 'copy.json'),
-  };
-  const issues = validateData(data);
-  if (issues.length) throw new Error(`剧情资料需要修正：\n${issues.join('\n')}`);
-  return data;
+  const [content, legacyText] = await Promise.all([fetchText('team-content.json'), fetchText('legacy-data.json')]);
+  const data = parseTeamContent(content);
+  let legacy: { endings: Ending[]; copy: CopyData };
+  try { legacy = JSON.parse(legacyText); }
+  catch { throw new Error('legacy-data.json 格式无效；旧版收藏需要保留。'); }
+  return { ...data, legacyEndings: legacy.endings, legacyCopy: legacy.copy };
 }
 
 export async function loadGuideData(): Promise<GuideData> {

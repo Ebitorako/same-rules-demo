@@ -9,6 +9,7 @@ const bossMetals: Record<string, string> = { 'C1-B': 'red', 'C2-B': 'green', 'C3
 export function boardScreen(state: AppState, data: GameData): string {
   const run = state.run!;
   const selected = Object.keys(run.choices).length;
+  const role = run.reachedDirector ? 'Creative Director' : typeof run.flags?.role === 'string' ? run.flags.role.replaceAll('_', ' ').replace(/\b[a-z]/g, letter => letter.toUpperCase()) : 'New Hire';
   const history = getChoiceHistory(run, data);
   const chosenCards = history.map(entry => {
     const title = entry.scenario?.title ?? 'Recorded choice';
@@ -16,7 +17,7 @@ export function boardScreen(state: AppState, data: GameData): string {
     const metal = bossMetals[entry.cardId];
     return `<button type="button" class="chosen-card${metal ? ` chosen-boss metal-${metal}` : ''}" style="--card-order:${entry.order}" data-action="review-choice" data-card="${escape(entry.cardId)}" ${metal ? '' : `title="${escape(title)}"`} aria-label="Review choice ${entry.order}: ${escape(title)}" aria-haspopup="dialog">${metal ? '' : `<span class="chosen-number" aria-hidden="true">${number}</span>`}</button>`;
   }).join('') || '<i>Waiting for your first card</i>';
-  return `<section class="game-screen"><div class="career-strip"><div><span class="eyebrow">CAREER ${String(run.round).padStart(2,'0')}</span><h1>${escape(run.character.name)} <span>/ ${run.reachedDirector ? 'Creative Director' : 'New Hire'}</span></h1></div><span class="career-count">${String(selected).padStart(2,'0')} / 20 CARDS</span></div>
+  return `<section class="game-screen"><div class="career-strip"><div><span class="eyebrow">CAREER ${String(run.round).padStart(2,'0')}</span><h1>${escape(run.character.name)} <span>/ ${escape(role)}</span></h1></div><span class="career-count">${String(selected).padStart(2,'0')} / 20 CARDS</span></div>
     <div class="board" role="group" aria-label="Career board, 22 spaces">${BOARD.map((tile,index) => {
       const walked = run.visited.includes(index);
       const here = run.position === index;
@@ -30,6 +31,6 @@ export function boardScreen(state: AppState, data: GameData): string {
       else if (walked && tile.kind !== 'start') inner = `<span class="tile-number">${String(index).padStart(2,'0')}</span><span class="walked-mark">CHAPTER ${tile.chapter}</span>`;
       return `<div data-tile="${index}" class="tile ${tile.kind} ${walked && !startHidden && !special ? 'walked' : ''} ${special ? 'special' : ''} ${metal ? `metal-tile metal-${metal}` : ''} ${metalVisited ? 'metal-visited' : ''} ${here ? 'current' : ''}" style="grid-row:${tile.row};grid-column:${tile.col}" ${here ? 'aria-current="location"' : ''} aria-label="${escape(tile.label)}${here ? ', current position' : ''}${walked ? ', visited' : ''}">${inner}${metalVisited ? '<span class="tile-visit-mark" aria-hidden="true">✓</span>' : ''}${here ? `<div class="board-pawn">${pawnArt(run.character.pawn)}<span class="you-label">YOU</span></div>` : ''}</div>`;
     }).join('')}
-    <div class="board-centre"><div class="centre-topline"><span>THE STUDIO</span><span>EST. EVERY DAY</span></div><h2>${escape(data.copy.companyName)}</h2><p class="centre-subtitle">THE CREATIVE CAREER GAME</p><div class="deck-row">${[1,2,3].map(n=>`<div class="deck" aria-label="Face-down card pile ${n}">${art('cards/card_back','card back','deck-art')}<span class="deck-question" aria-hidden="true">?</span></div>`).join('')}</div><div class="chosen-pile"><span>YOUR CHOICES</span><div class="chosen-cards" style="--choice-gaps:${Math.max(1, history.length - 1)}" role="group" aria-label="Your recorded choices">${chosenCards}</div></div><div class="board-next">${button('Next', 'advance', 'primary', 'data-enter="true"')}<span>ONE STEP FORWARD</span></div><p class="keyboard-note">ENTER · NEXT &nbsp; / &nbsp; 1 2 3 · CHOOSE</p></div>
+    <div class="board-centre"><div class="centre-topline"><span>THE STUDIO</span><span>EST. EVERY DAY</span></div><h2>${escape(data.copy.companyName)}</h2><p class="centre-subtitle">THE CREATIVE CAREER GAME</p><div class="deck-row">${[1,2,3].map(n=>`<div class="deck" aria-label="Face-down card pile ${n}">${art('cards/card_back','card back','deck-art')}<span class="deck-question" aria-hidden="true">?</span></div>`).join('')}</div><div class="chosen-pile"><span>YOUR CHOICES</span><div class="chosen-cards" style="--choice-gaps:${Math.max(1, history.length - 1)}" role="group" aria-label="Your recorded choices">${chosenCards}</div></div><div class="board-next">${button('Next', 'advance', 'primary', 'data-enter="true"')}<span>ONE STEP FORWARD</span></div><p class="keyboard-note">ENTER · NEXT &nbsp; / &nbsp; NUMBER KEYS · CHOOSE</p></div>
     </div><p class="board-footer">Progress is saved in this browser after every choice.</p></section>`;
 }

@@ -1,0 +1,31 @@
+.option-unavailable { color: var(--tile-hidden-mark); background: var(--panel); border-color: var(--grey); }
+.option-unavailable:hover { transform: none; box-shadow: 2px 2px 0 var(--grey); }
+.option-lock-label { font-size: 11px; letter-spacing: .5px; }
+.unavailable-note { margin: 8px 0 14px 14px; border-left: 3px solid var(--ink); padding: 12px 16px; background: var(--paper); }
+.unavailable-note p { font-style: italic; font-size: 16px; }
+.guide-fatigue { border: 1px solid var(--ink); padding: 12px; margin: 14px 0; font-size: 14px; }
+.promotion .guide-panel, .intro-screen .guide-panel { margin-top: 26px; text-align: left; }
+.intro-screen h1 { font-size: clamp(30px, 4vw, 44px); }
+.ending-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ending-guide { text-align: left; border-top: 1px solid var(--grey); padding-top: 14px; margin-top: 22px; }
+.ending-guide > span { font-size: 10px; font-weight: bold; letter-spacing: 1.5px; }
+.ending-guide p { font-size: 14px; margin-top: 8px; }
+.legacy-gallery { margin-top: 42px; padding-top: 24px; border-top: 2px solid var(--ink); }
+.legacy-gallery > h2 { font-size: 28px; margin-bottom: 12px; }
+.legacy-gallery > p, .legacy-record p { font-size: 15px; }
+.legacy-record { padding: 20px; border: 1px solid var(--grey); margin-top: 18px; background: var(--cream); }
+.legacy-record > p, .legacy-record > h3 { margin-top: 16px; }
+.migration-notice { max-width: 900px; margin: 20px auto; border: 2px solid var(--ink); padding: 18px 22px; background: var(--cream); }
+.migration-notice p { margin-top: 8px; font-size: 15px; }
+.epilogue-screen { width: min(700px, calc(100% - 36px)); text-align: left; }
+.epilogue-screen h1 { margin-block: 15px 24px; }
+.ending-variant { margin-top: 18px; }
+.ending-variant p { margin-top: 12px; }
+.recap-result { margin-top: 12px; font-size: 14px; }
+.recap-result > p { margin-top: 12px; }
+@media (max-width:560px) {
+  .ending-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .migration-notice { margin: 12px; }
+  .legacy-record { padding: 14px; }
+}
+.story-open { overflow: hidden; }

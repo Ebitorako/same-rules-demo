@@ -11,7 +11,7 @@ import { currentGuideNote, guidePanel } from './guide';
 
 vi.mock('virtual:art-index', () => ({ default: [] }));
 
-const read = (name: string) => readFileSync(`public/data/${name}`, 'utf8');
+const read = (name: string) => readFileSync(`docs/source/prototype-v0.11/${name}`, 'utf8');
 const policyData = JSON.parse(read('policies.json'));
 const data: GameData = {
   scenarios: parseScenarios(read('scenarios.csv')), endings: parseEndings(read('endings.csv')),

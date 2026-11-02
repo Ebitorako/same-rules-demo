@@ -20,14 +20,25 @@ export async function loadAssets(): Promise<void> {
     }
   }
 }
-export function art(key: string, label: string, className = ''): string {
+export function assetPath(key: string): string | undefined {
   const paths = manifest[key] ?? ['svg', 'png', 'webp'].map(ext => `assets/${key}.${ext}`);
-  const path = paths.find(path => !path.includes('..') && !path.includes(':') && available.has(path));
+  return paths.find(path => !path.includes('..') && !path.includes(':') && available.has(path));
+}
+export function art(key: string, label: string, className = ''): string {
+  const path = assetPath(key);
   if (path) return `<figure class="art ${className}"><img src="${escape(import.meta.env.BASE_URL + path)}" alt="${escape(label)}"><figcaption class="failed-art" hidden>ART PLACEHOLDER<br>${escape(label)}</figcaption></figure>`;
   return `<figure class="art art-placeholder ${className}" role="img" aria-label="Art placeholder: ${escape(label)}"><span>ART<br>PLACEHOLDER</span><figcaption>${escape(label)}</figcaption></figure>`;
 }
 export function pawnArt(pawn: string, className = ''): string { return art(`characters/pawn_${pawn}`, `${pawn} pawn`, className); }
 export function npcArt(npc: string, expression: string): string {
   const id = npc.toLowerCase().replace(/[^a-z0-9_]+/g, '-').replace(/^-|-$/g, '');
-  return art(`npc/${id}_${expression || 'neutral'}`, `${npc} · ${expression || 'neutral'}`, 'npc-art');
+  const key = `npc/${id}_${expression || 'neutral'}`;
+  return art(assetPath(key) ? key : `npc/${id}_neutral`, `${npc} · ${expression || 'neutral'}`, 'npc-art');
+}
+const bossKeys: Record<string, string> = { 'C1-B': 'gatekeeper', 'C2-B': 'old_boys_network', 'C3-B': 'ideal_worker', 'C4-B': 'the_system' };
+export function storyArt(cardId: string, npc: string, expression: string): string {
+  const boss = bossKeys[cardId];
+  if (!boss) return npcArt(npc, expression);
+  const reaction = `bosses/${boss}_${expression || 'neutral'}`;
+  return art(assetPath(reaction) ? reaction : `bosses/${boss}`, `${npc} · ${expression || 'neutral'}`, 'npc-art');
 }

@@ -1,0 +1,104 @@
+{
+  "contentVersion": "prototype-v0.11",
+  "copy": {
+    "title": "Genderpoly",
+    "companyName": "FreeDOM",
+    "subtitle": "One career. Another turn.",
+    "introduction": "[PLACEHOLDER] Your first day in the creative industries begins here. Choose your badge and a name, then follow the career board. Each decision stays with this career.",
+    "promotionTitle": "Creative Director",
+    "promotionText": "[PLACEHOLDER] You now sit on the other side of the table. Your next decisions concern the people and rules that will shape another career.",
+    "defaultNames": {
+      "female": "Alex",
+      "male": "Alex"
+    },
+    "defaultDirector": "The Director",
+    "statDescriptions": {
+      "Creativity": "Developing original ideas and creative contributions.",
+      "Communication": "Communicating ideas and working with others.",
+      "Skill": "Technical skills and professional craft.",
+      "Energy": "The energy available to sustain work and recover.",
+      "Network": "Access to professional contacts and opportunities.",
+      "Reputation": "How others in the workplace regard your work.",
+      "Availability": "The time and flexibility you can offer the workplace.",
+      "Money": "Financial resources available to support your career."
+    },
+    "gatekeeperReturning": "[PLACEHOLDER] {name}, who held the director’s chair in the previous career, is now reviewing your application.",
+    "gatekeeperFormal": "[PLACEHOLDER] The recruitment policy uses written criteria for this appointment.",
+    "gatekeeperUnchanged": "[PLACEHOLDER] The office continues to use its established recruitment process.",
+    "placeholderNotice": "Prototype: bracketed PLACEHOLDER text, temporary numbers and labelled art spaces are waiting for the team’s final content."
+  },
+  "endings": [
+    {
+      "id": "E01",
+      "name": "A Personal Choice",
+      "pawn": "both",
+      "front": "You decided to step back. Everyone agreed it was the right choice for your family.",
+      "back": "Leaving is framed as an individual choice, while the pressures behind it stay invisible.",
+      "reference": "Dent (2020)",
+      "triggerNote": "Ch3 Boss 时 Availability 不足，选择离开行业",
+      "nextRoundNote": "下一局的 Gatekeeper 是另一位默认 CD",
+      "artNote": "空荡的工位",
+      "notes": "示例"
+    },
+    {
+      "id": "E02",
+      "name": "Nothing Needed to Change",
+      "pawn": "both",
+      "front": "You made it to the top. The rules never changed. For you, they never needed to.",
+      "back": "Inequality can be reproduced through routine, reasonable decisions, without any open discrimination.",
+      "reference": "Hesmondhalgh & Baker (2015)",
+      "triggerNote": "成为 CD 并通过 The System，没有推行任何政策",
+      "nextRoundNote": "下一局的 Gatekeeper 就是你，规则不变",
+      "artNote": "总监办公室的椅子",
+      "notes": "示例"
+    },
+    {
+      "id": "E03",
+      "name": "Before the Door Opened",
+      "pawn": "both",
+      "front": "[PLACEHOLDER] The role goes to someone else. You are encouraged to keep building your portfolio.",
+      "back": "[PLACEHOLDER THEORY NOTE] The team will connect this ending to gendered ideas of creative fit.",
+      "reference": "Wang & Keane (2020)",
+      "triggerNote": "Gatekeeper checkpoint failed",
+      "nextRoundNote": "Default director at the next Gatekeeper",
+      "artNote": "Recruitment desk",
+      "notes": "PLACEHOLDER"
+    },
+    {
+      "id": "E04",
+      "name": "Outside the Circle",
+      "pawn": "both",
+      "front": "[PLACEHOLDER] The promotion is decided after a conversation you were not part of.",
+      "back": "[PLACEHOLDER THEORY NOTE] The team will connect this ending to informal networks and access to opportunity.",
+      "reference": "Hennekam & Bennett (2017)",
+      "triggerNote": "Old Boys Network checkpoint failed",
+      "nextRoundNote": "Default director at the next Gatekeeper",
+      "artNote": "A closed meeting room",
+      "notes": "PLACEHOLDER"
+    },
+    {
+      "id": "E05",
+      "name": "No Energy Left",
+      "pawn": "both",
+      "front": "[PLACEHOLDER] You leave the project before the next milestone. The work continues without you.",
+      "back": "[PLACEHOLDER THEORY NOTE] The team will connect this ending to the unequal costs of sustaining a creative career.",
+      "reference": "Dent (2020)",
+      "triggerNote": "Energy reached zero",
+      "nextRoundNote": "Director and intern carry over only if already chosen",
+      "artNote": "An unoccupied chair",
+      "notes": "PLACEHOLDER"
+    },
+    {
+      "id": "E06",
+      "name": "A Written Rule",
+      "pawn": "both",
+      "front": "[PLACEHOLDER] The next vacancy has written criteria. A new applicant is about to enter the room.",
+      "back": "[PLACEHOLDER THEORY NOTE] The team will discuss how formal procedures can change one mechanism of exclusion without resolving every inequality.",
+      "reference": "Hesmondhalgh & Baker (2015)",
+      "triggerNote": "Completed a career after selecting formal recruitment",
+      "nextRoundNote": "You become the next Gatekeeper; formal recruitment removes the hidden fit penalty",
+      "artNote": "A recruitment policy on the desk",
+      "notes": "PLACEHOLDER"
+    }
+  ]
+}

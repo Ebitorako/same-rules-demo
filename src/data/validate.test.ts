@@ -2,83 +2,152 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { GameData } from '../game/types';
-import { parseEndings, parseScenarios } from './parse';
 import { getDataWarnings, validateData } from './validate';
+import { parseDelta } from './parse';
+import { parseTeamContent } from './team';
 
-function fixture(): GameData {
-  const read = (name: string): string => readFileSync(resolve('public/data', name), 'utf8');
-  const policies = JSON.parse(read('policies.json'));
-  return { scenarios: parseScenarios(read('scenarios.csv')), endings: parseEndings(read('endings.csv')), candidates: JSON.parse(read('candidates.json')).candidates, policies: policies.policies, powerTokens: policies.powerTokens, copy: JSON.parse(read('copy.json')) };
-}
+const read = (name: string): string => readFileSync(resolve(name), 'utf8');
+const fixture = (): GameData => JSON.parse(read('public/data/team-content.json'));
+const source = JSON.parse(read('docs/source/2026-11-03-team-sheet.json')) as {
+  sheets: Record<string, { values: string[][] }>;
+};
 
-describe('complete game content validation', () => {
-  it('accepts the 20-card prototype while reporting placeholders as warnings', () => {
-    const data = fixture();
+describe('the team’s published story content', () => {
+  it('covers every card slot, chapter opening, terminal ending and milestone', () => {
+    const data = parseTeamContent(read('public/data/team-content.json'));
     expect(validateData(data)).toEqual([]);
-    expect(getDataWarnings(data).join('\n')).toContain('19 张卡');
-    expect(new Set(data.scenarios.map((row) => row.cardId)).size).toBe(20);
+    expect(new Set(data.scenarios.map(row => row.cardId)).size).toBe(20);
+    expect(data.chapters).toHaveLength(4);
+    expect(data.endings).toHaveLength(13);
+    expect(data.milestones?.map(e => e.id)).toEqual(['CH1-E01', 'CH2-E07']);
+    expect(data.epilogue?.eligibleEndings).toEqual(['E12', 'E13', 'E14']);
   });
 
-  it('requires every board card and all three unconditional options for each pawn', () => {
+  it('preserves all 111 source choices, both result texts, numerical changes, notes and guide advice', () => {
     const data = fixture();
-    data.scenarios = data.scenarios.filter((row) => row.cardId !== 'C1-01');
+    let sourceCount = 0;
+    for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) source.sheets[sheet].values.forEach((r, index) => {
+      if (!/^C[1-4]-(?:0[1-5][FMABCDab]?|B)$/.test(r[0] ?? '')) return;
+      sourceCount++;
+      const row = data.scenarios.find(item => item.sourceSheet === sheet && item.sourceRow === index + 1 && item.condition !== 'flag:previous_family_man=true')!;
+      expect(row, `${sheet}:${index + 1}`).toBeDefined();
+      expect([row.title, row.scene, row.background, row.npc, row.optionText]).toEqual([r[4], r[5], r[6], r[7], r[11]]);
+      expect(row.results).toEqual({ female: r[12] ?? '', male: r[13] ?? '' });
+      expect(row.deltas).toEqual({ female: parseDelta(r[16] ?? ''), male: parseDelta(r[17] ?? '') });
+      expect([row.reference, row.notes, row.guideAdvice, row.sourceCardId]).toEqual([r[18] ?? '', r[19] ?? '', r[20] ?? '', r[0]]);
+    });
+    expect(sourceCount).toBe(111);
+  });
+
+  it('uses six authored starting values and removes the two temporary abilities', () => {
+    const data = fixture();
+    expect(data.initialStats).toEqual({ Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 });
+    expect(data.statNames).toEqual(['Creativity', 'Communication', 'Network', 'Reputation', 'Availability', 'Energy']);
+    expect(Object.keys(data.copy.statDescriptions!)).toEqual(data.statNames);
+    expect(JSON.stringify(data.scenarios)).not.toMatch(/"(?:Skill|Money)"/);
+  });
+
+  it('keeps the fourth choice, forced exit and fixed-size board-slot mappings', () => {
+    const data = fixture();
+    expect(data.scenarios.filter(row => row.cardId === 'C2-03' && row.optionLabel === 'D')).toHaveLength(2);
+    expect(data.scenarios.filter(row => row.sourceCardId === 'C2-04D').every(row => row.cardId === 'C2-04' && row.automatic && row.effects?.[0].endingId === 'E10')).toBe(true);
+    expect(data.scenarios.filter(row => row.sourceCardId === 'C3-03a').every(row => row.cardId === 'C3-03' && row.condition === 'flag:has_child=true')).toBe(true);
+  });
+
+  it('separates visible branches from numeric locks and preserves the authored monologues', () => {
+    const data = fixture();
+    const child = data.scenarios.find(row => row.cardId === 'C3-B' && row.option === 1 && row.pawn === 'female' && row.condition.includes('true'))!;
+    expect(child.condition).toBe('flag:has_child=true');
+    expect(child.availableWhen).toBe('stat:Availability>=3');
+    expect(child.unavailableText?.female).toBe("Every other mum seems to manage it. Why can't I? Maybe I just can't do it.");
+    const strict = data.scenarios.find(row => row.cardId === 'C4-B' && row.option === 1 && row.condition === 'flag:policy=transparent')!;
+    expect(strict.availableWhen).toBe('stat:Reputation>5');
+  });
+
+  it('does not invent missing references, change the contradictory +1, or append optional ending text', () => {
+    const data = fixture();
+    expect(data.endings.find(row => row.id === 'E02')?.reference).toBe('');
+    expect(data.milestones?.find(row => row.id === 'CH1-E01')?.reference).toBe('');
+    const b = data.scenarios.find(row => row.sourceCardId === 'C2-04B' && row.option === 2)!;
+    expect(b.deltas.female.Reputation).toBe(1);
+    expect(b.effects).toBeUndefined();
+    expect(data.endings.find(row => row.id === 'E14')?.front).not.toContain('diversity');
+    expect(getDataWarnings(data).join('\n')).toContain('Q30 实际为 Reputation+1');
+  });
+
+  it('keeps the male ending text and the next-career Family Man line distinct from generic text', () => {
+    const data = fixture();
+    expect(data.endings.find(row => row.id === 'E04')?.frontByPawn?.male).toBe("You chose to leave. Everyone was surprised, and plenty of people asked you to stay, but you politely turned them down. Was it the right choice? You don't know. But the world outside is a big place anyway.");
+    const variants = data.scenarios.filter(row => row.cardId === 'C3-01' && row.condition === 'flag:previous_family_man=true');
+    expect(variants).toHaveLength(3);
+    expect(variants.every(row => row.pawn === 'female' && row.scene.endsWith('“We assumed you\'d want to slow down.”'))).toBe(true);
+  });
+
+  it('isolates the previous release’s ending ids and text for archived saves', () => {
+    const old = JSON.parse(read('public/data/legacy-data.json'));
+    const current = fixture();
+    expect(old.contentVersion).toBe('prototype-v0.11');
+    expect(old.endings.find((e: { id: string }) => e.id === 'E02').name).toBe('Nothing Needed to Change');
+    expect(current.endings.find(e => e.id === 'E02')?.name).toBe('A Different Door');
+  });
+});
+
+describe('formal content validation', () => {
+  it('rejects missing cards and incomplete conditional branches', () => {
+    const data = fixture();
+    data.scenarios = data.scenarios.filter(row => row.cardId !== 'C1-01');
     expect(validateData(data).join('\n')).toContain('C1-01 缺少');
-    const incomplete = fixture();
-    incomplete.scenarios = incomplete.scenarios.filter((row) => !(row.cardId === 'C2-03' && row.pawn === 'female'));
-    expect(validateData(incomplete).join('\n')).toContain('C2-03 / ♀ / 选项 2');
+    const branch = fixture();
+    branch.scenarios = branch.scenarios.filter(row => !(row.sourceCardId === 'C3-04a' && row.option === 2 && row.pawn === 'male'));
+    expect(validateData(branch).join('\n')).toContain('C3-04 / male / has_child=true');
   });
 
-  it('allows a conditional override but rejects overlapping variants and future references', () => {
+  it('rejects overlapping variants and malformed visibility or availability conditions', () => {
     const data = fixture();
-    const source = data.scenarios.find((row) => row.cardId === 'C2-01' && row.option === 1)!;
-    const variant = { ...structuredClone(source), condition: 'C1-01=1;policy:formal_recruitment;round>=2' };
-    data.scenarios.push(variant);
-    expect(validateData(data)).toEqual([]);
-    data.scenarios.push({ ...structuredClone(source), condition: 'round>=3' });
-    expect(validateData(data).join('\n')).toContain('可能同时生效');
-    variant.condition = 'C3-01=1';
-    expect(validateData(data).join('\n')).toContain('只能引用前面');
+    const row = data.scenarios[0];
+    data.scenarios.push({ ...structuredClone(row), sourceRow: 999 });
+    expect(validateData(data).join('\n')).toContain('互不重复');
+    row.availableWhen = 'Reputation++5';
+    expect(validateData(data).join('\n')).toContain('条件无效');
   });
 
-  it('accepts mutually exclusive variants but rejects contradictory conditions', () => {
+  it('rejects obsolete stats, nonfinite values, missing results and invalid expressions', () => {
     const data = fixture();
-    const source = data.scenarios.find((row) => row.cardId === 'C2-01' && row.option === 1)!;
-    data.scenarios.push({ ...structuredClone(source), condition: 'C1-01=1' }, { ...structuredClone(source), condition: 'C1-01=2' });
-    expect(validateData(data)).toEqual([]);
-    data.scenarios.push({ ...structuredClone(source), condition: 'C1-01=1;C1-01=2' });
-    expect(validateData(data).join('\n')).toContain('条件相互矛盾');
-  });
-
-  it('validates results and expressions only for the relevant pawn', () => {
-    const data = fixture();
-    const row = data.scenarios.find((entry) => entry.cardId === 'C2-03' && entry.pawn === 'female')!;
-    expect(row.results.male).toBe('');
-    expect(validateData(data)).toEqual([]);
+    const row = data.scenarios.find(r => r.pawn === 'female')!;
+    row.deltas.female.Skill = 1;
+    row.deltas.male.Network = Number.NaN;
     row.results.female = '';
     row.expressions.female = 'happy';
     const errors = validateData(data).join('\n');
+    expect(errors).toContain('Skill');
+    expect(errors).toContain('Network');
     expect(errors).toContain('♀ 的结果文字不能为空');
     expect(errors).toContain('♀ 的 NPC 表情无效');
   });
 
-  it('requires referenced endings, candidates and policies', () => {
+  it('requires all referenced endings, milestones, candidates and policies', () => {
     const data = fixture();
-    data.endings = data.endings.filter((ending) => ending.id !== 'E06');
-    data.candidates = data.candidates.filter((candidate) => candidate.id !== 'cand_b');
-    data.policies = data.policies.filter((policy) => policy.id !== 'formal_recruitment');
+    data.endings = data.endings.filter(e => e.id !== 'E10');
+    data.milestones = [];
+    data.candidates = [];
+    data.policies = data.policies.filter(p => p.id !== 'coordinator');
     const errors = validateData(data).join('\n');
-    expect(errors).toContain('结局 E06');
-    expect(errors).toContain('cand_b');
-    expect(errors).toContain('formal_recruitment');
+    expect(errors).toContain('不存在的结局 E10');
+    expect(errors).toContain('不存在的章节卡 CH1-E01');
+    expect(errors).toContain('不存在的候选人 josh');
+    expect(errors).toContain('不存在的政策 coordinator');
   });
 
-  it('accepts optional ability descriptions and reports malformed editable descriptions', () => {
+  it('accepts optional descriptions but rejects empty or unknown descriptions', () => {
     const data = fixture();
     delete data.copy.statDescriptions;
     expect(validateData(data)).toEqual([]);
-    data.copy.statDescriptions = { Skill: 'Professional craft.' };
-    expect(validateData(data)).toEqual([]);
-    data.copy.statDescriptions.Skill = '   ';
-    expect(validateData(data).join('\n')).toContain('statDescriptions.Skill');
+    data.copy.statDescriptions = { Creativity: '   ' };
+    expect(validateData(data).join('\n')).toContain('statDescriptions.Creativity');
+  });
+
+  it('rejects broken JSON and wrongly shaped collections before rendering', () => {
+    expect(() => parseTeamContent('{bad')).toThrow('格式无效');
+    expect(() => parseTeamContent('{}')).toThrow('scenarios');
   });
 });

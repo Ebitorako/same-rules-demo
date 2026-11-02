@@ -2,9 +2,9 @@
   "title": "Genderpoly",
   "companyName": "FreeDOM",
   "subtitle": "One career. Another turn.",
-  "introduction": "[PLACEHOLDER] Your first day in the creative industries begins here. Choose your badge and a name, then follow the career board. Each decision stays with this career.",
-  "promotionTitle": "Creative Director",
-  "promotionText": "[PLACEHOLDER] You now sit on the other side of the table. Your next decisions concern the people and rules that will shape another career.",
+  "introduction": "Congratulations! You've been shortlisted for a position at freeDOM, a creative production company that makes advertising, branded content and TV, where fresh ideas and bold thinking are always welcome. Your interview is tomorrow. Are you ready to take the first step towards your dream career?",
+  "promotionTitle": "Chapter 4: The Other Side of the Table",
+  "promotionText": "A few more years have passed. You're now the company's Creative Director. Your office is at the end of the corridor, with a door that closes. Now you're the one asking people out for coffee and deciding whose names go on the list. You remember what it felt like to sit on the other side. But from this side, a lot of things don't look so simple.",
   "defaultNames": {
     "female": "Alex",
     "male": "Alex"
@@ -13,15 +13,14 @@
   "statDescriptions": {
     "Creativity": "Developing original ideas and creative contributions.",
     "Communication": "Communicating ideas and working with others.",
-    "Skill": "Technical skills and professional craft.",
-    "Energy": "The energy available to sustain work and recover.",
     "Network": "Access to professional contacts and opportunities.",
     "Reputation": "How others in the workplace regard your work.",
     "Availability": "The time and flexibility you can offer the workplace.",
-    "Money": "Financial resources available to support your career."
+    "Energy": "The energy available to sustain work and recover."
   },
-  "gatekeeperReturning": "[PLACEHOLDER] {name}, who held the director’s chair in the previous career, is now reviewing your application.",
-  "gatekeeperFormal": "[PLACEHOLDER] The recruitment policy uses written criteria for this appointment.",
-  "gatekeeperUnchanged": "[PLACEHOLDER] The office continues to use its established recruitment process.",
-  "placeholderNotice": "Prototype: bracketed PLACEHOLDER text, temporary numbers and labelled art spaces are waiting for the team’s final content."
+  "gatekeeperReturning": "",
+  "gatekeeperFormal": "",
+  "gatekeeperUnchanged": "",
+  "placeholderNotice": "Story and rules supplied by the team. Art placeholders will be replaced with the prepared assets.",
+  "lowEnergyAdvice": "You look a little tired! Don’t worry, everyone in the creative industries gets through it this way. (A little tip: if your energy runs out, you’ll leave the industry.)"
 }

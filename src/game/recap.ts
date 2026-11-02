@@ -1,7 +1,7 @@
 import { initialStats, RULES } from '../config/rules';
 import { BOARD } from './board';
 import { getChoiceHistory } from './history';
-import { STAT_NAMES, type AppState, type Career, type EndingRecap, type GameData, type RecapIssue, type RecapStep,
+import { STAT_NAMES, LEGACY_STAT_NAMES, type AppState, type Career, type ChapterOpening, type EndingRecap, type GameData, type RecapIssue, type RecapStep,
   type Run, type ScenarioOption, type StatBounds, type StatChangeSnapshot, type StatHistory, type Stats } from './types';
 
 const cardIds = BOARD.flatMap((tile) => tile.cardId ? [tile.cardId] : []);
@@ -9,30 +9,39 @@ const issueIds: RecapIssue[] = ['reconstructed-from-current-data', 'legacy-initi
   'content-unavailable', 'final-stats-mismatch', 'legacy-career-no-stats'];
 const object = (value: unknown): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 const near = (a: number, b: number) => Math.abs(a - b) < 1e-9;
-export const sameStats = (a: Stats, b: Stats): boolean => STAT_NAMES.every((name) => near(a[name], b[name]));
+export const sameStats = (a: Stats, b: Stats): boolean => Object.keys(a).length === Object.keys(b).length
+  && Object.keys(a).every((key) => near(a[key as keyof Stats]!, b[key as keyof Stats]!));
 const fullDelta = (delta: Partial<Stats>): Stats => Object.fromEntries(STAT_NAMES.map((name) => [name, delta[name] ?? 0])) as Stats;
 const copy = <T>(value: T): T => structuredClone(value);
 const currentBounds = (): StatBounds => ({ minimum: RULES.stats.minimum, maximum: RULES.stats.maximum });
-const applyDelta = (before: Stats, delta: Stats, bounds: StatBounds): Stats => Object.fromEntries(STAT_NAMES.map((name) =>
-  [name, Math.max(bounds.minimum, Math.min(bounds.maximum, before[name] + delta[name]))])) as Stats;
+const applyDelta = (before: Stats, delta: Stats, bounds: StatBounds): Stats => Object.fromEntries(Object.keys(before).map((key) => {
+  const name = key as keyof Stats;
+  return [name, Math.max(bounds.minimum, Math.min(bounds.maximum, before[name]! + (delta[name] ?? 0)))];
+})) as Stats;
 
 export function isStats(value: unknown): value is Stats {
-  return object(value) && Object.keys(value).length === STAT_NAMES.length
-    && STAT_NAMES.every((name) => typeof value[name] === 'number' && Number.isFinite(value[name]));
+  return object(value) && (Object.keys(value).length === STAT_NAMES.length || Object.keys(value).length === LEGACY_STAT_NAMES.length)
+    && STAT_NAMES.every((name) => typeof value[name] === 'number' && Number.isFinite(value[name]))
+    && Object.keys(value).every((name) => LEGACY_STAT_NAMES.includes(name as typeof LEGACY_STAT_NAMES[number])
+      && typeof value[name] === 'number' && Number.isFinite(value[name]));
 }
 function isBounds(value: unknown): value is StatBounds {
   return object(value) && typeof value.minimum === 'number' && Number.isFinite(value.minimum)
     && typeof value.maximum === 'number' && Number.isFinite(value.maximum) && value.minimum < value.maximum;
 }
 function isSnapshot(value: unknown): value is StatChangeSnapshot {
-  if (!object(value) || typeof value.cardId !== 'string' || !cardIds.includes(value.cardId)
-    || value.order !== cardIds.indexOf(value.cardId) + 1 || ![1, 2, 3].includes(Number(value.choice))
+  if (!object(value) || typeof value.cardId !== 'string'
+    || !(cardIds.includes(value.cardId) || (value.kind === 'system' && /^C[1-4]-00$/.test(value.cardId)))
+    || !Number.isSafeInteger(value.order) || Number(value.order) < 1
+    || !(value.kind === 'system' ? value.choice === 0 : [1, 2, 3, 4].includes(Number(value.choice)))
     || typeof value.choice !== 'number' || typeof value.title !== 'string' || typeof value.optionText !== 'string'
+    || (value.resultText !== undefined && typeof value.resultText !== 'string')
     || !isStats(value.before) || !isStats(value.after) || !isStats(value.requestedDelta)
     || !isStats(value.actualDelta) || !isBounds(value.bounds)) return false;
   const step = value as unknown as StatChangeSnapshot;
   return sameStats(applyDelta(step.before, step.requestedDelta, step.bounds), step.after)
-    && STAT_NAMES.every((name) => near(step.after[name] - step.before[name], step.actualDelta[name]));
+    && Object.keys(step.before).every((key) => { const name = key as keyof Stats;
+      return near(step.after[name]! - step.before[name]!, step.actualDelta[name]!); });
 }
 export function isStatHistory(value: unknown): value is StatHistory {
   if (!object(value) || value.version !== 1 || !(value.initialStats === null || isStats(value.initialStats))
@@ -48,8 +57,10 @@ export function hasConsistentStatHistory(run: Pick<Run, 'statHistory' | 'choices
   if (!isStatHistory(run.statHistory)) return false;
   const steps = run.statHistory.steps;
   if (!steps.length) return Object.keys(run.choices).length === 0;
-  return steps.every((step) => run.choices[step.cardId] === step.choice)
-    && steps.at(-1)!.order === Object.keys(run.choices).length && sameStats(steps.at(-1)!.after, run.stats);
+  const choices = steps.filter((step) => step.kind !== 'system');
+  return choices.every((step) => run.choices[step.cardId] === step.choice)
+    && new Set(choices.map((step) => step.cardId)).size === choices.length
+    && choices.length <= Object.keys(run.choices).length && sameStats(steps.at(-1)!.after, run.stats);
 }
 export function isEndingRecap(value: unknown): value is EndingRecap {
   if (!object(value) || value.version !== 1 || !Number.isSafeInteger(value.round) || Number(value.round) < 1
@@ -62,8 +73,9 @@ export function isEndingRecap(value: unknown): value is EndingRecap {
     || !Array.isArray(value.steps)) return false;
   const report = value as unknown as EndingRecap;
   if (!report.steps.every((step, index) => {
-    if (!object(step) || step.order !== index + 1 || step.cardId !== cardIds[index]
-      || ![1, 2, 3].includes(step.choice)) return false;
+    if (!object(step) || step.order !== index + 1 || typeof step.cardId !== 'string'
+      || !(step.kind === 'system' ? step.choice === 0 && /^C[1-4]-00$/.test(step.cardId)
+        : cardIds.includes(step.cardId) && [1, 2, 3, 4].includes(step.choice))) return false;
     if (step.source === 'missing') return step.title === null && step.optionText === null
       && step.before === null && step.after === null && step.requestedDelta === null
       && step.actualDelta === null && step.bounds === null;
@@ -83,6 +95,8 @@ export function isEndingRecap(value: unknown): value is EndingRecap {
 }
 
 function choiceText(option: ScenarioOption, data: GameData, run?: Run): string {
+  if (option.automatic) return 'Continue';
+  if (data.contentVersion) return option.optionText;
   if (option.cardId === RULES.hiring.cardId) {
     const id = run?.hiredIntern ?? RULES.hiring.candidates[option.option];
     const candidate = data.candidates.find((item) => item.id === id);
@@ -97,6 +111,7 @@ function choiceText(option: ScenarioOption, data: GameData, run?: Run): string {
 function makeSnapshot(option: ScenarioOption, order: number, before: Stats, after: Stats, bounds: StatBounds,
   data: GameData, run: Run): StatChangeSnapshot {
   return { cardId: option.cardId, order, choice: option.option, title: option.title, optionText: choiceText(option, data, run),
+    resultText: option.results[run.character.pawn],
     before: { ...before }, after: { ...after }, requestedDelta: fullDelta(option.deltas[run.character.pawn]),
     actualDelta: Object.fromEntries(STAT_NAMES.map((name) => [name, after[name] - before[name]])) as Stats,
     bounds: { ...bounds } };
@@ -105,12 +120,28 @@ export function recordStatChange(run: Run, option: ScenarioOption, after: Stats,
   const history = run.statHistory ?? { version: 1 as const,
     initialStats: Object.keys(run.choices).length === 0 ? { ...run.stats } : null, bounds: currentBounds(), steps: [] };
   return { ...history, steps: [...history.steps,
-    makeSnapshot(option, Object.keys(run.choices).length + 1, run.stats, after, currentBounds(), data, run)] };
+    makeSnapshot(option, history.steps.length + 1, run.stats, after, currentBounds(), data, run)] };
+}
+
+export function recordSystemChange(run: Run, opening: ChapterOpening, after: Stats, delta: Partial<Stats>): StatHistory {
+  const history = run.statHistory ?? { version: 1 as const, initialStats: null, bounds: currentBounds(), steps: [] };
+  return { ...history, steps: [...history.steps, {
+    cardId: opening.id, order: history.steps.length + 1, choice: 0, kind: 'system',
+    title: opening.title, optionText: opening.recapText ?? 'Chapter transition',
+    before: { ...run.stats }, after: { ...after }, requestedDelta: fullDelta(delta),
+    actualDelta: Object.fromEntries(STAT_NAMES.map((name) => [name, after[name] - run.stats[name]])) as Stats,
+    bounds: currentBounds(),
+  }] };
 }
 
 export function getEndingRecap(run: Run, data?: GameData): EndingRecap {
   const ids = cardIds.filter((id) => Object.hasOwn(run.choices, id));
   const history = run.statHistory && hasConsistentStatHistory(run) ? run.statHistory : undefined;
+  if (history && history.steps.filter((step) => step.kind !== 'system').length === ids.length) {
+    return { version: 1, round: run.round, character: { ...run.character }, finalStats: { ...run.stats },
+      initialStats: history.initialStats ? { ...history.initialStats } : null, bounds: { ...history.bounds },
+      status: 'recorded', steps: history.steps.map((step) => ({ ...copy(step), source: 'recorded' })), issues: [] };
+  }
   const recorded = new Map(history?.steps.map((step) => [step.cardId, step]));
   const bounds = history?.bounds ?? currentBounds();
   const storedInitial = history?.initialStats ?? null;

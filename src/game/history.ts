@@ -17,11 +17,11 @@ export function getChoiceHistory(run: Run, data: GameData): ChoiceHistoryEntry[]
     const cardId = tile.cardId;
     if (!cardId || !Object.hasOwn(run.choices, cardId)) return;
     const choice = run.choices[cardId];
-    let scenario: ScenarioOption | null = null;
+    let scenario: ScenarioOption | null = run.chosenScenarios?.[cardId] ?? null;
     try {
       // A later decision must never rewrite the variant seen on an earlier card.
       const historicalRun: Run = { ...run, position, choices: { ...earlierChoices } };
-      scenario = getOptions(historicalRun, data).find((option) => option.option === choice) ?? null;
+      scenario ??= getOptions(historicalRun, data).find((option) => option.option === choice) ?? null;
     } catch {
       // Writers may have changed the content since this career was saved.
       // Keep the recorded choice without guessing which text used to be shown.

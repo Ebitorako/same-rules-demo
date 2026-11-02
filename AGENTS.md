@@ -4,7 +4,7 @@
 
 **Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
-**Read `docs/GAME_SPEC.md` before any task.** It is the source of truth for rules, data format, art direction and milestones. If a request conflicts with the spec, point it out and ask before changing a rule.
+**Read `docs/GAME_SPEC.md` before any task.** Version 0.12 records the team's completed CH1–4 sheets, replacing the earlier provisional rules. The designer explicitly authorised this migration on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Resolve remaining content ambiguities through the documented source decisions rather than inventing story or balancing numbers.
 
 ## Who you are working with
 
@@ -32,14 +32,14 @@ Keep these script names working; create them during M0 if they do not exist yet.
 
 ## Non-negotiable rules
 
-1. **Same start, hidden rules during play.** Both pawns start with identical stats. Hide numerical stats and gender effects during play and YOUR CHOICES review, except with `?debug=1`. The designer's 3 Nov decision permits an ending-only reveal: eight final stats and a read-only numerical recap of that completed career. This does not change starting values, thresholds or outcomes.
+1. **Same start, hidden rules during play.** Both pawns start with Creativity 3, Communication 3, Network 2, Reputation 2, Availability 2 and Energy 7. These are the six current stats. Hide numerical stats and gender effects during play and YOUR CHOICES review, except with `?debug=1`. At a terminal ending show six final values and its recorded choice/system-event recap. Chapter milestones do not reveal numerical values.
 2. **Deterministic.** No randomness in outcomes. `Math.random` is allowed only for the optional round-1 random gender (config).
 3. **No undo.** No back button or save slots; auto-save the current run so a refresh resumes, not rewinds.
-4. **Story text comes from data** (`public/data/*.csv`, `*.json`). Never hard-code story, option, result or ending text in code.
-5. **Gender logic is data-driven** (per-pawn options, results, deltas, boss thresholds). No `if (female)` story branches in UI code.
+4. **Story text comes from data.** The runtime authority is `public/data/team-content.json`, generated from the read-only sheet snapshot by `scripts/import-team-content.mjs`. The public scenario/ending CSVs and copy/candidate/policy JSONs are review exports, not independent runtime inputs. Guide identity/fallbacks and asset mappings remain separate. Never hard-code story, option, result or ending text in UI code.
+5. **Gender logic is data-driven** (per-pawn options, results, deltas and effects). Keep visible branch conditions separate from numeric availability gates. A card may have one, three or four options; a locked choice opens its supplied thought without spending it. No `if (female)` story branches in UI code.
 6. **The designer draws all art.** Use only the art files she adds under `public/assets/` (names in the spec's asset list). Until a file exists, show a clearly labelled placeholder box. Never draw, generate or download character art yourself. Use the colour tokens in the spec; do not invent colours, emoji or new fonts. The designer's 31 Oct requests permit static metallic gradients on the six special tiles and the corresponding four Boss history-card faces; other surfaces remain flat.
 7. **No `window.alert` / `confirm` / `prompt`.** Use in-page dialogs.
-8. **Accessibility:** real `<button>`s, keyboard play (`1` `2` `3`, `Enter`), visible focus, respect `prefers-reduced-motion`.
+8. **Accessibility:** real `<button>`s, keyboard play (`1`–`4`, `D`, `Enter`), visible focus, respect `prefers-reduced-motion`. Sound is optional and must never be needed to understand or complete a scene.
 
 ## Code conventions
 

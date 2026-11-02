@@ -1,5 +1,7 @@
 # 美术资源接入指南
 
+**正式剧本的逐项制作清单与完整 Prompt：** [打开可筛选清单](ART_REQUIREMENTS.zh-CN.html) · [文字版](ART_REQUIREMENTS.zh-CN.md)。2026 年 11 月 3 日后的制作数量、角色、表情和结局编号以该清单为准；本页保留通用导出和替换方法。已有 2 枚棋子和 4 位 Boss 复用，先补 25 张基础视觉，再按实际剧情补 27 张反应；不用给每个 NPC 做完整六种表情。
+
 你可以在另一个图像聊天制作资源，再把成品放到这里。当前骨架不会替你创作角色；图片缺失时显示带名称的占位框，方便逐张补齐。统一风格与配色以 [GAME_SPEC.md](GAME_SPEC.md) 第 10 节为准。
 
 ## 资源清单与建议尺寸
@@ -13,13 +15,13 @@
 | `public/assets/npc/` | `<npc-id>_<expression>.png` | 768 × 768，统一头像裁切和眼睛位置 | 透明 |
 | `public/assets/npc/` | `guide_neutral.png`（或 `.svg`、`.webp`） | 768 × 768，常驻引导 NPC，主体居中 | 透明 |
 | `public/assets/cards/` | `card_back.png` | 900 × 1200，竖版 3:4 | 可用规格中的奶油色或黑色 |
-| `public/assets/cards/` | `ending_E01.png` 等，与结局编号一致 | 1200 × 800，横版 3:2 的独立插图 | 按插图构图决定 |
-| `public/assets/ui/` | `title.png` | 1600 × 600，横版标题装饰 | 透明 |
-| `public/assets/ui/` | `gallery_frame.png` | 900 × 1200，边框中间留空 | 透明 |
+| `public/assets/cards/` | `ending_E02.png`—`ending_E14.png`，13 个真正终局 | 1200 × 800，横版 3:2 的独立插图 | 按插图构图决定 |
+| `public/assets/ui/` | `title.png`（可选，现有文字界面已可用） | 1600 × 600，横版标题装饰 | 透明 |
+| `public/assets/ui/` | `gallery_frame.png`（可选，现有边框已可用） | 900 × 1200，边框中间留空 | 透明 |
 
 结局插图不要把结局正文画进图片；游戏会显示可选取、可缩放的文字。标题和卡背若包含文字，请先人工检查拼写。
 
-NPC 表情后缀固定为 `pleased`、`neutral`、`appraising`、`frowning`、`awkward`、`cold`。NPC 的资源编号要和路径表一致；新增 NPC 后让 Codex 核对表格名称与资源编号的对应关系。
+NPC 表情后缀使用 `pleased`、`neutral`、`appraising`、`frowning`、`awkward`、`cold`，但每个角色只做正式清单列出的子集。NPC 的资源编号要和路径表一致；新增 NPC 后让 Codex 核对表格名称与资源编号的对应关系。Ch1 E01 与 Ch2 E07 是继续游玩的过渡，不要与真正终局 E07 混用图片。
 
 常驻引导 NPC 的头像使用 [guide.json](../public/data/guide.json) 中的 `portrait: "npc/guide_neutral"`，已经在资源路径表登记。直接把同名透明图片放入 `public/assets/npc/` 即可；缺图时仍显示占位框。NPC 的名字与身份说明分别在同一文件的 `name`、`role` 修改，台词另填 [guide.csv](../public/data/guide.csv)，不要把对白画进头像。
 
@@ -85,7 +87,7 @@ NPC 表情后缀固定为 `pleased`、`neutral`、`appraising`、`frowning`、`a
 
 字体只使用 **Limelight** 和 **Josefin Sans**。当前通过 Google Fonts 样式加载；网络不可用时浏览器会使用备用字体，画面字形会有差异。重要的离线演示前，可以将这两种字体的合法本地文件放到 `public/assets/fonts/`，让 Codex 配好本地加载并测试。不要单独换成第三种装饰字体。
 
-音乐和音效放进 `public/assets/audio/`。文件放进去不会自动变成游戏音效，需要明确触发位置并接入。使用外部音频时一并保存作者、来源和授权说明；此文件夹暂时可以为空。
+音乐和音效放进 `public/assets/audio/`。正式清单里的 `bgm_main`、`bgm_boss`、`sfx_move`、`sfx_card`、`sfx_choose`、`sfx_ending` 六个名称已预留加载与触发位置，支持 `.mp3`、`.wav`、`.ogg`、`.m4a`，路径也在 `public/assets/manifest.json`。当前只有接入框架，音频成品尚未放入，实际播放、循环与响度需收到后检查。使用外部音频时一并保存作者、来源和授权说明；此文件夹可以暂时为空。
 
 ## 每次交付后看什么
 

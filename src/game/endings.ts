@@ -1,18 +1,14 @@
 import { RULES } from '../config/rules';
 import type { Run } from './types';
 
-export const ENDING_IDS: string[] = Object.values(RULES.endings);
+export const ENDING_IDS: string[] = [...new Set(Object.values(RULES.endings))];
 
-// Order is intentional: an exit takes precedence over any policy adopted earlier.
-const endingRules: { matches: (run: Run) => boolean; id: string }[] = [
-  { matches: (run) => run.exitReason === 'burnout', id: RULES.endings.burnout },
-  { matches: (run) => run.exitReason === 'C1-B', id: RULES.endings.gatekeeper },
-  { matches: (run) => run.exitReason === 'C2-B', id: RULES.endings.network },
-  { matches: (run) => run.exitReason === 'C3-B', id: RULES.endings.idealWorker },
-  { matches: (run) => run.policiesSet.includes(RULES.policy.formalRecruitment), id: RULES.endings.policy },
-  { matches: () => true, id: RULES.endings.completed },
-];
-
+// Burnout takes precedence over every route-specific or policy ending.
 export function selectEnding(run: Run): string {
-  return endingRules.find((rule) => rule.matches(run))!.id;
+  if (run.exitReason === 'burnout' || run.stats.Energy <= 0) return RULES.endings.burnout;
+  if (run.endingId && ENDING_IDS.includes(run.endingId)) return run.endingId;
+  if (run.exitReason && ENDING_IDS.includes(run.exitReason)) return run.exitReason;
+  if (run.policiesSet.includes('transparent')) return RULES.endings.policy;
+  if (run.policiesSet.includes('coordinator')) return RULES.endings.limitedPolicy;
+  return RULES.endings.completed;
 }

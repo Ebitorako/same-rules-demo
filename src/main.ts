@@ -3,6 +3,7 @@ import './styles/metal.css';
 import './styles/guide.css';
 import './styles/endings.css';
 import './styles/history.css';
+import './styles/story.css';
 import { RULES } from './config/rules';
 import { loadData, loadGuideData } from './data/load';
 import type { GuideData } from './data/guide';
@@ -14,10 +15,11 @@ import { loadState, resetStorage, saveState } from './game/persistence';
 import { archiveEndingRecap } from './game/recap';
 import type { AppState, GameData, Pawn } from './game/types';
 import { loadAssets } from './ui/assets';
+import { playSound, syncAudio } from './ui/audio';
 import { boardScreen } from './ui/board';
 import { scenarioDialog } from './ui/card';
 import { button, escape } from './ui/dom';
-import { endingScreen, galleryScreen } from './ui/gallery';
+import { endingScreen, epilogueScreen, galleryScreen, milestoneScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
 import { guidePanel } from './ui/guide';
@@ -33,6 +35,8 @@ let returnView: 'title' | 'game' = view;
 let selectingPawn = false;
 let confirmingReset = false;
 let endingBack = false;
+let epilogueVisible = false;
+let unavailableOption: number | null = null;
 let savingFailed = false;
 let busy = false;
 let showingReturn = false;
@@ -47,20 +51,24 @@ function debugPanel(): string {
   return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p></aside>`;
 }
 function render(focus = true): void {
+  syncAudio(state);
   document.body.classList.toggle('reduced-motion', reduced());
   const run = state.run;
-  const scenarioOpen = view === 'game' && run && ['card','result','promotion'].includes(run.phase);
+  const scenarioOpen = view === 'game' && run && ['card','result','promotion','chapter'].includes(run.phase);
   const historyMarkup = view === 'game' && run?.phase === 'board' && historyCardId
     ? choiceHistoryDialog(state, data, historyCardId) : '';
   const storyOpen = scenarioOpen || Boolean(historyMarkup);
+  document.body.classList.toggle('story-open', Boolean(storyOpen));
   let content: string;
   if (view === 'title') content = titleScreen(state,data,selectingPawn);
   else if (view === 'gallery') content = galleryScreen(state,data,galleryFlips);
   else if (view === 'settings') content = settingsScreen(state.settings,confirmingReset);
   else if (!run) { view = 'title'; content = titleScreen(state,data,selectingPawn); }
-  else if (run.phase === 'intro') content = introScreen(state,data);
-  else if (run.phase === 'ending' && !showingReturn) content = endingScreen(state,data,endingBack);
-  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '') : historyMarkup}`;
+  else if (run.phase === 'intro') content = introScreen(state,data,guidePanel(state,data,guide,'intro-guide'));
+  else if (run.phase === 'milestone') content = milestoneScreen(state,data,endingBack);
+  else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && data.epilogue ? epilogueScreen(data) : endingScreen(state,data,endingBack);
+  else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(state,data)}${guidePanel(state,data,guide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(state,data,run.phase !== 'result' ? guidePanel(state,data,guide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
+  if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>The team’s completed story is ready.</strong><p>This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.</p>${button('Got it', 'dismiss-migration', 'text-button')}</aside>${content}`;
   app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="Main navigation"><span class="prototype-stamp">PROTOTYPE</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? '<p class="save-warning" role="status">This browser could not save progress. Keep this tab open; refreshing may lose this career.</p>' : ''}${debugPanel()}`;
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
@@ -79,18 +87,24 @@ function closeHistory(): void {
 }
 function start(pawn: Pawn): void {
   state = startCareer(state,pawn,data);
-  view = 'game'; selectingPawn = false; endingBack = false; persist(); render();
+  view = 'game'; selectingPawn = false; endingBack = false; epilogueVisible = false; unavailableOption = null; persist(); render();
 }
 function newCareer(): void {
   const previous = state.lineage.at(-1);
-  if (previous?.reachedDirector && previous.hiredIntern) start('female');
+  if (!data.contentVersion && previous?.reachedDirector && previous.hiredIntern) start('female');
   else if (RULES.firstCareerPawn === 'random') start(Math.random() < .5 ? 'female' : 'male');
   else { view = 'title'; selectingPawn = true; render(); }
 }
 async function makeMove(action: () => AppState): Promise<void> {
   const oldPosition = state.run?.position;
   const oldRect = app.querySelector('.board-pawn')?.getBoundingClientRect();
-  state = action(); persist();
+  const oldPhase = state.run?.phase;
+  const oldChoices = Object.keys(state.run?.choices ?? {}).length;
+  state = action(); endingBack = false; unavailableOption = null; persist();
+  syncAudio(state, true);
+  if (state.run?.phase === 'ending' && oldPhase !== 'ending') playSound('ending');
+  else if (Object.keys(state.run?.choices ?? {}).length > oldChoices) playSound('choose');
+  else if (oldPosition !== state.run?.position) playSound('move');
   const hop = oldRect && oldPosition !== state.run?.position && !reduced();
   showingReturn = Boolean(hop && state.run?.phase === 'ending' && state.run.position === 0);
   if (hop) { busy = true; app.classList.add('moving'); }
@@ -118,8 +132,10 @@ async function makeMove(action: () => AppState): Promise<void> {
     app.classList.remove('moving'); busy = false;
     app.querySelector<HTMLElement>('[role=dialog]')?.focus({preventScroll:true});
   }
+  if (state.run?.phase === 'card' && oldPhase !== 'card') playSound('card');
 }
 async function flip(target: HTMLElement, change: () => void): Promise<void> {
+  playSound('card');
   busy = true;
   const card = target.closest<HTMLElement>('.ending-card,.gallery-card');
   if (card && !reduced()) await card.animate([{ transform: 'scaleX(1)' },{ transform: 'scaleX(0)' }], {duration:RULES.animation.flipHalfMs}).finished.catch(()=>{});
@@ -134,9 +150,14 @@ async function flip(target: HTMLElement, change: () => void): Promise<void> {
 app.addEventListener('click', event => {
   const target = (event.target as HTMLElement).closest<HTMLElement>('[data-action]');
   if (!target || busy) return;
+  syncAudio(state, true);
   const action = target.dataset.action;
   if (target.closest('[inert]')) return;
   if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
+  if (action === 'dismiss-migration') { state = { ...state, migrationNotice: false }; persist(); render(); return; }
+  if (action === 'epilogue') { epilogueVisible = true; render(); return; }
+  if (action === 'unavailable') { unavailableOption = Number(target.dataset.option); render(false); app.querySelector<HTMLElement>('.unavailable-note')?.focus(); return; }
+  if (action === 'close-unavailable') { const option = unavailableOption; unavailableOption = null; render(false); app.querySelector<HTMLElement>(`[data-option="${option}"]:not(:disabled)`)?.focus(); return; }
   if (action === 'review-choice') {
     const cardId = target.dataset.card;
     if (view === 'game' && state.run?.phase === 'board'
@@ -198,8 +219,8 @@ document.addEventListener('keydown', event => {
     return;
   }
   if (target.matches('input,textarea,select')) return;
-  if (view === 'game' && state.run?.phase === 'card' && /^[123]$/.test(event.key)) {
-    event.preventDefault(); app.querySelector<HTMLButtonElement>(`[data-option="${event.key}"]`)?.click();
+  if (view === 'game' && state.run?.phase === 'card' && /^[1234dD]$/.test(event.key)) {
+    event.preventDefault(); app.querySelector<HTMLButtonElement>(`[data-option="${/d/i.test(event.key) ? 4 : event.key}"]:not(:disabled)`)?.click();
   }
   if (event.key === 'Enter' && !target.closest('button,summary')) {
     const next = dialog?.querySelector<HTMLButtonElement>('[data-enter]') ?? app.querySelector<HTMLButtonElement>('[data-enter]:not([inert] *)');

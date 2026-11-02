@@ -1,5 +1,5 @@
 import { BOARD } from '../game/board';
-import { getOptions } from '../game/state';
+import { getChapterIntro, getOptions } from '../game/state';
 import type { AppState, GameData } from '../game/types';
 import type { GuideData, GuideNote } from '../data/guide';
 import { art } from './assets';
@@ -9,6 +9,12 @@ export function currentGuideNote(state: AppState, data: GameData, guide: GuideDa
   const run = state.run;
   const general = guide.notes.find(note => note.cardId === 'GENERAL')!;
   const card = run?.phase === 'card' ? getOptions(run, data)[0] : undefined;
+  const chapter = run && ['intro', 'chapter', 'promotion'].includes(run.phase) ? getChapterIntro(run, data) : null;
+  if (data.contentVersion && (card || chapter)) {
+    const context = card ?? chapter!;
+    return { cardId: card?.cardId ?? chapter!.id, advice: context.guideAdvice || general.advice,
+      background: context.background, theory: '', reference: context.reference, notes: '' };
+  }
   const id = run?.phase === 'promotion' ? 'PROMOTION' : card?.cardId ?? 'GENERAL';
   const note = guide.notes.find(entry => entry.cardId === id);
   const usesSceneContext = Boolean(card && !note?.background && !note?.theory);
@@ -26,11 +32,13 @@ export function guidePanel(state: AppState, data: GameData, guide: GuideData, id
   const hidden = Boolean(state.settings.guideHidden);
   const note = currentGuideNote(state, data, guide);
   const beforeChoice = state.run?.phase === 'card' && Boolean(BOARD[state.run.position].cardId);
+  const tired = state.run && state.run.phase !== 'ending' && state.run.stats.Energy <= 1;
   const detail = !hidden && (note.background || note.theory || note.reference)
     ? `<details class="guide-context"><summary>Open the rulebook</summary>${note.background ? `<h4>Industry context</h4><p>${richText(note.background)}</p>` : ''}${note.theory ? `<h4>Theory</h4><p>${richText(note.theory)}</p>` : ''}${note.reference ? `<h4>References</h4><p class="guide-reference">${richText(note.reference)}</p>` : ''}</details>` : '';
   return `<aside class="guide-panel ${hidden ? 'guide-is-hidden' : ''}" aria-labelledby="${id}-heading">
     <div class="guide-identity">${art(guide.portrait, guide.name, 'guide-art')}<div><p class="guide-kicker">THE RULEBOOK</p><h3 id="${id}-heading">${escape(guide.name)}</h3><p class="guide-role">${escape(guide.role)}</p></div></div>
     <button type="button" class="guide-toggle" data-action="toggle-guide" aria-expanded="${!hidden}" aria-controls="${id}-body">${hidden ? 'Ask the guide' : 'Hide advice'}</button>
+    ${tired && data.copy.lowEnergyAdvice ? `<p class="guide-fatigue" role="status">${richText(data.copy.lowEnergyAdvice)}</p>` : ''}
     <div id="${id}-body" ${hidden ? 'hidden' : ''}>${hidden ? '' : `<p class="guide-timing">${beforeChoice ? 'BEFORE YOU CHOOSE' : 'BESIDE THE BOARD'}</p><p class="guide-advice">${richText(note.advice)}</p>${detail}<p class="guide-choice">Advice is optional. The choice is yours.</p>`}</div>
   </aside>`;
 }

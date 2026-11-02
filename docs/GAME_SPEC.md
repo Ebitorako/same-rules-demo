@@ -1,437 +1,150 @@
 # Genderpoly — Game Spec
 
-*Version 0.11, 3 Nov 2026.*
+*Version 0.12, 3 Nov 2026. Formal team content integrated and verified locally; publication pending.*
 
-Version 0.11 records the designer's explicit ending-only numerical reveal. Keep stats hidden during play and YOUR CHOICES review. After a career ends, its ending-card front shows all eight final stats beneath the narrative; the back adds a chronological choice-and-stat recap after Theory and References. Explain each stat, distinguish requested changes from actual changes limited by stat bounds, and keep each completed career's report separate in the Gallery. This is a presentation and record-keeping change, not a change to starting values, Boss thresholds or outcomes. Version 0.11 was verified and published on 3 Nov 2026; detailed evidence is recorded in README and AI_LOG.
+## 1. Authority and scope
 
-Version 0.10 fixes ordinary board-tile colors: unvisited tiles keep their existing dark background, and visited tiles use cream `#F4EFE3` through `--tile-walked: var(--cream)`. The former red/blue/yellow visited palette and `lit-*` classes/tokens are retired. This is no longer an open design decision. The six special board tiles and four Boss history-card faces retain their assigned metal finishes; game rules and progress are unchanged.
+The designer explicitly requested replacing the provisional game content and rules with the completed `ch1`, `ch2`, `ch3`, `ch4` tabs and `ch3相关规则说明` in the [team spreadsheet](https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit). This v0.12 decision supersedes the earlier prototype’s numerical defaults, fixed three-choice rule, generic Boss checks and forced next-career intern inheritance.
 
-Version 0.9 fits every recorded **YOUR CHOICES** card inside the original hand area by increasing overlap as the card count grows. The hand has no horizontal scrolling or scrollbar, including with all 20 cards on narrow screens. Exposed card width adjusts to the available space; there is no fixed 24px minimum. Preserve hover/focus enlargement, click-to-review behavior, single-number ordinary faces and text-free metallic Boss faces.
+The exact read-only source is `docs/source/2026-11-03-team-sheet.json`. `scripts/import-team-content.mjs` produces `public/data/team-content.json`, which is the runtime authority. The scenario/ending CSVs and copy/candidate/policy JSONs are readable exports. Import does not fetch Google Sheets automatically. Preserve authored story, results, deltas, advice and citations; changes to mapping or rules require tests. Missing citations and policy dialogue are not permission to invent them.
 
-Version 0.8 simplifies the history-card faces: ordinary cards show one centred number only, with no duplicate corner numbers or suit symbols. Boss cards show only their matching board metal finish—C1 red, C2 green, C3 blue, C4 purple—with no visible number or text. Their accessible labels and click-to-review actions remain. Preserve the approved overlap and hover/focus animation.
+The project remains a single-player, deterministic, two-dimensional browser game about structural inequality in the creative industries. The game name is **Genderpoly** and the board company is **FreeDOM**. Preserve the team’s body-text casing. UI is English; handoff documentation is Chinese. Keep the established repository, public URL and storage key.
 
-Historical v0.7 introduced an overlapping hand of portrait playing cards, with hover/focus enlargement and responsive numbers. Its horizontal scrolling and minimum exposed-width layout have been superseded by v0.9; the read-only review remains.
+## 2. Fixed presentation and board
 
-Historical v0.6 introduced clickable **YOUR CHOICES** mini cards and a horizontally scrolling row, which v0.9 replaces with adaptive overlap. Reviewing a scene, its chosen option and the current pawn's result still never rewinds or changes progress; the existing `run.choices` records support older saves without a new history format.
+- A 7-column × 6-row rectangular ring with 22 tiles: START, 16 scenario slots, four Bosses and Creative Director.
+- Route: START → four Ch1 scenes → Gatekeeper → four Ch2 scenes → Old Boys’ Network → five Ch3 scenes → Ideal Worker → Creative Director → three Ch4 scenes → System → START.
+- Card ids in the runtime use fixed board slots. Retain source ids separately: C1-03F/M → C1-03; C2-04A/B/C/D → C2-04; C3-03a/b, C3-04a/b and C3-05a/b share their numbered slots.
+- Ordinary unvisited tiles are dark `#2A2825`; visited tiles are cream `#F4EFE3`. The four Bosses retain red, green, blue and purple metal respectively; Creative Director is silver and START/finish is gold. Special tiles retain metal after visiting.
+- YOUR CHOICES fits all recorded choices by increasing overlap, with no horizontal scrollbar. Ordinary mini cards show one centred number, Bosses show metal without visible wording. Hover/focus raises and enlarges; click opens a read-only review. Reading never replays or changes progress.
+- Retain cream/ink paper cards, Limelight titles, Josefin Sans body text, grain overlay, existing colour tokens and reduced-motion support. Designer-supplied art only; use labelled placeholders until files are provided.
 
-Version 0.5 names the game **Genderpoly** (title and header) and the in-game company **FreeDOM** (board centre). A failed numerical Boss check now opens the ending card immediately, without an intervening result screen or Continue button. Passing The Ideal Worker and becoming Creative Director through the promotion scene are required before Chapter 4. Numerical defaults and The System's existing no-fail check are unchanged. Retain the existing storage keys and repository/site addresses for compatibility.
+## 3. Six abilities and disclosure
 
-Version 0.4 records the designer's 31 Oct decisions: fixed metal finishes for the six special board tiles, an optional resident guide, and separate theory/reference sections on ending-card backs. The approved metal finishes override the earlier blanket restriction on gradients and the original special-tile palette. This exception originally covered six tiles; v0.8 also permits their corresponding Boss history-card faces.
+| Ability | Both pawns start at |
+|---|---:|
+| Creativity | 3 |
+| Communication | 3 |
+| Network | 2 |
+| Reputation | 2 |
+| Availability | 2 |
+| Energy | 7 |
 
-A single-player 2D web game for a university course on gender and media (NMC5369, NUS). The player lives one career at FreeDOM in the creative industries, from New Hire to Creative Director and back to the start. Both pawns start equal; the workplace treats them differently, and the game never says so.
+Skill and Money belong only to archived prototype reports. Current effects use the six abilities above. Retain bounds 0–10 because the final sheets specify starting values and burnout but do not supply a replacement maximum. Do not rebalance the authored numbers on the team’s behalf.
 
-Hard deadline: the team submits on **5 Nov 2026**; the course deadline is 6 Nov 23:59. Feature freeze is **3 Nov**.
+During play, results and ordinary choice review, hide numerical changes and values except in `?debug=1`. Terminal ending fronts reveal six final values; backs append numerical review after Theory and References. Record the requested and applied changes, limits, and the automatic Chapter 3 entry event. Chapter milestones do not reveal stats.
 
----
+Energy ≤ 1 shows the source’s exhaustion guidance (faithfully translated from its Chinese rule note). Energy ≤ 0 has priority over other outcomes and immediately triggers E11 Burnout. No random outcomes, undo, save slots or gender-specific starting abilities.
 
-## 1. Why the game exists (read this before designing anything)
+## 4. Chapters, choices and authored branches
 
-The project is graded on four criteria: conceptual understanding of the readings, understanding of the phenomenon, applying the readings as a lens, and creativity ("symbolic layers"). The teacher's feedback after the first presentation was: **the theory must be visible inside the game**, not only in the write-up.
+There are four chapter introductions. An introduction is not an extra board choice. The Creative Director silver tile presents Chapter 4’s authored opening after the player has accepted the Ideal Worker promotion and survived its effects.
 
-The conceptual lens the game is built on:
+Cards need not have exactly three options. C1-B has one action. C2-03 has 1, 2, 3 and D (internal choice 4). C2-04 A/B/C has an additional resignation choice for the female pawn. C2-04D is the authored forced-exit route, ending in E10 without reaching its Boss; its Continue action is narrative acknowledgement, not a new decision.
 
-> **Structural inequality presented as individual choice.** Every option feels like the player's free choice, but which options exist and what they lead to are shaped by how the workplace reads the player's gender.
+Resolve visible variants using pawn and state flags. Numeric availability is separate: an unavailable Boss choice remains visible, grey and noncommitting; it can show only its authored thought. No stat number is revealed in the lock label. Available choices retain their authored effects. Use real buttons, keyboard 1–4/D/Enter, focus visibility and accessible reading areas.
 
-| Chapter | Phenomenon | Main readings |
-|---|---|---|
-| 1 · Breaking In | Creativity read as masculine; appearance and self-presentation become hidden barriers | Wang & Keane (2020); Hennekam & Bennett (2017); Hesmondhalgh & Baker (2015) |
-| 2 · Getting Ahead | Informal networks decide promotion; speaking up against harassment has career costs | Hennekam & Bennett (2017); North (2016) |
-| 3 · The Career Cliff | Unequal care expectations; leaving framed as a "personal choice" (neoliberal feminism) | Dent (2020) |
-| 4 · The Other Side of the Table | Managers reproduce inequality through reasonable-looking decisions about hiring and roles | Hesmondhalgh & Baker (2015); Koppman et al. (2022); Sørensen (on intimacy coordination) |
-
-Design consequences that are **not negotiable**:
-
-1. **Same start.** Both pawns have identical starting stats. Gender never changes ability; it changes how the world responds.
-2. **Hidden rules during play.** Stats and numerical gender effects remain hidden during choices, results and YOUR CHOICES review (except in debug mode). Feedback during play comes through text, NPC tone and NPC expressions. Once a career ends, reveal its eight final stats and recorded numerical choice recap (§8), as approved by the designer on 3 Nov; this does not expose upcoming choices or change any rule.
-3. **Deterministic.** No dice, no randomness in outcomes. Same choices + same pawn = same result, every time. (The only allowed randomness is the optional first-round gender assignment, see §11.)
-4. **No undo.** No action rewinds gameplay, and there are no save slots. The current run is auto-saved so that refreshing the page resumes at the same point instead of undoing a choice. Browsing recorded choices (§3) is read-only and does not replay a decision.
-5. **Colour records, never judges.** Ordinary tiles change from the existing dark background to cream when visited. The six special tiles keep their assigned metal finish and gain a visited check mark. Colour identifies place and progress, never a good/bad choice.
-6. **Never preach.** The game never states "this happened because you are a woman". Theory appears as background notes the player can open, through the optional guide's rulebook, and on the back of ending cards. The guide provides context without deciding for the player or revealing hidden numerical rules.
-
----
-
-## 2. Screen flow
-
-```
-Title ─▶ Character intro (pawn + name) ─▶ Board
-Board: [Next] ─▶ pawn hops 1 tile ─▶ tile lights up ─▶ Scenario card (3 options)
-       ─▶ Result (text + NPC reaction) ─▶ card goes to the "chosen" pile ─▶ back to Board
-Boss corner ─▶ Boss card (3 options) ─▶ numerical pass ─▶ Result ─▶ Continue
-                                     └▶ numerical fail ─▶ Ending card immediately
-Pass Ideal Worker ─▶ Creative Director tile ─▶ promotion scene ─▶ Chapter 4 (hiring + policy)
-Back on the start tile ─▶ Ending card flips over ─▶ Gallery ─▶ "Next career" (new round)
-```
-
-Always reachable from the title screen: **Gallery** and **Settings** (reset all progress, reduced motion, sound on/off).
-
-Use **Genderpoly** as the game name in the title/header and **FreeDOM** as the company name in the board centre. Both names come from `public/data/copy.json` (`title` and `companyName` respectively).
-
-A resident guide sits beside the board on desktop and below it on narrow screens. On a choice card, the guide's advice appears before the options in document order; it never blocks or disables choosing. **Hide advice** collapses the advice; **Ask the guide** restores it. **Open the rulebook** reveals available industry context, theory and references. Reading or hiding advice never changes a choice, stat, boss result or ending.
-
----
-
-## 3. The board
-
-A rectangular ring of 22 cells on a **7 columns × 6 rows** grid. The four corners are bosses. The centre (columns 2–6, rows 2–5, 1-indexed) is the card area.
-
-```
-row 1:  [IDEAL WORKER] [t4] [t3] [t2] [t1] [t0] [OLD BOYS' NETWORK]
-row 2:  [CD = l0]                                [r3]
-row 3:  [l1]               card area              [r2]
-row 4:  [l2]   3 face-down piles + 1 chosen pile  [r1]
-row 5:  [l3]                                      [r0]
-row 6:  [THE SYSTEM] [START b0] [b1] [b2] [b3] [b4] [GATEKEEPER]
-```
-
-**Path** (clockwise, starting bottom-left and moving right):
-
-`b0 START` → `b1–b4` (Ch1, 4 tiles) → **Gatekeeper** → `r0–r3` upward (Ch2, 4 tiles) → **Old Boys' Network** → `t0–t4` leftward (Ch3, 5 tiles) → **Ideal Worker** → `l0` **Creative Director tile** → `l1–l3` downward (Ch4, 3 tiles) → **The System** → `b0` again = **ending**.
-
-That is 16 scenario tiles + 4 bosses = 20 cards per run, about 10 minutes.
-
-Tile states:
-
-| State | Look |
+| Flag | Set/read rule |
 |---|---|
-| Ordinary hidden tile (not yet walked) | Dark `#2A2825`, a "?" in `#5E584F` (Limelight) |
-| Ordinary walked tile | Cream `#F4EFE3` via `--tile-walked: var(--cream)`; no red/blue/yellow cycle or good/bad meaning |
-| START / finish (before leaving) | Gold metal finish with a double inner border, "START / NEW HIRE →" |
-| START after the pawn leaves | **Flips into a "?" tile while keeping its gold finish.** When the pawn returns, it flips to reveal the ending |
-| Creative Director tile | Silver metal finish, a star, "CREATIVE DIRECTOR". Not the ending |
-| Boss corners | In route order: Gatekeeper = red metal; Old Boys' Network = green metal; Ideal Worker = blue metal; The System = purple metal. Keep the figure and name legible |
-| Visited special tile | Keeps its assigned metal finish and adds a check mark; never switches to the ordinary cream background |
+| `maternal_assumption` | All C1-03F responses set true. At Ch3 entry, female Availability −1 unless inherited transparent policy is active. Record once as a system event. |
+| `c2_branch` | C2-03 choices 1/2/3/D set A/B/C/D; controls C2-04 and C4-02 option 2. D exits in Chapter 2. |
+| `promised_no_kids` | Female C3-01 option 3; choosing a child at C3-02 later also applies Reputation −1. |
+| `has_child` | C3-02 option 1 true, options 2/3 false; controls C3-03/04/05 and relevant Ideal Worker text. |
+| `partner_primary` | Male C3-03a option 2; accepting Ideal Worker promotion ends in E05 instead of continuing. |
+| `hire` | C4-01: creative / support / blind. Josh is hired by option 1; Chloe by 2 or blind review 3. Blind review removes the female Reputation −1 for the transparent proposal. |
+| `policy` | C4-03 proposal, rewritten by System’s decision; only its final approved form affects the next career. |
+| `previous_family_man` | Previous terminal E05; female C3-01 includes the exact additional source line, “We assumed you'd want to slow down.” |
 
-Card area: three face-down piles (black card backs with a cream inner border and "?" in a circle) and one face-up horizontal pile of chosen cards that grows as the player plays.
+Each selected scenario is frozen with its actual text, gender-specific result and applied policy context. Later source edits or flags must not rewrite the history view. Auto-save retains the current branch and phase.
 
-### YOUR CHOICES review
+## 5. Bosses
 
-- Every recorded card in the current career appears as a clickable mini card under **YOUR CHOICES**. Keep all recorded cards, up to 20, inside the original hand area. Automatically deepen the overlap as the number of cards grows or the available width shrinks; do not use horizontal scrolling or show a horizontal scrollbar. Exposed widths may shrink below 24px on narrow screens, so there is no fixed minimum exposure promise.
-- Use portrait playing-card proportions in an overlapping hand/pile. Ordinary cards show one centred number that scales to the available card size, without corner duplicates or suit symbols. Boss history cards show no visible number or text: `C1-B` uses the board's red metal finish, `C2-B` green, `C3-B` blue and `C4-B` purple. Keep their accessible labels and review actions.
-- Hovered and keyboard-focused cards rise and enlarge above adjacent cards, retaining the approved animation and overlap. Touch players tap a card directly; hover must not be required to open it. Retain focus visibility and reduced-motion support.
-- Clicking a mini card opens a read-only modal showing the scene, the option actually selected and the result text for the pawn that made that choice. Reuse the existing CSV content and candidate/policy JSON where applicable; do not add a separate story copy or show hidden stats.
-- Previous/next controls browse only recorded choices from this career. They do not reveal upcoming cards or retrieve choices from earlier careers.
-- **Close** or **Escape** dismisses the modal and restores focus to the mini card that opened it. The dialog supports keyboard focus navigation; gameplay actions must not run behind it.
-- Opening, browsing and closing the review never changes the pawn's position, choices, stats, outcome or save progress. Use the existing `run.choices` records, so older valid saves also work. The selected review card is temporary UI state: refreshing closes the review and resumes the current board position.
+### Gatekeeper — C1-B
 
----
+One “Open the email” action; evaluate current stats before applying effects. Creativity ≥ 5 leads to CH1-E01, a Junior Producer milestone that continues to Chapter 2. Otherwise Communication ≥ 5 ends at E02 Production Coordinator; otherwise E03 rejection. The three outcomes are selected automatically, not offered as choices.
 
-## 4. Stats: hidden during play, revealed at the ending
+### Old Boys’ Network — C2-B
 
-Eight stats stay hidden until the career ends, including in ordinary choice-history review. Both pawns start with the same values (placeholder: all `5`, range 0–10; final numbers come from the team's rules doc). The ending-only reveal in §8 is the normal-mode exception; it does not change these values or limits.
+Option 1 requires Network ≥ 5; option 2 requires Creativity ≥ 6. Unmet gates are grey with pawn-specific source thoughts. Option 3 is always available: female → E09; male → Chapter 3. Male success on any option and female option 2 show CH2-E07 during the chapter transition. Female option 1 receives an acting title and proceeds without that milestone.
 
-`Creativity` · `Communication` · `Skill` · `Energy` · `Network` · `Reputation` · `Availability` · `Money`
+With inherited transparent policy, female option 2 uses the male result text/expression. Its numerical delta remains the explicit female numerical cells, Communication +1 and Reputation +1; the ambiguous word “result” is not used to infer new balancing values.
 
-Gender enters the game in exactly three data-driven ways:
+### Ideal Worker — C3-B
 
-1. **Option availability.** A scenario can offer different options to each pawn. Each pawn always sees exactly 3, so neither ever looks incomplete. (Example: only the male pawn is invited to "the second round".)
-2. **Per-pawn results.** The same option can give each pawn a different result text, NPC expression and stat change.
-3. **Per-pawn boss thresholds.** A boss can require more of one pawn than the other (rules config).
+Option 1 requires Availability ≥ 3. Female child/no-child variants use different Energy costs and thoughts; male gate failure has no invented thought. A male with `partner_primary` accepting option 1 ends in E05. Other successful option-1 paths continue to the Creative Director tile and Chapter 4, unless Energy triggers Burnout first.
 
-Default rule (configurable): if `Energy` reaches 0, the run ends in a burnout exit ending.
+Option 2 always ends in E06. Option 3 ends female with child in E04, female without child in E07, and male in E04 with the male authored front. This replaces the prototype’s generic numerical-failure exit.
 
-Debug mode: add `?debug=1` to the URL to show the development stats panel and current card id during play. That panel remains debug-only; the completed-career summary is available without debug mode.
+### The System — C4-B
 
----
+| Proposal | Choice 1 | Choice 2 | Choice 3 |
+|---|---|---|---|
+| transparent | Requires Reputation > 5; approve transparent | Downgrade to coordinator | Withdraw; no policy |
+| coordinator | Requires Reputation > 4; approve coordinator | Downgrade to zero_tolerance | Withdraw; no policy |
+| zero_tolerance | Approve, no gate | Requires Reputation > 5; upgrade to coordinator | Withdraw; no policy |
 
-## 5. Scenario cards
+Thresholds are strictly greater where shown, checked before the selected delta. Missing thresholds produce a grey option and the source thought, not a new invented ending. After the accepted result and return to START, final policy selects E12/E13/E14, subject to Burnout priority.
 
-Each scenario card shows: chapter label, title, scene text, NPC portrait (with expression), and a small **"Why does this happen?"** toggle that reveals the card's background note (theory + reading). The player picks 1 of 3 options (click, or keys `1` `2` `3`). Ordinary choices and passed Boss checks show the result text and the NPC's new expression, then **Continue**. A failed Boss check skips this result screen and opens the ending card immediately.
+## 6. Policy inheritance and next career
 
-Conditions let an option (or a whole card variant) appear only if earlier things happened. Syntax, combined with `;` meaning AND:
+`zero_tolerance` and withdrawal make no next-career mechanical change. `coordinator` removes the female Reputation −1 from the applicable C2-04A/C option 2; C2-04B option 2 is already +1 and remains +1. `transparent` cancels female C2-02 option-2 Network −1, applies the C2-B option-2 recognition change above, and removes the maternal-assumption Availability −1 at Ch3 entry. Do not silently grant coordinator effects to transparent; the source lists distinct effects.
 
-- `C1-02=2` → the player chose option 2 on card C1-02 this run
-- `policy:formal_recruitment` → that policy is active (set by a previous round's Creative Director)
-- `round>=2` → this is the second career or later
+A completed Creative Director, or the explicit E05 exception, becomes the next Gatekeeper. Other endings use the default Director. The new career lets the player choose a pawn again, following the source’s final instruction; the hired intern is recorded but does not force the next pawn. All new careers start from the same six values.
 
-### Resident guide
+## 7. Terminal cards, milestones and epilogue
 
-The guide reads its identity from `public/data/guide.json` and authored notes from `public/data/guide.csv` (§12). The template contains `GENERAL`, `PROMOTION` and the 20 board card ids, one row per id. All card-specific advice, context, theory and references are initially blank for the team to write; `GENERAL` contains navigation guidance only. Do not invent quotations or theory claims to fill these blanks.
-
-- Use the current card's advice before its choice; a blank advice field falls back to `GENERAL` advice. `PROMOTION` covers the Creative Director scene.
-- If both the current guide row's industry context and theory are blank, use the current scenario's background and, unless explicitly supplied in the guide row, its reference.
-- If the guide row supplies its own industry context or theory, use that independent text and its own reference only. Do not silently borrow a scenario citation to support newly authored claims.
-- The guide is optional. Persist its visibility preference as `settings.guideHidden`; older saves without this setting remain valid and default to visible. This is a display preference, not a game-rule input.
-
----
-
-## 6. Bosses
-
-A boss is a 3-option card like any other, but its outcome is **pass** or **fail**, decided by a rule: current stats vs. the boss's per-pawn threshold, plus the chosen option's modifier. Deterministic.
-
-Use the actual numerical check, not wording in a result cell, to determine success. If that check fails, end the career and show its ending card immediately; there is no separate failure-result Continue step. Starting values, stat deltas, thresholds and modifiers are not rebalanced by this flow change.
-
-| Boss | What it checks (from the design doc) | On failed numerical check |
+| Id | Card | Trigger |
 |---|---|---|
-| The Gatekeeper | Skill + professional image, plus a hidden "fit" check | Exit ending: never got in |
-| The Old Boys' Network | Skill **and** Network ("merit alone is not enough") | Exit ending: stalled |
-| The Ideal Worker | Energy and Availability (always available, no care duties) | Exit ending: "a personal choice" |
-| The System | Balancing Profit, Reputation, Worker Wellbeing, Diversity, Deadline (design intent); the current numerical check has no fail threshold | No new failure condition; retain the existing no-fail behavior. Its final-choice ending mapping remains a team decision |
+| E02 | A Different Door | Gatekeeper coordination offer |
+| E03 | The Door Stays Closed | Gatekeeper rejection |
+| E04 | A Personal Choice | Ideal Worker exit; male front differs |
+| E05 | Family Man | Male partner-primary promotion route |
+| E06 | Staying Put | Decline Ideal Worker promotion |
+| E07 | Maybe It Was Just Me | Female without child exits at Ideal Worker |
+| E08 | Personal Reasons | Female resignation in C2-04 A/B/C |
+| E09 | Off the List | Female requests transparent review at C2-B |
+| E10 | The Official Version | C2-03 D then C2-04D |
+| E11 | Burnout | Energy ≤ 0 at any chapter |
+| E12 | Nothing Changed | Finish with zero_tolerance or no policy |
+| E13 | A Small Step Forward | Finish with coordinator |
+| E14 | Rewriting the Rules | Finish with transparent |
 
-**Round 2 and later:** the Gatekeeper is **the previous round's Creative Director** (same name, pawn and badge colour). Their dialogue reflects the policies they set. If the previous round never reached Creative Director, the Gatekeeper is a default NPC director ("someone else got the chair").
+CH1-E01 Through the Door and CH2-E07 Moving Up are separate milestone ids. Their displayed source ids remain E01 and E07, preserving authorship while avoiding the two distinct E07 cards colliding. Milestones flip to theory/references during the chapter transition and continue the same career. They do not appear in Gallery, archive a terminal report or disclose stats. Gallery contains only the 13 terminal endings.
 
-Immediate exit on a failed Boss check is confirmed by the designer in v0.5. The System remains exempt because its existing check has no failing threshold; do not introduce one as part of this change.
+Terminal fronts show source text, source rulebook note and six final values. Backs show Theory, References and the per-career numerical review. Explain the abilities from the data copy; distinguish actual changes at limits. Missing references are shown as missing. Reports remain separate for each completed career and include chapter-entry effects; the Chapter 3 maternal-assumption explanation is revealed only in this ending recap through `recapText`, never in the opening scene. Recorded outcome text can be expanded under What followed. Gallery keeps locked cards undisclosed, and reveals only the pawn fronts that have been earned.
 
----
+The epilogue is available after E12/E13/E14 only. The source’s epilogue trigger and final note differ; the final note plus its full-career wording support this choice. Do not tell an early exit that it completed all four chapters.
 
-## 7. Chapter 4: hiring and policy
+## 8. Guide and story ownership
 
-The player must first pass The Ideal Worker's actual Boss check, then reach the Creative Director tile and see the promotion scene before entering Chapter 4. Failing The Ideal Worker opens an ending immediately and cannot lead to hiring or policy choices. Preserve the promotion scene: it marks the change from employee to decision-maker.
+Use the current resolved scenario’s `guideAdvice` from the source’s 规则书 column before choices. Its tone is the team’s cheerful industry-common-sense voice. Industry background remains the neutral source background; theory and citations are revealed on the authored card backs. Do not rewrite the guide into an all-knowing moral explanation.
 
-- **Hiring:** choose 1 of 3 intern candidates. Each has a name, gender, skills and a short blurb (e.g. a woman excellent at both creative and organisational work, a man with average skills who presents confidently, a candidate who needs flexible working). **The chosen intern becomes the playable character of the next round.**
-- **Policy:** spend a limited number of Power Tokens (MVP: pick 1) on rules such as formal recruitment, childcare support, flexible working, an anti-harassment policy, intimacy coordination. Each has a cost and a benefit. Chosen policies are stored and **change the next round** (via `policy:` conditions and boss rules).
+Guide identity and portrait remain in `guide.json`. `guide.csv` retains generic navigation fallbacks. Hide advice/Ask the guide persist a display preference only. Advice does not choose for the player or reveal thresholds. Multi-line theory and references remain readable with vertical scrolling; avoid horizontal overflow.
 
-MVP effect that must work: **formal recruitment** removes the hidden "fit" penalty at the next round's Gatekeeper. Other policy effects are stretch goals.
+## 9. Saves and migration
 
-Candidates and policies live in `public/data/candidates.json` and `public/data/policies.json` (placeholder entries until the writers fill them in).
+Current content version is `team-2026-11-03`. Preserve the `sameRules.` storage key. Save choices, flags, current phase, chapter introductions already applied, actual selected scenario snapshots, numerical event history, career archives and Gallery unlocks.
 
----
+The earlier prototype used different stat and ending meanings. On migration, preserve it in `legacyArchive`, clear only the active formal-story slot and start the new content separately. Gallery labels archived prototype records explicitly and uses `legacy-data.json` for their old titles/text. Do not reinterpret old E02 as new E02, merge old numbers into six-stat reports, fabricate missing history, or discard old records. Refreshes must neither double-apply chapter effects nor duplicate reports/milestones.
 
-## 8. Endings and the Gallery
+## 10. Art and audio handoff
 
-- A run ends when the pawn **returns to START** (the "?" tile flips over) or exits early (failed boss, burnout).
-- The ending is picked by an ordered list of rules in code (first match wins); its text comes from `endings.csv`.
-- Ending card: **front** = name + ending text + art, followed by all eight final stats beneath the narrative; **back** = separate **Theory** and **References** sections, sourced from `endings.csv` fields `背面：理论概念` and `对应文献`, followed by the completed career's numerical recap. The player can flip it. Preserve paragraph breaks and multiline citations; long text scrolls within the reading area. Empty references remain visibly unfilled, never generated or inferred.
-- The recap lists the actual selected options in chronological order, their requested increases/decreases and their actual applied changes. When a stat limit changes the effect, make the difference explicit (for example, a requested `+3` at `9` applies only `+1` with a maximum of `10`). Explain all eight stats using interface descriptions from `copy.json.statDescriptions`; these explanations are not replacement story text or formal theory. Do not introduce new citations or balancing rules.
-- Record numerical events when choices are applied and preserve the finished career's final values and report. Older saves remain playable. If exact historical snapshots are unavailable, disclose missing or reconstructed records clearly; never present a reconstructed value as an exact historical snapshot or borrow another career's values.
-- **Gallery:** a grid of all ending cards. Unlocked cards show their front (click to flip); locked cards show a silhouette and "???". Each unlocked card records which pawn unlocked it.
-- The same theory/reference layout, numerical report and scrolling behavior applies in the Gallery. Keep completed-career reports separate and label their career/round number, including when multiple careers unlock the same ending. Legacy unlocks without a report remain accessible with a clear missing-record notice.
-- Some endings can only be reached by one pawn. The gallery itself then shows the gap between the two pawns without the game ever saying it. **This is a key design idea; do not "fix" it.**
-- Target: 6–8 endings.
+The designer has prepared two player pawns, four Boss designs and audio but has not placed them in the project yet. Do not regenerate those designs or claim they are integrated. The detailed, source-based list and generation prompts are in [ART_REQUIREMENTS.zh-CN.html](ART_REQUIREMENTS.zh-CN.html); do not make every NPC produce every expression if its scenes do not use them.
 
----
+Runtime art lives under `public/assets/characters`, `bosses`, `npc`, `cards`, `ui`; source/reference material under `docs/reference/players`, `bosses`, `audio`. `public/assets/manifest.json` maps stable resource keys to editable file locations. Users may move files and update paths without changing story ids. Rebuild/restart after adding assets as required by the asset index.
 
-## 9. The loop and what is saved
+Audio entry keys are `audio/bgm_main`, `audio/bgm_boss`, `audio/sfx_move`, `audio/sfx_card`, `audio/sfx_choose`, `audio/sfx_ending`. Store files in `public/assets/audio` or update the manifest. The framework supports optional main/Boss loops and neutral event sounds, waits for a user gesture, respects Settings Sound and remains silent when files are absent. Actual files still require playback/loop/volume checks after delivery.
 
-Saved in `localStorage` (one key prefix, e.g. `sameRules.`):
+## 11. Source issues and verification
 
-| Key | Content |
-|---|---|
-| `currentRun` | Full state of the run in progress, including numerical choice-event snapshots (auto-saved after every choice; hidden during play) |
-| `lineage` | One entry per finished career: character name, pawn, ending id, reached Creative Director?, policies set, intern hired, and an archived final-stat/choice report when available |
-| `gallery` | Unlocked ending ids, with which pawn and which round |
-| `settings` | Reduced motion, sound, `guideHidden` (optional advice visibility; absent in older saves means visible) |
+**E03 is currently unreachable under the authored numbers.** Exhaustive Chapter 1 coverage of 162 routes (81 per pawn) always ends with Creativity ≥ 5 or Communication ≥ 5. Keep E03 and the original values; the team must explicitly choose any change that makes rejection collectible. This is a source-design outcome, not a branch-engine failure. The other 12 terminal endings each have a verified path using real choices.
 
-New round:
+See `docs/source/2026-11-03-import-report.json` for all handling decisions. In particular, first-chapter ending references are missing; coordinator/transparent replacement dialogue is not provided; C2-04B’s note conflicts with its +1 cell; C2-B transparent changes result wording without overriding explicit delta cells; the male Ideal Worker locked thought is absent; optional E14 suffixes are omitted; the existing maximum is retained. Do not silently fill, translate additional story, rebalance, or manufacture citations.
 
-- Previous run reached Creative Director → the previous character becomes the **Gatekeeper**; the **hired intern** becomes the player's character (their gender decides the pawn).
-- Previous run did not reach Creative Director → default NPC Gatekeeper; the player gets a new character (same rule as round 1).
-- Round 1 character: see §11 (choose or random).
+Use `npm run validate-data`, `npm test`, `npm run build`, then browser-test the changed flow. The validation enumerates visible branches instead of enforcing three choices everywhere. Import fidelity tests compare all 111 original rows and the documented derived variants. The final local checks passed: 115 tests across 12 files, data validation with 11 documented source warnings, and production build. Browser acceptance covered the female E14 full career, male D-route E10, locked-option thoughts and reload, ending values/reviews, epilogue, next-career selection and 390px layouts, with no desktop warning/error logs. Policy inheritance and archive migration are automated-test coverage, not a claim of a full additional manual walkthrough. Asset-checklist search and prompt expansion were checked; audio playback remains unverified until files arrive. Publication has not occurred; detailed local evidence is in README and AI_LOG.
 
-Settings has **Reset all progress** (clears everything, with a confirm step built as an in-page dialog, not `window.confirm`).
+Implementation remains Vite + strict TypeScript, no UI framework/backend/game engine. Game state transitions are pure functions; UI reads resolved data. The course AI appendix is maintained in `AI_LOG.md`.
 
-Wording for the team: "you cannot save or undo within a career, but the game remembers your past careers".
+## 12. Historical reference
 
-Keep the existing storage prefix and accept older saves without report fields. Archive each completed career once; refreshing an ending or starting the next career must not duplicate a report or overwrite an earlier career's numbers. Missing or reconstructed legacy records must be identified as such in the ending/Gallery display.
-
----
-
-## 10. Art direction
-
-**Style:** 1930s black-and-white rubber-hose cartoon (think early animation), fully 2D, flat fills and thick black outlines. Colour is rare and muted. The designer approved fixed brushed-metal gradients for the six special board tiles and, in v0.8, the four matching Boss history-card faces. Characters, ordinary history cards, full-size cards and ordinary tiles retain their existing flat treatment.
-
-**Characters:**
-
-- Player pawn = an **ID badge with rubber-hose limbs**: a landscape badge as the body, a clip and two lanyard straps on top, noodle arms on hips with white gloves, black round shoes. Gender shows **only** as the lanyard colour and the two small ♀/♂ symbols on the cheeks. Everything else is identical.
-- Faces (all characters): big white oval eyes with a thick black outline, black pupils, simple brows and mouth. Bosses use the same face construction.
-
-**Colour tokens** (centralize in `src/styles/tokens.css`; use the approved palette and metal finishes below):
-
-| Token | Value | Use |
-|---|---|---|
-| `--ink` | `#141414` | Outlines, text, dark cards |
-| `--paper` | `#E6DFCF` | Page background |
-| `--board` | `#D3CBB8` | Board base (5px ink border, 10px hard ink shadow) |
-| `--panel` | `#EFE9DB` | Centre card area |
-| `--cream` | `#F4EFE3` | Card faces, light figures |
-| `--ivory` | `#F7F2E6` | Existing light interface accents; special tiles now use the assigned metal finish |
-| `--tile-hidden` | `#2A2825` | Ordinary unvisited tiles |
-| `--tile-hidden-mark` | `#5E584F` | "?" on unwalked tiles |
-| `--grey` | `#A39B8C` | Secondary lines |
-| `--female` | `#C7716B` | Female lanyard and cheek symbols only |
-| `--male` | `#5B7FA6` | Male lanyard and cheek symbols only |
-| `--tile-walked` | `var(--cream)` = `#F4EFE3` | All ordinary visited tiles; fixed in v0.10 |
-
-Approved special-tile tokens use each base name plus `-shadow`, `-light` and `-edge`. These colors form a fixed brushed-metal background; the four Boss history-card faces reuse the matching red/green/blue/purple tokens. Colors do not respond to success, failure, pawn or choice.
-
-| Base token | Base / shadow / light / edge | Tile |
-|---|---|---|
-| `--metal-red` | `#A95050` / `#7B2E32` / `#E2B1A4` / `#5A2329` | The Gatekeeper |
-| `--metal-green` | `#678E73` / `#305A4F` / `#CFDCC0` / `#234439` | The Old Boys' Network |
-| `--metal-blue` | `#6F92B0` / `#315676` / `#D2E0E7` / `#263D53` | The Ideal Worker |
-| `--metal-purple` | `#92779E` / `#523A65` / `#DECEE4` / `#3D2B4B` | The System |
-| `--metal-silver` | `#BAC1C3` / `#72797C` / `#F0F2ED` / `#4C5357` | Creative Director |
-| `--metal-gold` | `#CDAA55` / `#876127` / `#F4E7AF` / `#65451D` | START and finish (the same tile) |
-
-**Type:** `Limelight` for titles, boss names and "?"; `Josefin Sans` for everything else (both from Google Fonts).
-
-**Shapes:** tiles 12px radius, 4px ink border; full-size cards 12px radius with a 2px inner border inset 7px and small diamond corner ornaments; buttons are real `<button>` elements styled as ink-outlined cream cards. History mini-card faces follow the simpler markings in §3.
-
-**Film look:** a fixed full-screen grain overlay (SVG `feTurbulence`, greyscale, `mix-blend-mode: multiply`, opacity ~0.2) and an optional slow vignette.
-
-**Animation** (all CSS/Web Animations, all disabled by `prefers-reduced-motion` and the settings toggle):
-
-| Motion | Spec |
-|---|---|
-| Idle bob (pawn, bosses, NPCs) | translateY 0 → −4px with a slight squash, ~600ms ease-in-out, alternate, infinite |
-| Pawn hop | ~450ms arc to the next tile, small squash on landing |
-| Card flip | scaleX 1 → 0 (150ms), swap face, 0 → 1 (150ms) |
-| Tile light-up | the ordinary tile's cream fill spreads from the centre over ~400ms |
-| START → "?" flip | same flip as a card, when the pawn leaves START |
-
-**Art assets.** All art is drawn by the designer and added to `public/assets/` over time (SVG preferred, PNG allowed). Until a file exists, the game shows a clearly labelled placeholder box of the right size. Load art by these names so new files slot in without code changes:
-
-| File (in `public/assets/`) | Use |
-|---|---|
-| `characters/pawn_female.*`, `pawn_male.*` | Player pawn |
-| `bosses/gatekeeper.*`, `old_boys_network.*`, `ideal_worker.*`, `the_system.*` | Boss figures |
-| `npc/<npc-id>_<expression>.*` | NPC portraits; expressions `pleased`, `neutral`, `appraising`, `frowning`, `awkward`, `cold` |
-| `npc/guide_neutral.svg`, `.png` or `.webp` | Resident guide portrait; `guide.json` refers to manifest key `npc/guide_neutral` without an extension |
-| `cards/card_back.*`, `cards/ending_<id>.*` | Card back, ending card art |
-| `ui/title.*`, `ui/gallery_frame.*` | Title screen, gallery frame |
-
-Reference images from the designer go in `docs/reference/`; match them when they exist.
-
----
-
-## 11. Open decisions (implement as config with these defaults)
-
-Put all of these in `src/config/rules.ts` so the team can change them without touching game logic.
-
-| Decision | Default for now |
-|---|---|
-| Round 1 character: choose pawn or random | `"choose"` |
-| Starting stats and boss thresholds per pawn | All stats 5; placeholder thresholds |
-| Which policies exist and their next-round effects | Formal recruitment only (removes Gatekeeper "fit" penalty) |
-| Number of endings | 6–8 |
-
-Ordinary tile colors are settled in v0.10: dark before visiting, cream afterward. Maintain their tokens in `src/styles/tokens.css`; the old three-color visited palette is no longer a rule-config option. Special-tile and Boss history-card metals remain as specified in §10.
-
----
-
-## 12. Data (written by the team in Google Sheets)
-
-The writers fill a shared Google Sheet; the developer exports each tab as CSV into `public/data/`. **All story text comes from these files. Never hard-code story text.** Game text is in English; some helper columns are in Chinese.
-
-`copy.json` supplies shared narrative text and the two distinct names: `title: "Genderpoly"` for the game and `companyName: "FreeDOM"` for the workplace shown in the board centre. Renaming either display name does not rename browser storage, the repository or the existing public URL.
-
-Its optional `statDescriptions` object supplies editable interface explanations keyed by the eight stat names in §4. These descriptions explain the ending summary; changing them does not change stat mechanics. Story, ending narrative, formal theory and references remain authored by the team in the existing CSV files. Do not add a separate `stats.json` file.
-
-### `scenarios.csv` — one row per option
-
-Headers are in Chinese as the team uses them; map them to these keys:
-
-| Sheet header | Key | Notes |
-|---|---|---|
-| 卡号 | `cardId` | `C1-01` … `C4-03`; bosses `C1-B` … `C4-B` |
-| 章节 | `chapter` | `Ch1`–`Ch4` |
-| 格子 | `tile` | 1–5, or `Boss` |
-| 类型 | `type` | `情境` = scenario, `Boss` = boss |
-| 场景标题 | `title` | |
-| 场景描述 | `scene` | |
-| 背景信息（游戏内可翻看） | `background` | Shown behind "Why does this happen?" |
-| NPC | `npc` | |
-| 出现条件（可选） | `condition` | See §5 |
-| 选项 | `option` | 1–3 |
-| 适用棋子 | `pawn` | `都可` = both, `仅♀` = female only, `仅♂` = male only |
-| 选项文字 | `optionText` | |
-| 结果 ♀ / 结果 ♂ | `resultF` / `resultM` | |
-| NPC 表情 ♀ / ♂ | `exprF` / `exprM` | 满意 pleased · 中性 neutral · 打量 appraising · 皱眉 frowning · 尴尬 awkward · 冷淡 cold |
-| 数值变化 ♀ / ♂ | `deltaF` / `deltaM` | `Network+1, Energy-1` |
-| 对应文献 | `reference` | Available in the guide's rulebook when its context falls back to this scenario |
-| 备注 | `notes` | Not shown in game |
-
-Rows of the same card repeat the card-level columns. Skip rows whose `optionText` is empty. Grey example rows in the sheet (card `C2-03`) are samples and may be deleted by the team.
-
-### `endings.csv` — one row per ending
-
-| Sheet header | Key |
-|---|---|
-| 编号 | `id` (`E01`…) |
-| 结局名称 | `name` |
-| 触发条件 | `triggerNote` (human description; the real rule lives in code) |
-| 适用棋子 | `pawn` |
-| 结局文字（正面） | `front` |
-| 背面：理论概念 | `back` |
-| 对应文献 | `reference` |
-| 对下一局的影响 | `nextRoundNote` |
-| 美术需求 | `artNote` |
-| 备注 | `notes` |
-
-### `guide.csv` — one row per guide context
-
-The supplied template has 22 rows: `GENERAL`, `PROMOTION`, and all 20 scenario/Boss card ids. Keep each id unique; this file does not use the scenario table's one-row-per-option layout.
-
-| Sheet header | Key | Notes |
-|---|---|---|
-| 卡号 | `cardId` | `GENERAL`, `PROMOTION`, or an existing board card id |
-| 选择前建议 | `advice` | `GENERAL` is required; other blank advice falls back to it |
-| 行业背景 | `background` | Optional industry context |
-| 理论解释 | `theory` | Optional team-authored theoretical explanation |
-| 对应文献 | `reference` | References supporting this row's text; multiline text is supported |
-| 备注 | `notes` | Team notes, not displayed |
-
-If both `background` and `theory` are blank on a choice card, the guide uses that scenario's background and its reference, unless the guide row supplies a reference. When either independent context field is filled, no scenario reference is automatically inherited. `GENERAL` supplies navigation guidance, not invented card-specific claims. The team will fill the currently empty dedicated rows.
-
-`guide.json` contains nonempty `name`, `role` and `portrait` fields. The default portrait is `npc/guide_neutral`, which is a resource key in `public/assets/manifest.json`, not a filename or filesystem path.
-
-### Validation
-
-`npm run validate-data` must check: every card gives **each pawn exactly 3 options**; card ids are unique and match the board's 20 slots; stat names in deltas are valid; conditions parse; every ending id referenced in code exists in `endings.csv`. Print readable errors (the team are not programmers).
-
-Guide validation checks the six CSV headers, recognized and unique context ids, required `GENERAL` advice, and nonempty guide identity fields with a valid `npc/...` portrait key. Blank dedicated advice and context are intentional and use the fallback rules above.
-
----
-
-## 13. Tech
-
-- **Vite + TypeScript**, no UI framework, no game engine, no 3D. DOM + CSS + inline SVG.
-- `papaparse` for CSV. No backend; everything runs in the browser.
-- Game logic is a small state machine with pure functions (`state + choice → new state`), separate from rendering, so it can be unit-tested (`vitest`).
-- Deploy to **GitHub Pages** through a GitHub Actions workflow (set Vite `base` correctly).
-- Desktop-first at 1280×800; must be playable on a phone in portrait (board scales, cards become full-screen sheets).
-- Accessible: real buttons, keyboard play (`1` `2` `3`, `Enter`), visible focus, text contrast ≥ 4.5:1.
-
-Suggested structure:
-
-```
-src/
-  main.ts
-  config/rules.ts        # all tunable numbers and open decisions (§11)
-  data/load.ts           # CSV/JSON loading + header mapping
-  data/validate.ts       # used by validate-data
-  data/guide.ts          # guide.csv / guide.json parsing and validation
-  game/state.ts          # types + state machine
-  game/conditions.ts     # condition parser
-  game/bosses.ts         # boss rules
-  game/endings.ts        # ordered ending rules
-  game/persistence.ts    # localStorage
-  ui/board.ts  ui/card.ts  ui/gallery.ts  ui/title.ts  ui/settings.ts
-  ui/guide.ts            # optional advice, context and references
-  styles/tokens.css  styles/*.css
-public/
-  assets/...             # art drawn by the designer (placeholders until added)
-  data/*.csv  data/*.json
-  data/guide.csv         # 22 guide contexts, authored by the team
-  data/guide.json        # guide name, role and portrait resource key
-```
-
----
-
-## 14. Milestones
-
-| Milestone | Date | Done when |
-|---|---|---|
-| M0 Setup | 26 Oct | Repo runs locally; deploys to GitHub Pages; tokens, fonts, grain overlay in place |
-| M1 Playable prototype | 30 Oct | A full run works with the sample/placeholder data: board, hop, scenario cards, hidden stats, per-pawn options, bosses, return to START, an ending card |
-| M2 Loop + gallery | 1 Nov | Real CSV data loads and validates; Chapter 4 hiring/policy; ending gallery; round 2 with previous Creative Director as Gatekeeper; persistence + reset |
-| M3 Art + motion | 2 Nov | Final art in, animations, sound with a credits file, mobile layout |
-| Freeze | 3 Nov | Only bug fixes after this |
-| M4 Release | 4 Nov | Tested on desktop and phone browsers; final deploy |
-
-If on 1 Nov a full run is still unstable: drop animations first. The loop must keep at least "previous Creative Director becomes the Gatekeeper".
-
----
-
-## 15. Out of scope
-
-Multiplayer, accounts, a backend, 3D, save slots, procedural content, in-game text editing.
+The v0.11 specification and older README/content-guide snapshots are under `docs/source/prototype-v0.11/`. Their eight-stat baseline, fixed three-option layout, generic Boss checks and forced intern inheritance describe the old prototype, not current requirements. Existing visual interactions and designer-approved metallic surfaces remain current unless explicitly superseded above.

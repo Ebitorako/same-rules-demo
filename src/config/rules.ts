@@ -1,37 +1,28 @@
-import { STAT_NAMES, type Pawn, type Stats, type StatName } from '../game/types';
+import type { Pawn, Stats, StatName } from '../game/types';
 
 export interface BossCheck {
-  stats: StatName[];
-  minimum: Record<Pawn, number>;
-  optionModifiers: Record<number, number>;
+  stats: StatName[]; minimum: Record<Pawn, number>; optionModifiers: Record<number, number>;
 }
 
-// These are prototype balancing values, kept together for the team's rules pass.
+export const CONTENT_VERSION = 'team-2026-11-03';
+
+// Starting values and gates come from the team's chapter sheets. The existing
+// 0–10 bounds remain until the writers specify a different scale.
 export const RULES = {
   firstCareerPawn: 'choose' as 'choose' | 'random',
   stats: { initial: 5, minimum: 0, maximum: 10 },
+  startingStats: { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 } as Stats,
   burnoutAtZero: true,
-  powerTokens: 1,
-  hiring: { cardId: 'C4-01', candidates: { 1: 'cand_a', 2: 'cand_b', 3: 'cand_c' } as Record<number, string> },
-  policy: { cardId: 'C4-02', options: { 1: 'formal_recruitment' } as Record<number, string>, formalRecruitment: 'formal_recruitment', tokenCost: 1 },
-  gatekeeperFitPenalty: { female: 2, male: 0 } as Record<Pawn, number>,
-  bosses: {
-    'C1-B': [{ stats: ['Skill', 'Reputation'], minimum: { female: 9, male: 9 }, optionModifiers: { 1: 2, 2: 0, 3: 1 } }],
-    'C2-B': [
-      { stats: ['Skill'], minimum: { female: 5, male: 5 }, optionModifiers: { 1: 1, 2: 0, 3: 1 } },
-      { stats: ['Network'], minimum: { female: 6, male: 5 }, optionModifiers: { 1: 1, 2: 2, 3: 0 } },
-    ],
-    'C3-B': [
-      { stats: ['Energy'], minimum: { female: 4, male: 4 }, optionModifiers: { 1: 0, 2: 1, 3: 0 } },
-      { stats: ['Availability'], minimum: { female: 6, male: 5 }, optionModifiers: { 1: 1, 2: -1, 3: 0 } },
-    ],
-    'C4-B': [],
-  } as Record<string, BossCheck[]>,
-  endings: { idealWorker: 'E01', completed: 'E02', gatekeeper: 'E03', network: 'E04', burnout: 'E05', policy: 'E06' },
+  lowEnergyWarning: 1,
+  powerTokens: 0,
+  hiring: { cardId: 'C4-01', candidates: {} as Record<number, string> },
+  policy: { cardId: 'C4-03', options: { 1: 'zero_tolerance', 2: 'coordinator', 3: 'transparent' } as Record<number, string>, formalRecruitment: 'transparent', tokenCost: 0 },
+  gatekeeperFitPenalty: { female: 0, male: 0 } as Record<Pawn, number>,
+  gates: { creativityEntry: 5, communicationEntry: 5, networkPromotion: 5, creativityPromotion: 6, idealAvailability: 3, transparentReputation: 5, coordinatorReputation: 4 },
+  bosses: {} as Record<string, BossCheck[]>,
+  endings: { coordinator: 'E02', gatekeeper: 'E03', family: 'E04', balanced: 'E05', idealWorker: 'E06', childfree: 'E07', resignation: 'E08', network: 'E09', official: 'E10', burnout: 'E11', completed: 'E12', limitedPolicy: 'E13', policy: 'E14' },
   animation: { hopMs: 450, flipHalfMs: 150, lightMs: 400, idleMs: 600 },
   storagePrefix: 'sameRules.',
 } as const;
 
-export function initialStats(): Stats {
-  return Object.fromEntries(STAT_NAMES.map((name) => [name, RULES.stats.initial])) as Stats;
-}
+export function initialStats(): Stats { return { ...RULES.startingStats }; }

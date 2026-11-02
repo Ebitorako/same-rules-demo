@@ -15,7 +15,8 @@ vi.mock('virtual:art-index', () => ({ default: [] }));
 const read = (file: string) => readFileSync(`public/data/${file}`, 'utf8');
 const policies = JSON.parse(read('policies.json'));
 const data: GameData = {
-  scenarios: parseScenarios(read('scenarios.csv')), endings: parseEndings(read('endings.csv')),
+  ...JSON.parse(read('team-content.json')),
+  scenarios: JSON.parse(read('team-content.json')).scenarios, endings: JSON.parse(read('team-content.json')).endings,
   candidates: JSON.parse(read('candidates.json')).candidates,
   policies: policies.policies, powerTokens: policies.powerTokens, copy: JSON.parse(read('copy.json')),
 };
@@ -23,31 +24,31 @@ const values = (overrides: Partial<Stats> = {}): Stats => ({ ...initialStats(), 
 const zeros = (): Stats => Object.fromEntries(Object.keys(initialStats()).map(key => [key, 0])) as Stats;
 function report(round = 1): EndingRecap {
   return { version: 1, round, character: { name: `Player ${round}`, pawn: 'female' },
-    initialStats: values({ Skill: 9 }), finalStats: values({ Skill: 10, Energy: 3 }), bounds: { minimum: 0, maximum: 10 },
+    initialStats: values({ Creativity: 9, Energy: 5 }), finalStats: values({ Creativity: 10, Energy: 3 }), bounds: { minimum: 0, maximum: 10 },
     status: 'recorded', issues: [], steps: [{ cardId: 'C1-01', order: 1, choice: 2, title: 'A demanding brief',
-      optionText: 'Take on the project.', source: 'recorded', before: values({ Skill: 9 }), after: values({ Skill: 10, Energy: 3 }),
-      requestedDelta: { ...zeros(), Skill: 3, Energy: -2 }, actualDelta: { ...zeros(), Skill: 1, Energy: -2 },
+      optionText: 'Take on the project.', source: 'recorded', before: values({ Creativity: 9, Energy: 5 }), after: values({ Creativity: 10, Energy: 3 }),
+      requestedDelta: { ...zeros(), Creativity: 3, Energy: -2 }, actualDelta: { ...zeros(), Creativity: 1, Energy: -2 },
       bounds: { minimum: 0, maximum: 10 } }],
   };
 }
 function career(recap: EndingRecap): Career {
-  return { round: recap.round, character: recap.character, endingId: 'E01', reachedDirector: false,
+  return { round: recap.round, character: recap.character, endingId: 'E02', reachedDirector: false,
     policiesSet: [], hiredIntern: null, recap };
 }
 function finished(): AppState {
   const state = startCareer(createInitialState(), 'female', data);
   const recap = report();
-  state.run = { ...state.run!, phase: 'ending', endingId: 'E01', stats: recap.finalStats!, character: recap.character };
+  state.run = { ...state.run!, phase: 'ending', endingId: 'E02', stats: recap.finalStats!, character: recap.character };
   state.lineage = [career(recap)];
-  state.gallery = [{ endingId: 'E01', pawn: 'female', name: recap.character.name, round: 1 }];
+  state.gallery = [{ endingId: 'E02', pawn: 'female', name: recap.character.name, round: 1 }];
   return state;
 }
 
 describe('ending-only numerical disclosure', () => {
-  it('puts eight saved final values below the ending story and review after references', () => {
+  it('puts six saved final values below the ending story and review after references', () => {
     const state = finished();
     const front = endingScreen(state, data, false), back = endingScreen(state, data, true);
-    expect(front.match(/<dt>/g)).toHaveLength(8);
+    expect(front.match(/<dt>/g)).toHaveLength(6);
     expect(front).toContain('<dt>Energy</dt><dd>3</dd>');
     expect(front.indexOf('Final values')).toBeGreaterThan(front.indexOf(data.endings[0].front));
     expect(back.indexOf('<h3>Numerical review</h3>')).toBeGreaterThan(back.indexOf('<h3>References</h3>'));
@@ -83,32 +84,32 @@ describe('ending-only numerical disclosure', () => {
     expect(finalValues(old)).toContain('Final values were not saved');
     expect(finalValues(old)).not.toContain('<dd>');
     const partial = { ...old, finalStats: values(), status: 'partial' as const };
-    expect(numericalReview(partial, data.copy)).toContain('<td>—</td><td>5</td><td>—</td>');
+    expect(numericalReview(partial, data.copy)).toContain('<td>—</td><td>3</td><td>—</td>');
     expect(numericalReview(partial, data.copy)).toContain('missing changes are not estimated');
   });
 
   it('keeps different careers separate in the gallery and never substitutes a live run', () => {
     const state = finished(), second = report(2);
-    second.finalStats!.Money = 2;
-    second.steps[0].after!.Money = 2;
-    second.steps[0].requestedDelta!.Money = -3;
-    second.steps[0].actualDelta!.Money = -3;
+    second.finalStats!.Network = 2;
+    second.steps[0].after!.Network = 2;
+    second.steps[0].requestedDelta!.Network = -3;
+    second.steps[0].actualDelta!.Network = -3;
     state.lineage.push(career(second));
-    state.run = { ...state.run!, round: 3, phase: 'board', endingId: null, stats: values({ Money: 9 }) };
+    state.run = { ...state.run!, round: 3, phase: 'board', endingId: null, stats: values({ Network: 9 }) };
     const html = galleryScreen(state, data, new Set());
     expect(html).toContain('Career 1 · Player 1');
     expect(html).toContain('Career 2 · Player 2');
-    expect(html).toContain('<dt>Money</dt><dd>2</dd>');
-    expect(html).not.toContain('<dt>Money</dt><dd>9</dd>');
+    expect(html).toContain('<dt>Network</dt><dd>2</dd>');
+    expect(html).not.toContain('<dt>Network</dt><dd>9</dd>');
     expect(html).not.toContain('Career 3');
-    expect(galleryScreen(createInitialState(), data, new Set(['E01']))).not.toContain('Final values');
+    expect(galleryScreen(createInitialState(), data, new Set(['E02']))).not.toContain('Final values');
   });
 
   it('escapes saved story text and editable ability explanations', () => {
     const recap = report();
     recap.steps[0].title = '<script>bad()</script>';
     recap.steps[0].optionText = '<img src=x onerror=bad()>\nSecond line';
-    const copy = { ...data.copy, statDescriptions: { Skill: '<b>Craft</b>' } };
+    const copy = { ...data.copy, statDescriptions: { Creativity: '<b>Craft</b>' } };
     const html = numericalReview(recap, copy);
     expect(html).toContain('&lt;script&gt;');
     expect(html).toContain('&lt;img src=x onerror=bad()&gt;<br>Second line');

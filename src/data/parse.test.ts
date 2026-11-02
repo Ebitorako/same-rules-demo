@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { parseDelta, parseEndings, parseScenarios } from './parse';
 
-const read = (name: string): string => readFileSync(resolve('public/data', name), 'utf8');
+const read = (name: string): string => readFileSync(resolve('docs/source/prototype-v0.11', name), 'utf8');
 
 describe('writer-facing CSV parser', () => {
   it('keeps the supplied scenario wording, quotes and pawn-specific option intact', () => {

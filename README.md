@@ -1,158 +1,76 @@
 # Genderpoly — 游戏 Demo
 
-这是 NMC5369 Media Project 的网页游戏骨架。游戏名为 **Genderpoly**，游戏内公司名为 **FreeDOM**。游戏界面使用英文；给组员和美术的操作说明使用中文。剧情、结局与图片分别放在独立文件夹，后续可逐批替换。
+NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，棋盘公司名 **FreeDOM**；剧情保留组员英文原文中的拼写。游戏使用英文，交接说明使用中文。
 
-目前内容包含完整流程所需的 **20 张卡位：16 张情境卡 + 4 张 Boss 卡**。除了保留的 `C2-03` 原始示例，其余新增文字用于测试流程，不是组员的最终稿。初始数值、Boss 门槛和结局判定也需要团队确认；能通关不代表已经完成游戏平衡。
+## 当前版本与试玩
 
-## 在线试玩
+**v0.12（2026-11-03）已在本地接入正式 CH1–4，并完成测试、构建与本轮浏览器验收；尚未发布。** 当前线上网站此前发布的是 v0.11，不要把它当作本轮正式内容已上线的证据。
 
-**[打开 Genderpoly 试玩](https://ebitorako.github.io/same-rules-demo/)** · **[GitHub 项目仓库](https://github.com/Ebitorako/same-rules-demo)**
+**115 项自动测试通过（12 个测试文件）**，数据检查与生产构建通过；数据检查保留11条已记录的源表提示。本地浏览器已实际完成女棋子20次选择到E14、男棋子D路线到E10、灰显选项的独白与刷新、结局复盘、终章和再开一局。在390×844手机尺寸检查了双列最终数值和剧情卡，没有横向溢出；桌面浏览器警告/错误为空。政策继承和旧档迁移由自动测试覆盖，本轮未再完整手工重测。截图见 [本轮验收截图](../story-integration-verification-2026-11-03/)，详细记录见 [AI_LOG](docs/AI_LOG.md)。
 
-把试玩链接发给组员即可，浏览器打开就能玩，无需 GitHub 账号或安装软件。点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，再点击 **Enter the studio**。棋盘上点击 **Next** 前进，普通选项或通过 Boss 后点击 **Continue**；Boss 实际数值检查失败时直接显示结局卡。
+[在线试玩地址](https://ebitorako.github.io/same-rules-demo/) · [GitHub 仓库](https://github.com/Ebitorako/same-rules-demo)
 
-GitHub Pages 首次发布已完成。之后把修改上传到仓库的 `main` 分支，会自动检查并更新同一个试玩网址；具体操作见[试玩网站发布说明](docs/DEPLOYMENT.zh-CN.md)。当前仍是包含占位剧情和占位美术的 Demo。
+本地试新版本：双击 [启动游戏.cmd](启动游戏.cmd)，或在本文件夹运行 `npm run dev`，打开提示的本地网址。点击 **Start a career → Female pawn / Male pawn → Enter the studio**；棋盘上用 **Next** 前进，点击选项后用 **Continue** 继续。支持键盘 `1`–`4`、`D` 和 `Enter`。灰色 Boss 选项只能阅读独白，不会替玩家选择或扣分。
 
-11 月 3 日的 **v0.11 已发布**到上面的同一试玩网址：职业结束后可查看八项最终能力值和逐次选择的数值复盘，游玩时仍隐藏数值。普通地块继续使用未走黑色、已走奶油白，特殊地块保留金属色，历史卡片保留自动重叠与点击回看。之后的本地修改仍需完成检查并上传，才会更新网站。游戏改名后继续使用这个网址，仓库名称和浏览器存档标识保持不变。
+游戏自动保存当前进度。这个版本会把旧原型的记录放入 Gallery 的 **Earlier prototype records**，不把旧结局编号和数值混入正式剧情。重新选择棋子即可开始正式内容；不要为了更新版本主动重置全部存档。
 
-## v0.11：结局揭示能力值与选择复盘（11 月 3 日，已上线）
+## 已接入什么
 
-游玩时和 **YOUR CHOICES** 的日常回顾中仍隐藏数值。一轮职业结束后，结局卡正面在正文下显示八项最终能力值；翻到背面，在 **Theory** 与 **References** 之后查看逐次选择、增加或扣减的数值，以及上下限造成的实际变化差异。例如能力原为 9、选项要求加 3、上限为 10 时，实际只增加 1。
+- 棋盘仍为 20 个剧情位置：16 个情境槽 + 4 个 Boss；共 111 行源选项，另有 3 行按 E05 下一局台词生成的条件版本。
+- 4 段章节开场、13 个终局（E02–E14），以及 2 张在章节过渡时可翻面查看、但不结束职业的章节里程碑（CH1-E01、CH2-E07）。Gallery 只收藏 13 个终局；完整通关后展示终章。
+- 六项能力：**Creativity 3、Communication 3、Network 2、Reputation 2、Availability 2、Energy 7**，男女起点一致。正式内容不再使用临时的 Skill、Money。
+- 第二章的 A/B/C/D 路线、第四选项、女性辞职选项；第三章的生育、伴侣照护与承诺标记；第四章招聘、政策方案、董事会门槛和下一局影响。
+- 规则书使用各分支原表的“规则书”台词。数值在游玩和 YOUR CHOICES 回顾中保持隐藏；终局正面显示六项最终值，背面在 Theory / References 后列出逐选择变化，也记录第三章开场的系统扣分。
+- 六个金属特殊地块、普通地块未走黑色/走过奶油白、历史卡自动重叠与点击回顾继续保留。
 
-复盘同时解释八项能力的含义。这些界面说明可在 [copy.json](public/data/copy.json) 的可选 `statDescriptions` 对象中编辑；它们不替代组员的剧情、结局理论或正式引用。此次改动不调整开局数值、Boss 门槛或结局判定。
+Boss 规则已改为正式稿：C1 邮件按能力自动分流；C2/C3/C4 未达门槛的选项灰显，其余选项仍可选择。详细门槛、直接离职和政策结局见 [GAME_SPEC.md](docs/GAME_SPEC.md)。Energy ≤ 1 提醒，Energy ≤ 0 立即进入 E11 Burnout；本次没有自行调平。
 
-Gallery 按职业局数分别保留已结束职业的报告，避免同一结局的不同分数混在一起。旧存档仍可继续；若旧记录缺少精确快照，会明确注明缺失或重建情况，以及重建所用的默认初始值，不把推算当成当时的精确记录。
+## 剧情与资源放哪里
 
-v0.11 已通过 **101 项自动测试、数据校验和构建**，代码 `9dcf521` 的[线上发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/41491077779)成功。浏览器从旧的 7 次选择存档继续到 20 张卡的 E06：游玩时不显示 Final values / Numerical review；结局正面显示八项值，背面按 Theory → References → Numerical review 排列，包含全部 20 步与实际增减，例如 Energy `5 → 4（−1）`、Network `7 → 8（+1）`。前 7 步明确标为重建，并说明默认初始值；刷新后终值保持。Gallery 中职业 4 有独立报告，旧职业 3 缺少记录时明确提示。
+| 位置 | 用途 |
+|---|---|
+| [正式剧情来源 Google Sheet](https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit) | 组员继续修改 ch1–ch4；本次仅读取，没有改动共享表 |
+| [team-content.json](public/data/team-content.json) | 游戏实际读取的正式剧情、数值、条件、开场、结局和共用文字 |
+| [来源快照](docs/source/2026-11-03-team-sheet.json) | 本轮读取的原表内容与行号，便于对照 |
+| [导入报告](docs/source/2026-11-03-import-report.json) | 数量、来源和未自行补写的缺失/歧义 |
+| [剧情接入指南](docs/CONTENT_GUIDE.zh-CN.md) | 以后修改与重新导入的流程 |
+| [美术与音频制作清单](docs/ART_REQUIREMENTS.zh-CN.html) | 每项资产、人物/表情数量、尺寸、文件名与可复制 prompt |
+| `public/assets/characters/` | 已完成的两枚玩家棋子 |
+| `public/assets/bosses/` | 已完成的四位 Boss 游戏用图 |
+| `public/assets/npc/`、`cards/`、`ui/` | NPC 表情、结局图、卡背及界面图 |
+| `public/assets/audio/` | 已完成音频的运行版本 |
+| `docs/reference/players/`、`bosses/`、`audio/` | 原始设定稿或未分类音频，供制作和提取，不直接进入游戏 |
 
-另开职业 5，从新记录玩到 C2-B 失败后立即显示 E04，复盘包含失败 Boss 在内的 10 步。三处 Energy `10 → 10（0）` 均明确说明原效果为 `+1`、受上限限制，且没有旧存档重建提示。在 390 × 844 手机尺寸下，卡背可读、八项说明可展开，页面和阅读区均无横向溢出；浏览器警告与错误日志为空。截图保存在 Media Project 的 [feature-verification-2026-11-03](../feature-verification-2026-11-03/) 文件夹。以下验收记录属于各自标明的旧版本。
+你确认两枚棋子、四位 Boss 和音频已经制作好，但还未放入项目。现在仍显示资源占位；没有重新生成已有美术，也未宣称已替换或试听。文件放入后按清单命名，或在 `public/assets/manifest.json` 调整对应路径，再重启预览检查。可以手动调整文件位置，保留左侧资源名称不变即可。
 
-## v0.10：普通地块走过后变奶油白
+音频框架已提供主背景、Boss 背景、移动、翻卡、选择、结局六类资源入口。只有背景音乐也可以先接入；Settings 的 Sound 控制播放。缺文件时保持静音，等待玩家操作后才尝试播放。实际音质、循环、音量及格式要在文件交付后检查。
 
-普通棋盘地块未走过时保持原来的黑色，走过后统一变成奶油白 `#F4EFE3`，不再轮换红、蓝、黄。这项配色已经确定，使用现有奶油白，不需要额外图片。
+## 修改后检查
 
-四位 Boss、Creative Director 和 START 的金属背景，以及 Boss 历史小卡的金属色保持原样。本次只调整普通地块的显示，数值、流程和存档进度不变。数据校验、78 项自动测试和构建已通过，[线上发布](https://github.com/Ebitorako/same-rules-demo/actions/runs/41214676135)成功；已确认旧存档中的已走地块变白、未走地块保持黑色，前进时下一格正常由黑变白，六个金属地块保留渐变，浏览器无警告或错误。
-
-## v0.9：自动收拢的 YOUR CHOICES
-
-在棋盘中央的 **YOUR CHOICES** 区域，已选卡采用竖版扑克牌比例，相互叠放成一手牌。卡片越多，重叠越深，让本轮全部记录留在原来的区域内，不需要横向滚动，也不显示横向滚动条。小屏幕放满 20 张时，每张牌露出的宽度会相应缩小。
-
-普通卡仍只显示一个居中数字，Boss 小卡仍只显示对应棋盘的金属色：Gatekeeper 红、Old Boys' Network 绿、Ideal Worker 蓝、The System 紫；读屏标签和点击回顾功能保留。
-
-鼠标悬停或键盘聚焦时，卡片仍会抬起、放大到相邻卡片上方；点击即可回看场景、当时实际选择的选项，以及当前棋子得到的结果。手机直接点按卡片即可，也可在回顾窗口中前后切换记录。
-
-v0.9 已通过 78 项自动测试、数据校验与构建，代码 `5a5b00c` 的[发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/41213851251)成功。使用真实 20 张记录，在桌面及 390 × 844、320 × 900、768 × 900 浏览器尺寸下确认全部卡片边界均在区域内，卡列没有隐藏的横向溢出，页面也无横向溢出。
-
-桌面首张、中间及末张卡都能打开正确记录；390px 手机宽度下点按绿色 Boss 卡露出的边缘，能打开 The Old Boys' Network。末张卡实际悬停时放大 1.25 倍、上移 6px，仍留在区域内并保留金属色；Tab 可聚焦下一张，回顾后仍为 20 / 20。浏览器警告与错误日志为空，桌面和手机尺寸截图已保存。
-
-旧版验收记录（v0.8，仅对应当时布局）：数据校验、78 项测试和构建通过，并在线验证 20 张历史卡的单数字、四种 Boss 金属色、悬停和点击回看；默认桌面和 390 × 844 手机尺寸下未发现页面横向溢出或浏览器警告、错误。当时沿用的横向滚动及至少 24px 露出宽度属于旧布局，v0.9 不再沿用。
-
-回顾窗口中的前后按钮可切换本轮的其他已选卡。点击 **Close** 或按 **Escape** 关闭，键盘焦点会回到刚才打开的小卡片。这里只能阅读，不会重选、撤销、移动棋子或改变数值；数值仍保持隐藏，结束后的数值复盘见 v0.11。刷新页面会关闭回顾并回到当前棋盘进度。旧存档也可直接使用；过往其他职业的选择不包含在这里。
-
-旧版验收记录（v0.6）：数据校验、78 项自动测试和构建通过，并发布到上述网址。在线检查了单卡回看、10 张历史记录及前后切换、Close / Escape 返回原卡焦点、回看时 Enter / 数字键不推进游戏，以及刷新仍保留同一棋盘位置和选择数量。当时的手机卡列使用横向滚动；该布局已由 v0.9 的自动重叠设计替代。
-
-## v0.5：游戏名、公司名与 Boss 流程
-
-标题和页头显示 **Genderpoly**，棋盘中央显示公司名 **FreeDOM**。名称分别放在 [copy.json](public/data/copy.json) 的 `title` 和 `companyName` 字段，后续可直接编辑文字。
-
-前三位 Boss 按原来的隐藏数值、门槛与选项修正进行检查。实际检查失败就立即进入结局卡，不会先出现结果页要求再按 Continue。通过 **The Ideal Worker** 后，玩家到达银色 **Creative Director** 格，经历晋升场景，才能进入第四章的招聘和政策选择。**The System** 目前没有失败门槛，保持原来的行为。
-
-本次调整不改变初始数值和 Boss 门槛，也不清除已有存档。旧存档若停在 Boss 失败结果页，重新打开后会直接进入对应结局，不重复登记职业或画廊。
-
-## 10 月 31 日更新：棋盘、引导与结局卡
-
-六个特殊地块使用固定的拉丝金属背景：沿路线四位 Boss 依次为 **Gatekeeper 红、Old Boys' Network 绿、Ideal Worker 蓝、The System 紫**；**Creative Director 银色，START / 终点金色**。走过后保留金属色并加勾记。离开 START 后，它仍是金色，只把标记翻成 `?`。
-
-常驻引导 NPC 在桌面棋盘旁、窄屏棋盘下方显示；选择卡中会先显示建议，再显示三个选项。点击 **Hide advice** 可以收起建议，**Ask the guide** 再次展开；有背景资料时，点击 **Open the rulebook** 查看行业背景、理论和文献。可以直接选择，不必先读完建议。隐藏偏好会保存，旧存档仍可继续；这些操作不会改变游戏数值或结果。
-
-引导的专属台词目前留空等组员填写，只有通用导航提示。填写位置是 [guide.csv](public/data/guide.csv)，角色名字与头像名称在 [guide.json](public/data/guide.json)；操作步骤见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md)。
-
-结局卡点击 **Turn the card over**，或 Gallery 中已解锁卡点击 **Turn over**，背面会分别显示 **Theory** 与 **References**。支持多行引用与长文滚动，内容来自原来的 `endings.csv`，程序不会生成文献。
-
-## 在本机修改和试玩
-
-1. 在这个文件夹双击 **[启动游戏.cmd](启动游戏.cmd)**，保留它打开的窗口。
-2. 按窗口提示打开本地网址 `http://127.0.0.1:5173/`。若提示端口被占用，先确认是否已有一个游戏启动窗口在运行；不要反复启动多个副本。
-3. 点击 **Start a career**，选择 **Female pawn** 或 **Male pawn**，然后点击 **Enter the studio**。棋盘上点击 **Next** 前进，再选择卡牌选项；普通选择或通过 Boss 后在结果页点击 **Continue**，Boss 检查失败则直接显示结局卡。也可以用键盘 `1`、`2`、`3` 选项和 `Enter` 继续。
-
-第一次启动需要联网准备项目依赖。以后依赖已在电脑上时，可以直接启动。不要双击 `index.html`；游戏的数据加载需要通过启动脚本提供的本地网址。
-
-v0.5 的数据校验、61 项自动测试和构建通过。在线验证了 Genderpoly / FreeDOM 名称、Gatekeeper 失败立即显示 E03 及刷新保留结局、Ideal Worker 通过后的晋升场景及刷新恢复，并完整走完 20 张卡到 E06；未发现浏览器警告或错误。修复了发布时旧文字文件的缓存问题。上一轮已验证金属地块、指引偏好、规则册、手机宽度选择和结局翻面；正式展示前仍需组员在实体手机上试玩定稿内容。
-
-游戏会在当前浏览器自动记录进度，刷新页面会继续当前职业。浏览器、网址或端口变化可能使用另一份记录。标题页的 **Settings** 可重置全部进度；这会清除已解锁结局和历代角色。
-
-标题页的 **Continue career** 可继续未完成的一轮；**Gallery** 查看已经解锁的结局。一轮结束后选择 **Next career** 体验上一轮决定对下一轮的影响。
-
-开发时想在游玩中检查隐藏数值，可在网址末尾加 `?debug=1`。对外演示使用普通网址；v0.11 的结束后能力展示不需要调试模式。
-
-## 需要下载什么
-
-这台电脑已经有 **Node.js 24** 和 **Git**，当前不用额外安装 Unity、Unreal 或其他游戏引擎。组员在线试玩只需浏览器；Node.js 用于本机启动和构建项目，Git 用于版本管理和上传更新。
-
-整理剧情可以继续用现有的 Google Sheets 或 Excel。修改少量文件可以用文本编辑器；没有必要为了本次试玩再安装一个软件。图片从你的图像聊天导出后放入指定资源文件夹即可。
-
-## 文件放哪里
-
-| 位置 | 内容 | 日常操作 |
-|---|---|---|
-| [public/data/](public/data/) | 英文剧情、选项、结局、候选人、政策、引导 NPC 台词 | 组员交稿后更新这里，见[剧情指南](docs/CONTENT_GUIDE.zh-CN.md) |
-| [public/data/guide.csv](public/data/guide.csv) / [guide.json](public/data/guide.json) | 22 行引导模板，以及 NPC 名字、身份、头像名称 | 填写建议、行业背景、理论和引用；卡号保持唯一 |
-| [public/data/copy.json](public/data/copy.json) | 游戏名 Genderpoly、公司名 FreeDOM、共用叙事文字与结局能力解释 | 修改 `title`、`companyName`、可选 `statDescriptions` 或对应说明文字 |
-| [public/assets/](public/assets/) | 游戏实际使用的图片、音频、字体 | 你添加或替换资源，见[美术指南](docs/ART_GUIDE.zh-CN.md) |
-| [public/assets/manifest.json](public/assets/manifest.json) | 资源名称与文件路径的对应表 | 改图片名称或移动图片后同步修改路径 |
-| [docs/reference/](docs/reference/) | 草图、布局参考、风格参考 | 可以手动整理，不会自动作为游戏图片显示 |
-| [docs/starter-data/](docs/starter-data/) | 最初提供的剧情数据备份 | 留作对照，游戏不读取这里 |
-| [docs/GAME_SPEC.md](docs/GAME_SPEC.md) | 当前采用的游戏规则与设计规格 | 规则变更先在这里核对 |
-| [src/config/rules.ts](src/config/rules.ts) | 初始数值、Boss 门槛、开放设计选项 | 与 Codex 一起调整并测试 |
-| [src/styles/tokens.css](src/styles/tokens.css) | 界面色板和六种金属色 | 配色集中在这里，特殊地块不必另做背景图 |
-| [src/data/guide.ts](src/data/guide.ts) / [src/ui/guide.ts](src/ui/guide.ts) | 引导数据检查与显示框架 | 组员日常只需填写上面的 CSV / JSON |
-| [src/](src/) | 游戏流程、界面、样式 | 由 Codex 维护骨架 |
-| [docs/AI_LOG.md](docs/AI_LOG.md) | AI 使用记录 | 用于课程提交的附录 |
-
-根目录的 `GAME_SPEC.md` 和 `nmc5369-codex-starter.zip` 保留为原始交付文件。继续开发以 **`docs/GAME_SPEC.md`** 为准。
-
-资源子文件夹：
-
-```text
-public/assets/
-  manifest.json   资源路径表
-  characters/     两种玩家棋子
-  bosses/         四个 Boss
-  npc/            情境 NPC、表情与 guide_neutral 引导头像
-  cards/          卡背与结局图
-  ui/             标题、边框等界面图片
-  audio/          音效、音乐及授权说明
-  fonts/          本地字体（需要离线展示时使用）
-```
-
-**你可以手动调整资源位置。** 最省事的方法是用相同文件名替换图片；如果更改名称、扩展名或子文件夹，再更新 `manifest.json` 的对应路径。`src`、`public`、`public/data` 属于程序的固定目录，不要只在文件管理器里直接重命名；需要重组时让 Codex 一起改引用并检查。
-
-## 换一批内容的顺序
-
-1. 把最终剧情或引导台词导出为 UTF-8 CSV，替换 `public/data` 中对应文件；先保留一份组员原稿。`guide.csv` 每个卡号只有一行，与剧情表每个选项一行的方式不同。
-2. 把美术成品放入 `public/assets` 的对应子文件夹，核对资源路径表。
-3. 双击 **[检查项目.cmd](检查项目.cmd)**，检查数据、游戏逻辑和发布构建。
-4. 启动游戏，完整试玩受到改动影响的部分。引导有改动时检查收起、展开及规则册；结局有改动时检查正面的八项能力值，翻到 Theory / References 及选择复盘并检查长文滚动，同时确认游玩和日常回顾仍隐藏数值。数据有大改时，通过 Settings 重置旧测试进度再开始。
-
-提供的卡牌占位文字、候选人和政策只是接入样例。正式交稿前替换占位内容并删掉相应占位标记，核对文献出处、理论表述和结局。
-
-## 给继续开发的人
-
-在此目录打开终端：
+组员更新共享表后，让 Codex 读取新快照并核对规则，不要只替换一个 CSV。当前 `scenarios.csv`、`endings.csv`、`copy.json`、`candidates.json`、`policies.json` 是查阅导出；游戏从 `team-content.json` 读取对应内容，单改这些导出文件不会更新游戏。
 
 ```bash
-npm install
-npm run dev
+node scripts/import-team-content.mjs
 npm run validate-data
 npm test
 npm run build
+npm run dev
 ```
 
-`validate-data` 检查表格；`test` 检查关键规则；`build` 生成 `dist/` 发布文件。`dist/` 是生成结果，不要直接改它来替换内容。
+导入脚本读取当前保存的 `docs/source/2026-11-03-team-sheet.json`，**不会自动联网刷新 Google Sheet**。新规则、列名或表结构变化后要同步调整映射；不要用旧快照覆盖组员新稿。数据检查通过不代表文献已经补齐或完成数值平衡。
 
-`node_modules/` 是已安装的开发组件，`.tools/` 是检查过程中生成的文件；它们和 `dist/` 都无需组员手动编辑。分享源码时可省略这些生成文件，接收者先运行 `npm install` 即可恢复组件。
+## 需要组员补充的原表细节
 
-技术准备与后续上线可参考 [Vite 官方说明](https://vite.dev/guide/) 和 [GitHub Pages 官方发布说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+**优先确认 E03 的可达性：** 已穷举第一章男女共 162 条完整路线，按原稿数值总能让 Creativity 或 Communication 至少一项达到5，所以 E03 拒绝录用目前无法触发。程序保留这张结局和原值；若希望玩家能收集到 E03，需要组内决定调整哪些数值或门槛。其余 12 个终局均已用真实选择路线验证可达。
 
-排期 T04 的仓库和试玩网站已上线，[首次发布记录](https://github.com/Ebitorako/same-rules-demo/actions/runs/40188632600)为成功状态。发布、更新和组员试玩方式见[试玩网站发布说明](docs/DEPLOYMENT.zh-CN.md)。在线版本仍由浏览器保存进度，不会跨设备同步。
+- 第一章的三张章节/结局卡没有 References 列，引用留空。
+- 协调员介入谈话、透明招聘改为正式会议决策的替换英文对白未提供；明确数值效果已接入，原对白保留。
+- C2-04B 选项 2 的数值是 Reputation +1，但备注说取消 −1：保留 +1，不再加分。transparent 的 C2-B 选项 2 只换结果文案/表情，数值仍遵守独立数值列。
+- 男棋子在 Ideal Worker 未达门槛时没有专属独白；显示不可用状态，不编造台词。E14 的可选末尾句未追加。
+- 源表未给新上限，暂保留原骨架 0–10 范围；完整通关的 E12/E13/E14 后播放终章，早退不显示“已走完全程”的文字。
 
-下一轮由团队确认：最终剧情、引导台词和文献、初始数值与 Boss 门槛、结局条件和政策效果。普通地块的“未走黑色、已走奶油白”已在 v0.10 确定，六个特殊地块与 Boss 历史小卡仍使用固定金属色。当前六个结局按退出原因或是否推行正式招聘政策选择；**The System 最后一次选择如何对应不同结局，还需要团队定义**。其余项目可先沿用规格中的默认值继续制作。
+全部映射处理见导入报告。无需额外安装游戏引擎：本机已有 Node.js 和 Git；组员在线试玩只需要浏览器。
+
+## 历史说明
+
+v0.11 以前的原型文档、CSV 和示例数据保存在 [prototype-v0.11](docs/source/prototype-v0.11/)，历次验收保留在 [AI_LOG.md](docs/AI_LOG.md)。其中旧的八项属性、统一三选一、通用 Boss 失败判定和强制继承实习生设定，均为被 v0.12 正式稿替换的历史规则。当前以 [GAME_SPEC.md](docs/GAME_SPEC.md) 为准。

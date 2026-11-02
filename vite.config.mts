@@ -13,7 +13,7 @@ function assetFiles(directory: string): string[] {
   try {
     return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
       const path = join(directory, entry.name);
-      return entry.isDirectory() ? assetFiles(path) : /\.(svg|png|webp|jpe?g|woff2?)$/i.test(entry.name)
+      return entry.isDirectory() ? assetFiles(path) : /\.(svg|png|webp|jpe?g|woff2?|mp3|wav|ogg|m4a)$/i.test(entry.name)
         ? [relative(join(process.cwd(), 'public'), path).replaceAll('\\', '/')] : [];
     });
   } catch { return []; }
