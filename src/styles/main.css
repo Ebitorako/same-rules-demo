@@ -17,6 +17,10 @@ button:disabled { cursor: wait; }
 .brand:hover { box-shadow: none; }
 .header-nav { display: flex; gap: 8px; align-items: center; }
 .header-nav button { background: none; border: 0; padding: 8px 12px; font-size: 14px; }
+.sound-toggle, .header-nav .sound-toggle { display: inline-grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; padding: 8px; border: 2px solid var(--ink); border-radius: 8px; background: var(--ink); color: var(--cream); font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif; font-size: 22px; line-height: 1; letter-spacing: 0; }
+.sound-toolbar { display: flex; justify-content: flex-end; width: 100%; flex-shrink: 0; margin-bottom: 12px; }
+.history-header > :first-child { margin-right: auto; }
+.gallery-dialog-toolbar { gap: 8px; }
 .prototype-stamp { font-size: 10px; letter-spacing: 2px; padding: 4px 7px; border: 1px solid var(--ink); }
 .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; line-height: 1.6; }
 .keyboard-note { font-size: 10px; letter-spacing: 1.5px; margin-top: 22px; }
@@ -100,7 +104,8 @@ button:disabled { cursor: wait; }
 .board-footer { font-size: 10px; text-align: center; padding-top: 20px; }
 .sheet-scrim { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 24px; background: color-mix(in srgb,var(--ink) 65%,transparent); overflow-y: auto; }
 .story-card { width: min(780px,100%); padding: 30px; max-height: calc(100dvh - 48px); overflow-y: auto; }
-.card-meta { display: flex; justify-content: space-between; border-bottom: 2px solid var(--ink); padding-bottom: 12px; font-size: 10px; letter-spacing: 1.5px; margin: 0 5px; }
+.card-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 12px; font-size: 10px; letter-spacing: 1.5px; margin: 0 5px; }
+.card-meta > span:nth-child(2) { margin-left: auto; }
 .story-body { display: grid; grid-template-columns: 145px 1fr; gap: 26px; padding: 27px 4px 20px; }
 .npc-art { height: 165px; width: 145px; }
 .npc-label { display: block; font-size: 11px; text-align: center; margin-top: 9px; }

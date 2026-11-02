@@ -21,17 +21,36 @@ beforeEach(() => { vi.resetModules(); playing.length=0; vi.stubGlobal('Audio', F
 afterEach(() => vi.unstubAllGlobals());
 
 describe('optional music and effects', () => {
-  it('waits for a gesture, switches contextual music without two tracks playing, and mutes everything', async () => {
+  it('waits for a gesture, switches contextual music, and resumes muted music without replaying effects', async () => {
     const audio = await import('./audio');
-    const state = fresh(); state.settings.sound=true;
+    const state = fresh(); expect(state.settings.sound).toBe(true);
     audio.syncAudio(state); expect(playing).toHaveLength(0);
+    expect(audio.audioStatus()).toBe('Sound: waiting for a player gesture');
     audio.syncAudio(state,true); expect(playing[0].src).toContain('bgm_intro');
     state.run!.phase='card'; state.run!.position=BOARD.findIndex(tile=>tile.cardId==='C2-03');
     audio.syncAudio(state); expect(playing[0].paused).toBe(true); expect(playing[1].src).toContain('bgm_bar');
     audio.playSound('choose'); expect(playing[2].paused).toBe(false);
+    const bar = playing[1], effect = playing[2];
+    bar.currentTime = 24.5;
     state.settings.sound=false; audio.syncAudio(state);
     expect(playing.every(item=>item.paused)).toBe(true);
     audio.playSound('card'); expect(playing).toHaveLength(3);
+    state.settings.sound=true; audio.syncAudio(state,true);
+    expect(playing).toHaveLength(3);
+    expect(bar.paused).toBe(false);
+    expect(bar.currentTime).toBe(24.5);
+    expect(bar.play).toHaveBeenCalledTimes(2);
+    expect(playing[0].paused).toBe(true);
+    expect(effect.paused).toBe(true);
+    expect(effect.play).toHaveBeenCalledTimes(1);
+  });
+  it('does not create audio when the first player gesture is already muted', async () => {
+    const audio = await import('./audio');
+    const state = fresh(); state.settings.sound=false;
+    audio.syncAudio(state,true);
+    audio.playSound('card');
+    expect(playing).toHaveLength(0);
+    expect(audio.audioStatus()).toBe('Sound: muted');
   });
   it('fades the excerpt edges and does not let an old track restart after switching', async () => {
     const audio=await import('./audio');const state=fresh();state.settings.sound=true;

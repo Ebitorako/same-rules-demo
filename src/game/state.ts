@@ -8,7 +8,7 @@ import { STAT_NAMES, type AppState, type ChapterOpening, type GameData, type Paw
 
 export function createInitialState(): AppState {
   return { version: 1, contentVersion: CONTENT_VERSION, run: null, lineage: [], gallery: [],
-    settings: { reducedMotion: false, sound: false } };
+    settings: { reducedMotion: false, sound: true } };
 }
 
 export function startCareer(state: AppState, pawn: Pawn, data: GameData): AppState {

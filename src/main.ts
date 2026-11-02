@@ -59,6 +59,9 @@ function debugPanel(): string {
   if (!debug || !run) return '';
   return `<aside class="debug-panel"><strong>DEBUG · hidden from normal play</strong><p>Round ${run.round} · ${escape(run.phase)} · ${escape(BOARD[run.position].cardId ?? BOARD[run.position].id)}</p><dl>${Object.entries(run.stats).map(([name,value])=>`<dt>${name}</dt><dd>${value}</dd>`).join('')}</dl><p>Policies: ${escape(run.activePolicies.join(', ') || 'none')}</p><p>Boss: ${run.result?.passed ?? '—'}</p><p id="audio-debug">${escape(audioStatus())}</p></aside>`;
 }
+function soundButton(): string {
+  return `<button type="button" class="sound-toggle" data-action="toggle-sound" aria-label="${t('Sound')}" aria-pressed="${state.settings.sound}"><span aria-hidden="true">${state.settings.sound ? '🔊' : '🔇'}</span></button>`;
+}
 function render(focus = true): void {
   const locale = state.settings.locale ?? 'en';
   setLocale(locale);
@@ -87,12 +90,17 @@ function render(focus = true): void {
   else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && displayData.epilogue ? epilogueScreen(displayData) : endingScreen(displayState,displayData,endingBack);
   else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(displayState,displayData)}${guidePanel(displayState,displayData,displayGuide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(displayState,displayData,run.phase !== 'result' ? guidePanel(displayState,displayData,displayGuide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
   if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>${t('The team’s completed story is ready.','组员的正式剧情已准备就绪。')}</strong><p>${t('This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.','本版本使用六项能力值和新的剧情分支。早期原型记录已保留在结局收藏中，开始新的职业生涯即可体验更新后的剧情。')}</p>${button(t('Got it','知道了'), 'dismiss-migration', 'text-button')}</aside>${content}`;
-  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
+  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}${storyOpen || confirmingReset ? '' : soundButton()}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
   boardResizeObserver.disconnect();
   fitBoardLabels(app);
   const board = app.querySelector('.board');
   if (board) boardResizeObserver.observe(board);
   const dialog = app.querySelector<HTMLElement>('[role=alertdialog], [role=dialog]');
+  if (dialog) {
+    const toolbar = dialog.querySelector('.card-meta, .history-header, .gallery-dialog-toolbar');
+    if (toolbar) toolbar.insertAdjacentHTML('beforeend', soundButton());
+    else dialog.insertAdjacentHTML('afterbegin', `<div class="sound-toolbar">${soundButton()}</div>`);
+  }
   if (galleryMarkup) app.querySelectorAll<HTMLElement>('#main-content > :not(.gallery-scrim)').forEach(item => item.inert = true);
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
   if (focus) {
@@ -185,10 +193,20 @@ async function flip(target: HTMLElement, change: () => void): Promise<void> {
 }
 app.addEventListener('click', event => {
   const target = (event.target as HTMLElement).closest<HTMLElement>('[data-action]');
-  if (!target || busy) return;
-  syncAudio(state, true, view);
+  if (!target || target.closest('[inert]')) return;
   const action = target.dataset.action;
-  if (target.closest('[inert]')) return;
+  if (action === 'toggle-sound') {
+    state = updateSettings(state, { sound: !state.settings.sound });
+    persist();
+    syncAudio(state, true, view === 'game' && epilogueVisible ? 'epilogue' : view);
+    target.setAttribute('aria-pressed', String(state.settings.sound));
+    target.querySelector('span')!.textContent = state.settings.sound ? '🔊' : '🔇';
+    const setting = app.querySelector<HTMLInputElement>('[data-setting="sound"]');
+    if (setting) setting.checked = state.settings.sound;
+    return;
+  }
+  if (busy) return;
+  syncAudio(state, true, view);
   if (historyCardId && action !== 'review-choice' && action !== 'close-history') return;
   if (galleryEndingId && !['close-gallery', 'flip-gallery'].includes(action ?? '')) return;
   if (action === 'set-language') {

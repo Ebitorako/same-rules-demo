@@ -195,6 +195,35 @@ describe('authored branches and numerical gates', () => {
 });
 
 describe('storage isolation and resilience', () => {
+  it('starts new profiles and reset profiles with sound enabled', () => {
+    memoryStorage();
+    expect(createInitialState().settings.sound).toBe(true);
+    expect(loadState().settings.sound).toBe(true);
+    expect(saveState(updateSettings(createInitialState(), { sound: false }))).toBe(true);
+    resetStorage();
+    expect(loadState().settings.sound).toBe(true);
+  });
+
+  it.each([false, true])('preserves saved sound=%s across reloads and prototype migration', sound => {
+    const storage = memoryStorage();
+    const saved = updateSettings(fresh(), { sound });
+    expect(saveState(saved)).toBe(true);
+    expect(loadState()).toEqual(saved);
+    expect(startCareer(updateSettings(createInitialState(), { sound }), 'male', loadTeamData()).settings.sound).toBe(sound);
+
+    const old = structuredClone(saved);
+    delete old.contentVersion;
+    delete old.run!.contentVersion;
+    old.run!.stats = { ...old.run!.stats, Skill: 5, Money: 5 };
+    delete old.run!.statHistory;
+    storage.setItem(RULES.storagePrefix + 'snapshot', JSON.stringify(old));
+    const migrated = loadState();
+    expect(migrated.settings.sound).toBe(sound);
+    expect(migrated.legacyArchive!.run).toEqual(old.run);
+    expect(saveState(migrated)).toBe(true);
+    expect(loadState().settings.sound).toBe(sound);
+  });
+
   it('retains completed prototype reports with all eight original values and ending identities', () => {
     const storage = memoryStorage();
     const old = play(fresh('male'), loadTeamData());
@@ -258,7 +287,7 @@ describe('storage isolation and resilience', () => {
 
   it('preserves unrelated browser keys, settings and unavailable-storage behavior', () => {
     const storage = memoryStorage();
-    const changed = updateSettings(createInitialState(), { sound: true, reducedMotion: true, guideHidden: true });
+    const changed = updateSettings(createInitialState(), { sound: false, reducedMotion: true, guideHidden: true });
     expect(startCareer(changed, 'male', loadTeamData()).settings).toEqual(changed.settings);
     saveState(changed);
     storage.setItem('unrelated', 'keep');
