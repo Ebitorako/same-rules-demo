@@ -105,8 +105,10 @@ button:disabled { cursor: wait; }
 .board-next > span { font-size: 8px; letter-spacing: 2px; margin-top: 7px; }
 .board-centre .keyboard-note { font-size: 8px; margin-top: 9px; }
 .board-footer { font-size: 10px; text-align: center; padding-top: 20px; }
-.sheet-scrim { position: fixed; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 24px; background: color-mix(in srgb,var(--ink) 65%,transparent); overflow-y: auto; }
-.story-card { width: min(780px,100%); padding: 30px; max-height: calc(100dvh - 48px); overflow-y: auto; }
+.sheet-scrim { position: fixed; inset: 0; z-index: 20; display: flex; align-items: flex-start; justify-content: center; padding: 24px; background: color-mix(in srgb,var(--ink) 65%,transparent); overflow-y: auto; overscroll-behavior: contain; }
+.story-card { width: min(780px,100%); min-width: 0; flex-shrink: 0; margin-block: auto; padding: 30px; max-height: calc(100dvh - 48px); overflow-y: auto; }
+/* Keep the decorative frame on the full card; its scrim scrolls long content. History has its own reading area. */
+.story-card:not(.history-card) { max-height: none; overflow: visible; }
 .card-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 2px solid var(--ink); padding-bottom: 12px; font-size: 10px; letter-spacing: 1.5px; margin: 0 5px; }
 .card-meta > span:nth-child(2) { margin-left: auto; }
 .story-body { display: grid; grid-template-columns: 145px 1fr; gap: 26px; padding: 27px 4px 20px; }
@@ -168,7 +170,10 @@ input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--ink); }
 .reset-area h2 { font-size: 23px; margin-bottom: 12px; }
 .reset-area p { font-size: 14px; }
 .reset-button { margin-top: 20px; }
-.reset-confirm { position: fixed; z-index: 30; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--paper); padding: 30px; gap: 25px; }
+.reset-confirm { position: fixed; z-index: 30; inset: 0; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; background: var(--paper); padding: 30px; gap: 25px; overflow-y: auto; overscroll-behavior: contain; }
+.reset-confirm > * { flex-shrink: 0; }
+.reset-confirm > :first-child { margin-block-start: auto; }
+.reset-confirm > :last-child { margin-block-end: auto; }
 .reset-confirm > div { display: flex; gap: 15px; }
 .debug-panel { position: fixed; left: 10px; bottom: 10px; z-index: 50; padding: 12px; border: 2px solid var(--ink); background: var(--ivory); font: 11px var(--font-body); max-width: 260px; }
 .debug-panel dl { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 15px; margin: 5px 0; }

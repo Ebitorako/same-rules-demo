@@ -4,7 +4,7 @@
 
 **Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
-**Read `docs/GAME_SPEC.md` before any task.** Version 0.20 installs all 51 designer-approved portraits/reactions and ending illustrations, retaining the existing audio, numeric choice and bilingual Gallery behavior. The designer explicitly authorised final art integration and old-draft cleanup on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
+**Read `docs/GAME_SPEC.md` before any task.** Version 0.21 makes long story-card frames follow expanded content and keeps confirmation controls reachable in short viewports. All 51 approved art additions remain installed; two milestone images are the remaining visible placeholders. The designer explicitly authorised responsive border repairs and a missing-art audit on 3 Nov. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
 
 ## Who you are working with
 

@@ -4,7 +4,9 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.20：51 张审核定稿接入游戏。** 11 张基础头像、27 张剧情表情和 13 张结局插图已全部通过，分别用于指引人、剧情选择前后、结局与收藏。三张 HR 表情使用最终确认的椭圆眼镜版本；两枚棋子、四位 Boss 和首页海报继续使用原定稿。验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.21：展开规则书时，卡框随正文自动延伸。** 剧情、结果、章节与晋升弹窗按完整内容计算高度，由外层滚动，内框不再横穿展开后的文字；极矮窗口的重置确认页也可滚动到全部按钮。历史选择和收藏详情保留各自的阅读滚动。已检查中英文、电脑和手机竖横屏；验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+
+51 张已审核定稿继续用于指引人、剧情表情、结局与收藏。当前还会显示美术占位的是**第一章、第二章各一张晋升插图**；9 张可选 Boss 表情会复用已有基础图。缺图位置、文件名、尺寸和 Prompt 见[制作清单顶部](docs/ART_REQUIREMENTS.zh-CN.html#missing)。
 
 声音沿用 v0.19 的防叠加逻辑：当前游戏页接管声音，进入棋盘时切换游戏 BGM；后台暂停不修改存档或声音偏好。新玩家默认开启声音，已有偏好保留，右上角黑白扬声器按钮与 Settings 共用设置。
 

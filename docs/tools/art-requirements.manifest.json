@@ -10,7 +10,80 @@
     "total": 68,
     "installed": 57,
     "requiredNewInstalled": 51,
-    "optionalMissing": 11
+    "optionalMissing": 9,
+    "visiblePlaceholderMissing": 2
+  },
+  "missingArt": {
+    "visiblePlaceholders": [
+      {
+        "key": "cards/ending_CH1-E01",
+        "title": "推开大门 / Through the Door",
+        "path": "public/assets/cards/ending_CH1-E01.png",
+        "when": "第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。",
+        "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
+        "source": "ch1!23",
+        "priority": "next",
+        "prompt": "Original 1930s rubber-hose cartoon illustration for Genderpoly, a contemporary London creative-production workplace story. Match the supplied approved employee-badge pawns and symbolic Boss cast: cream rounded rectangular badge bodies, thick black outlines, expressive large white oval eyes, black pupils, simple brows and mouth, flexible black arms, white gloves and rounded black shoes. Ordinary workplace NPCs are living employee badges, not human portraits; their face is on the cream badge surface. Preserve each role through a distinct badge silhouette, clip, collar or small modern work prop, without readable job-title text. Use the supplied designs as visual references, never redesign the approved six characters. Flat cream and ink, restrained approved red or blue accents only where already present. No 3D, photorealism, new colour palette, text, watermark, generated card frame or baked-in paper background.\n\nCreate a milestone-card illustration for “Through the Door”, matching the attached approved ending illustrations. A laptop displaying a successful Junior Producer offer email, beside a tidy portfolio and a simple open studio doorway. Reserve a blank heading area; use abstract email lines with no readable words. Show entry into the industry rather than final victory. No protagonist or gender-specific symbols, so the same image works for both player pawns.\n\nLandscape 3:2 composition, 1536 by 1024 pixels, flat cream #F4EFE3 background, generous breathing space, clear simple props. No card border, game UI, chapter or ending code, numbers, theory text, captions or readable generated labels. No confetti or finish-line imagery. Deliver one standalone illustration, not a card mockup. The game adds the title and story separately."
+      },
+      {
+        "key": "cards/ending_CH2-E07",
+        "title": "向上一步 / Moving Up",
+        "path": "public/assets/cards/ending_CH2-E07.png",
+        "when": "第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。",
+        "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
+        "source": "ch2!45",
+        "priority": "next",
+        "prompt": "Original 1930s rubber-hose cartoon illustration for Genderpoly, a contemporary London creative-production workplace story. Match the supplied approved employee-badge pawns and symbolic Boss cast: cream rounded rectangular badge bodies, thick black outlines, expressive large white oval eyes, black pupils, simple brows and mouth, flexible black arms, white gloves and rounded black shoes. Ordinary workplace NPCs are living employee badges, not human portraits; their face is on the cream badge surface. Preserve each role through a distinct badge silhouette, clip, collar or small modern work prop, without readable job-title text. Use the supplied designs as visual references, never redesign the approved six characters. Flat cream and ink, restrained approved red or blue accents only where already present. No 3D, photorealism, new colour palette, text, watermark, generated card frame or baked-in paper background.\n\nCreate a milestone-card illustration for “Moving Up”, matching the attached approved ending illustrations. An office noticeboard with a company-wide promotion announcement and a new role title represented by a blank title line, beside an invitation to a senior meeting. Leave the character name and role labels blank, using abstract marks only: the two pawn routes receive different roles. This is an intermediate promotion, not the final Creative Director appointment or an ending. No protagonist or gender-specific symbols, so the same image works for both player pawns.\n\nLandscape 3:2 composition, 1536 by 1024 pixels, flat cream #F4EFE3 background, generous breathing space, clear simple props. No card border, game UI, chapter or ending code, numbers, theory text, captions or readable generated labels. No confetti or finish-line imagery. Deliver one standalone illustration, not a card mockup. The game adds the title and story separately."
+      }
+    ],
+    "bossFallbacks": [
+      {
+        "key": "bosses/old_boys_network_pleased",
+        "path": "public/assets/bosses/old_boys_network_pleased.png",
+        "title": "The Old Boys’ Network · 满意"
+      },
+      {
+        "key": "bosses/old_boys_network_appraising",
+        "path": "public/assets/bosses/old_boys_network_appraising.png",
+        "title": "The Old Boys’ Network · 打量"
+      },
+      {
+        "key": "bosses/old_boys_network_cold",
+        "path": "public/assets/bosses/old_boys_network_cold.png",
+        "title": "The Old Boys’ Network · 冷淡"
+      },
+      {
+        "key": "bosses/ideal_worker_pleased",
+        "path": "public/assets/bosses/ideal_worker_pleased.png",
+        "title": "The Ideal Worker · 满意"
+      },
+      {
+        "key": "bosses/ideal_worker_frowning",
+        "path": "public/assets/bosses/ideal_worker_frowning.png",
+        "title": "The Ideal Worker · 皱眉"
+      },
+      {
+        "key": "bosses/ideal_worker_cold",
+        "path": "public/assets/bosses/ideal_worker_cold.png",
+        "title": "The Ideal Worker · 冷淡"
+      },
+      {
+        "key": "bosses/the_system_pleased",
+        "path": "public/assets/bosses/the_system_pleased.png",
+        "title": "The System · 满意"
+      },
+      {
+        "key": "bosses/the_system_frowning",
+        "path": "public/assets/bosses/the_system_frowning.png",
+        "title": "The System · 皱眉"
+      },
+      {
+        "key": "bosses/the_system_cold",
+        "path": "public/assets/bosses/the_system_cold.png",
+        "title": "The System · 冷淡"
+      }
+    ],
+    "excluded": "Uninstalled legacy role keys, conditional gallery_frame decoration, code-drawn symbols/card piles, and future scene/candidate concepts are not current visible placeholders."
   },
   "assets": [
     {
@@ -1095,30 +1168,34 @@
     },
     {
       "key": "cards/ending_CH1-E01",
-      "group": "可选过渡插图",
+      "group": "晋升卡待补插图",
       "priority": "P2",
-      "title": "CH1-E01 · Through the Door",
-      "size": "1200×800 · 横版3:2",
+      "currentDisplay": "placeholder",
+      "title": "推开大门 / Through the Door",
+      "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
       "source": "ch1!23",
-      "note": "晋升过渡卡，有独立插槽，可在晋升时翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：Junior Producer 录用邮件",
+      "when": "第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。",
+      "note": "下一批优先补齐可见占位。第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。 晋升过渡卡有独立插槽，可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：Junior Producer 录用邮件",
       "path": "public/assets/cards/ending_CH1-E01.png",
       "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1200×800 · 横版3:2",
+      "status": "missing-visible-placeholder",
+      "suggestedSize": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
       "actualDimensions": null
     },
     {
       "key": "cards/ending_CH2-E07",
-      "group": "可选过渡插图",
+      "group": "晋升卡待补插图",
       "priority": "P2",
-      "title": "CH2-E07 · Moving Up",
-      "size": "1200×800 · 横版3:2",
+      "currentDisplay": "placeholder",
+      "title": "向上一步 / Moving Up",
+      "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
       "source": "ch2!45",
-      "note": "晋升过渡卡，有独立插槽，可在晋升时翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：A company-wide promotion announcement, a new title beneath Alex's name and an invitation to a senior meeting.",
+      "when": "第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。",
+      "note": "下一批优先补齐可见占位。第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。 晋升过渡卡有独立插槽，可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：A company-wide promotion announcement, a new title beneath Alex's name and an invitation to a senior meeting.",
       "path": "public/assets/cards/ending_CH2-E07.png",
       "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1200×800 · 横版3:2",
+      "status": "missing-visible-placeholder",
+      "suggestedSize": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
       "actualDimensions": null
     }
   ],

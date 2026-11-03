@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.20, 3 Nov 2026. All 51 reviewed NPC/expression and ending illustrations are installed; superseded review drafts and duplicate image copies are removed. Verification/publication is recorded in README and AI_LOG. Existing v0.19 audio ownership and gameplay rules remain in effect.*
+*Version 0.21, 3 Nov 2026. Long story cards and their decorative frames grow with expanded content; their outer overlay scrolls. All 51 reviewed art additions remain installed. Verification/publication is recorded in README and AI_LOG. Existing audio ownership and gameplay rules remain in effect.*
 
 ## 1. Authority and scope
 
@@ -21,6 +21,7 @@ The Chinese edition uses the explicit `ch1中文版`–`ch4中文版` tabs, save
 - Boss artwork fits in its own region above a reserved bottom nameplate, with a visible gap and no clipping. Boss and Creative Director names fit one line by shrinking to the available width on rendering and resize. The Director star is centered in the full tile with its name at the bottom. The starting tile shows a centered arrow without the former START/New Hire plaque; after departure its centered question mark uses a thin hollow outline matching the Director star, with no circular badge or white background. The three decorative card piles show only a centered question mark, without card-back artwork or placeholder wording.
 - YOUR CHOICES fits all recorded choices by increasing overlap, with no horizontal scrollbar. Ordinary mini cards show one centred number, Bosses show metal without visible wording. Hover/focus raises and enlarges; click opens a read-only review. Reading never replays or changes progress.
 - Retain cream/ink paper cards, Limelight English titles and brand lettering, Josefin Sans body text, grain overlay, existing colour tokens and reduced-motion support. Chinese headings use bold sans-serif fallbacks; Latin text shares Josefin Sans in both languages. Boss, Creative Director and YOU nameplates share rounded corners and bold body lettering. Use designer-supplied or explicitly reviewed artwork. Optional images not yet supplied retain the existing fallback or labelled placeholder.
+- Ordinary story, result, chapter and promotion cards have natural content height, including expanded rulebook/background sections. Scroll their outer overlay instead of limiting the same element that anchors the decorative inner frame. Short cards remain vertically centered; tall cards start at the reachable top. Mobile cards may fill the screen but must grow beyond its height when needed. History retains its separate reading area and Gallery retains its enclosing scroll container. Short-window reset confirmation must keep its first control reachable and allow scrolling to both decision buttons.
 
 ## 3. Six abilities and disclosure
 
