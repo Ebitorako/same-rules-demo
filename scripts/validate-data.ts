@@ -4,6 +4,7 @@ import { getDataWarnings } from '../src/data/validate';
 import { parseTeamContent } from '../src/data/team';
 import { parseGuide } from '../src/data/guide';
 import { parseTranslationCatalog } from '../src/data/localize';
+import { RULES } from '../src/config/rules';
 
 try {
   const read = (file: string): string => {
@@ -22,6 +23,7 @@ try {
   console.log(`指引资料检查通过：${guide.name}；正式建议来自剧情行的规则书列。`);
   console.log(`中文资料检查通过：${Object.keys(chinese.translations).length} 条原文对应；语言切换共用正式规则。`);
   for (const warning of getDataWarnings(data)) console.warn(`提醒：${warning}`);
+  console.log(`当前界面配置：经设计者更新，疲劳提示使用 Energy≤${RULES.lowEnergyWarning}；上述原表导入提醒保留历史门槛。Energy≤0 的倦怠结局不变。`);
 } catch (error) {
   console.error(`资料检查未通过：\n${error instanceof Error ? error.message : String(error)}`);
   process.exitCode = 1;

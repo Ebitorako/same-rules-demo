@@ -5,6 +5,8 @@ import './styles/endings.css';
 import './styles/history.css';
 import './styles/story.css';
 import './styles/language.css';
+import './styles/affordances.css';
+import './styles/credits.css';
 import { RULES } from './config/rules';
 import { loadChineseCatalog, loadData, loadGuideData } from './data/load';
 import { localizeData, localizeGuide, localizeState, type TranslationCatalog } from './data/localize';
@@ -25,6 +27,8 @@ import { button, escape } from './ui/dom';
 import { endingScreen, epilogueScreen, galleryDetailDialog, galleryScreen, milestoneScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
+import { creditsScreen } from './ui/credits';
+import { attachEndingScrollCues } from './ui/ending-scroll';
 import { guidePanel } from './ui/guide';
 import { choiceHistoryDialog } from './ui/history';
 import { setLocale, setStoryTranslations, t } from './ui/i18n';
@@ -37,7 +41,7 @@ let state: AppState = loadState();
 let data: GameData;
 let guide: GuideData;
 let chinese: TranslationCatalog;
-let view: 'title' | 'game' | 'gallery' | 'settings' = state.run ? 'game' : 'title';
+let view: 'title' | 'game' | 'gallery' | 'settings' | 'credits' = state.run ? 'game' : 'title';
 let returnView: 'title' | 'game' = view;
 let selectingPawn = false;
 let confirmingReset = false;
@@ -53,6 +57,7 @@ let galleryEndingId: string | null = null;
 let galleryBack = false;
 let galleryNoticeTimer: number | undefined;
 const reduced = () => state.settings.reducedMotion || matchMedia('(prefers-reduced-motion: reduce)').matches;
+let disposeEndingScrollCues = () => {};
 
 function debugPanel(): string {
   const run = state.run;
@@ -63,6 +68,7 @@ function soundButton(): string {
   return `<button type="button" class="sound-toggle" data-action="toggle-sound" aria-label="${t('Sound')}" aria-pressed="${state.settings.sound}"><svg class="sound-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9H7L12 5V19L7 15H3Z"/><g class="sound-waves"><path d="M15 8.5Q19 12 15 15.5M18 5Q24 12 18 19"/></g><path class="sound-slash" d="M3 3L21 21"/></svg></button>`;
 }
 function render(focus = true): void {
+  disposeEndingScrollCues();
   const locale = state.settings.locale ?? 'en';
   setLocale(locale);
   document.documentElement.lang = locale;
@@ -84,13 +90,14 @@ function render(focus = true): void {
   else if (view === 'gallery') content = galleryScreen(displayState,displayData) + galleryMarkup
     + '<p id="gallery-notice" class="gallery-toast" role="status" aria-live="polite" hidden></p>';
   else if (view === 'settings') content = settingsScreen(state.settings,confirmingReset);
+  else if (view === 'credits') content = creditsScreen();
   else if (!run) { view = 'title'; content = titleScreen(displayState,displayData,selectingPawn); }
   else if (run.phase === 'intro') content = introScreen(displayState,displayData,guidePanel(displayState,displayData,displayGuide,'intro-guide'));
   else if (run.phase === 'milestone') content = milestoneScreen(displayState,displayData,endingBack);
   else if (run.phase === 'ending' && !showingReturn) content = epilogueVisible && displayData.epilogue ? epilogueScreen(displayData) : endingScreen(displayState,displayData,endingBack);
   else content = `<div class="game-with-guide" ${storyOpen ? 'inert' : ''}>${boardScreen(displayState,displayData)}${guidePanel(displayState,displayData,displayGuide,'board-guide')}</div>${scenarioOpen ? scenarioDialog(displayState,displayData,run.phase !== 'result' ? guidePanel(displayState,displayData,displayGuide,'choice-guide') : '',unavailableOption) : historyMarkup}`;
   if (state.migrationNotice) content = `<aside class="migration-notice" role="status"><strong>${t('The team’s completed story is ready.','组员的正式剧情已准备就绪。')}</strong><p>${t('This version uses six values and new story branches. Your earlier prototype records are preserved in Gallery. Start a new career to play the updated story.','本版本使用六项能力值和新的剧情分支。早期原型记录已保留在结局收藏中，开始新的职业生涯即可体验更新后的剧情。')}</p>${button(t('Got it','知道了'), 'dismiss-migration', 'text-button')}</aside>${content}`;
-  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery')}${button('Settings','settings')}${storyOpen || confirmingReset ? '' : soundButton()}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
+  app.innerHTML = `<header class="app-header" ${storyOpen || confirmingReset ? 'inert' : ''}><button class="brand" data-action="home">${escape(data.copy.title)}</button><nav class="header-nav" aria-label="${t('Main navigation','主导航')}"><span class="prototype-stamp">${t('PROTOTYPE','试玩版')}</span>${view !== 'game' && state.run ? button('Resume','resume') : ''}${button('Gallery','gallery', '', view === 'gallery' ? 'aria-current="page"' : '')}${button('Credits','credits', '', view === 'credits' ? 'aria-current="page"' : '')}${button('Settings','settings')}${storyOpen || confirmingReset ? '' : soundButton()}</nav></header><main id="main-content">${content}</main>${savingFailed ? `<p class="save-warning" role="status">${t('This browser could not save progress. Keep this tab open; refreshing may lose this career.','当前浏览器无法保存进度。请保持本页打开，刷新可能会丢失这次职业生涯。')}</p>` : ''}${debugPanel()}`;
   boardResizeObserver.disconnect();
   fitBoardLabels(app);
   const board = app.querySelector('.board');
@@ -102,6 +109,7 @@ function render(focus = true): void {
     else dialog.insertAdjacentHTML('afterbegin', `<div class="sound-toolbar">${soundButton()}</div>`);
   }
   if (galleryMarkup) app.querySelectorAll<HTMLElement>('#main-content > :not(.gallery-scrim)').forEach(item => item.inert = true);
+  disposeEndingScrollCues = attachEndingScrollCues(app, reduced);
   if (confirmingReset) app.querySelectorAll<HTMLElement>('.settings-screen > :not(.reset-confirm)').forEach(item=>item.inert=true);
   if (focus) {
     const target = dialog ?? app.querySelector<HTMLElement>('#main-content h1, #main-content h2');
@@ -263,7 +271,7 @@ app.addEventListener('click', event => {
   if (action === 'flip-gallery' && galleryEndingId) return void flip(target,()=>{ galleryBack = !galleryBack; });
   if (action === 'home') { view = 'title'; selectingPawn = false; }
   if (action === 'resume') { view = 'game'; selectingPawn = false; }
-  if (action === 'gallery' || action === 'settings') { if (view === 'game' || view === 'title') returnView = view; view = action; }
+  if (action === 'gallery' || action === 'settings' || action === 'credits') { if (view === 'game' || view === 'title') returnView = view; view = action; }
   if (action === 'back') { view = returnView; confirmingReset = false; }
   if (action === 'confirm-reset') confirmingReset = true;
   if (action === 'cancel-reset') confirmingReset = false;

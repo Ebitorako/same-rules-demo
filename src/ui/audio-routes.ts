@@ -3,11 +3,11 @@ import type { AppState } from '../game/types';
 
 export type SoundCue = 'move' | 'land' | 'card' | 'choose' | 'hired' | 'boss' | 'ending' | 'flip';
 export type MusicCue = 'main' | 'intro' | 'bar' | 'party';
-export type AudioView = 'title' | 'game' | 'gallery' | 'settings' | 'epilogue';
+export type AudioView = 'title' | 'game' | 'gallery' | 'settings' | 'credits' | 'epilogue';
 
 export function musicFor(state: AppState, view: AudioView = 'game'): MusicCue {
   if (view === 'title' || view === 'epilogue' || !state.run) return 'intro';
-  if (view === 'gallery') return 'main';
+  if (view === 'gallery' || view === 'credits') return 'main';
   const run = state.run;
   if (['intro', 'chapter', 'promotion'].includes(run.phase)) return 'intro';
   if (['card', 'result'].includes(run.phase)) {

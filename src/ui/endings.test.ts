@@ -113,6 +113,20 @@ describe('ending card theory and references', () => {
     expect(html).not.toContain('Dent (2020)');
   });
 
+  it.each(['en', 'zh-CN'] as const)('offers a scroll cue only on reading faces in %s', locale => {
+    const { state, data } = fixture();
+    setLocale(locale);
+    expect(endingScreen(state, data, false)).not.toContain('data-ending-scroll');
+    expect(galleryDetailDialog(state, data, 'E02', false)).not.toContain('data-ending-scroll');
+    const current = endingScreen(state, data, true);
+    const collected = galleryDetailDialog(state, data, 'E02', true);
+    expect(current).toContain('data-ending-scroll="card"');
+    expect(collected).toContain('data-ending-scroll="gallery"');
+    expect(current).toContain(locale === 'en' ? 'Scroll for choices and value changes' : '下滑查看选择与数值变化');
+    expect(collected).toContain(locale === 'en' ? 'Scroll to read more' : '下滑查看更多');
+    expect(current).toContain('role="region" tabindex="0"');
+  });
+
   it('keeps grid cards compact and exposes full details only in an accessible dialog', () => {
     const { state, data } = fixture();
     const before = JSON.stringify(state);

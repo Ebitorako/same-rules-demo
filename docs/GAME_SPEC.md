@@ -1,6 +1,6 @@
 # Genderpoly — Game Spec
 
-*Version 0.22, 3 Nov 2026. All three approved milestone PNGs are installed: CH1 shares one image and CH2 selects its male/female image by the current pawn. Earlier art, responsive frames, audio ownership and gameplay rules remain in effect. The production handoff contains 59 logical resources and 60 PNGs, excluding the homepage poster. Verification/publication is recorded in README and AI_LOG.*
+*Version 0.23, 3 Nov 2026. Adds chapter-opening Energy guidance, an earlier fatigue warning at Energy ≤ 2, clearer progression/ending controls and the Group 9 Credits page. All approved artwork remains installed (59 logical resources, 60 PNGs, excluding the homepage poster). Burnout, authored choice effects and saved progress are unchanged. Verification/publication is recorded in README and AI_LOG.*
 
 ## 1. Authority and scope
 
@@ -38,11 +38,13 @@ Skill and Money belong only to archived prototype reports. Current effects use t
 
 During play, results and ordinary choice review, hide numerical changes and values except in `?debug=1`. Terminal ending fronts reveal six final values; backs append numerical review after Theory and References. Record the requested and applied changes, limits, and the automatic Chapter 3 entry event. Chapter milestones do not reveal stats.
 
-Energy ≤ 1 shows the source’s exhaustion guidance (faithfully translated from its Chinese rule note). Energy ≤ 0 has priority over other outcomes and immediately triggers E11 Burnout. No random outcomes, undo, save slots or gender-specific starting abilities.
+On the designer's explicit 3 Nov update, Energy ≤ 2 shows the source's exhaustion guidance (faithfully translated from its Chinese rule note). The current warning threshold is RULES.lowEnergyWarning; the original source notes still record the former ≤ 1 threshold. Energy ≤ 0 has priority over other outcomes and immediately triggers E11 Burnout. No random outcomes, undo, save slots or gender-specific starting abilities.
 
 ## 4. Chapters, choices and authored branches
 
 There are four chapter introductions. An introduction is not an extra board choice. The Creative Director silver tile presents Chapter 4’s authored opening after the player has accepted the Ideal Worker promotion and survived its effects.
+
+The Guide adds a short Energy reminder before first play and at every chapter opening, alongside the authored chapter advice. The supplied Chinese wording is “部分行动可能会扣除energy，想要健康的在行业走下去就要注意劳逸结合噢”; the English version carries the same meaning. Both are editable in public/data/guide.json. This reminder and low-Energy warnings stay visible if ordinary advice is hidden. Ordinary board/choice pages do not repeat the chapter reminder.
 
 Cards need not have exactly three options. C1-B has one action. C2-03 shows 1, 2, 3 and 4; its fourth option retains the source's D label and branch internally. All genuine choices use numeric option values consistently in cards, keyboard hints, history and numerical review, including older saved D-labelled choices. C2-04 A/B/C has an additional resignation choice for the female pawn. C2-04D is the authored forced-exit route, ending in E10 without reaching its Boss; its Continue action is narrative acknowledgement, not a new decision, and uses an arrow and Enter hint.
 
@@ -128,6 +130,12 @@ The epilogue is available after E12/E13/E14 only. The source’s epilogue trigge
 Use the current resolved scenario’s `guideAdvice` from the source’s 规则书 column before choices. Its tone is the team’s cheerful industry-common-sense voice. Industry background remains the neutral source background; theory and citations are revealed on the authored card backs. Do not rewrite the guide into an all-knowing moral explanation.
 
 Guide identity and portrait remain in `guide.json`. `guide.csv` retains generic navigation fallbacks. Hide advice/Ask the guide persist a display preference only. Advice does not choose for the player or reveal thresholds. Multi-line theory and references remain readable with vertical scrolling; avoid horizontal overflow.
+
+Primary progression buttons (Start a career, Continue career, Enter the studio, Next, Continue and Next career) use a restrained cream highlight sweep and contrasting outline. Story choices and destructive settings are not selectively highlighted. Both the app's Reduced motion option and the system preference stop the animation.
+
+Ending and milestone flip controls use larger bold body lettering with a minimum 44px target. Back faces with overflow display a black downward chevron plus a short localized scroll prompt; clicking it scrolls the current reading container. Hide the prompt at the bottom or when content fits, update it after resizing or expanding details, and respect reduced motion. Terminal cards retain the inner reading region; Gallery details retain the outer dialog scroll.
+
+Credits is a navigation button immediately after Gallery. It opens a centered paper-card page and returns to the original title/game view without changing progress. Keep all supplied names and casing exactly: Presented by Group 9 / The FreeDOM project Team; Stories: JIANG, JINGYI, HUANG YILIN, YANG YIWEI; Game and Visuals: ShiJia Zhang & GPT Codex; Sound: HUANG YILIN. Special Thanks: Dr Shobha Avadhani on one row, then Hazel Yang / Michelle Han / Yang XuQi, then Wang Lu / Nagi. Descriptive roles use Josefin Sans, while Group 9, the team name and people's names use Limelight. Names and supplied role labels remain English in both editions. The page supports narrow screens and shares existing sound controls.
 
 ## 9. Saves and migration
 

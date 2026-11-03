@@ -4,7 +4,7 @@
 
 **Genderpoly** (working title): a single-player 2D web game about structural gender inequality in the creative industries, made for a university course (NMC5369, NUS). Team deadline 5 Nov 2026, feature freeze 3 Nov.
 
-**Read `docs/GAME_SPEC.md` before any task.** Version 0.22 installs all three approved milestone PNGs: one shared CH1 image and two pawn-specific CH2 images. All earlier art and responsive frame fixes remain in use. The designer approved all milestone images and explicitly authorised integration, cleanup and publication on 3 Nov. The extra Boss reaction requirement remains cancelled. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
+**Read `docs/GAME_SPEC.md` before any task.** Version 0.23 adds chapter-opening Energy reminders, a fatigue warning at Energy <= 2, clearer progress/ending controls and Credits. All three approved milestone PNGs remain installed: one shared CH1 image and two pawn-specific CH2 images. All earlier art and responsive frame fixes remain in use. The designer approved all milestone images and explicitly authorised integration, cleanup and publication on 3 Nov. The extra Boss reaction requirement remains cancelled. Follow a new explicit user instruction over an older rule; do not re-request permission for that authorised scope. Keep original sheet snapshots unchanged and record approved overrides separately.
 
 ## Who you are working with
 

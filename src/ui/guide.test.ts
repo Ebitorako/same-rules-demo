@@ -8,6 +8,8 @@ import { isValidState, loadState, saveState } from '../game/persistence';
 import { advance, chooseOption, createInitialState, startCareer, updateSettings } from '../game/state';
 import type { AppState, GameData } from '../game/types';
 import { currentGuideNote, guidePanel } from './guide';
+import { setLocale } from './i18n';
+import { richText } from './dom';
 
 vi.mock('virtual:art-index', () => ({ default: [] }));
 
@@ -49,7 +51,7 @@ function memoryStorage() {
   return storage;
 }
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => { vi.unstubAllGlobals(); setLocale('en'); });
 
 describe('editable guide validation', () => {
   it('rejects repeated card ids with an actionable CSV error', () => {
@@ -189,5 +191,59 @@ describe('guide preference persistence', () => {
     expect(loadState()).toEqual(legacy);
     expect(guidePanel(loadState(), data, guideWith(), 'guide-test')).toContain('aria-expanded="true"');
     expect(isValidState({ ...legacy, settings: { ...legacy.settings, guideHidden: 'true' } })).toBe(false);
+  });
+});
+
+describe('energy guidance', () => {
+  const currentData = JSON.parse(readFileSync('public/data/team-content.json', 'utf8')) as GameData;
+  const currentGuide = parseGuide(readFileSync('public/data/guide.csv', 'utf8'),
+    JSON.parse(readFileSync('public/data/guide.json', 'utf8')));
+
+  it.each(['en', 'zh-CN'] as const)('reminds players at every chapter opening in %s, including when advice is hidden', locale => {
+    setLocale(locale);
+    for (const chapter of currentData.chapters!) {
+      const state = startCareer(createInitialState(), 'female', currentData);
+      state.run!.phase = chapter.chapter === 1 ? 'intro' : chapter.chapter === 4 ? 'promotion' : 'chapter';
+      state.run!.openingChapter = chapter.chapter;
+      const before = JSON.stringify(state.run);
+      const shown = guidePanel(state, currentData, currentGuide, 'opening');
+      expect(shown).toContain(currentGuide.energyReminder![locale]);
+      expect(shown).toContain(richText(chapter.guideAdvice));
+      const hidden = guidePanel(updateSettings(state, { guideHidden: true }), currentData, currentGuide, 'opening');
+      expect(hidden).toContain(currentGuide.energyReminder![locale]);
+      expect(hidden).toContain('<div id="opening-body" hidden></div>');
+      expect(hidden).not.toContain(richText(chapter.guideAdvice));
+      expect(JSON.stringify(state.run)).toBe(before);
+    }
+  });
+
+  it('does not repeat the chapter reminder over ordinary board, choices or results', () => {
+    const state = startCareer(createInitialState(), 'male', currentData);
+    for (const phase of ['board', 'card', 'result'] as const) {
+      state.run!.phase = phase;
+      state.run!.position = BOARD.findIndex(tile => tile.cardId === 'C1-01');
+      expect(guidePanel(state, currentData, currentGuide, 'normal')).not.toContain('guide-energy-reminder');
+    }
+  });
+
+  it.each([1, 2, 3])('shows fatigue at Energy %s only when at or below two, even with advice hidden', energy => {
+    const state = startCareer(createInitialState(), 'male', currentData);
+    state.run!.phase = 'board';
+    state.run!.stats.Energy = energy;
+    const before = JSON.stringify(state.run);
+    for (const guideHidden of [false, true]) {
+      const html = guidePanel(updateSettings(state, { guideHidden }), currentData, currentGuide, 'fatigue');
+      expect(html.includes('class="guide-fatigue"')).toBe(energy <= 2);
+      expect(html.includes(currentData.copy.lowEnergyAdvice!)).toBe(energy <= 2);
+      expect(JSON.stringify(state.run)).toBe(before);
+    }
+  });
+
+  it('does not add a fatigue warning to the terminal ending', () => {
+    const state = startCareer(createInitialState(), 'male', currentData);
+    state.run!.phase = 'ending';
+    state.run!.stats.Energy = 0;
+    expect(guidePanel(state, currentData, currentGuide, 'ending')).not.toContain('guide-fatigue');
+    expect(RULES.burnoutAtZero).toBe(true);
   });
 });

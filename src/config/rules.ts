@@ -14,7 +14,7 @@ export const RULES = {
   stats: { initial: 5, minimum: 0, maximum: 10 },
   startingStats: { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 } as Stats,
   burnoutAtZero: true,
-  lowEnergyWarning: 1,
+  lowEnergyWarning: 2,
   approvedBalance: chapterOneBalance,
   powerTokens: 0,
   hiring: { cardId: 'C4-01', candidates: {} as Record<number, string> },

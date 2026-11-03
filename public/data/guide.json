@@ -1,5 +1,9 @@
 {
   "name": "The Guide",
   "role": "Your studio companion",
-  "portrait": "npc/guide_neutral"
+  "portrait": "npc/guide_neutral",
+  "energyReminder": {
+    "en": "Some actions may cost Energy. For a healthy, lasting career in the industry, remember to balance work and rest!",
+    "zh-CN": "部分行动可能会扣除energy，想要健康的在行业走下去就要注意劳逸结合噢"
+  }
 }

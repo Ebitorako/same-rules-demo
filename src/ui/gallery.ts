@@ -5,7 +5,12 @@ import { button, escape, richText } from './dom';
 import { finalValues, numericalReview } from './recap';
 import { t, tf } from './i18n';
 
-function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn, headingId?: string): string {
+function scrollCue(target: 'card' | 'gallery', review: boolean): string {
+  const label = review ? t('Scroll for choices and value changes', '下滑查看选择与数值变化') : t('Scroll to read more', '下滑查看更多');
+  return `<button type="button" class="ending-scroll-cue" data-ending-scroll="${target}" hidden><span>${escape(label)}</span><svg width="38" height="24" viewBox="0 0 38 24" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 5L19 19L33 5"/></svg></button>`;
+}
+
+function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn, headingId?: string, showScrollCue = true): string {
   const milestone = ending.kind === 'milestone';
   const heading = `<h2${headingId ? ` id="${escape(headingId)}"` : ''}>${escape(ending.name)}</h2>`;
   const label = milestone ? `${t('A CHAPTER MILESTONE')} · ${ending.name}` : tf('ending {id}', { id: ending.sourceId ?? ending.id });
@@ -14,7 +19,7 @@ function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn, head
   const artKey = milestone && pawn && assetPath(`${baseArtKey}_${pawn}`) ? `${baseArtKey}_${pawn}` : baseArtKey;
   if (!back) return `${art(artKey,label,'ending-art')}<p class="eyebrow">${eyebrow}</p>${heading}<p>${richText(pawn ? ending.frontByPawn?.[pawn] ?? ending.front : ending.front)}</p>${ending.guideAdvice ? `<aside class="ending-guide"><span>${t('THE RULEBOOK')}</span><p>${richText(ending.guideAdvice)}</p></aside>` : ''}${recap}`;
   const text = (value: string) => richText(value.replace(/\r\n?/g, '\n'));
-  return `<p class="eyebrow">${t('BEHIND THE CAREER')}</p>${heading}
+  return `<p class="eyebrow">${t('BEHIND THE CAREER')}</p>${heading}${showScrollCue ? scrollCue('card', Boolean(recap)) : ''}
     <div class="ending-reading-scroll" role="region" tabindex="0" aria-label="${escape(tf('Theory, references and numerical review for {ending}', { ending: ending.name }))}">
       <section class="ending-reading-section"><h3>${t('Theory')}</h3><p class="ending-theory">${text(ending.back)}</p></section>
       <section class="ending-reading-section ending-references"><h3>${t('References')}</h3>${ending.reference.trim()
@@ -30,14 +35,14 @@ export function endingScreen(state: AppState, data: GameData, back: boolean): st
   const report = career?.recap ?? getEndingRecap(state.run, data);
   const finalDecision = state.run.exitReason && state.run.result?.text ? `<details class="ending-last-decision"><summary>${t('Your final decision')}</summary><p>${richText(state.run.result.text)}</p></details>` : '';
   const hasEpilogue = data.epilogue?.eligibleEndings?.includes(ending.id);
-  return `<section class="ending-screen"><p class="eyebrow">${t('CAREER')} ${state.run.round} / ${escape(state.run.character.name)}</p><article class="ending-card paper-card ${back ? 'back-face' : ''}" aria-live="polite">${endingFace(ending,back,back ? numericalReview(report,data.copy) : finalDecision + finalValues(report), state.run.character.pawn)}${button(back ? 'See the front' : 'Turn the card over', 'flip-ending','text-button')}</article><div class="ending-actions">${button('Gallery','gallery')}${hasEpilogue ? button('Continue', 'epilogue', 'primary') : button('Next career','next-career','primary')}</div><p class="keyboard-note">${t('THIS CAREER IS NOW PART OF THE STUDIO.')}</p></section>`;
+  return `<section class="ending-screen"><p class="eyebrow">${t('CAREER')} ${state.run.round} / ${escape(state.run.character.name)}</p><article class="ending-card paper-card ${back ? 'back-face' : ''}" aria-live="polite">${endingFace(ending,back,back ? numericalReview(report,data.copy) : finalDecision + finalValues(report), state.run.character.pawn)}${button(back ? 'See the front' : 'Turn the card over', 'flip-ending','text-button ending-flip')}</article><div class="ending-actions">${button('Gallery','gallery')}${hasEpilogue ? button('Continue', 'epilogue', 'primary') : button('Next career','next-career','primary')}</div><p class="keyboard-note">${t('THIS CAREER IS NOW PART OF THE STUDIO.')}</p></section>`;
 }
 
 export function milestoneScreen(state: AppState, data: GameData, back: boolean): string {
   const run = state.run!;
   const milestone = data.milestones?.find(item => item.id === run.milestoneId);
   if (!milestone) return '';
-  return `<section class="ending-screen"><p class="eyebrow">${t('CAREER')} ${run.round} / ${t('YOUR CAREER CONTINUES')}</p><article class="ending-card paper-card ${back ? 'back-face' : ''}">${endingFace(milestone, back, '', run.character.pawn)}${button(back ? 'See the front' : 'Turn the card over', 'flip-ending', 'text-button')}</article>${button('Continue to the next chapter', 'advance', 'primary', 'data-enter="true"')}</section>`;
+  return `<section class="ending-screen"><p class="eyebrow">${t('CAREER')} ${run.round} / ${t('YOUR CAREER CONTINUES')}</p><article class="ending-card paper-card ${back ? 'back-face' : ''}">${endingFace(milestone, back, '', run.character.pawn)}${button(back ? 'See the front' : 'Turn the card over', 'flip-ending', 'text-button ending-flip')}</article>${button('Continue to the next chapter', 'advance', 'primary', 'data-enter="true"')}</section>`;
 }
 
 export function epilogueScreen(data: GameData): string {
@@ -82,8 +87,8 @@ export function galleryDetailDialog(state: AppState, data: GameData, id: string,
     .filter(pawn => pawn !== entries[0].pawn)
     .map(pawn => `<details class="ending-variant"><summary>${tf('{pawn} pawn’s ending', { pawn: t(pawn === 'female' ? 'Female' : 'Male') })}</summary><p>${richText(ending.frontByPawn?.[pawn] ?? ending.front)}</p></details>`).join('') : '';
   return `<div class="sheet-scrim gallery-scrim"><section class="gallery-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-detail-heading" tabindex="-1">
-    <header class="gallery-dialog-toolbar">${button('Close', 'close-gallery', 'gallery-close')}</header>
-    <article class="ending-card paper-card ${back ? 'back-face' : ''}">${endingFace(ending, back, galleryRecaps(state, data, ending, back), entries[0].pawn, 'gallery-detail-heading')}${variants}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · ${t('career')} ${entry.round}`).join('<br>')}</p>${button(back ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button', `data-ending="${escape(ending.id)}"`)}</article>
+    <header class="gallery-dialog-toolbar">${back ? scrollCue('gallery', state.lineage.some(career => career.endingId === id)) : ''}${button('Close', 'close-gallery', 'gallery-close')}</header>
+    <article class="ending-card paper-card ${back ? 'back-face' : ''}">${endingFace(ending, back, galleryRecaps(state, data, ending, back), entries[0].pawn, 'gallery-detail-heading', false)}${variants}<p class="unlocked-by">${entries.map(entry=>`${escape(entry.name)} · ${entry.pawn === 'female' ? '♀' : '♂'} · ${t('career')} ${entry.round}`).join('<br>')}</p>${button(back ? 'See the front' : 'Turn over', 'flip-gallery', 'text-button ending-flip', `data-ending="${escape(ending.id)}"`)}</article>
   </section></div>`;
 }
 

@@ -5,7 +5,7 @@ let locale: Locale = 'en';
 let storyTranslations: Record<string, string> = {};
 
 const labels: Record<string, string> = {
-  'Gallery': '结局收藏', 'Settings': '设置', 'Resume': '继续游戏', 'Back': '返回',
+  'Gallery': '结局收藏', 'Credits': '制作名单', 'Settings': '设置', 'Resume': '继续游戏', 'Back': '返回',
   'Continue': '继续', 'Next': '下一步', 'Close': '关闭', 'Got it': '知道了',
   'Continue career': '继续本次生涯', 'Start a career': '开始职业生涯', 'Next career': '下一段生涯',
   'Enter the studio': '进入工作室', 'Choose a pawn': '选择棋子', 'Female pawn': '女性棋子', 'Male pawn': '男性棋子',

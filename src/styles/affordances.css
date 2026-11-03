@@ -1,0 +1,30 @@
+/* A quiet cream sweep marks the next step without highlighting any story choice. */
+.progress-action {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px var(--cream), 0 0 0 3px var(--ink);
+}
+.progress-action::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgb(244 239 227 / 24%) 49%, transparent 68%);
+  transform: translateX(-140%);
+  animation: next-step-shine 3.6s ease-in-out infinite;
+}
+.progress-action:hover, .progress-action:focus-visible {
+  background: #302d27;
+  box-shadow: 0 0 0 2px var(--cream), 0 0 0 3px var(--ink), 0 5px 0 var(--ink);
+}
+.progress-action:active { box-shadow: 0 0 0 2px var(--cream), 0 0 0 3px var(--ink); }
+.progress-action:disabled::after, .moving .progress-action::after, [inert] .progress-action::after { animation: none; }
+.header-nav button[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+@keyframes next-step-shine {
+  0%, 38% { transform: translateX(-140%); }
+  73%, 100% { transform: translateX(140%); }
+}
+.reduced-motion .progress-action::after { display: none; }
+@media (prefers-reduced-motion: reduce) { .progress-action::after { display: none; } }

@@ -4,6 +4,44 @@
 
 .ending-card { max-width: 620px; }
 
+.ending-card > .ending-flip {
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 10px 12px;
+  font: 700 clamp(19px, 2.2vw, 23px)/1.35 var(--font-body);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.ending-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 54px;
+  max-width: 100%;
+  margin: 2px auto 14px;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--ink);
+  font: 700 13px/1.35 var(--font-body);
+  text-align: center;
+}
+.ending-scroll-cue[hidden] { display: none; }
+.ending-scroll-cue svg { flex: none; animation: ending-scroll-nudge 1.8s ease-in-out infinite; }
+.ending-scroll-cue:hover { transform: none; box-shadow: 0 0 0 2px var(--ink); }
+.gallery-dialog-toolbar .ending-scroll-cue { flex: 1 1 0; min-width: 0; margin: 0 auto 0 0; }
+/* Keep the scroll target's height stable when its sticky hint disappears. */
+.gallery-dialog-toolbar .ending-scroll-cue[hidden] { display: flex; visibility: hidden; pointer-events: none; }
+.gallery-dialog-toolbar:has(.ending-scroll-cue) { align-items: center; }
+@keyframes ending-scroll-nudge { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+.reduced-motion .ending-scroll-cue svg { animation: none; }
+@media (prefers-reduced-motion: reduce) { .ending-scroll-cue svg { animation: none; } }
+
 .ending-values {
   width: 100%;
   margin-top: 24px;
