@@ -589,6 +589,16 @@
     "assets/cards/ending_CH2-E07.png",
     "assets/cards/ending_CH2-E07.webp"
   ],
+  "cards/ending_CH2-E07_male": [
+    "assets/cards/ending_CH2-E07_male.svg",
+    "assets/cards/ending_CH2-E07_male.png",
+    "assets/cards/ending_CH2-E07_male.webp"
+  ],
+  "cards/ending_CH2-E07_female": [
+    "assets/cards/ending_CH2-E07_female.svg",
+    "assets/cards/ending_CH2-E07_female.png",
+    "assets/cards/ending_CH2-E07_female.webp"
+  ],
   "audio/bgm_main": [
     "assets/audio/music/main.m4a"
   ],

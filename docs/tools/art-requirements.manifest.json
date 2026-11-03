@@ -1,88 +1,28 @@
 {
   "source": "https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit",
   "date": "2026-11-03",
+  "version": "0.22",
   "summary": {
     "existing": 6,
     "firstBatchNew": 24,
     "reactionAdditions": 27,
-    "optionalBoss": 9,
-    "optionalMilestone": 2,
-    "total": 68,
-    "installed": 57,
+    "milestoneIllustrations": 2,
+    "milestonePngFiles": 3,
+    "total": 59,
+    "logicalResources": 59,
+    "pngFiles": 60,
+    "installed": 59,
+    "installedPngFiles": 60,
     "requiredNewInstalled": 51,
-    "optionalMissing": 9,
-    "visiblePlaceholderMissing": 2
+    "pending": 0,
+    "visiblePlaceholderMissing": 0,
+    "homepagePosterIncluded": false
   },
+  "approvedOverview": "art/approved/2026-11-03/index.html",
+  "approvalMetadata": "art/approved/2026-11-03/milestone-provenance.json",
   "missingArt": {
-    "visiblePlaceholders": [
-      {
-        "key": "cards/ending_CH1-E01",
-        "title": "推开大门 / Through the Door",
-        "path": "public/assets/cards/ending_CH1-E01.png",
-        "when": "第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。",
-        "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
-        "source": "ch1!23",
-        "priority": "next",
-        "prompt": "Original 1930s rubber-hose cartoon illustration for Genderpoly, a contemporary London creative-production workplace story. Match the supplied approved employee-badge pawns and symbolic Boss cast: cream rounded rectangular badge bodies, thick black outlines, expressive large white oval eyes, black pupils, simple brows and mouth, flexible black arms, white gloves and rounded black shoes. Ordinary workplace NPCs are living employee badges, not human portraits; their face is on the cream badge surface. Preserve each role through a distinct badge silhouette, clip, collar or small modern work prop, without readable job-title text. Use the supplied designs as visual references, never redesign the approved six characters. Flat cream and ink, restrained approved red or blue accents only where already present. No 3D, photorealism, new colour palette, text, watermark, generated card frame or baked-in paper background.\n\nCreate a milestone-card illustration for “Through the Door”, matching the attached approved ending illustrations. A laptop displaying a successful Junior Producer offer email, beside a tidy portfolio and a simple open studio doorway. Reserve a blank heading area; use abstract email lines with no readable words. Show entry into the industry rather than final victory. No protagonist or gender-specific symbols, so the same image works for both player pawns.\n\nLandscape 3:2 composition, 1536 by 1024 pixels, flat cream #F4EFE3 background, generous breathing space, clear simple props. No card border, game UI, chapter or ending code, numbers, theory text, captions or readable generated labels. No confetti or finish-line imagery. Deliver one standalone illustration, not a card mockup. The game adds the title and story separately."
-      },
-      {
-        "key": "cards/ending_CH2-E07",
-        "title": "向上一步 / Moving Up",
-        "path": "public/assets/cards/ending_CH2-E07.png",
-        "when": "第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。",
-        "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
-        "source": "ch2!45",
-        "priority": "next",
-        "prompt": "Original 1930s rubber-hose cartoon illustration for Genderpoly, a contemporary London creative-production workplace story. Match the supplied approved employee-badge pawns and symbolic Boss cast: cream rounded rectangular badge bodies, thick black outlines, expressive large white oval eyes, black pupils, simple brows and mouth, flexible black arms, white gloves and rounded black shoes. Ordinary workplace NPCs are living employee badges, not human portraits; their face is on the cream badge surface. Preserve each role through a distinct badge silhouette, clip, collar or small modern work prop, without readable job-title text. Use the supplied designs as visual references, never redesign the approved six characters. Flat cream and ink, restrained approved red or blue accents only where already present. No 3D, photorealism, new colour palette, text, watermark, generated card frame or baked-in paper background.\n\nCreate a milestone-card illustration for “Moving Up”, matching the attached approved ending illustrations. An office noticeboard with a company-wide promotion announcement and a new role title represented by a blank title line, beside an invitation to a senior meeting. Leave the character name and role labels blank, using abstract marks only: the two pawn routes receive different roles. This is an intermediate promotion, not the final Creative Director appointment or an ending. No protagonist or gender-specific symbols, so the same image works for both player pawns.\n\nLandscape 3:2 composition, 1536 by 1024 pixels, flat cream #F4EFE3 background, generous breathing space, clear simple props. No card border, game UI, chapter or ending code, numbers, theory text, captions or readable generated labels. No confetti or finish-line imagery. Deliver one standalone illustration, not a card mockup. The game adds the title and story separately."
-      }
-    ],
-    "bossFallbacks": [
-      {
-        "key": "bosses/old_boys_network_pleased",
-        "path": "public/assets/bosses/old_boys_network_pleased.png",
-        "title": "The Old Boys’ Network · 满意"
-      },
-      {
-        "key": "bosses/old_boys_network_appraising",
-        "path": "public/assets/bosses/old_boys_network_appraising.png",
-        "title": "The Old Boys’ Network · 打量"
-      },
-      {
-        "key": "bosses/old_boys_network_cold",
-        "path": "public/assets/bosses/old_boys_network_cold.png",
-        "title": "The Old Boys’ Network · 冷淡"
-      },
-      {
-        "key": "bosses/ideal_worker_pleased",
-        "path": "public/assets/bosses/ideal_worker_pleased.png",
-        "title": "The Ideal Worker · 满意"
-      },
-      {
-        "key": "bosses/ideal_worker_frowning",
-        "path": "public/assets/bosses/ideal_worker_frowning.png",
-        "title": "The Ideal Worker · 皱眉"
-      },
-      {
-        "key": "bosses/ideal_worker_cold",
-        "path": "public/assets/bosses/ideal_worker_cold.png",
-        "title": "The Ideal Worker · 冷淡"
-      },
-      {
-        "key": "bosses/the_system_pleased",
-        "path": "public/assets/bosses/the_system_pleased.png",
-        "title": "The System · 满意"
-      },
-      {
-        "key": "bosses/the_system_frowning",
-        "path": "public/assets/bosses/the_system_frowning.png",
-        "title": "The System · 皱眉"
-      },
-      {
-        "key": "bosses/the_system_cold",
-        "path": "public/assets/bosses/the_system_cold.png",
-        "title": "The System · 冷淡"
-      }
-    ],
+    "visiblePlaceholders": [],
+    "bossReactions": "Cancelled by the designer. Reuse the existing Boss illustrations; no extra reaction files or prompts are required.",
     "excluded": "Uninstalled legacy role keys, conditional gallery_frame decoration, code-drawn symbols/card piles, and future scene/candidate concepts are not current visible placeholders."
   },
   "assets": [
@@ -91,8 +31,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "女玩家棋子",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到双棋子原稿，按定稿分拆接入；无需重新设计。当前棋盘尺寸不需要额外表情，保留一张基础像即可。",
+      "files": [
+        {
+          "key": "characters/pawn_female",
+          "path": "public/assets/characters/pawn_female.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/characters/pawn_female.png"
+      ],
       "path": "public/assets/characters/pawn_female.png",
       "prepared": true,
       "status": "installed",
@@ -107,8 +62,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "男玩家棋子",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到双棋子原稿，按定稿分拆接入；无需重新设计。当前棋盘尺寸不需要额外表情，保留一张基础像即可。",
+      "files": [
+        {
+          "key": "characters/pawn_male",
+          "path": "public/assets/characters/pawn_male.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/characters/pawn_male.png"
+      ],
       "path": "public/assets/characters/pawn_male.png",
       "prepared": true,
       "status": "installed",
@@ -123,8 +93,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "The Gatekeeper",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到四联Boss原稿，按定稿分拆接入；保留图中既有象征与道具。棋盘和Boss卡共用，金属红背景由程序生成，不能烘焙到角色图片。",
+      "files": [
+        {
+          "key": "bosses/gatekeeper",
+          "path": "public/assets/bosses/gatekeeper.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/bosses/gatekeeper.png"
+      ],
       "path": "public/assets/bosses/gatekeeper.png",
       "prepared": true,
       "status": "installed",
@@ -139,8 +124,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "The Old Boys’ Network",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到四联Boss原稿，按定稿分拆接入；保留图中既有象征与道具。棋盘和Boss卡共用，金属绿背景由程序生成，不能烘焙到角色图片。",
+      "files": [
+        {
+          "key": "bosses/old_boys_network",
+          "path": "public/assets/bosses/old_boys_network.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/bosses/old_boys_network.png"
+      ],
       "path": "public/assets/bosses/old_boys_network.png",
       "prepared": true,
       "status": "installed",
@@ -155,8 +155,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "The Ideal Worker",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到四联Boss原稿，按定稿分拆接入；保留图中既有象征与道具。棋盘和Boss卡共用，金属蓝背景由程序生成，不能烘焙到角色图片。",
+      "files": [
+        {
+          "key": "bosses/ideal_worker",
+          "path": "public/assets/bosses/ideal_worker.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/bosses/ideal_worker.png"
+      ],
       "path": "public/assets/bosses/ideal_worker.png",
       "prepared": true,
       "status": "installed",
@@ -171,8 +186,23 @@
       "group": "已收稿角色",
       "priority": "现有",
       "title": "The System",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "已收到四联Boss原稿，按定稿分拆接入；保留图中既有象征与道具。棋盘和Boss卡共用，金属紫背景由程序生成，不能烘焙到角色图片。",
+      "files": [
+        {
+          "key": "bosses/the_system",
+          "path": "public/assets/bosses/the_system.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/bosses/the_system.png"
+      ],
       "path": "public/assets/bosses/the_system.png",
       "prepared": true,
       "status": "installed",
@@ -187,9 +217,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "招聘经理 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-01—C1-03：剧情明确为女性，主持服装印象、作品集与面试。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch1!5 C1-01；ch1!6 C1-01；ch1!7 C1-01；ch1!8 C1-02；ch1!9 C1-02；ch1!10 C1-02；ch1!11 C1-03F；ch1!12 C1-03F；ch1!13 C1-03F；ch1!14 C1-03M；ch1!15 C1-03M；ch1!16 C1-03M",
+      "files": [
+        {
+          "key": "npc/hiring-manager_neutral",
+          "path": "public/assets/npc/hiring-manager_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hiring-manager_neutral.png"
+      ],
       "path": "public/assets/npc/hiring-manager_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -204,9 +249,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "招聘经理 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-01—C1-03：剧情明确为女性，主持服装印象、作品集与面试。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch1!5 C1-01；ch1!6 C1-01；ch1!7 C1-01；ch1!8 C1-02；ch1!9 C1-02；ch1!10 C1-02；ch1!11 C1-03F；ch1!12 C1-03F；ch1!13 C1-03F；ch1!14 C1-03M；ch1!15 C1-03M；ch1!16 C1-03M",
+      "files": [
+        {
+          "key": "npc/hiring-manager_pleased",
+          "path": "public/assets/npc/hiring-manager_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hiring-manager_pleased.png"
+      ],
       "path": "public/assets/npc/hiring-manager_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -221,9 +281,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "招聘经理 · 皱眉",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-01—C1-03：剧情明确为女性，主持服装印象、作品集与面试。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch1!5 C1-01；ch1!6 C1-01；ch1!7 C1-01；ch1!8 C1-02；ch1!9 C1-02；ch1!10 C1-02；ch1!11 C1-03F；ch1!12 C1-03F；ch1!13 C1-03F；ch1!14 C1-03M；ch1!15 C1-03M；ch1!16 C1-03M",
+      "files": [
+        {
+          "key": "npc/hiring-manager_frowning",
+          "path": "public/assets/npc/hiring-manager_frowning.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hiring-manager_frowning.png"
+      ],
       "path": "public/assets/npc/hiring-manager_frowning.png",
       "prepared": true,
       "status": "installed",
@@ -238,9 +313,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "招聘经理 · 尴尬",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-01—C1-03：剧情明确为女性，主持服装印象、作品集与面试。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch1!5 C1-01；ch1!6 C1-01；ch1!7 C1-01；ch1!8 C1-02；ch1!9 C1-02；ch1!10 C1-02；ch1!11 C1-03F；ch1!12 C1-03F；ch1!13 C1-03F；ch1!14 C1-03M；ch1!15 C1-03M；ch1!16 C1-03M",
+      "files": [
+        {
+          "key": "npc/hiring-manager_awkward",
+          "path": "public/assets/npc/hiring-manager_awkward.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hiring-manager_awkward.png"
+      ],
       "path": "public/assets/npc/hiring-manager_awkward.png",
       "prepared": true,
       "status": "installed",
@@ -255,9 +345,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "招聘经理 · 冷淡",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-01—C1-03：剧情明确为女性，主持服装印象、作品集与面试。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch1!5 C1-01；ch1!6 C1-01；ch1!7 C1-01；ch1!8 C1-02；ch1!9 C1-02；ch1!10 C1-02；ch1!11 C1-03F；ch1!12 C1-03F；ch1!13 C1-03F；ch1!14 C1-03M；ch1!15 C1-03M；ch1!16 C1-03M",
+      "files": [
+        {
+          "key": "npc/hiring-manager_cold",
+          "path": "public/assets/npc/hiring-manager_cold.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hiring-manager_cold.png"
+      ],
       "path": "public/assets/npc/hiring-manager_cold.png",
       "prepared": true,
       "status": "installed",
@@ -272,9 +377,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "资深制片人 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-04：试工结束给予反馈的男经理/资深制片人。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch1!17 C1-04；ch1!18 C1-04；ch1!19 C1-04",
+      "files": [
+        {
+          "key": "npc/senior-producer_neutral",
+          "path": "public/assets/npc/senior-producer_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/senior-producer_neutral.png"
+      ],
       "path": "public/assets/npc/senior-producer_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -289,9 +409,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "资深制片人 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch1 C1-04：试工结束给予反馈的男经理/资深制片人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch1!17 C1-04；ch1!18 C1-04；ch1!19 C1-04",
+      "files": [
+        {
+          "key": "npc/senior-producer_pleased",
+          "path": "public/assets/npc/senior-producer_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/senior-producer_pleased.png"
+      ],
       "path": "public/assets/npc/senior-producer_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -306,9 +441,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "创意总监（第二章） · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-01—C2-04A/D：男性，控制创意认可、社交与晋升；不是第四章的玩家，也不要与同事 Daniel 自动合并。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch2!5 C2-01；ch2!6 C2-01；ch2!7 C2-01；ch2!8 C2-01；ch2!9 C2-01；ch2!10 C2-01；ch2!11 C2-02；ch2!12 C2-02；ch2!13 C2-02；ch2!14 C2-02；ch2!15 C2-02；ch2!16 C2-02；ch2!17 C2-03；ch2!18 C2-03；ch2!19 C2-03；ch2!20 C2-03；ch2!21 C2-03；ch2!22 C2-03；ch2!23 C2-03；ch2!24 C2-03；ch2!25 C2-04A；ch2!26 C2-04A；ch2!27 C2-04A；ch2!28 C2-04A；ch2!37 C2-04D；ch2!38 C2-04D",
+      "files": [
+        {
+          "key": "npc/creative-director_neutral",
+          "path": "public/assets/npc/creative-director_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/creative-director_neutral.png"
+      ],
       "path": "public/assets/npc/creative-director_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -323,9 +473,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "创意总监（第二章） · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-01—C2-04A/D：男性，控制创意认可、社交与晋升；不是第四章的玩家，也不要与同事 Daniel 自动合并。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!5 C2-01；ch2!6 C2-01；ch2!7 C2-01；ch2!8 C2-01；ch2!9 C2-01；ch2!10 C2-01；ch2!11 C2-02；ch2!12 C2-02；ch2!13 C2-02；ch2!14 C2-02；ch2!15 C2-02；ch2!16 C2-02；ch2!17 C2-03；ch2!18 C2-03；ch2!19 C2-03；ch2!20 C2-03；ch2!21 C2-03；ch2!22 C2-03；ch2!23 C2-03；ch2!24 C2-03；ch2!25 C2-04A；ch2!26 C2-04A；ch2!27 C2-04A；ch2!28 C2-04A；ch2!37 C2-04D；ch2!38 C2-04D",
+      "files": [
+        {
+          "key": "npc/creative-director_pleased",
+          "path": "public/assets/npc/creative-director_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/creative-director_pleased.png"
+      ],
       "path": "public/assets/npc/creative-director_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -340,9 +505,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "创意总监（第二章） · 皱眉",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-01—C2-04A/D：男性，控制创意认可、社交与晋升；不是第四章的玩家，也不要与同事 Daniel 自动合并。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!5 C2-01；ch2!6 C2-01；ch2!7 C2-01；ch2!8 C2-01；ch2!9 C2-01；ch2!10 C2-01；ch2!11 C2-02；ch2!12 C2-02；ch2!13 C2-02；ch2!14 C2-02；ch2!15 C2-02；ch2!16 C2-02；ch2!17 C2-03；ch2!18 C2-03；ch2!19 C2-03；ch2!20 C2-03；ch2!21 C2-03；ch2!22 C2-03；ch2!23 C2-03；ch2!24 C2-03；ch2!25 C2-04A；ch2!26 C2-04A；ch2!27 C2-04A；ch2!28 C2-04A；ch2!37 C2-04D；ch2!38 C2-04D",
+      "files": [
+        {
+          "key": "npc/creative-director_frowning",
+          "path": "public/assets/npc/creative-director_frowning.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/creative-director_frowning.png"
+      ],
       "path": "public/assets/npc/creative-director_frowning.png",
       "prepared": true,
       "status": "installed",
@@ -357,9 +537,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "创意总监（第二章） · 尴尬",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-01—C2-04A/D：男性，控制创意认可、社交与晋升；不是第四章的玩家，也不要与同事 Daniel 自动合并。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!5 C2-01；ch2!6 C2-01；ch2!7 C2-01；ch2!8 C2-01；ch2!9 C2-01；ch2!10 C2-01；ch2!11 C2-02；ch2!12 C2-02；ch2!13 C2-02；ch2!14 C2-02；ch2!15 C2-02；ch2!16 C2-02；ch2!17 C2-03；ch2!18 C2-03；ch2!19 C2-03；ch2!20 C2-03；ch2!21 C2-03；ch2!22 C2-03；ch2!23 C2-03；ch2!24 C2-03；ch2!25 C2-04A；ch2!26 C2-04A；ch2!27 C2-04A；ch2!28 C2-04A；ch2!37 C2-04D；ch2!38 C2-04D",
+      "files": [
+        {
+          "key": "npc/creative-director_awkward",
+          "path": "public/assets/npc/creative-director_awkward.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/creative-director_awkward.png"
+      ],
       "path": "public/assets/npc/creative-director_awkward.png",
       "prepared": true,
       "status": "installed",
@@ -374,9 +569,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "创意总监（第二章） · 冷淡",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-01—C2-04A/D：男性，控制创意认可、社交与晋升；不是第四章的玩家，也不要与同事 Daniel 自动合并。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!5 C2-01；ch2!6 C2-01；ch2!7 C2-01；ch2!8 C2-01；ch2!9 C2-01；ch2!10 C2-01；ch2!11 C2-02；ch2!12 C2-02；ch2!13 C2-02；ch2!14 C2-02；ch2!15 C2-02；ch2!16 C2-02；ch2!17 C2-03；ch2!18 C2-03；ch2!19 C2-03；ch2!20 C2-03；ch2!21 C2-03；ch2!22 C2-03；ch2!23 C2-03；ch2!24 C2-03；ch2!25 C2-04A；ch2!26 C2-04A；ch2!27 C2-04A；ch2!28 C2-04A；ch2!37 C2-04D；ch2!38 C2-04D",
+      "files": [
+        {
+          "key": "npc/creative-director_cold",
+          "path": "public/assets/npc/creative-director_cold.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/creative-director_cold.png"
+      ],
       "path": "public/assets/npc/creative-director_cold.png",
       "prepared": true,
       "status": "installed",
@@ -391,9 +601,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "同事 Sophie · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-04B/C：同批入职的女性同事，也是酒吧谈话涉及的当事人。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch2!29 C2-04B；ch2!30 C2-04B；ch2!31 C2-04B；ch2!32 C2-04B；ch2!33 C2-04C；ch2!34 C2-04C；ch2!35 C2-04C；ch2!36 C2-04C",
+      "files": [
+        {
+          "key": "npc/sophie_neutral",
+          "path": "public/assets/npc/sophie_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/sophie_neutral.png"
+      ],
       "path": "public/assets/npc/sophie_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -408,9 +633,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "同事 Sophie · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-04B/C：同批入职的女性同事，也是酒吧谈话涉及的当事人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!29 C2-04B；ch2!30 C2-04B；ch2!31 C2-04B；ch2!32 C2-04B；ch2!33 C2-04C；ch2!34 C2-04C；ch2!35 C2-04C；ch2!36 C2-04C",
+      "files": [
+        {
+          "key": "npc/sophie_pleased",
+          "path": "public/assets/npc/sophie_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/sophie_pleased.png"
+      ],
       "path": "public/assets/npc/sophie_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -425,9 +665,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "同事 Sophie · 皱眉",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-04B/C：同批入职的女性同事，也是酒吧谈话涉及的当事人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!29 C2-04B；ch2!30 C2-04B；ch2!31 C2-04B；ch2!32 C2-04B；ch2!33 C2-04C；ch2!34 C2-04C；ch2!35 C2-04C；ch2!36 C2-04C",
+      "files": [
+        {
+          "key": "npc/sophie_frowning",
+          "path": "public/assets/npc/sophie_frowning.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/sophie_frowning.png"
+      ],
       "path": "public/assets/npc/sophie_frowning.png",
       "prepared": true,
       "status": "installed",
@@ -442,9 +697,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "同事 Sophie · 冷淡",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch2 C2-04B/C：同批入职的女性同事，也是酒吧谈话涉及的当事人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch2!29 C2-04B；ch2!30 C2-04B；ch2!31 C2-04B；ch2!32 C2-04B；ch2!33 C2-04C；ch2!34 C2-04C；ch2!35 C2-04C；ch2!36 C2-04C",
+      "files": [
+        {
+          "key": "npc/sophie_cold",
+          "path": "public/assets/npc/sophie_cold.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/sophie_cold.png"
+      ],
       "path": "public/assets/npc/sophie_cold.png",
       "prepared": true,
       "status": "installed",
@@ -459,9 +729,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "执行制片人 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-01、C3-03b、C3-04a/b：男性，谈晋升、代班并安排深夜剪辑。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch3!5 C3-01；ch3!6 C3-01；ch3!7 C3-01；ch3!14 C3-03b；ch3!15 C3-03b；ch3!16 C3-03b；ch3!17 C3-04a；ch3!18 C3-04a；ch3!19 C3-04a；ch3!20 C3-04a；ch3!21 C3-04a；ch3!22 C3-04a；ch3!23 C3-04b；ch3!24 C3-04b；ch3!25 C3-04b",
+      "files": [
+        {
+          "key": "npc/executive-producer_neutral",
+          "path": "public/assets/npc/executive-producer_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/executive-producer_neutral.png"
+      ],
       "path": "public/assets/npc/executive-producer_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -476,9 +761,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "执行制片人 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-01、C3-03b、C3-04a/b：男性，谈晋升、代班并安排深夜剪辑。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!5 C3-01；ch3!6 C3-01；ch3!7 C3-01；ch3!14 C3-03b；ch3!15 C3-03b；ch3!16 C3-03b；ch3!17 C3-04a；ch3!18 C3-04a；ch3!19 C3-04a；ch3!20 C3-04a；ch3!21 C3-04a；ch3!22 C3-04a；ch3!23 C3-04b；ch3!24 C3-04b；ch3!25 C3-04b",
+      "files": [
+        {
+          "key": "npc/executive-producer_pleased",
+          "path": "public/assets/npc/executive-producer_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/executive-producer_pleased.png"
+      ],
       "path": "public/assets/npc/executive-producer_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -493,9 +793,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "执行制片人 · 打量",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-01、C3-03b、C3-04a/b：男性，谈晋升、代班并安排深夜剪辑。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!5 C3-01；ch3!6 C3-01；ch3!7 C3-01；ch3!14 C3-03b；ch3!15 C3-03b；ch3!16 C3-03b；ch3!17 C3-04a；ch3!18 C3-04a；ch3!19 C3-04a；ch3!20 C3-04a；ch3!21 C3-04a；ch3!22 C3-04a；ch3!23 C3-04b；ch3!24 C3-04b；ch3!25 C3-04b",
+      "files": [
+        {
+          "key": "npc/executive-producer_appraising",
+          "path": "public/assets/npc/executive-producer_appraising.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/executive-producer_appraising.png"
+      ],
       "path": "public/assets/npc/executive-producer_appraising.png",
       "prepared": true,
       "status": "installed",
@@ -510,9 +825,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "执行制片人 · 皱眉",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-01、C3-03b、C3-04a/b：男性，谈晋升、代班并安排深夜剪辑。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!5 C3-01；ch3!6 C3-01；ch3!7 C3-01；ch3!14 C3-03b；ch3!15 C3-03b；ch3!16 C3-03b；ch3!17 C3-04a；ch3!18 C3-04a；ch3!19 C3-04a；ch3!20 C3-04a；ch3!21 C3-04a；ch3!22 C3-04a；ch3!23 C3-04b；ch3!24 C3-04b；ch3!25 C3-04b",
+      "files": [
+        {
+          "key": "npc/executive-producer_frowning",
+          "path": "public/assets/npc/executive-producer_frowning.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/executive-producer_frowning.png"
+      ],
       "path": "public/assets/npc/executive-producer_frowning.png",
       "prepared": true,
       "status": "installed",
@@ -527,9 +857,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "伴侣 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-02、C3-03a：同样在电视行业工作。女玩家路线文字用 he，男玩家路线用 she。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch3!8 C3-02；ch3!9 C3-02；ch3!10 C3-02；ch3!11 C3-03a；ch3!12 C3-03a；ch3!13 C3-03a",
+      "files": [
+        {
+          "key": "npc/your-partner_neutral",
+          "path": "public/assets/npc/your-partner_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner_neutral.png"
+      ],
       "path": "public/assets/npc/your-partner_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -544,9 +889,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "伴侣 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-02、C3-03a：同样在电视行业工作。女玩家路线文字用 he，男玩家路线用 she。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!8 C3-02；ch3!9 C3-02；ch3!10 C3-02；ch3!11 C3-03a；ch3!12 C3-03a；ch3!13 C3-03a",
+      "files": [
+        {
+          "key": "npc/your-partner_pleased",
+          "path": "public/assets/npc/your-partner_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner_pleased.png"
+      ],
       "path": "public/assets/npc/your-partner_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -561,9 +921,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "伴侣 · 打量",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-02、C3-03a：同样在电视行业工作。女玩家路线文字用 he，男玩家路线用 she。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!8 C3-02；ch3!9 C3-02；ch3!10 C3-02；ch3!11 C3-03a；ch3!12 C3-03a；ch3!13 C3-03a",
+      "files": [
+        {
+          "key": "npc/your-partner_appraising",
+          "path": "public/assets/npc/your-partner_appraising.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner_appraising.png"
+      ],
       "path": "public/assets/npc/your-partner_appraising.png",
       "prepared": true,
       "status": "installed",
@@ -578,9 +953,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "伴侣 · 尴尬",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-02、C3-03a：同样在电视行业工作。女玩家路线文字用 he，男玩家路线用 she。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!8 C3-02；ch3!9 C3-02；ch3!10 C3-02；ch3!11 C3-03a；ch3!12 C3-03a；ch3!13 C3-03a",
+      "files": [
+        {
+          "key": "npc/your-partner_awkward",
+          "path": "public/assets/npc/your-partner_awkward.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner_awkward.png"
+      ],
       "path": "public/assets/npc/your-partner_awkward.png",
       "prepared": true,
       "status": "installed",
@@ -595,9 +985,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "伴侣／委约人组合 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-05a/b 的 NPC 栏是两个说话人共用，并非第三个新人物。剧情提及女性委约人。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch3!26 C3-05a；ch3!27 C3-05a；ch3!28 C3-05a；ch3!29 C3-05a；ch3!30 C3-05a；ch3!31 C3-05a；ch3!32 C3-05b；ch3!33 C3-05b；ch3!34 C3-05b",
+      "files": [
+        {
+          "key": "npc/your-partner-commissioner_neutral",
+          "path": "public/assets/npc/your-partner-commissioner_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner-commissioner_neutral.png"
+      ],
       "path": "public/assets/npc/your-partner-commissioner_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -612,9 +1017,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "伴侣／委约人组合 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-05a/b 的 NPC 栏是两个说话人共用，并非第三个新人物。剧情提及女性委约人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!26 C3-05a；ch3!27 C3-05a；ch3!28 C3-05a；ch3!29 C3-05a；ch3!30 C3-05a；ch3!31 C3-05a；ch3!32 C3-05b；ch3!33 C3-05b；ch3!34 C3-05b",
+      "files": [
+        {
+          "key": "npc/your-partner-commissioner_pleased",
+          "path": "public/assets/npc/your-partner-commissioner_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner-commissioner_pleased.png"
+      ],
       "path": "public/assets/npc/your-partner-commissioner_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -629,9 +1049,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "伴侣／委约人组合 · 尴尬",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch3 C3-05a/b 的 NPC 栏是两个说话人共用，并非第三个新人物。剧情提及女性委约人。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch3!26 C3-05a；ch3!27 C3-05a；ch3!28 C3-05a；ch3!29 C3-05a；ch3!30 C3-05a；ch3!31 C3-05a；ch3!32 C3-05b；ch3!33 C3-05b；ch3!34 C3-05b",
+      "files": [
+        {
+          "key": "npc/your-partner-commissioner_awkward",
+          "path": "public/assets/npc/your-partner-commissioner_awkward.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/your-partner-commissioner_awkward.png"
+      ],
       "path": "public/assets/npc/your-partner-commissioner_awkward.png",
       "prepared": true,
       "status": "installed",
@@ -646,9 +1081,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "人力资源经理 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-01：提供 Chloe/Josh 资料并评价招聘选择；剧本未规定性别、年龄、发型。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch4!5 C4-01；ch4!6 C4-01；ch4!7 C4-01",
+      "files": [
+        {
+          "key": "npc/hr-manager_neutral",
+          "path": "public/assets/npc/hr-manager_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hr-manager_neutral.png"
+      ],
       "path": "public/assets/npc/hr-manager_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -663,9 +1113,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "人力资源经理 · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-01：提供 Chloe/Josh 资料并评价招聘选择；剧本未规定性别、年龄、发型。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!5 C4-01；ch4!6 C4-01；ch4!7 C4-01",
+      "files": [
+        {
+          "key": "npc/hr-manager_pleased",
+          "path": "public/assets/npc/hr-manager_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hr-manager_pleased.png"
+      ],
       "path": "public/assets/npc/hr-manager_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -680,9 +1145,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "人力资源经理 · 打量",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-01：提供 Chloe/Josh 资料并评价招聘选择；剧本未规定性别、年龄、发型。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!5 C4-01；ch4!6 C4-01；ch4!7 C4-01",
+      "files": [
+        {
+          "key": "npc/hr-manager_appraising",
+          "path": "public/assets/npc/hr-manager_appraising.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/hr-manager_appraising.png"
+      ],
       "path": "public/assets/npc/hr-manager_appraising.png",
       "prepared": true,
       "status": "installed",
@@ -697,9 +1177,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "实习生 Mia · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-02：另一团队的成年女性实习生，向玩家求助；不是受聘的 Chloe。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch4!8 C4-02；ch4!9 C4-02；ch4!10 C4-02；ch4!11 C4-02；ch4!12 C4-02；ch4!13 C4-02",
+      "files": [
+        {
+          "key": "npc/intern-mia_neutral",
+          "path": "public/assets/npc/intern-mia_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/intern-mia_neutral.png"
+      ],
       "path": "public/assets/npc/intern-mia_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -714,9 +1209,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "实习生 Mia · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-02：另一团队的成年女性实习生，向玩家求助；不是受聘的 Chloe。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!8 C4-02；ch4!9 C4-02；ch4!10 C4-02；ch4!11 C4-02；ch4!12 C4-02；ch4!13 C4-02",
+      "files": [
+        {
+          "key": "npc/intern-mia_pleased",
+          "path": "public/assets/npc/intern-mia_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/intern-mia_pleased.png"
+      ],
       "path": "public/assets/npc/intern-mia_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -731,9 +1241,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "实习生 Mia · 尴尬",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-02：另一团队的成年女性实习生，向玩家求助；不是受聘的 Chloe。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!8 C4-02；ch4!9 C4-02；ch4!10 C4-02；ch4!11 C4-02；ch4!12 C4-02；ch4!13 C4-02",
+      "files": [
+        {
+          "key": "npc/intern-mia_awkward",
+          "path": "public/assets/npc/intern-mia_awkward.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/intern-mia_awkward.png"
+      ],
       "path": "public/assets/npc/intern-mia_awkward.png",
       "prepared": true,
       "status": "installed",
@@ -748,9 +1273,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "实习生 Mia · 冷淡",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-02：另一团队的成年女性实习生，向玩家求助；不是受聘的 Chloe。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!8 C4-02；ch4!9 C4-02；ch4!10 C4-02；ch4!11 C4-02；ch4!12 C4-02；ch4!13 C4-02",
+      "files": [
+        {
+          "key": "npc/intern-mia_cold",
+          "path": "public/assets/npc/intern-mia_cold.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/intern-mia_cold.png"
+      ],
       "path": "public/assets/npc/intern-mia_cold.png",
       "prepared": true,
       "status": "installed",
@@ -765,9 +1305,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "公司 CEO · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-03：要求提出 DEI 政策、交董事会审议；剧本没有限定外貌或性别。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "ch4!14 C4-03；ch4!15 C4-03；ch4!16 C4-03",
+      "files": [
+        {
+          "key": "npc/ceo_neutral",
+          "path": "public/assets/npc/ceo_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/ceo_neutral.png"
+      ],
       "path": "public/assets/npc/ceo_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -782,9 +1337,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "公司 CEO · 满意",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-03：要求提出 DEI 政策、交董事会审议；剧本没有限定外貌或性别。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!14 C4-03；ch4!15 C4-03；ch4!16 C4-03",
+      "files": [
+        {
+          "key": "npc/ceo_pleased",
+          "path": "public/assets/npc/ceo_pleased.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/ceo_pleased.png"
+      ],
       "path": "public/assets/npc/ceo_pleased.png",
       "prepared": true,
       "status": "installed",
@@ -799,9 +1369,24 @@
       "group": "剧情表情",
       "priority": "P1",
       "title": "公司 CEO · 打量",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "Ch4 C4-03：要求提出 DEI 政策、交董事会审议；剧本没有限定外貌或性别。 只变化眉、眼、嘴，沿用该角色neutral定稿。",
       "source": "ch4!14 C4-03；ch4!15 C4-03；ch4!16 C4-03",
+      "files": [
+        {
+          "key": "npc/ceo_appraising",
+          "path": "public/assets/npc/ceo_appraising.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/ceo_appraising.png"
+      ],
       "path": "public/assets/npc/ceo_appraising.png",
       "prepared": true,
       "status": "installed",
@@ -816,9 +1401,24 @@
       "group": "首批基础头像",
       "priority": "P0",
       "title": "规则书／常驻引导人 · 中性",
-      "size": "1254×1254 · 已接入 PNG",
+      "size": "1254×1254 · 1 张已接入 PNG",
       "note": "常驻棋盘边与选择前；台词轻快，像行业前辈的小贴士。其象征性是“行业常识”的化身。 先完成这一张，并把它作为该角色后续表情的参考。",
       "source": "guide.json + 章节规则书列",
+      "files": [
+        {
+          "key": "npc/guide_neutral",
+          "path": "public/assets/npc/guide_neutral.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1254,
+            "height": 1254
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/npc/guide_neutral.png"
+      ],
       "path": "public/assets/npc/guide_neutral.png",
       "prepared": true,
       "status": "installed",
@@ -833,9 +1433,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E02 · A Different Door",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：录用邮件；Junior Producer 字样淡去，Production Coordinator 被突出",
       "source": "ch1!24",
+      "files": [
+        {
+          "key": "cards/ending_E02",
+          "path": "public/assets/cards/ending_E02.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E02.png"
+      ],
       "path": "public/assets/cards/ending_E02.png",
       "prepared": true,
       "status": "installed",
@@ -850,9 +1465,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E03 · The Door Stays Closed",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：邮件屏幕显示未录用 E03 已按获准的第一章微调恢复可达：仅 C1-04 选项3不再增加 Communication。原始表格快照保留；对应结局图已经审核通过并接入。",
       "source": "ch1!25",
+      "files": [
+        {
+          "key": "cards/ending_E03",
+          "path": "public/assets/cards/ending_E03.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E03.png"
+      ],
       "path": "public/assets/cards/ending_E03.png",
       "prepared": true,
       "status": "installed",
@@ -867,9 +1497,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E08 · Personal Reasons",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：一封只写着“个人原因”的辞职信",
       "source": "ch2!46",
+      "files": [
+        {
+          "key": "cards/ending_E08",
+          "path": "public/assets/cards/ending_E08.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E08.png"
+      ],
       "path": "public/assets/cards/ending_E08.png",
       "prepared": true,
       "status": "installed",
@@ -884,9 +1529,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E09 · Off the List",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：公告栏上的晋升名单中没有你的名字",
       "source": "ch2!47",
+      "files": [
+        {
+          "key": "cards/ending_E09",
+          "path": "public/assets/cards/ending_E09.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E09.png"
+      ],
       "path": "public/assets/cards/ending_E09.png",
       "prepared": true,
       "status": "installed",
@@ -901,9 +1561,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E10 · The Official Version",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：停用的门禁卡、HR 邮件，以及一份关键内容被涂黑的内部声明",
       "source": "ch2!48",
+      "files": [
+        {
+          "key": "cards/ending_E10",
+          "path": "public/assets/cards/ending_E10.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E10.png"
+      ],
       "path": "public/assets/cards/ending_E10.png",
       "prepared": true,
       "status": "installed",
@@ -918,9 +1593,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E04 · A Personal Choice",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：空荡的工位，椅背上搭着一件外套",
       "source": "ch3!45",
+      "files": [
+        {
+          "key": "cards/ending_E04",
+          "path": "public/assets/cards/ending_E04.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E04.png"
+      ],
       "path": "public/assets/cards/ending_E04.png",
       "prepared": true,
       "status": "installed",
@@ -935,9 +1625,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E05 · Family Man",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：办公桌上的全家福",
       "source": "ch3!46",
+      "files": [
+        {
+          "key": "cards/ending_E05",
+          "path": "public/assets/cards/ending_E05.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E05.png"
+      ],
       "path": "public/assets/cards/ending_E05.png",
       "prepared": true,
       "status": "installed",
@@ -952,9 +1657,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E06 · Staying Put",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：同一张工位，墙上的日历已经翻过了好几年",
       "source": "ch3!47",
+      "files": [
+        {
+          "key": "cards/ending_E06",
+          "path": "public/assets/cards/ending_E06.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E06.png"
+      ],
       "path": "public/assets/cards/ending_E06.png",
       "prepared": true,
       "status": "installed",
@@ -969,9 +1689,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E07 · Maybe It Was Just Me",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：一面映出空工位的镜子",
       "source": "ch3!48",
+      "files": [
+        {
+          "key": "cards/ending_E07",
+          "path": "public/assets/cards/ending_E07.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E07.png"
+      ],
       "path": "public/assets/cards/ending_E07.png",
       "prepared": true,
       "status": "installed",
@@ -986,9 +1721,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E11 · Burnout",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：一张空椅子，桌上的电脑还亮着",
       "source": "ch4!36",
+      "files": [
+        {
+          "key": "cards/ending_E11",
+          "path": "public/assets/cards/ending_E11.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E11.png"
+      ],
       "path": "public/assets/cards/ending_E11.png",
       "prepared": true,
       "status": "installed",
@@ -1003,9 +1753,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E12 · Nothing Changed",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：茶水间冰箱上贴着的一张 A4 声明",
       "source": "ch4!37",
+      "files": [
+        {
+          "key": "cards/ending_E12",
+          "path": "public/assets/cards/ending_E12.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E12.png"
+      ],
       "path": "public/assets/cards/ending_E12.png",
       "prepared": true,
       "status": "installed",
@@ -1020,9 +1785,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E13 · A Small Step Forward",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：地下一层门口的一块新门牌",
       "source": "ch4!38",
+      "files": [
+        {
+          "key": "cards/ending_E13",
+          "path": "public/assets/cards/ending_E13.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E13.png"
+      ],
       "path": "public/assets/cards/ending_E13.png",
       "prepared": true,
       "status": "installed",
@@ -1037,9 +1817,24 @@
       "group": "结局插图",
       "priority": "P0",
       "title": "E14 · Rewriting the Rules",
-      "size": "1536×1024 · 已接入 PNG",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "note": "原表美术需求：公告栏上贴着的晋升名单和评审标准",
       "source": "ch4!39",
+      "files": [
+        {
+          "key": "cards/ending_E14",
+          "path": "public/assets/cards/ending_E14.png",
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "paths": [
+        "public/assets/cards/ending_E14.png"
+      ],
       "path": "public/assets/cards/ending_E14.png",
       "prepared": true,
       "status": "installed",
@@ -1050,153 +1845,99 @@
       }
     },
     {
-      "key": "bosses/old_boys_network_pleased",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Old Boys’ Network · 满意",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/old_boys_network_pleased.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/old_boys_network_appraising",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Old Boys’ Network · 打量",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/old_boys_network_appraising.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/old_boys_network_cold",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Old Boys’ Network · 冷淡",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/old_boys_network_cold.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/ideal_worker_pleased",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Ideal Worker · 满意",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/ideal_worker_pleased.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/ideal_worker_frowning",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Ideal Worker · 皱眉",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/ideal_worker_frowning.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/ideal_worker_cold",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The Ideal Worker · 冷淡",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/ideal_worker_cold.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/the_system_pleased",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The System · 满意",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/the_system_pleased.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/the_system_frowning",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The System · 皱眉",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/the_system_frowning.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
-      "key": "bosses/the_system_cold",
-      "group": "可选Boss表情",
-      "priority": "可选",
-      "title": "The System · 冷淡",
-      "size": "1024×1024 · 透明",
-      "note": "已有基础Boss可直接复用；只有完成全部首批资源后才建议补。",
-      "path": "public/assets/bosses/the_system_cold.png",
-      "prepared": false,
-      "status": "optional-not-supplied",
-      "suggestedSize": "1024×1024 · 透明",
-      "actualDimensions": null
-    },
-    {
       "key": "cards/ending_CH1-E01",
-      "group": "晋升卡待补插图",
+      "files": [
+        {
+          "key": "cards/ending_CH1-E01",
+          "path": "public/assets/cards/ending_CH1-E01.png",
+          "title": "男女棋子共用",
+          "approved": true,
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "group": "晋升卡插图",
       "priority": "P2",
-      "currentDisplay": "placeholder",
+      "approved": true,
+      "approvedOverview": "art/approved/2026-11-03/index.html",
+      "approvalMetadata": "art/approved/2026-11-03/milestone-provenance.json",
+      "currentDisplay": "artwork",
+      "currentBrief": "录用邮件、作品集与敞开的工作室大门；原图已通过并正式接入，男女棋子共用。",
       "title": "推开大门 / Through the Door",
-      "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
+      "size": "1536×1024 · 1 张已接入 PNG",
       "source": "ch1!23",
       "when": "第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。",
-      "note": "下一批优先补齐可见占位。第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。 晋升过渡卡有独立插槽，可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：Junior Producer 录用邮件",
+      "note": "已批准原图正式接入，男女共用一个文件。 第一章守门人录用后、进入第二章前：获得 Junior Producer 职位（男女路线共用）。 晋升过渡卡可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：Junior Producer 录用邮件",
+      "paths": [
+        "public/assets/cards/ending_CH1-E01.png"
+      ],
       "path": "public/assets/cards/ending_CH1-E01.png",
-      "prepared": false,
-      "status": "missing-visible-placeholder",
-      "suggestedSize": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
-      "actualDimensions": null
+      "prepared": true,
+      "status": "installed",
+      "suggestedSize": "1536×1024 · 横版3:2 · 正式文件1幅，男女共用",
+      "actualDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
     },
     {
       "key": "cards/ending_CH2-E07",
-      "group": "晋升卡待补插图",
+      "files": [
+        {
+          "key": "cards/ending_CH2-E07_female",
+          "path": "public/assets/cards/ending_CH2-E07_female.png",
+          "title": "女性棋子版",
+          "pawn": "female",
+          "approved": true,
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        },
+        {
+          "key": "cards/ending_CH2-E07_male",
+          "path": "public/assets/cards/ending_CH2-E07_male.png",
+          "title": "男性棋子版",
+          "pawn": "male",
+          "approved": true,
+          "prepared": true,
+          "status": "installed",
+          "actualDimensions": {
+            "width": 1536,
+            "height": 1024
+          }
+        }
+      ],
+      "group": "晋升卡插图",
       "priority": "P2",
-      "currentDisplay": "placeholder",
+      "approved": true,
+      "approvedOverview": "art/approved/2026-11-03/index.html",
+      "approvalMetadata": "art/approved/2026-11-03/milestone-provenance.json",
+      "currentDisplay": "artwork",
+      "reviewComment": "这个看不出来太多的晋升的感觉，可以放一个办公室的场景，然后领导旁边站着主角，下面办公桌坐着的同事们在鼓掌恭喜的画面",
+      "currentBrief": "办公室晋升祝贺场景：领导与主角并排站在前方，下方办公桌旁坐着的同事鼓掌。男女棋子两版均已通过并正式接入；场景和构图一致，游戏按当前棋子显示对应版本。",
       "title": "向上一步 / Moving Up",
-      "size": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
+      "size": "1536×1024 · 2 张已接入 PNG",
       "source": "ch2!45",
       "when": "第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。",
-      "note": "下一批优先补齐可见占位。第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。 晋升过渡卡有独立插槽，可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：A company-wide promotion announcement, a new title beneath Alex's name and an invitation to a senior meeting.",
-      "path": "public/assets/cards/ending_CH2-E07.png",
-      "prepared": false,
-      "status": "missing-visible-placeholder",
-      "suggestedSize": "1536×1024 · 横版3:2 · 每张1幅，男女共用",
-      "actualDimensions": null
+      "note": "男女版本均获批准并正式接入，按当前棋子选择对应文件；同属一个逻辑资源，不存在无后缀的 CH2 PNG。 第二章老男孩网络晋升后、进入第三章前：男性通过任一晋升选项，或女性选择第2项获得正式晋升。女性第1项的代理头衔不会显示这张卡。 晋升过渡卡可翻面查看；不进入 Gallery，不计入13个终局。原表美术需求：A company-wide promotion announcement, a new title beneath Alex's name and an invitation to a senior meeting.",
+      "paths": [
+        "public/assets/cards/ending_CH2-E07_female.png",
+        "public/assets/cards/ending_CH2-E07_male.png"
+      ],
+      "prepared": true,
+      "status": "installed",
+      "suggestedSize": "1536×1024 · 横版3:2 · 1个逻辑资源、男女正式文件各1幅",
+      "actualDimensions": {
+        "width": 1536,
+        "height": 1024
+      }
     }
   ],
   "audio": [

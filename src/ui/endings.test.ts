@@ -6,7 +6,11 @@ import { endingScreen, galleryDetailDialog, galleryScreen, milestoneScreen } fro
 import { richText } from './dom';
 import { setLocale } from './i18n';
 
-vi.mock('virtual:art-index', () => ({ default: [] }));
+vi.mock('virtual:art-index', () => ({ default: [
+  'assets/cards/ending_CH1-E01.png',
+  'assets/cards/ending_CH2-E07_male.png',
+  'assets/cards/ending_CH2-E07_female.png',
+] }));
 afterEach(() => setLocale('en'));
 
 function fixture(): { state: AppState; data: GameData } {
@@ -147,13 +151,45 @@ describe('ending card theory and references', () => {
       state.run!.milestoneId = milestone.id;
       for (const back of [false, true]) {
         const html = milestoneScreen(state, data, back);
-        expect(html).not.toContain(milestone.sourceId!);
-        expect(html).not.toContain(milestone.id);
+        const visibleText = html.replace(/<[^>]*>/g, '');
+        expect(visibleText).not.toContain(milestone.sourceId!);
+        expect(visibleText).not.toContain(milestone.id);
         expect(html).not.toContain('ending-values');
         expect(html).not.toContain('numerical-review');
         expect(html).toContain('data-action="advance"');
       }
       expect(milestoneScreen(state, data, false)).toContain(locale === 'en' ? 'A CHAPTER MILESTONE' : '章节里程碑');
     }
+  });
+
+  it.each([
+    ['female', 'en'], ['male', 'en'], ['female', 'zh-CN'], ['male', 'zh-CN'],
+  ] as const)('shows the approved %s milestone artwork in %s without changing the career', (pawn, locale) => {
+    const { state, data } = fixture();
+    setLocale(locale);
+    state.run!.character.pawn = pawn;
+    state.run!.phase = 'milestone';
+    for (const [id, file] of [
+      ['CH1-E01', 'ending_CH1-E01.png'],
+      ['CH2-E07', `ending_CH2-E07_${pawn}.png`],
+    ]) {
+      state.run!.milestoneId = id;
+      const before = JSON.stringify(state);
+      const front = milestoneScreen(state, data, false);
+      expect(front).toContain(`src="/assets/cards/${file}"`);
+      expect(front).not.toContain('class="art art-placeholder');
+      expect(front).toContain('data-action="flip-ending"');
+      const back = milestoneScreen(state, data, true);
+      expect(back).not.toContain('<img');
+      expect(back).toContain('class="ending-theory"');
+      expect(back).toContain('data-action="advance"');
+      expect(back).not.toContain('ending-values');
+      expect(back).not.toContain('numerical-review');
+      expect(JSON.stringify(state)).toBe(before);
+    }
+    const collection = galleryScreen(state, data);
+    expect(collection.match(/data-action="open-ending"/g)).toHaveLength(13);
+    expect(collection).not.toContain('CH1-E01');
+    expect(collection).not.toContain('CH2-E07');
   });
 });

@@ -10,7 +10,9 @@ function endingFace(ending: Ending, back: boolean, recap = '', pawn?: Pawn, head
   const heading = `<h2${headingId ? ` id="${escape(headingId)}"` : ''}>${escape(ending.name)}</h2>`;
   const label = milestone ? `${t('A CHAPTER MILESTONE')} · ${ending.name}` : tf('ending {id}', { id: ending.sourceId ?? ending.id });
   const eyebrow = milestone ? t('A CHAPTER MILESTONE') : `${escape(ending.sourceId ?? ending.id)} / ${t('A CAREER REMEMBERED')}`;
-  if (!back) return `${art(`cards/ending_${ending.id}`,label,'ending-art')}<p class="eyebrow">${eyebrow}</p>${heading}<p>${richText(pawn ? ending.frontByPawn?.[pawn] ?? ending.front : ending.front)}</p>${ending.guideAdvice ? `<aside class="ending-guide"><span>${t('THE RULEBOOK')}</span><p>${richText(ending.guideAdvice)}</p></aside>` : ''}${recap}`;
+  const baseArtKey = `cards/ending_${ending.id}`;
+  const artKey = milestone && pawn && assetPath(`${baseArtKey}_${pawn}`) ? `${baseArtKey}_${pawn}` : baseArtKey;
+  if (!back) return `${art(artKey,label,'ending-art')}<p class="eyebrow">${eyebrow}</p>${heading}<p>${richText(pawn ? ending.frontByPawn?.[pawn] ?? ending.front : ending.front)}</p>${ending.guideAdvice ? `<aside class="ending-guide"><span>${t('THE RULEBOOK')}</span><p>${richText(ending.guideAdvice)}</p></aside>` : ''}${recap}`;
   const text = (value: string) => richText(value.replace(/\r\n?/g, '\n'));
   return `<p class="eyebrow">${t('BEHIND THE CAREER')}</p>${heading}
     <div class="ending-reading-scroll" role="region" tabindex="0" aria-label="${escape(tf('Theory, references and numerical review for {ending}', { ending: ending.name }))}">

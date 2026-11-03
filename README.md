@@ -4,9 +4,9 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 当前版本与试玩
 
-**v0.21：展开规则书时，卡框随正文自动延伸。** 剧情、结果、章节与晋升弹窗按完整内容计算高度，由外层滚动，内框不再横穿展开后的文字；极矮窗口的重置确认页也可滚动到全部按钮。历史选择和收藏详情保留各自的阅读滚动。已检查中英文、电脑和手机竖横屏；验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
+**v0.22：三张晋升定稿正式接入，两个章节里程碑均显示美术。** 第一章男女共用一张，第二章按当前棋子显示男女对应版本。此前的卡框自适应修复继续保留：剧情、结果、章节与晋升弹窗按完整内容计算高度，由外层滚动，内框不再横穿展开后的文字；极矮窗口的重置确认页也可滚动到全部按钮。历史选择和收藏详情保留各自的阅读滚动。已检查中英文、电脑和手机竖横屏；验证记录见 [AI_LOG](docs/AI_LOG.md)，线上发布状态见 [GitHub Actions](https://github.com/Ebitorako/same-rules-demo/actions)。
 
-51 张已审核定稿继续用于指引人、剧情表情、结局与收藏。当前还会显示美术占位的是**第一章、第二章各一张晋升插图**；9 张可选 Boss 表情会复用已有基础图。缺图位置、文件名、尺寸和 Prompt 见[制作清单顶部](docs/ART_REQUIREMENTS.zh-CN.html#missing)。
+51 张角色／表情与结局定稿继续使用，新增的三张晋升图片也已全部获准接入。第二章保留领导与主角并排站立、桌旁同事鼓掌的办公室场景，男女版只更换主角。正式图片、实际路径与制作参考见[制作清单顶部](docs/ART_REQUIREMENTS.zh-CN.html#missing)；审核原始 JSON 与生成来源保存在[本地最终素材总览](art/approved/2026-11-03/index.html)，该目录不随游戏发布。Boss 额外表情需求已取消，继续使用现有立绘。
 
 声音沿用 v0.19 的防叠加逻辑：当前游戏页接管声音，进入棋盘时切换游戏 BGM；后台暂停不修改存档或声音偏好。新玩家默认开启声音，已有偏好保留，右上角黑白扬声器按钮与 Settings 共用设置。
 
@@ -46,16 +46,18 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 ## 文件夹怎么用
 
-四轮审核的 **51 张最终素材**（38 张角色／表情、13 张结局图）已全部接入。每张 PNG 只保留一份，放在游戏实际使用的 `public/assets/npc/` 或 `public/assets/cards/`；三张 HR 使用第四轮确认的第二轮椭圆眼镜原图。
+已审核的 **54 张新增最终素材**（38 张角色／表情、13 张结局图、3 张晋升图）全部接入。加上原有两枚棋子和四位 Boss，生产清单共 **59 个逻辑资源、60 张实际 PNG**，首页海报另计。每张 PNG 只保留一份运行文件；三张 HR 仍使用第四轮确认的第二轮椭圆眼镜原图。
 
-本地 `art/approved/2026-11-03/index.html` 是最终素材总览，直接读取这些运行文件。同目录只保留清单、四轮审核 JSON、来源和实际生成 Prompt 等文字记录，不再存重复图片。旧审核页面及未采用的图片已清理，后续以最终目录为准。
+本地 `art/approved/2026-11-03/index.html` 是最终素材总览，直接读取这些运行文件。同目录保存清单、原角色结局四轮与晋升两轮审核 JSON、来源和实际生成 Prompt 等文字记录，不另存重复图片。晋升来源统一保存在 [milestone-provenance.json](art/approved/2026-11-03/milestone-provenance.json)；旧审核页面与未采用图片清理后，以正式运行文件及最终目录为准。
 
 | 位置 | 用途 |
 |---|---|
 | `art/approved/2026-11-03/` | 本地最终素材总览、审核与来源记录；图片引用运行目录，不另存副本 |
 | [public/assets/](public/assets/) | 游戏实际加载的图片、字体与音频 |
 | `characters/`、`bosses/` | 两枚棋子、四位 Boss |
-| `npc/`、`cards/` | 38 张角色／表情、13 张结局定稿；卡牌堆问号由界面绘制 |
+| `npc/`、`cards/` | 38 张角色／表情、13 张结局、3 张晋升定稿；卡牌堆问号由界面绘制 |
+| `cards/ending_CH1-E01.png` | 第一章晋升，男女共用 |
+| `cards/ending_CH2-E07_male.png`、`cards/ending_CH2-E07_female.png` | 第二章晋升，按当前棋子显示对应版本；没有无后缀的 CH2 PNG |
 | `audio/music/`、`audio/effects/` | 背景音乐、短音效；用途见同目录 catalog |
 | [docs/reference/](docs/reference/) | 用户原稿；其中大型音频只保留本地，不提交 Git |
 | [public/data/team-content.json](public/data/team-content.json) | 正式剧情运行数据 |
@@ -66,7 +68,7 @@ NMC5369 Media Project 的网页游戏。游戏名 **Genderpoly**，公司名 **F
 
 后续直接把图片发到聊天即可，由 Codex 分拆、命名和接入。也可以自行移动资源，只需同步 [manifest.json](public/assets/manifest.json) 的右侧路径，固定资源名称不变。路径以 `assets/` 开头，不写盘符或 `public/`。
 
-**[打开唯一的美术需求与 Prompt 清单](docs/ART_REQUIREMENTS.zh-CN.html)**：已有 6 张角色，加上本次 51 张定稿，共 57 张清单素材已接入；首页海报另行保留。9 张 Boss 表情与 2 张晋升插图仍为可选，未提供时继续使用既有 Boss 图和里程碑占位。清单按实际文件显示状态，保留后续复用的制作 Prompt；最终实际生成与修改 Prompt 保存在本地审核目录。
+**[打开唯一的美术需求与 Prompt 清单](docs/ART_REQUIREMENTS.zh-CN.html)**：6 张既有棋子／Boss、38 张角色／表情、13 张结局与3张晋升 PNG 均已接入，共 60 张实际图片、59 个逻辑资源；首页海报另行保留。当前没有待审核素材或可见美术占位。Boss 额外表情需求已取消，不再列文件或制作 Prompt；游戏复用原 Boss 立绘。第一章使用已通过原图，第二章男女两版按当前棋子读取；第二章逻辑资源下只列两个实际文件路径。清单按实际文件显示状态，保留后续复用的制作 Prompt；最终实际生成与修改 Prompt 保存在本地审核目录。
 
 旧版重复说明已从当前文件夹移除，可从 Git 历史找回。原始启动包归档到上一级 `_archive/`；过去四批验收截图集中在 `_archive/verification/`，保留原批次名称。本轮临时截图使用项目内被忽略的 `.verification/`。`node_modules`、`dist` 和 `.tools` 是本地运行或构建所需目录，不上传 Git。
 
