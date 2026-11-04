@@ -8,7 +8,7 @@ export function creditsScreen(): string {
       <header class="credits-presented">
         <p class="credits-role">Presented by</p>
         <p class="credits-group credits-name">Group 9</p>
-        <p class="credits-team credits-name">The FreeDOM project Team</p>
+        <p class="credits-team credits-name">The FreeDom project Team</p>
       </header>
       <section class="credits-section" aria-labelledby="credits-stories">
         <h2 class="credits-role" id="credits-stories">Stories</h2>

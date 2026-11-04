@@ -15,7 +15,7 @@ export function titleScreen(state: AppState, data: GameData, selecting: boolean)
     ${selecting ? `<div class="pawn-selection" aria-label="${t('Choose a pawn')}">${(['female','male'] as const).map(pawn => `<button class="pawn-choice" data-action="start-${pawn}">${pawnArt(pawn)}<span>${t(pawn === 'female' ? 'Female pawn' : 'Male pawn')}</span></button>`).join('')}</div>` : `<div class="title-actions">${button(state.run ? 'Continue career' : 'Start a career', state.run ? 'resume' : 'select-pawn', 'primary')}${button('Gallery', 'gallery')}${button('Settings', 'settings')}</div>`}
     <p class="keyboard-note">${t('ONE CAREER AT A TIME · EVERY CHOICE STAYS')}</p></div>
     <div class="title-art-panel">${titleArt}<span class="art-caption">${t('NEW HIRE → CREATIVE DIRECTOR → ?')}</span></div></div>
-    <div class="title-bottom"><span>${t('01 / BREAKING IN')}</span><span>${t('02 / GETTING AHEAD')}</span><span>${t('03 / THE CAREER CLIFF')}</span><span>${t('04 / THE OTHER SIDE')}</span></div>
+    <section class="title-chapters" aria-labelledby="career-chapters-heading"><h2 id="career-chapters-heading">${t('Your Career Chapters')}</h2><div class="title-bottom"><span>${t('01 / BREAKING IN')}</span><span>${t('02 / GETTING AHEAD')}</span><span>${t('03 / THE CAREER CLIFF')}</span><span>${t('04 / THE OTHER SIDE')}</span></div></section>
     <p class="prototype-note">${escape(data.copy.placeholderNotice)}</p>
   </section>`;
 }

@@ -1,11 +1,12 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import Papa from 'papaparse';
+import { SOURCE_DATE, endingCell, endingColumns, loadTeamSources, normaliseCompany } from './team-source.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const read = (name) => readFileSync(resolve(root, name), 'utf8');
 const write = (name, value) => writeFileSync(resolve(root, name), JSON.stringify(value, null, 2) + '\n');
-const snapshot = JSON.parse(read('docs/source/2026-11-03-team-sheet.json'));
+const { english: snapshot } = loadTeamSources(root);
 const statNames = ['Creativity', 'Communication', 'Network', 'Reputation', 'Availability', 'Energy'];
 const initialStats = { Creativity: 3, Communication: 3, Network: 2, Reputation: 2, Availability: 2, Energy: 7 };
 const chapterOneBalance = JSON.parse(read('src/config/chapter-one-balance.json'));
@@ -50,8 +51,9 @@ const canonicalId = id => id.replace(/^(C1-03)[FM]$/, '$1').replace(/^(C2-04)[AB
 const scenarios = [], chapters = [], endings = [], milestones = [];
 let epilogue;
 for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) {
+  const endingHeader = endingColumns(snapshot.sheets[sheet].values);
   snapshot.sheets[sheet].values.forEach((raw, index) => {
-    const r = Array.from({ length: 21 }, (_, i) => String(raw[i] ?? ''));
+    const r = Array.from({ length: 21 }, (_, i) => normaliseCompany(raw[i]));
     const source = { sourceSheet: sheet, sourceRow: index + 1, sourceCardId: r[0] };
     if (/^C[1-4]-00$/.test(r[0])) {
       const opening = { id: r[0], chapter: Number(r[1].slice(2)), title: r[4], scene: r[5], background: r[6], reference: r[18], guideAdvice: r[20], notes: r[19], ...source };
@@ -126,11 +128,11 @@ for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) {
       if (effects.length) row.effects = effects;
       scenarios.push(row);
     } else if (/^E\d+$/.test(r[0]) || r[0] === '终章') {
-      const ch1 = sheet === 'ch1';
+      const field = label => endingCell(r, endingHeader, label);
       const ending = { id: r[0], sourceId: r[0], name: r[1], triggerNote: r[2], pawn: pawn(r[3]), front: r[4], back: r[5],
-        reference: ch1 ? '' : r[6], nextRoundNote: r[ch1 ? 6 : 7], artNote: r[ch1 ? 7 : 8], notes: r[ch1 ? 8 : 9], guideAdvice: r[ch1 ? 9 : 10], ...source };
+        reference: field('对应文献'), nextRoundNote: field('对下一局的影响'), artNote: field('美术需求'), notes: field('备注'), guideAdvice: field('规则书（可选）'), ...source };
       if (sheet === 'ch3' && r[0] === 'E04') {
-        const quote = /^♂ 触发时正面改为："([\s\S]+)"$/.exec(r[9]);
+        const quote = /^♂ 触发时正面改为："([\s\S]+)"$/.exec(ending.notes);
         if (!quote) throw new Error('Missing authored male E04 text.');
         ending.frontByPawn = { male: quote[1] };
       }
@@ -173,7 +175,7 @@ for (const pawn of chapterOneBalance.pawns) {
   if (delta[chapterOneBalance.stat] !== chapterOneBalance.from) throw new Error(`The source ${pawn} delta changed; review the approved balance before importing.`);
   delta[chapterOneBalance.stat] = chapterOneBalance.to;
 }
-write('docs/source/2026-11-03-ch1-balance.json', {
+write(`docs/source/${SOURCE_DATE}-ch1-balance.json`, {
   adjustment: chapterOneBalance,
   sourceCells: ['ch1!Q19', 'ch1!R19'],
   before: chapterOneRoutes(originalChapterOne),
@@ -194,7 +196,7 @@ for (const row of [...scenarios]) {
 }
 
 const oldCopy = JSON.parse(read('public/data/legacy-data.json')).copy;
-const copy = { ...oldCopy, introduction: chapters[0].scene, promotionTitle: chapters[3].title, promotionText: chapters[3].scene,
+const copy = { ...oldCopy, companyName: 'FreeDom', introduction: chapters[0].scene, promotionTitle: chapters[3].title, promotionText: chapters[3].scene,
   gatekeeperReturning: '', gatekeeperFormal: '', gatekeeperUnchanged: '',
   placeholderNotice: 'Story and rules supplied by the team. Art placeholders will be replaced with the prepared assets.',
   statDescriptions: Object.fromEntries(statNames.map(name => [name, oldCopy.statDescriptions[name]])),
@@ -211,7 +213,7 @@ const policies = [
 ];
 const warnings = [
   '已按设计者授权最小调平：C1-04选项3的Communication由+1改为0，男女一致；其余加分、起点与门槛不变。第一章81条路线中，女棋子晋升21/E02 45/E03 15，男棋子晋升51/E02 18/E03 12；原表快照保留，例外见src/config/chapter-one-balance.json。',
-  'ch1!A22:J25 的结局表没有文献列：CH1-E01、E02、E03 的 References 保留空白。',
+  '2026-11-05共享表新增ch1结局文献列：CH1-E01、E02、E03现使用G23:G25的Hesmondhalgh & Baker (2015)。按表头导入，保留其余结局字段。',
   'ch2!T30 说取消 Reputation−1，但 Q30 实际为 Reputation+1；保留 +1，不额外加分。',
   'transparent 在 C2-B 选项2的“结果与男性相同”按结果文案与表情处理；保留数值列的女性 Communication+1、Reputation+1，不擅自改为男性数值。',
   '透明招聘改变 C2-02 正式决定过程、协调员参与 C2-04 谈话，但表中未提供替换英文对白；已落实明确的数值规则，原对白保留，待组员补写。',
@@ -226,7 +228,7 @@ const data = { contentVersion: 'team-2026-11-03', source: { spreadsheetId: snaps
   statNames, initialStats,
   scenarios, chapters, endings: endings.sort((a,b) => Number(a.id.slice(1))-Number(b.id.slice(1))), milestones, epilogue, candidates, policies, powerTokens: 1, copy, warnings };
 write('public/data/team-content.json', data);
-const csvCell = value => '"' + String(value ?? '').replaceAll('"', '""') + '"';
+const csvCell = value => '"' + String(value ?? '').replace(/[ \t]+(?=\r?\n)/g, '').replaceAll('"', '""') + '"';
 const csv = rows => rows.map(row => row.map(csvCell).join(',')).join('\n') + '\n';
 const deltaText = delta => Object.entries(delta).map(([name, amount]) => `${name}${amount >= 0 ? '+' : ''}${amount}`).join(', ');
 const pawnText = p => p === 'female' ? '仅♀' : p === 'male' ? '仅♂' : '都可';
@@ -241,5 +243,5 @@ writeFileSync(resolve(root, 'public/data/endings.csv'), csv([
 write('public/data/copy.json', copy);
 write('public/data/candidates.json', { candidates });
 write('public/data/policies.json', { powerTokens: 1, policies });
-write('docs/source/2026-11-03-import-report.json', { source: data.source, options: scenarios.length, slots: new Set(scenarios.map(r=>r.cardId)).size, endings: endings.length, milestones: milestones.length, chapters: chapters.length, warnings });
+write(`docs/source/${SOURCE_DATE}-import-report.json`, { source: data.source, options: scenarios.length, slots: new Set(scenarios.map(r=>r.cardId)).size, endings: endings.length, milestones: milestones.length, chapters: chapters.length, mechanicalSourceCheck: 'All scenario identities, gates, options, pawns, expressions and deltas match the 2026-11-03 source; the existing E03 balance override is unchanged.', warnings });
 console.log(`Imported ${scenarios.length} option rows, ${new Set(scenarios.map(r=>r.cardId)).size} card slots, ${endings.length} endings, ${milestones.length} milestones and ${chapters.length} openings.`);

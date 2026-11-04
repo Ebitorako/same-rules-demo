@@ -5,7 +5,7 @@ import { getLocale, t, tf } from './i18n';
 let manifest: Record<string, string[]> = {};
 const available = new Set(assetFiles);
 export async function loadAssets(): Promise<void> {
-  const response = await fetch(`${import.meta.env.BASE_URL}assets/manifest.json`);
+  const response = await fetch(`${import.meta.env.BASE_URL}assets/manifest.json?v=${__DATA_VERSION__}`, { cache: 'no-cache' });
   if (!response.ok) throw new Error('资源路径表 assets/manifest.json 无法读取。');
   const parsed: unknown = await response.json();
   if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)

@@ -1,0 +1,26 @@
+{
+  "source": {
+    "spreadsheetId": "1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow",
+    "url": "https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit",
+    "retrievedDate": "2026-11-05"
+  },
+  "options": 114,
+  "slots": 20,
+  "endings": 13,
+  "milestones": 2,
+  "chapters": 4,
+  "mechanicalSourceCheck": "All scenario identities, gates, options, pawns, expressions and deltas match the 2026-11-03 source; the existing E03 balance override is unchanged.",
+  "warnings": [
+    "已按设计者授权最小调平：C1-04选项3的Communication由+1改为0，男女一致；其余加分、起点与门槛不变。第一章81条路线中，女棋子晋升21/E02 45/E03 15，男棋子晋升51/E02 18/E03 12；原表快照保留，例外见src/config/chapter-one-balance.json。",
+    "2026-11-05共享表新增ch1结局文献列：CH1-E01、E02、E03现使用G23:G25的Hesmondhalgh & Baker (2015)。按表头导入，保留其余结局字段。",
+    "ch2!T30 说取消 Reputation−1，但 Q30 实际为 Reputation+1；保留 +1，不额外加分。",
+    "transparent 在 C2-B 选项2的“结果与男性相同”按结果文案与表情处理；保留数值列的女性 Communication+1、Reputation+1，不擅自改为男性数值。",
+    "透明招聘改变 C2-02 正式决定过程、协调员参与 C2-04 谈话，但表中未提供替换英文对白；已落实明确的数值规则，原对白保留，待组员补写。",
+    "ch3 E05 指定下一局 C3-01 对女棋子说 We assumed you’d want to slow down.；句子单独展示，不覆写原结果。",
+    "ch3 C3-B 男棋子门槛不足没有专属独白；仅显示不可用状态，不编写独白。",
+    "ch4 终章触发范围表述不一致；按末行及完整职业正文，仅 E12/E13/E14 后展示终章。",
+    "ch4 E14 的男女末尾句标为可选，本次不追加。",
+    "上限10沿用原骨架；正式表只指定初始值及Burnout下限，没有新的最大值。除已授权的C1-04选项3例外外，未调整其他数值。",
+    "Energy≤1 提示来自中文规则表，本次提供忠实英文界面译文。"
+  ]
+}

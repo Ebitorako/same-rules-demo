@@ -8,7 +8,7 @@ import './styles/language.css';
 import './styles/affordances.css';
 import './styles/credits.css';
 import { RULES } from './config/rules';
-import { loadChineseCatalog, loadData, loadGuideData } from './data/load';
+import { loadChineseCatalog, loadData, loadGuideData, loadTextFormatting } from './data/load';
 import { localizeData, localizeGuide, localizeState, type TranslationCatalog } from './data/localize';
 import type { GuideData } from './data/guide';
 import { validateData } from './data/validate';
@@ -24,6 +24,7 @@ import { transitionSounds } from './ui/audio-routes';
 import { boardScreen, fitBoardLabels } from './ui/board';
 import { scenarioDialog } from './ui/card';
 import { button, escape } from './ui/dom';
+import { setTextFormatting } from './ui/rich-text';
 import { endingScreen, epilogueScreen, galleryDetailDialog, galleryScreen, milestoneScreen } from './ui/gallery';
 import { settingsScreen } from './ui/settings';
 import { introScreen, titleScreen } from './ui/title';
@@ -326,7 +327,9 @@ matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>doc
 
 async function boot(): Promise<void> {
   try {
-    [data, guide, chinese] = await Promise.all([loadData(),loadGuideData(),loadChineseCatalog(),loadAssets()]);
+    const loaded = await Promise.all([loadData(),loadGuideData(),loadChineseCatalog(),loadTextFormatting(),loadAssets()]);
+    [data, guide, chinese] = loaded;
+    setTextFormatting(loaded[3]);
     setStoryTranslations(chinese.translations);
     const issues = validateData(data);
     if (issues.length) throw new Error(issues.join('\n'));

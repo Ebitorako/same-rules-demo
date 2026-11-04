@@ -2,6 +2,7 @@ import type { CopyData, Ending, GameData } from '../game/types';
 import { parseTeamContent } from './team';
 import { parseGuide, type GuideData } from './guide';
 import { parseTranslationCatalog, type TranslationCatalog } from './localize';
+import { parseTextFormatting, type TextFormattingCatalog } from '../ui/rich-text';
 
 async function fetchText(filename: string): Promise<string> {
     // Keep a new build from combining its code with cached text from an older release.
@@ -28,4 +29,8 @@ export async function loadGuideData(): Promise<GuideData> {
 
 export async function loadChineseCatalog(): Promise<TranslationCatalog> {
   return parseTranslationCatalog(await fetchText('zh-CN.json'));
+}
+
+export async function loadTextFormatting(): Promise<TextFormattingCatalog> {
+  return parseTextFormatting(await fetchText('text-formatting.json'));
 }

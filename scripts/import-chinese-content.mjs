@@ -1,45 +1,53 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { SOURCE_DATE, endingCell, endingColumns, loadTeamSources, normaliseCompany } from './team-source.mjs';
 
 const root = resolve(import.meta.dirname, '..');
 const read = name => JSON.parse(readFileSync(resolve(root, name), 'utf8'));
 const write = (name, value) => writeFileSync(resolve(root, name), JSON.stringify(value, null, 2) + '\n');
-const english = read('docs/source/2026-11-03-team-sheet.json');
-const chinese = read('docs/source/2026-11-03-chinese-sheet.json');
+const { english, chinese, previousEnglish, previousChinese } = loadTeamSources(root);
 const runtime = read('public/data/team-content.json');
 const translations = Object.create(null);
 const mappings = [], corrections = [], interfaceTranslations = [];
 const warnings = [];
+const historicalConflicts = [];
 const value = cell => String(cell ?? '');
 const cellRef = (sheet, row, column) => `${sheet}!${String.fromCharCode(65 + column)}${row}`;
 
 function add(en, zh, source, kind = 'sheet') {
-  en = value(en); zh = value(zh);
+  en = value(en); zh = normaliseCompany(zh);
   if (!en) return;
   if (!zh) throw new Error(`Missing Chinese text for ${source}: ${en}`);
-  if (translations[en] !== undefined && translations[en] !== zh) throw new Error(`Conflicting Chinese translations for ${source}: ${en}`);
-  translations[en] = zh;
+  for (const key of new Set([en, normaliseCompany(en)])) {
+    if (translations[key] !== undefined && translations[key] !== zh) {
+      if (kind === 'historical-sheet') { historicalConflicts.push({ source, english: key }); continue; }
+      throw new Error(`Conflicting Chinese translations for ${source}: ${key}`);
+    }
+    translations[key] = zh;
+  }
   mappings.push({ english: en, chinese: zh, source, kind });
 }
-function pair(sheet, row, column) {
-  const en = value(english.sheets[sheet].values[row - 1]?.[column]);
+function pair(sheet, row, column, enSource = english, zhSource = chinese, kind = 'sheet') {
+  const en = value(enSource.sheets[sheet].values[row - 1]?.[column]);
   const tab = sheet + '中文版';
-  let zh = value(chinese.sheets[tab].values[row - 1]?.[column]);
+  let zh = value(zhSource.sheets[tab].values[row - 1]?.[column]);
   if (sheet === 'ch2' && row === 14 && column === 6 && zh === '去') {
     const identicalRows = [11, 12, 13, 15, 16];
-    const context = identicalRows.map(n => value(chinese.sheets[tab].values[n - 1]?.[column]));
+    const context = identicalRows.map(n => value(zhSource.sheets[tab].values[n - 1]?.[column]));
     if (!context[0] || !context.every(t => t === context[0])) throw new Error('The documented G14 context repair no longer has unanimous source support.');
     zh = context[0];
-    corrections.push({ cell: `${tab}!G14`, sourceValue: '去', displayedValue: zh,
+    if (kind !== 'historical-sheet') corrections.push({ cell: `${tab}!G14`, sourceValue: '去', displayedValue: zh,
       copiedFrom: identicalRows.map(n => `${tab}!G${n}`), reason: 'The same scene repeats one complete background in five sibling rows; use that authored text instead of the isolated character. The source sheet and snapshot are unchanged.' });
   }
-  add(en, zh, cellRef(tab, row, column));
+  add(en, zh, cellRef(tab, row, column), kind);
 }
 
 let sourceOptions = 0;
+function pairedRows(enSource, zhSource, kind = 'sheet') {
 for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) {
-  const rows = english.sheets[sheet].values;
-  const zhRows = chinese.sheets[sheet + '中文版'].values;
+  const rows = enSource.sheets[sheet].values;
+  const zhRows = zhSource.sheets[sheet + '中文版'].values;
+  const enHeader = endingColumns(rows), zhHeader = endingColumns(zhRows);
   if (rows.length !== zhRows.length) throw new Error(`${sheet}: source row counts differ; review alignment before importing.`);
   rows.forEach((r, i) => {
     const z = zhRows[i] ?? [], row = i + 1;
@@ -50,21 +58,31 @@ for (const sheet of ['ch1', 'ch2', 'ch3', 'ch4']) {
       for (const column of [1, 2, 3, 8, 9, 10, 14, 15, 16, 17]) {
         if (value(r[column]) !== value(z[column])) throw new Error(`${sheet}:${row}:${column}: mechanical/source identity field differs between languages.`);
       }
-      for (const column of [4, 5, 6, 7, 11, 12, 13, 18, 20]) pair(sheet, row, column);
-      if (!/^C[1-4]-00$/.test(r[0])) sourceOptions++;
+      for (const column of [4, 5, 6, 7, 11, 12, 13, 18, 20]) pair(sheet, row, column, enSource, zhSource, kind);
+      if (kind !== 'historical-sheet' && !/^C[1-4]-00$/.test(r[0])) sourceOptions++;
     } else {
-      for (const column of [1, 4, 5, ...(sheet === 'ch1' ? [9] : [6, 10])]) pair(sheet, row, column);
+      for (const field of ['结局名称', '结局文字（正面）', '背面：理论概念', '对应文献', '规则书（可选）']) {
+        const en = endingCell(r, enHeader, field);
+        // Author names and years are shared across languages when the older Chinese layout has no citation column.
+        const zh = endingCell(z, zhHeader, field) || (field === '对应文献' ? en : '');
+        add(en, zh, `${sheet + '中文版'}!row ${row} ${field}`, kind);
+      }
     }
   });
 }
+}
+pairedRows(english, chinese);
+pairedRows(previousEnglish, previousChinese, 'historical-sheet');
 
 // Runtime splits the Gatekeeper's three automatic outcomes into individual paragraphs.
+for (const [enSource, zhSource, kind] of [[english, chinese, 'derived-sheet'], [previousEnglish, previousChinese, 'historical-sheet']]) {
 for (const pawn of ['female', 'male']) {
   const column = pawn === 'female' ? 12 : 13;
-  const en = english.sheets.ch1.values[19][column].split(/【[^】]+】/).map(t => t.trim()).filter(Boolean);
-  const zh = chinese.sheets['ch1中文版'].values[19][column].split(/【[^】]+】/).map(t => t.trim()).filter(Boolean);
+  const en = enSource.sheets.ch1.values[19][column].split(/【[^】]+】/).map(t => t.trim()).filter(Boolean);
+  const zh = zhSource.sheets['ch1中文版'].values[19][column].split(/【[^】]+】/).map(t => t.trim()).filter(Boolean);
   if (en.length !== 3 || zh.length !== 3) throw new Error('Gatekeeper outcomes must contain exactly three paired paragraphs.');
-  en.forEach((text, index) => add(text, zh[index], `ch1中文版!${pawn === 'female' ? 'M' : 'N'}20 outcome ${index + 1}`, 'derived-sheet'));
+  en.forEach((text, index) => add(text, zh[index], `ch1中文版!${pawn === 'female' ? 'M' : 'N'}20 outcome ${index + 1}`, kind));
+}
 }
 
 // Read the actual Chinese thoughts from the authors' notes, not new story translations.
@@ -91,6 +109,9 @@ if (!familyQuote) throw new Error('Missing Chinese next-career Family Man senten
 for (const row of runtime.scenarios.filter(r => r.condition === 'flag:previous_family_man=true')) {
   const baseScene = chinese.sheets['ch3中文版'].values[row.sourceRow - 1][5];
   add(row.scene, `${baseScene}\n\n“${familyQuote[1]}”`, `ch3中文版!F${row.sourceRow} + H46`, 'derived-sheet');
+  const oldEnglishScene = previousEnglish.sheets.ch3.values[row.sourceRow - 1][5];
+  const oldChineseScene = previousChinese.sheets.ch3中文版.values[row.sourceRow - 1][5];
+  add(`${oldEnglishScene}\n\n“We assumed you'd want to slow down.”`, `${oldChineseScene}\n\n“${familyQuote[1]}”`, `2026-11-03 ch3中文版!F${row.sourceRow} + H46`, 'historical-sheet');
 }
 
 // These are interface descriptions already present in the game, not newly authored plot.
@@ -109,6 +130,7 @@ const interfaceCopy = {
   'Your studio companion': '你的工作室同行者',
   'Take a moment to read the scene. I can offer some context, but you decide what to do. You can hide my advice and ask for it again whenever you like.': '先花一点时间阅读情境。我可以补充背景，但如何行动由你决定。你可以隐藏建议，也可以随时再次向我寻求提示。',
   'Move with Next. Read the situation and choose an available option. After the result, Continue takes you back to the board.': '点击“下一步”前进，阅读情境并选择一个可用选项。查看结果后，点击“继续”回到棋盘。',
+  'Select Next to move forward. Read the situation and choose from the available options. After seeing the result, select Continue to return to the board.': '点击“下一步”前进，阅读情境并从可用选项中作出选择。查看结果后，点击“继续”回到棋盘。',
   'Zero tolerance statement': '零容忍声明',
   'Dedicated coordinator': '专职协调员',
   'Transparent hiring and flexible working': '透明招聘与弹性工作制',
@@ -158,13 +180,13 @@ for (const row of [...runtime.chapters, ...runtime.endings, ...runtime.milestone
 }
 if (missing.length) throw new Error(`Untranslated runtime story fields:\n${JSON.stringify(missing, null, 2)}`);
 warnings.push('ch2中文版!G14 只有“去”；显示时采用同一场景 G11:G13、G15:G16 一致的完整背景。原表和快照未改。');
-warnings.push('中文页保留的职位英文、人物姓名和文献引用按组员原文显示，不逐词替换。第一章缺失引用及男性 Ideal Worker 缺失独白仍为空。');
+warnings.push('中文页保留的职位英文、人物姓名和文献引用按组员原文显示。第一章结局引用采用英文页新增的同一作者年份；男性 Ideal Worker 缺失独白仍为空。公司名称在显示文字中统一为FreeDom，原始快照不变。');
 warnings.push('中文版本只替换显示文字，共用现有数值规则及已批准的 C1-04 调平；不重置或重算存档。');
 const source = { spreadsheetId: chinese.spreadsheetId, url: chinese.url, retrievedDate: chinese.retrievedDate,
   tabs: ['ch1中文版', 'ch2中文版', 'ch3中文版', 'ch4中文版'] };
 write('public/data/zh-CN.json', { locale: 'zh-CN', source, translations, warnings });
-write('docs/source/2026-11-03-chinese-import-report.json', { source, options: sourceOptions, runtimeOptions: runtime.scenarios.length,
+write(`docs/source/${SOURCE_DATE}-chinese-import-report.json`, { source, options: sourceOptions, runtimeOptions: runtime.scenarios.length,
   chapters: runtime.chapters.length, endings: runtime.endings.length, milestones: runtime.milestones.length,
-  translationCount: Object.keys(translations).length, mappingCount: mappings.length, corrections, interfaceTranslations, missing, warnings,
+  translationCount: Object.keys(translations).length, mappingCount: mappings.length, corrections, interfaceTranslations, historicalConflicts, missing, warnings,
   sourceLocations: [...new Set(mappings.filter(m => m.kind !== 'interface').map(m => m.source))] });
 console.log(`Chinese display content: ${sourceOptions} source choices, ${Object.keys(translations).length} exact text translations, ${corrections.length} documented source-cell repair.`);

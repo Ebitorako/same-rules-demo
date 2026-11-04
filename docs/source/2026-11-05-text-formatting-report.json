@@ -1,0 +1,4974 @@
+{
+  "source": "docs/source/2026-11-05-sheet-formatting.json",
+  "sourceSpreadsheet": "https://docs.google.com/spreadsheets/d/1I28ChU7iAl6aHeJ9U5UPgOz2YptRXfwZ8VwOgwCg8Ow/edit",
+  "retrievedDate": "2026-11-05",
+  "policy": "Formatting only: exact plain text keys and UTF-16 spans. Sheet text, gameplay data and source snapshots are not rewritten. Rich runs inherit cell style and resets are honored. No runtime quote inference.",
+  "counts": {
+    "entries": 318,
+    "spans": 435,
+    "authoredCells": 166,
+    "authoredEnglishCells": 125,
+    "authoredChineseCells": 41,
+    "reviewedDialogueCells": 246,
+    "reviewedQuotedPassages": 291,
+    "reviewedUnquotedReplyCells": 18,
+    "omittedQuotedLabels": 78,
+    "manualChineseEmphasisCells": 20
+  },
+  "sourceFormatting": [
+    {
+      "source": "ch1!F4",
+      "spans": [
+        {
+          "start": 230,
+          "end": 293,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F5",
+      "spans": [
+        {
+          "start": 102,
+          "end": 122,
+          "bold": true
+        },
+        {
+          "start": 134,
+          "end": 163,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F6",
+      "spans": [
+        {
+          "start": 102,
+          "end": 122,
+          "bold": true
+        },
+        {
+          "start": 134,
+          "end": 163,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F7",
+      "spans": [
+        {
+          "start": 102,
+          "end": 122,
+          "bold": true
+        },
+        {
+          "start": 134,
+          "end": 163,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F8",
+      "spans": [
+        {
+          "start": 255,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F9",
+      "spans": [
+        {
+          "start": 255,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F10",
+      "spans": [
+        {
+          "start": 255,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F11",
+      "spans": [
+        {
+          "start": 280,
+          "end": 319,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F12",
+      "spans": [
+        {
+          "start": 280,
+          "end": 319,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F13",
+      "spans": [
+        {
+          "start": 280,
+          "end": 319,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F14",
+      "spans": [
+        {
+          "start": 276,
+          "end": 320,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F15",
+      "spans": [
+        {
+          "start": 276,
+          "end": 320,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F16",
+      "spans": [
+        {
+          "start": 276,
+          "end": 320,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F17",
+      "spans": [
+        {
+          "start": 161,
+          "end": 211,
+          "bold": true
+        },
+        {
+          "start": 289,
+          "end": 321,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F18",
+      "spans": [
+        {
+          "start": 161,
+          "end": 211,
+          "bold": true
+        },
+        {
+          "start": 289,
+          "end": 321,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F19",
+      "spans": [
+        {
+          "start": 161,
+          "end": 211,
+          "bold": true
+        },
+        {
+          "start": 289,
+          "end": 321,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch1!F20",
+      "spans": [
+        {
+          "start": 223,
+          "end": 269,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F4",
+      "spans": [
+        {
+          "start": 152,
+          "end": 230,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F5",
+      "spans": [
+        {
+          "start": 129,
+          "end": 210,
+          "bold": true
+        },
+        {
+          "start": 353,
+          "end": 384,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F6",
+      "spans": [
+        {
+          "start": 129,
+          "end": 210,
+          "bold": true
+        },
+        {
+          "start": 353,
+          "end": 384,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F7",
+      "spans": [
+        {
+          "start": 129,
+          "end": 210,
+          "bold": true
+        },
+        {
+          "start": 353,
+          "end": 384,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F8",
+      "spans": [
+        {
+          "start": 116,
+          "end": 136,
+          "bold": true
+        },
+        {
+          "start": 229,
+          "end": 259,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F9",
+      "spans": [
+        {
+          "start": 116,
+          "end": 136,
+          "bold": true
+        },
+        {
+          "start": 229,
+          "end": 259,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F10",
+      "spans": [
+        {
+          "start": 116,
+          "end": 136,
+          "bold": true
+        },
+        {
+          "start": 229,
+          "end": 259,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F11",
+      "spans": [
+        {
+          "start": 108,
+          "end": 117,
+          "italic": true
+        },
+        {
+          "start": 201,
+          "end": 256,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F12",
+      "spans": [
+        {
+          "start": 108,
+          "end": 117,
+          "italic": true
+        },
+        {
+          "start": 201,
+          "end": 256,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F13",
+      "spans": [
+        {
+          "start": 108,
+          "end": 117,
+          "italic": true
+        },
+        {
+          "start": 201,
+          "end": 256,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F14",
+      "spans": [
+        {
+          "start": 111,
+          "end": 121,
+          "italic": true
+        },
+        {
+          "start": 210,
+          "end": 259,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F15",
+      "spans": [
+        {
+          "start": 111,
+          "end": 121,
+          "italic": true
+        },
+        {
+          "start": 210,
+          "end": 259,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F16",
+      "spans": [
+        {
+          "start": 111,
+          "end": 121,
+          "italic": true
+        },
+        {
+          "start": 210,
+          "end": 259,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F17",
+      "spans": [
+        {
+          "start": 135,
+          "end": 204,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F18",
+      "spans": [
+        {
+          "start": 135,
+          "end": 204,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F19",
+      "spans": [
+        {
+          "start": 135,
+          "end": 204,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F20",
+      "spans": [
+        {
+          "start": 135,
+          "end": 204,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F21",
+      "spans": [
+        {
+          "start": 145,
+          "end": 213,
+          "bold": true
+        },
+        {
+          "start": 267,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F22",
+      "spans": [
+        {
+          "start": 145,
+          "end": 213,
+          "bold": true
+        },
+        {
+          "start": 267,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F23",
+      "spans": [
+        {
+          "start": 145,
+          "end": 213,
+          "bold": true
+        },
+        {
+          "start": 267,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F24",
+      "spans": [
+        {
+          "start": 145,
+          "end": 213,
+          "bold": true
+        },
+        {
+          "start": 267,
+          "end": 298,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F25",
+      "spans": [
+        {
+          "start": 64,
+          "end": 114,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F26",
+      "spans": [
+        {
+          "start": 64,
+          "end": 114,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F27",
+      "spans": [
+        {
+          "start": 64,
+          "end": 114,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F28",
+      "spans": [
+        {
+          "start": 64,
+          "end": 114,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F29",
+      "spans": [
+        {
+          "start": 148,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 189,
+          "end": 227,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F30",
+      "spans": [
+        {
+          "start": 148,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 189,
+          "end": 227,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F31",
+      "spans": [
+        {
+          "start": 148,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 189,
+          "end": 227,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F32",
+      "spans": [
+        {
+          "start": 148,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 189,
+          "end": 227,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F33",
+      "spans": [
+        {
+          "start": 84,
+          "end": 129,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F34",
+      "spans": [
+        {
+          "start": 84,
+          "end": 129,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F35",
+      "spans": [
+        {
+          "start": 84,
+          "end": 129,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F36",
+      "spans": [
+        {
+          "start": 84,
+          "end": 129,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F37",
+      "spans": [
+        {
+          "start": 165,
+          "end": 211,
+          "bold": true
+        },
+        {
+          "start": 216,
+          "end": 259,
+          "bold": true
+        },
+        {
+          "start": 260,
+          "end": 281,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F38",
+      "spans": [
+        {
+          "start": 165,
+          "end": 211,
+          "bold": true
+        },
+        {
+          "start": 216,
+          "end": 259,
+          "bold": true
+        },
+        {
+          "start": 260,
+          "end": 281,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F39",
+      "spans": [
+        {
+          "start": 220,
+          "end": 280,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F40",
+      "spans": [
+        {
+          "start": 220,
+          "end": 280,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F41",
+      "spans": [
+        {
+          "start": 220,
+          "end": 280,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F45",
+      "spans": [
+        {
+          "start": 36,
+          "end": 104,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F46",
+      "spans": [
+        {
+          "start": 11,
+          "end": 65,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F47",
+      "spans": [
+        {
+          "start": 74,
+          "end": 164,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch2!F48",
+      "spans": [
+        {
+          "start": 160,
+          "end": 240,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F4",
+      "spans": [
+        {
+          "start": 12,
+          "end": 22,
+          "bold": true
+        },
+        {
+          "start": 335,
+          "end": 452,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F5",
+      "spans": [
+        {
+          "start": 260,
+          "end": 317,
+          "bold": true
+        },
+        {
+          "start": 389,
+          "end": 415,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F6",
+      "spans": [
+        {
+          "start": 260,
+          "end": 317,
+          "bold": true
+        },
+        {
+          "start": 389,
+          "end": 415,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F7",
+      "spans": [
+        {
+          "start": 260,
+          "end": 317,
+          "bold": true
+        },
+        {
+          "start": 389,
+          "end": 415,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F8",
+      "spans": [
+        {
+          "start": 236,
+          "end": 270,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F9",
+      "spans": [
+        {
+          "start": 236,
+          "end": 270,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F10",
+      "spans": [
+        {
+          "start": 236,
+          "end": 270,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F11",
+      "spans": [
+        {
+          "start": 30,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 112,
+          "end": 174,
+          "bold": true
+        },
+        {
+          "start": 244,
+          "end": 273,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F12",
+      "spans": [
+        {
+          "start": 30,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 112,
+          "end": 174,
+          "bold": true
+        },
+        {
+          "start": 244,
+          "end": 273,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F13",
+      "spans": [
+        {
+          "start": 30,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 112,
+          "end": 174,
+          "bold": true
+        },
+        {
+          "start": 244,
+          "end": 273,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F14",
+      "spans": [
+        {
+          "start": 248,
+          "end": 269,
+          "italic": true
+        },
+        {
+          "start": 271,
+          "end": 307,
+          "bold": true
+        },
+        {
+          "start": 372,
+          "end": 439,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F15",
+      "spans": [
+        {
+          "start": 248,
+          "end": 269,
+          "italic": true
+        },
+        {
+          "start": 271,
+          "end": 307,
+          "bold": true
+        },
+        {
+          "start": 372,
+          "end": 439,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F16",
+      "spans": [
+        {
+          "start": 248,
+          "end": 269,
+          "italic": true
+        },
+        {
+          "start": 271,
+          "end": 307,
+          "bold": true
+        },
+        {
+          "start": 372,
+          "end": 439,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F17",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F18",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F19",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F20",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F21",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F22",
+      "spans": [
+        {
+          "start": 24,
+          "end": 51,
+          "bold": true
+        },
+        {
+          "start": 148,
+          "end": 149,
+          "bold": true
+        },
+        {
+          "start": 172,
+          "end": 243,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F23",
+      "spans": [
+        {
+          "start": 147,
+          "end": 194,
+          "bold": true
+        },
+        {
+          "start": 218,
+          "end": 290,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F24",
+      "spans": [
+        {
+          "start": 147,
+          "end": 194,
+          "bold": true
+        },
+        {
+          "start": 218,
+          "end": 290,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F25",
+      "spans": [
+        {
+          "start": 147,
+          "end": 194,
+          "bold": true
+        },
+        {
+          "start": 218,
+          "end": 290,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F26",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F27",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F28",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F29",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F30",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F31",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 247,
+          "bold": true
+        },
+        {
+          "start": 300,
+          "end": 335,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F32",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 248,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F33",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 248,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F34",
+      "spans": [
+        {
+          "start": 14,
+          "end": 29,
+          "bold": true
+        },
+        {
+          "start": 109,
+          "end": 139,
+          "bold": true
+        },
+        {
+          "start": 209,
+          "end": 248,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F35",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F36",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F37",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F38",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F39",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F40",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3!F41",
+      "spans": [
+        {
+          "start": 70,
+          "end": 98,
+          "bold": true
+        },
+        {
+          "start": 215,
+          "end": 231,
+          "bold": true
+        },
+        {
+          "start": 233,
+          "end": 249,
+          "bold": true
+        },
+        {
+          "start": 483,
+          "end": 521,
+          "italic": true
+        },
+        {
+          "start": 546,
+          "end": 589,
+          "bold": true
+        },
+        {
+          "start": 651,
+          "end": 696,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F5",
+      "spans": [
+        {
+          "start": 94,
+          "end": 127,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F6",
+      "spans": [
+        {
+          "start": 94,
+          "end": 127,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F7",
+      "spans": [
+        {
+          "start": 94,
+          "end": 127,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F8",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F9",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F10",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F11",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F12",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F13",
+      "spans": [
+        {
+          "start": 308,
+          "end": 361,
+          "italic": true
+        },
+        {
+          "start": 378,
+          "end": 445,
+          "bold": true
+        },
+        {
+          "start": 462,
+          "end": 518,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F14",
+      "spans": [
+        {
+          "start": 169,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 266,
+          "end": 302,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F15",
+      "spans": [
+        {
+          "start": 169,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 266,
+          "end": 302,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F16",
+      "spans": [
+        {
+          "start": 169,
+          "end": 188,
+          "bold": true
+        },
+        {
+          "start": 266,
+          "end": 302,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F17",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F18",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F19",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F20",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F21",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F22",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F23",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F24",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F25",
+      "spans": [
+        {
+          "start": 279,
+          "end": 366,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F36",
+      "spans": [
+        {
+          "start": 36,
+          "end": 117,
+          "bold": true
+        },
+        {
+          "start": 294,
+          "end": 322,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F37",
+      "spans": [
+        {
+          "start": 36,
+          "end": 82,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F38",
+      "spans": [
+        {
+          "start": 120,
+          "end": 176,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F39",
+      "spans": [
+        {
+          "start": 51,
+          "end": 116,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!E40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 492,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!F40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 225,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4!G40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 81,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F4",
+      "spans": [
+        {
+          "start": 137,
+          "end": 146,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F5",
+      "spans": [
+        {
+          "start": 89,
+          "end": 107,
+          "bold": true
+        },
+        {
+          "start": 123,
+          "end": 135,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F6",
+      "spans": [
+        {
+          "start": 89,
+          "end": 107,
+          "bold": true
+        },
+        {
+          "start": 123,
+          "end": 135,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F7",
+      "spans": [
+        {
+          "start": 89,
+          "end": 107,
+          "bold": true
+        },
+        {
+          "start": 123,
+          "end": 135,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F8",
+      "spans": [
+        {
+          "start": 78,
+          "end": 95,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F9",
+      "spans": [
+        {
+          "start": 78,
+          "end": 95,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F10",
+      "spans": [
+        {
+          "start": 78,
+          "end": 95,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F11",
+      "spans": [
+        {
+          "start": 33,
+          "end": 49,
+          "bold": true
+        },
+        {
+          "start": 63,
+          "end": 75,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F12",
+      "spans": [
+        {
+          "start": 33,
+          "end": 49,
+          "bold": true
+        },
+        {
+          "start": 63,
+          "end": 75,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F13",
+      "spans": [
+        {
+          "start": 33,
+          "end": 49,
+          "bold": true
+        },
+        {
+          "start": 63,
+          "end": 75,
+          "italic": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F14",
+      "spans": [
+        {
+          "start": 71,
+          "end": 77,
+          "italic": true
+        },
+        {
+          "start": 78,
+          "end": 88,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F15",
+      "spans": [
+        {
+          "start": 71,
+          "end": 77,
+          "italic": true
+        },
+        {
+          "start": 78,
+          "end": 88,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F16",
+      "spans": [
+        {
+          "start": 71,
+          "end": 77,
+          "italic": true
+        },
+        {
+          "start": 78,
+          "end": 88,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F17",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F18",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F19",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F20",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F21",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F22",
+      "spans": [
+        {
+          "start": 7,
+          "end": 13,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F23",
+      "spans": [
+        {
+          "start": 33,
+          "end": 43,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F24",
+      "spans": [
+        {
+          "start": 33,
+          "end": 43,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F25",
+      "spans": [
+        {
+          "start": 33,
+          "end": 43,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F26",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F27",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F28",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F29",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F30",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F31",
+      "spans": [
+        {
+          "start": 99,
+          "end": 108,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F32",
+      "spans": [
+        {
+          "start": 24,
+          "end": 37,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F33",
+      "spans": [
+        {
+          "start": 24,
+          "end": 37,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F34",
+      "spans": [
+        {
+          "start": 24,
+          "end": 37,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F35",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F36",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F37",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F38",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F39",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F40",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch3中文版!F41",
+      "spans": [
+        {
+          "start": 77,
+          "end": 84,
+          "italic": true
+        },
+        {
+          "start": 146,
+          "end": 158,
+          "italic": true
+        },
+        {
+          "start": 189,
+          "end": 209,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4中文版!E40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 152,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4中文版!F40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 73,
+          "bold": true
+        }
+      ]
+    },
+    {
+      "source": "ch4中文版!G40",
+      "spans": [
+        {
+          "start": 0,
+          "end": 81,
+          "bold": true
+        }
+      ]
+    }
+  ],
+  "dialogue": [
+    {
+      "source": "ch1!M5",
+      "quotes": [
+        "\"Very professional. That's the kind of presentation we expect.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N5",
+      "quotes": [
+        "\"Looking sharp! You've made a great first impression.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M6",
+      "quotes": [
+        "\"You could have made a little more effort to look professional.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N7",
+      "quotes": [
+        "\"Love the originality! You clearly have a creative eye.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!F8",
+      "quotes": [
+        "\"Interesting work! I can see you've been involved in some exciting projects. But I'm curious, what would you say was your biggest contribution to these projects?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M8",
+      "quotes": [
+        "\"That's a lovely concept!\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N8",
+      "quotes": [
+        "\"That's bold thinking! You've got real creative potential.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M9",
+      "quotes": [
+        "\"Wonderful! Every production needs someone who keeps the team organised.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N9",
+      "quotes": [
+        "\"A natural team leader! I can see you leading a project someday.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M10",
+      "quotes": [
+        "\"That's great! You seem really good at keeping everyone on the same page.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N10",
+      "quotes": [
+        "\"Impressive! You really know your way around the industry.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!F11",
+      "quotes": [
+        "\"Just one more question before we wrap up. You know, the creative industry can be pretty demanding, especially when we're working on tight deadlines. So, do you have any plans to start a family?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M11",
+      "quotes": [
+        "\"Good to hear! We've got some exciting projects coming up.\"",
+        "\"Of course, things can change. We're just hoping to find someone who can stay with us for the long term.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M12",
+      "quotes": [
+        "\"That's reassuring! Things can get pretty hectic around here.\"",
+        "\"Of course, we just want to make sure everyone can manage their responsibilities in the long run.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M13",
+      "quotes": [
+        "\"Of course. We just like to get to know our team a little better.\"",
+        "\"Anyway, I think we've covered everything for today. We'll be in touch soon.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!F14",
+      "quotes": [
+        "\"Just one more question before we wrap up. You know, the creative industry can be pretty demanding, especially when we're working on tight deadlines. How do you feel about working late sometimes?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N14",
+      "quotes": [
+        "\"Good to hear!\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N15",
+      "quotes": [
+        "\"Fair enough! It's important to have a life outside work. Of course, things don't always go according to schedule in this industry.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!N16",
+      "quotes": [
+        "\"Love the attitude! You sound like someone we can really count on.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!F17",
+      "quotes": [
+        "\"Congratulations! You've made it to the final stage of our recruitment process. We'd like to invite you to join us for an unpaid one-week trial!\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M17",
+      "quotes": [
+        "\"Great job, everyone! You've all done really well this week. We're impressed by your hard work and creativity!\"",
+        "\"We'll review your performances and let you know the results soon.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1!M20",
+      "quotes": [
+        "\"Congratulations! We're pleased to offer you the Junior Producer position. We were impressed by your creative potential and look forward to seeing what you'll bring to the team!\"",
+        "\"Congratulations! We were impressed by your performance during the trial, particularly your strong communication and organisational skills. We believe you'd be a better fit for the Production Coordinator role and would like to offer you this position instead.\"",
+        "\"Thank you for your time and effort throughout the recruitment process. Unfortunately, we regret to inform you that you have not been selected for the position. We appreciate your interest and wish you all the best in your future career.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F5",
+      "quotes": [
+        "\"That's exactly what we need.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L5",
+      "quotes": [
+        "\"That audience angle is the one I just suggested. I can walk everyone through it.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M5",
+      "quotes": [
+        "\"Let's not get territorial. It's a team idea.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F8",
+      "quotes": [
+        "\"That's exactly what we need.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L8",
+      "quotes": [
+        "\"Sophie raised this point first. She should take us through it.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F11",
+      "quotes": [
+        "\"Smoke?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M11",
+      "quotes": [
+        "\"really good at working a room\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M13",
+      "quotes": [
+        "\"too procedural\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F14",
+      "quotes": [
+        "\"Smoke?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L17",
+      "quotes": [
+        "\"They're our colleagues, not something for you to rate by their bodies.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M17",
+      "quotes": [
+        "\"taking a private joke too seriously\"",
+        "\"You were right.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L18",
+      "quotes": [
+        "\"This isn't an appropriate way to talk about team members. Let's get back to the project.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L20",
+      "quotes": [
+        "\"Why are you leading the way in rating the women in this company?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F25",
+      "quotes": [
+        "\"Got a minute to talk about your tone last night?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M26",
+      "quotes": [
+        "\"sorry you felt uncomfortable\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!N26",
+      "quotes": [
+        "\"Understood,\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!N27",
+      "quotes": [
+        "\"We're good, right?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M30",
+      "quotes": [
+        "\"keep things appropriate\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!F33",
+      "quotes": [
+        "\"You were there last night. Did you hear it?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!L35",
+      "quotes": [
+        "\"They were just joking.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!E47",
+      "quotes": [
+        "\"Very capable, but needs to work on collaboration.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!F5",
+      "quotes": [
+        "\"any big plans coming up\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!L5",
+      "quotes": [
+        "\"Everything's fine at home. Shall we talk about the project?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M5",
+      "quotes": [
+        "\"Good to hear. Though this project runs for at least three years. You two have been together a while now... nothing's going to change in the next three years, is it?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N5",
+      "quotes": [
+        "\"Good, I like that attitude.\"",
+        "\"The job's yours.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!L6",
+      "quotes": [
+        "\"To be honest, we're thinking about having a baby next year.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M6",
+      "quotes": [
+        "\"Oh! Congratulations in advance.\"",
+        "\"Let's revisit once things have settled down for you.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N6",
+      "quotes": [
+        "\"Oh, congratulations in advance! That's usually when people really step up.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!L7",
+      "quotes": [
+        "\"Don't worry, nothing's going to change at home any time soon. It won't affect my work.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N7",
+      "quotes": [
+        "\"Ha, you don't need to promise me that. Things change at home, that's normal. The job's yours.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M8",
+      "quotes": [
+        "'Congratulations!'",
+        "'keep in touch with the team'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N8",
+      "quotes": [
+        "'a proper grown-up now'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M9",
+      "quotes": [
+        "'planning to'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M10",
+      "quotes": [
+        "\"Of course. For now.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!F11",
+      "quotes": [
+        "\"So... what are we thinking?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M12",
+      "quotes": [
+        "\"Let's see how it goes.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N12",
+      "quotes": [
+        "\"It's fine,\"",
+        "\"Someone has to look after things at home, and you earn more than me anyway.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M13",
+      "quotes": [
+        "\"Back at work already? Brave.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N13",
+      "quotes": [
+        "\"Why not get your wife to help? Seems like a waste of money.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!F14",
+      "quotes": [
+        "\"helping out for now\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N15",
+      "quotes": [
+        "\"All right, since you've asked, I'll have a word with the channel.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M16",
+      "quotes": [
+        "\"Hm. I'd have thought you'd have the most time. You're the only one here without kids, after all.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N16",
+      "quotes": [
+        "\"No worries, we'll sort something out.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M17",
+      "quotes": [
+        "\"Can't you tell them you'll do it in the morning?\"",
+        "'Her temperature's up again.'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M18",
+      "quotes": [
+        "\"Next time, better if you're in the room.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N20",
+      "quotes": [
+        "\"Go.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N22",
+      "quotes": [
+        "\"No problem. Family first, eh?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M23",
+      "quotes": [
+        "\"So I'm doing the dishes again?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N23",
+      "quotes": [
+        "\"Go on,\"",
+        "\"I'm up late anyway.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M25",
+      "quotes": [
+        "\"No problem.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N25",
+      "quotes": [
+        "\"No problem.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M27",
+      "quotes": [
+        "\"They loved your archive doc idea.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M28",
+      "quotes": [
+        "\"But I've arranged to talk to that commissioner about next series...\"",
+        "\"They loved your archive doc idea.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M36",
+      "quotes": [
+        "'You're never home these days.'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N37",
+      "quotes": [
+        "\"Knew you'd step up.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M38",
+      "quotes": [
+        "\"Probably for the best. You'll have more time for things at home.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N38",
+      "quotes": [
+        "\"Are you sure? Chances like this don't come along often.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M39",
+      "quotes": [
+        "'The door's always open!'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M40",
+      "quotes": [
+        "'The door's always open!'"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!N41",
+      "quotes": [
+        "\"Leave? But haven't you always had someone at home holding things together?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!F5",
+      "quotes": [
+        "\"Great team player, super organised, always happy to help.\"",
+        "\"Bold, a bit chaotic, but a real creative.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!L5",
+      "quotes": [
+        "\"We need real creatives.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!L6",
+      "quotes": [
+        "\"The team really needs someone reliable.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M7",
+      "quotes": [
+        "\"I knew you'd pick the girl.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N7",
+      "quotes": [
+        "\"Good approach. Let's hire like this from now on.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!F8",
+      "quotes": [
+        "\"grab a drink, just us, and talk about your future\"",
+        "\"I didn't know who to go to. Everyone says you're nice.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M9",
+      "quotes": [
+        "\"Still as uptight as ever.\"",
+        "\"be careful\"",
+        "\"too emotional to manage people\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N9",
+      "quotes": [
+        "\"Fine, fine, I'll be careful.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!L11",
+      "quotes": [
+        "\"We've all been through it. Grit your teeth and get the permanent role first.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M11",
+      "quotes": [
+        "\"thanks\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!L12",
+      "quotes": [
+        "\"Daniel just doesn't think before he speaks. He doesn't mean anything by it. Don't take it to heart.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N12",
+      "quotes": [
+        "\"OK, I understand.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!L13",
+      "quotes": [
+        "\"keep an eye on it\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M13",
+      "quotes": [
+        "\"Thanks, everyone, for looking after me.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M14",
+      "quotes": [
+        "\"Low cost, quick results, and it keeps the clients happy.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M16",
+      "quotes": [
+        "\"This is mainly to help the women with kids, isn't it?\"",
+        "\"run it past the board first\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!F17",
+      "quotes": [
+        "\"Of course we all support diversity. The question is, what will this cost the company?\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M17",
+      "quotes": [
+        "\"Let's hope this doesn't look like special treatment.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N17",
+      "quotes": [
+        "\"This is the leadership we need.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M18",
+      "quotes": [
+        "\"Much more sensible.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N18",
+      "quotes": [
+        "\"Sensible and practical.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M19",
+      "quotes": [
+        "\"A wise decision.\"",
+        "\"Don't be discouraged. You're still young.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N19",
+      "quotes": [
+        "\"A wise decision.\"",
+        "\"I'll help you push it next year.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N20",
+      "quotes": [
+        "\"Good risk management.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M23",
+      "quotes": [
+        "\"Of course we support this.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M24",
+      "quotes": [
+        "\"I thought today was just a formality.\"",
+        "\"made a simple thing complicated\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!E37",
+      "quotes": [
+        "\"great team player, super organised\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M5",
+      "quotes": [
+        "“非常专业，这正是我们期待的形象。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N5",
+      "quotes": [
+        "“很精神！你给人的第一印象很棒。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M6",
+      "quotes": [
+        "“你本可以穿得再专业一点。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N7",
+      "quotes": [
+        "“太有个性了！你显然很有创意眼光。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!F8",
+      "quotes": [
+        "“作品很有意思！看得出你参与过一些很棒的项目。不过我很好奇，你觉得自己在这些项目里最大的贡献是什么？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M8",
+      "quotes": [
+        "“这个创意真可爱！”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N8",
+      "quotes": [
+        "“很大胆的想法！你真的很有创意潜力。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M9",
+      "quotes": [
+        "“太好了！每个制作团队都需要一个让大家井井有条的人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N9",
+      "quotes": [
+        "“天生的团队领导者！我能想象你将来带领一个项目。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M10",
+      "quotes": [
+        "“很棒！你看起来很擅长让所有人保持同步。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N10",
+      "quotes": [
+        "“厉害！你对这个行业真的很熟悉。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!F11",
+      "quotes": [
+        "“结束前最后一个问题。你知道，创意行业的工作强度很大，尤其是赶截止日期的时候。所以，你有成家生孩子的打算吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M11",
+      "quotes": [
+        "“那就好！我们接下来有一些很棒的项目。”",
+        "“当然，计划总会变。我们只是希望找到一个能长期留下来的人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M12",
+      "quotes": [
+        "“那我就放心了！这里有时候会很忙。”",
+        "“当然，我们只是想确保每个人都能长期兼顾好自己的责任。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M13",
+      "quotes": [
+        "“当然。我们只是想多了解一下团队成员。”",
+        "“好了，我想今天就聊到这里。我们会尽快联系你。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!F14",
+      "quotes": [
+        "“结束前最后一个问题。你知道，创意行业的工作强度很大，尤其是赶截止日期的时候。你对偶尔加班怎么看？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N14",
+      "quotes": [
+        "“那就好！”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N15",
+      "quotes": [
+        "“有道理！工作之外有自己的生活很重要。当然，这个行业的事情不总是按计划来。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!N16",
+      "quotes": [
+        "“就喜欢这种态度！听起来你是我们可以真正依靠的人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!F17",
+      "quotes": [
+        "“恭喜！你已进入招聘的最后阶段。我们诚邀你参加为期一周的无薪试用！”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M17",
+      "quotes": [
+        "“大家干得好！这周你们都表现得很棒，你们的努力和创意让我们印象深刻！”",
+        "“我们会评估每个人的表现，尽快通知结果。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch1中文版!M20",
+      "quotes": [
+        "“恭喜！我们很高兴向你发出初级制片人职位的录用通知。你的创意潜力让我们印象深刻，期待看到你为团队带来的新东西！”",
+        "“恭喜！你在试用期间的表现让我们印象深刻，尤其是你出色的沟通和组织能力。我们认为你更适合制作协调（Production Coordinator）的岗位，希望改为向你发出这个职位的录用通知。”",
+        "“感谢你在整个招聘过程中付出的时间和努力。很遗憾地通知你，你未能获得该职位。感谢你对我们的关注，祝你今后的职业发展一切顺利。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F5",
+      "quotes": [
+        "“这正是我们需要的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L5",
+      "quotes": [
+        "“这个受众切入点是我刚才提出的，我可以带大家完整讲一遍。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M5",
+      "quotes": [
+        "“别这么计较归属，这是团队的点子。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F8",
+      "quotes": [
+        "“这正是我们需要的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L8",
+      "quotes": [
+        "“Sophie 刚才先提出了这个观点，应该由她来为大家说明。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F11",
+      "quotes": [
+        "“抽烟吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M11",
+      "quotes": [
+        "“真的很会把握社交机会”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M13",
+      "quotes": [
+        "“太程序化”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F14",
+      "quotes": [
+        "“抽烟吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L17",
+      "quotes": [
+        "“她们是我们的同事，不是让你们按身材打分的对象。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M17",
+      "quotes": [
+        "“把私人玩笑看得太严重”",
+        "“你说得对。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L18",
+      "quotes": [
+        "“这样议论团队成员并不合适，我们回到项目吧。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L20",
+      "quotes": [
+        "“为什么由你带头议论并给公司的女性员工打分？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F25",
+      "quotes": [
+        "“有空聊一下你昨晚说话的态度吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M26",
+      "quotes": [
+        "“很抱歉让你觉得不舒服”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!N26",
+      "quotes": [
+        "“明白了”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!N27",
+      "quotes": [
+        "“我们没事了，对吧？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M30",
+      "quotes": [
+        "“注意保持适当”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F33",
+      "quotes": [
+        "“你昨晚也在那里。你听见了吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!L35",
+      "quotes": [
+        "“他们只是开玩笑。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!E47",
+      "quotes": [
+        "“能力很强，但需要提升合作能力。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!F5",
+      "quotes": [
+        "“最近有没有什么大计划”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!L5",
+      "quotes": [
+        "“家里都挺好的。我们聊聊这个项目吧？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M5",
+      "quotes": [
+        "“那就好。不过这个项目至少要跟三年，你们俩在一起这么久了，这三年里……不会有什么变动吧？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N5",
+      "quotes": [
+        "“好，就喜欢你这股劲头。”",
+        "“职位是你的了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!L6",
+      "quotes": [
+        "“说实话，我们在考虑明年要个孩子。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M6",
+      "quotes": [
+        "“哦！那先恭喜啦。”",
+        "“等你那边稳定下来，我们再考虑。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N6",
+      "quotes": [
+        "“哦，那先恭喜啦！人往往就是在这时候真正担起事来的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!L7",
+      "quotes": [
+        "“您放心，近期家里不会有什么变动，不会影响工作。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N7",
+      "quotes": [
+        "“哈哈，不用跟我保证这个，家里有变化很正常。职位是你的了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M8",
+      "quotes": [
+        "“恭喜！”",
+        "“和团队保持联系”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N8",
+      "quotes": [
+        "“现在是真正的大人了”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M9",
+      "quotes": [
+        "“打算什么时候要”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M10",
+      "quotes": [
+        "“当然，暂时嘛。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!F11",
+      "quotes": [
+        "“那……我们怎么打算？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M12",
+      "quotes": [
+        "“先看看情况吧。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N12",
+      "quotes": [
+        "“没关系，”",
+        "“总得有人照护家里，而且你赚得也比我多。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M13",
+      "quotes": [
+        "“这么快就回去上班了？真勇敢。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N13",
+      "quotes": [
+        "“为什么不让你的妻子帮忙呢？这钱花得真不值。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!F14",
+      "quotes": [
+        "“临时帮忙”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N15",
+      "quotes": [
+        "“行，既然你开口了，我去跟台里说说。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M16",
+      "quotes": [
+        "“嗯。我还以为你是最有时间的那个呢，毕竟你是我们这儿唯一没有小孩的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N16",
+      "quotes": [
+        "“没事，我们再想办法。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M17",
+      "quotes": [
+        "“你就不能跟他们说明早再弄吗？”",
+        "“她又烧起来了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M18",
+      "quotes": [
+        "“下次最好还是到现场来。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N20",
+      "quotes": [
+        "“去吧。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N22",
+      "quotes": [
+        "“没问题，家庭第一嘛，对吧？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M23",
+      "quotes": [
+        "“那碗又是我洗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N23",
+      "quotes": [
+        "“去吧，我反正也要熬夜。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M24",
+      "quotes": [
+        "“充电器在哪儿”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M25",
+      "quotes": [
+        "“没问题。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N25",
+      "quotes": [
+        "“没问题。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M27",
+      "quotes": [
+        "“他们特别喜欢你那个档案纪录片的点子。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M28",
+      "quotes": [
+        "“可是我跟那位编辑约好了要聊下一季……”",
+        "“他们特别喜欢你那个档案纪录片的点子。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M36",
+      "quotes": [
+        "“你最近都不在家”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N37",
+      "quotes": [
+        "“就知道你能顶上来。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M38",
+      "quotes": [
+        "“也好，这样你也能多顾着点家里。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N38",
+      "quotes": [
+        "“真的不考虑一下？这种机会可不常有。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M39",
+      "quotes": [
+        "“我们的大门永远为你敞开！”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M40",
+      "quotes": [
+        "“我们的大门永远为你敞开！”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!N41",
+      "quotes": [
+        "“离开？可你家里不是一直有人帮你顶着吗？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!F5",
+      "quotes": [
+        "“团队合作能力强，做事超级有条理，总是乐于帮忙。”",
+        "“大胆，有点乱，但是个真正的创意人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!L5",
+      "quotes": [
+        "“我们需要真正有创意的人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!L6",
+      "quotes": [
+        "“团队正缺一个靠谱的人。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M7",
+      "quotes": [
+        "“我就知道你会选女生。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N7",
+      "quotes": [
+        "“这个做法好，以后招聘我们都这么办。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!F8",
+      "quotes": [
+        "“单独喝一杯，聊聊你的前途”",
+        "“我不知道该找谁。大家都说你人很好。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M9",
+      "quotes": [
+        "“你还是老样子，这么较真。”",
+        "“注意分寸”",
+        "“太情绪化，不适合带人”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N9",
+      "quotes": [
+        "“行行行，我注意。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!L11",
+      "quotes": [
+        "“大家都是这么过来的。忍一忍，先把转正拿下。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M11",
+      "quotes": [
+        "“谢谢”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!L12",
+      "quotes": [
+        "“Daniel 就是嘴上没把门，没什么恶意，别太往心里去。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N12",
+      "quotes": [
+        "“好的，我明白了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!L13",
+      "quotes": [
+        "“留意一下”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M13",
+      "quotes": [
+        "“谢谢大家这段时间的照顾。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M14",
+      "quotes": [
+        "“成本低，见效快，客户那边也好交代。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M16",
+      "quotes": [
+        "“这主要是为了照顾有孩子的女同事吧？”",
+        "“先拿到董事会看看”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!F17",
+      "quotes": [
+        "“我们当然都支持多元化。问题是，这件事对公司来说，成本是多少？”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M17",
+      "quotes": [
+        "“希望这不会让外界觉得我们在搞特殊照顾。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N17",
+      "quotes": [
+        "“这就是我们需要的领导力。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M18",
+      "quotes": [
+        "“这样稳妥多了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N18",
+      "quotes": [
+        "“稳妥，务实。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M19",
+      "quotes": [
+        "“明智的决定。”",
+        "“别灰心，你还年轻。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N19",
+      "quotes": [
+        "“明智的决定。”",
+        "“明年我帮你一起推。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N20",
+      "quotes": [
+        "“风险管理做得好。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M23",
+      "quotes": [
+        "“这个我们当然支持。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M24",
+      "quotes": [
+        "“我以为今天只是走个流程。”",
+        "“把简单的事情搞复杂了”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!E37",
+      "quotes": [
+        "“团队合作能力强，做事超级有条理”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M28",
+      "quotes": [
+        "\"Wishing you all the best.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!M34",
+      "quotes": [
+        "\"actually harmed\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2!E46",
+      "quotes": [
+        "\"We value every employee's voice.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M7",
+      "quotes": [
+        "\"That makes things easier.\"",
+        "\"Of course, plans change. If anything does, make sure I'm the first to know.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M14",
+      "quotes": [
+        "\"That's valuable experience. It'll come in handy when it's your turn.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M15",
+      "quotes": [
+        "\"Didn't I just say? It's only temporary.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3!M19",
+      "quotes": [
+        "\"No problem, totally understand.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M8",
+      "quotes": [
+        "\"take it seriously\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M15",
+      "quotes": [
+        "\"From a risk management point of view, that makes sense.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M20",
+      "quotes": [
+        "\"We'll approve one year of budget and review the results next year.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!M21",
+      "quotes": [
+        "\"Something everyone can live with.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!N24",
+      "quotes": [
+        "\"Fair point. A statement alone isn't enough.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4!E36",
+      "quotes": [
+        "\"Sorry, I think I need to take some time off.\""
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M28",
+      "quotes": [
+        "“祝你一切顺利。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!M34",
+      "quotes": [
+        "“真的受到了伤害”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!F39",
+      "quotes": [
+        "“这个人已经准备好了。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch2中文版!E46",
+      "quotes": [
+        "“我们重视每一位员工的声音。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M7",
+      "quotes": [
+        "“那就好办了。”",
+        "“当然，计划总赶不上变化，有变化记得第一个告诉我。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M14",
+      "quotes": [
+        "“这可是宝贵的经验，等轮到你的时候会派上用场的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M15",
+      "quotes": [
+        "“我刚才不是说了吗，只是临时的。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch3中文版!M19",
+      "quotes": [
+        "“没问题，理解理解。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M8",
+      "quotes": [
+        "“认真处理”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M15",
+      "quotes": [
+        "“从风险管理的角度，这个说得通。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M20",
+      "quotes": [
+        "“预算先批一年，明年看效果再说。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!M21",
+      "quotes": [
+        "“这样大家都能接受。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!N24",
+      "quotes": [
+        "“有道理，光有声明确实不够。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    },
+    {
+      "source": "ch4中文版!E36",
+      "quotes": [
+        "“对不起，我可能需要休息一段时间。”"
+      ],
+      "kind": "reviewed-dialogue-or-written-message"
+    }
+  ],
+  "unquotedDialogue": [
+    {
+      "source": "ch1!L8",
+      "text": "I came up with the original concept and developed the visual storytelling.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L9",
+      "text": "I helped lead the team, assigned tasks, and kept the project on track.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L10",
+      "text": "I communicated with clients and partner companies to keep everything running smoothly.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L11",
+      "text": "I'm focused on work right now, and I don't have any immediate family plans.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L12",
+      "text": "My family situation won't affect my work. I'm available whenever needed.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L13",
+      "text": "I'd prefer to focus on my professional experience and keep my personal life private.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L14",
+      "text": "I understand that deadlines can be tight in this industry. I'm happy to stay late occasionally when a project really needs it.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L15",
+      "text": "I believe I can do my best work when I have a healthy work-life balance. I'd prefer to finish my tasks during regular working hours.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1!L16",
+      "text": "Absolutely! I'm fully committed to my career, and I'm willing to put in whatever hours it takes to get the job done.",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L8",
+      "text": "我提出了最初的创意，并负责视觉叙事的开发。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L9",
+      "text": "我协助带领团队，分配任务，确保项目按计划推进。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L10",
+      "text": "我负责和客户及合作公司沟通，确保一切顺利运转。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L11",
+      "text": "我现在专注于工作，近期没有成家的计划。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L12",
+      "text": "我的家庭情况不会影响工作。只要需要，我随时都可以。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L13",
+      "text": "我更希望聊聊我的专业经历，个人生活还是想保留隐私。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L14",
+      "text": "我理解这个行业的截止日期很紧。如果项目真的需要，我很乐意偶尔加班。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L15",
+      "text": "我相信健康的工作与生活平衡能让我发挥出最好的状态。我更希望在正常工作时间内完成任务。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    },
+    {
+      "source": "ch1中文版!L16",
+      "text": "当然！我会全身心投入事业，需要多少时间都愿意付出。",
+      "kind": "direct-interview-answer-without-quotation-marks",
+      "reason": "The preceding portfolio/family/work-hours question is answered in the player character’s own spoken words. The whole option is speech; no action prefix is present."
+    }
+  ],
+  "exclusions": [
+    {
+      "source": "ch2!M7",
+      "quote": "\"creative instinct\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M7",
+      "quote": "\"reliable coordination skills\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!N25",
+      "quote": "\"too sensitive\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M28",
+      "quote": "\"personal reasons\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M34",
+      "quote": "\"personal concern\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!F37",
+      "quote": "\"unauthorised recording\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!F37",
+      "quote": "\"serious breakdown of professional trust\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!F37",
+      "quote": "\"by mutual agreement\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M39",
+      "quote": "\"prove you're ready for the next step\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!N39",
+      "quote": "\"ready\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M40",
+      "quote": "\"team contribution\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!M41",
+      "quote": "\"difficult to work with\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!N41",
+      "quote": "\"a real leadership suggestion\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!E46",
+      "quote": "\"personal reasons\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!E48",
+      "quote": "\"by mutual agreement\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2!E48",
+      "quote": "\"breakdown of professional trust\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!M7",
+      "quote": "'Acting Series Producer'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!N11",
+      "quote": "'a legend'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!M14",
+      "quote": "'the whole team'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!N14",
+      "quote": "'Acting Series Producer'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!M15",
+      "quote": "'a bit difficult'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!M19",
+      "quote": "'rescued'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!F35",
+      "quote": "\"balances family and career perfectly\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!M35",
+      "quote": "'has it all'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3!E47",
+      "quote": "'not very ambitious'",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!U5",
+      "quote": "\"real creative\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!M8",
+      "quote": "\"communication style was inappropriate\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!F14",
+      "quote": "\"DEI commitment\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!L14",
+      "quote": "\"zero tolerance\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!M15",
+      "quote": "\"legal risk\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!L18",
+      "quote": "\"later\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!L19",
+      "quote": "\"revisit it next year\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!M20",
+      "quote": "\"results\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!M21",
+      "quote": "\"clear stance\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!N24",
+      "quote": "\"thoughtful\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!E36",
+      "quote": "\"urgent\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!E36",
+      "quote": "\"so driven\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4!K40",
+      "quote": "\"Everyone here has an equal chance to shine\"",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M7",
+      "quote": "“创意直觉”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M7",
+      "quote": "“可靠的协调能力”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!N25",
+      "quote": "“太敏感”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M28",
+      "quote": "“个人原因”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M34",
+      "quote": "“个人担忧”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!F37",
+      "quote": "“未经授权的录音”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!F37",
+      "quote": "“职业信任关系的严重破裂”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!F37",
+      "quote": "“双方协商一致离职”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!F39",
+      "quote": "“工作表现”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M39",
+      "quote": "“证明自己已经准备好进入下一阶段”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!N39",
+      "quote": "“已经准备好了”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M40",
+      "quote": "“团队贡献”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!M41",
+      "quote": "“很难合作”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!N41",
+      "quote": "“真正具有领导力的建议”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!E46",
+      "quote": "“个人原因”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!E48",
+      "quote": "“职业信任关系破裂”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch2中文版!E48",
+      "quote": "“双方协商一致离职”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!M7",
+      "quote": "“代理系列制片人”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!N11",
+      "quote": "“传奇”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!M14",
+      "quote": "“整个团队”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!N14",
+      "quote": "“代理系列制片人”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!M15",
+      "quote": "“有点计较”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!M19",
+      "quote": "“救”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!F35",
+      "quote": "“理想工作者”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!F35",
+      "quote": "“能完美平衡家庭和事业”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!M35",
+      "quote": "“能兼顾一切”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch3中文版!E47",
+      "quote": "“不太有野心”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!U5",
+      "quote": "“真正的创意人”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!M8",
+      "quote": "“沟通方式欠妥”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!F14",
+      "quote": "“多元与包容（DEI）承诺”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!L14",
+      "quote": "“零容忍”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!M15",
+      "quote": "“法律风险”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!L18",
+      "quote": "“以后再说”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!L19",
+      "quote": "“明年再议”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!M20",
+      "quote": "“效果”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!M21",
+      "quote": "“态度鲜明”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!N24",
+      "quote": "“想得周到”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!E36",
+      "quote": "“紧急”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!E36",
+      "quote": "“特别有冲劲”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    },
+    {
+      "source": "ch4中文版!K40",
+      "quote": "“这里人人都有同等的机会闪耀”",
+      "reason": "Quoted label, role, evaluation category, slogan or reported description; not a standalone utterance/message."
+    }
+  ],
+  "manualEmphasis": [
+    {
+      "source": "ch1中文版!F4",
+      "englishSource": "ch1!F4",
+      "phrases": [
+        "准备好迈出通往梦想职业的第一步了吗？"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F5",
+      "englishSource": "ch1!F5",
+      "phrases": [
+        "纠结明天该穿什么",
+        "给人留下好的第一印象"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F8",
+      "englishSource": "ch1!F8",
+      "phrases": [
+        "自己在这些项目里最大的贡献是什么"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F11",
+      "englishSource": "ch1!F11",
+      "phrases": [
+        "你有成家生孩子的打算吗"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F14",
+      "englishSource": "ch1!F14",
+      "phrases": [
+        "你对偶尔加班怎么看"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F17",
+      "englishSource": "ch1!F17",
+      "phrases": [
+        "诚邀你参加为期一周的无薪试用",
+        "你打算怎么表现自己"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch1中文版!F20",
+      "englishSource": "ch1!F20",
+      "phrases": [
+        "你能拿到初级制片人（Junior Producer）的职位吗"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F4",
+      "englishSource": "ch2!F4",
+      "phrases": [
+        "办公室里似乎还运行着另一套规则"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F5",
+      "englishSource": "ch2!F5",
+      "phrases": [
+        "怀疑自己是不是表达不清，或者这个点子根本不够好"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F8",
+      "englishSource": "ch2!F8",
+      "phrases": [
+        "但没有人回应"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F11",
+      "englishSource": "ch2!F11",
+      "phrases": [
+        "你看见 Creative Director 再次打开提案文件"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F14",
+      "englishSource": "ch2!F14",
+      "phrases": [
+        "再次打开提案文件，开始讨论"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F17",
+      "englishSource": "ch2!F17",
+      "phrases": [
+        "比较公司里几位女性员工的身材与性吸引力，还给她们打分"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F21",
+      "englishSource": "ch2!F21",
+      "phrases": [
+        "比较公司里几位女性员工的身材与性吸引力，还给她们打分",
+        "仿佛在等你也加入"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F29",
+      "englishSource": "ch2!F29",
+      "phrases": [
+        "这种事情一直都在发生",
+        "但请你不要提到她的名字"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F37",
+      "englishSource": "ch2!F37",
+      "phrases": [
+        "正在调查“未经授权的录音”",
+        "“职业信任关系的严重破裂”",
+        "因此暂停你的工作"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch2中文版!F39",
+      "englishSource": "ch2!F39",
+      "phrases": [
+        "每位候选人都需要房间里有人说：“这个人已经准备好了。”"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch4中文版!F5",
+      "englishSource": "ch4!F5",
+      "phrases": [
+        "两人学历相同，作品集水平也差不多"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch4中文版!F8",
+      "englishSource": "ch4!F8",
+      "phrases": [
+        "实习还有两个月结束，转正名额由 Daniel 决定"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    },
+    {
+      "source": "ch4中文版!F14",
+      "englishSource": "ch4!F14",
+      "phrases": [
+        "“多元与包容（DEI）承诺”",
+        "通过后再交董事会审议"
+      ],
+      "reason": "Chinese equivalent of the English sheet emphasis; Chinese tab has no authored narrative bold here."
+    }
+  ],
+  "repairs": [
+    {
+      "source": "ch3!F5:F7",
+      "text": "Before",
+      "reason": "Include the initial B omitted by the source bold run; the wording is unchanged."
+    }
+  ],
+  "derived": [
+    {
+      "source": "ch1!M20",
+      "kind": "split-gatekeeper-outcomes",
+      "count": 3
+    },
+    {
+      "source": "ch1!N20",
+      "kind": "split-gatekeeper-outcomes",
+      "count": 3
+    },
+    {
+      "source": "ch1中文版!M20",
+      "kind": "split-gatekeeper-outcomes",
+      "count": 3
+    },
+    {
+      "source": "ch1中文版!N20",
+      "kind": "split-gatekeeper-outcomes",
+      "count": 3
+    },
+    {
+      "source": "ch3!F5 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "en"
+    },
+    {
+      "source": "ch3!F5 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "zh-CN"
+    },
+    {
+      "source": "ch3!F6 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "en"
+    },
+    {
+      "source": "ch3!F6 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "zh-CN"
+    },
+    {
+      "source": "ch3!F7 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "en"
+    },
+    {
+      "source": "ch3!F7 + E05 next-career note",
+      "kind": "appended-family-man-dialogue",
+      "language": "zh-CN"
+    }
+  ]
+}

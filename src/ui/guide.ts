@@ -44,6 +44,6 @@ export function guidePanel(state: AppState, data: GameData, guide: GuideData, id
     ${energyReminder ? `<p class="guide-energy-reminder">${richText(energyReminder)}</p>` : ''}
     <button type="button" class="guide-toggle" data-action="toggle-guide" aria-expanded="${!hidden}" aria-controls="${id}-body">${t(hidden ? 'Ask the guide' : 'Hide advice')}</button>
     ${tired && data.copy.lowEnergyAdvice ? `<p class="guide-fatigue" role="status">${richText(data.copy.lowEnergyAdvice)}</p>` : ''}
-    <div id="${id}-body" ${hidden ? 'hidden' : ''}>${hidden ? '' : `<p class="guide-timing">${t(beforeChoice ? 'BEFORE YOU CHOOSE' : 'BESIDE THE BOARD')}</p><p class="guide-advice">${richText(t(note.advice))}</p>${detail}<p class="guide-choice">${t('Advice is optional. The choice is yours.')}</p>`}</div>
+    <div id="${id}-body" ${hidden ? 'hidden' : ''}>${hidden ? '' : `<p class="guide-timing">${t(beforeChoice ? 'BEFORE YOU CHOOSE' : 'BESIDE THE BOARD')}</p><p class="guide-advice">${richText(t(note.advice))}</p>${detail}<p class="guide-choice">${t('Advice is optional—what you do next is up to you!')}</p>`}</div>
   </aside>`;
 }

@@ -8,9 +8,10 @@ import { parseTeamContent } from './team';
 
 const read = (name: string): string => readFileSync(resolve(name), 'utf8');
 const fixture = (): GameData => JSON.parse(read('public/data/team-content.json'));
-const source = JSON.parse(read('docs/source/2026-11-03-team-sheet.json')) as {
+const source = JSON.parse(read('docs/source/2026-11-05-sheet-formatting.json')) as {
   sheets: Record<string, { values: string[][] }>;
 };
+const normaliseCompany = (value = '') => value.replace(/\bfreedom\b/gi, 'FreeDom');
 
 describe('the team’s published story content', () => {
   it('covers every card slot, chapter opening, terminal ending and milestone', () => {
@@ -32,8 +33,8 @@ describe('the team’s published story content', () => {
       sourceCount++;
       const row = data.scenarios.find(item => item.sourceSheet === sheet && item.sourceRow === index + 1 && item.condition !== 'flag:previous_family_man=true')!;
       expect(row, `${sheet}:${index + 1}`).toBeDefined();
-      expect([row.title, row.scene, row.background, row.npc, row.optionText]).toEqual([r[4], r[5], r[6], r[7], r[11]]);
-      expect(row.results).toEqual({ female: r[12] ?? '', male: r[13] ?? '' });
+      expect([row.title, row.scene, row.background, row.npc, row.optionText]).toEqual([r[4], r[5], r[6], r[7], r[11]].map(normaliseCompany));
+      expect(row.results).toEqual({ female: normaliseCompany(r[12]), male: normaliseCompany(r[13]) });
       const expectedDeltas = { female: parseDelta(r[16] ?? ''), male: parseDelta(r[17] ?? '') };
       if (sheet === 'ch1' && index + 1 === 19 && r[0] === 'C1-04' && r[9] === '3') {
         expect(expectedDeltas.female.Communication).toBe(1);
@@ -43,7 +44,7 @@ describe('the team’s published story content', () => {
         adjustedRows++;
       }
       expect(row.deltas).toEqual(expectedDeltas);
-      expect([row.reference, row.notes, row.guideAdvice, row.sourceCardId]).toEqual([r[18] ?? '', r[19] ?? '', r[20] ?? '', r[0]]);
+      expect([row.reference, row.notes, row.guideAdvice, row.sourceCardId]).toEqual([r[18], r[19], r[20], r[0]].map(normaliseCompany));
     });
     expect(sourceCount).toBe(111);
     expect(adjustedRows).toBe(1);
@@ -74,10 +75,23 @@ describe('the team’s published story content', () => {
     expect(strict.availableWhen).toBe('stat:Reputation>5');
   });
 
-  it('does not invent missing references, change the contradictory +1, or append optional ending text', () => {
+  it('imports the added CH1 reference column without shifting notes or inventing still-missing citations', () => {
     const data = fixture();
-    expect(data.endings.find(row => row.id === 'E02')?.reference).toBe('');
-    expect(data.milestones?.find(row => row.id === 'CH1-E01')?.reference).toBe('');
+    for (const row of [...data.endings, ...data.milestones!].filter(row => row.sourceSheet === 'ch1')) {
+      const cells = source.sheets.ch1.values[row.sourceRow! - 1];
+      expect(row.reference).toBe(cells[6]);
+      expect(row.nextRoundNote).toBe(cells[7]);
+      expect(row.artNote).toBe(cells[8]);
+      expect(row.notes).toBe(cells[9] ?? '');
+      expect(row.guideAdvice).toBe(cells[10]);
+    }
+    expect(data.chapters?.find(row => row.id === 'C1-00')?.reference).toBe('');
+    expect(data.chapters?.find(row => row.id === 'C3-00')?.reference).toBe('Dent');
+    expect(data.endings.find(row => row.id === 'E14')?.reference).toContain('; Sørensen');
+  });
+
+  it('does not change the contradictory +1 or append optional ending text', () => {
+    const data = fixture();
     const b = data.scenarios.find(row => row.sourceCardId === 'C2-04B' && row.option === 2)!;
     expect(b.deltas.female.Reputation).toBe(1);
     expect(b.effects).toBeUndefined();

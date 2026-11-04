@@ -55,6 +55,16 @@ describe('rendered formal story connections', () => {
     expect(introScreen(startCareer(createInitialState(), 'male', data), data)).toContain(richText(data.chapters![0].scene));
   });
 
+  it.each(['en', 'zh-CN'] as const)('keeps authored citations beside the background even without the guide in %s', locale => {
+    setLocale(locale);
+    const data = localizeData(fixture(), translations, locale);
+    const html = scenarioDialog(atCard('C1-01', data), data);
+    const background = html.match(/<details class="background-note">[\s\S]*?<\/details>/)?.[0];
+    expect(background).toContain(`<h4>${t('References')}</h4>`);
+    expect(background).toContain('Warhurst et al. (2000); Dellinger &amp; Williams (1997)');
+    expect(html).not.toContain('class="guide-panel');
+  });
+
   it.each(['en', 'zh-CN'] as const)('shows four numeric choices in %s while preserving the source D branch and female-only resignation option', locale => {
     setLocale(locale);
     const data = localizeData(fixture(), translations, locale);
