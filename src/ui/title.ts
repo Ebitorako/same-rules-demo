@@ -11,7 +11,7 @@ export function titleScreen(state: AppState, data: GameData, selecting: boolean)
     <div class="edition"><span>${t('NMC5369 · MEDIA PROJECT')}</span><span>${t('PLAYABLE PROTOTYPE / 01')}</span></div>
     <div class="title-layout"><div class="title-copy"><p class="eyebrow">${t('A CAREER IN THE CREATIVE INDUSTRIES')}</p>
     <h1 id="title-heading">${escape(data.copy.title)}</h1><p class="title-subtitle">${escape(data.copy.subtitle)}</p>
-    <div class="title-rule"></div><p class="title-description">${escape(data.copy.introduction)}</p>
+    <div class="title-rule"></div><p class="title-description">${richText(data.copy.introduction)}</p>
     ${selecting ? `<div class="pawn-selection" aria-label="${t('Choose a pawn')}">${(['female','male'] as const).map(pawn => `<button class="pawn-choice" data-action="start-${pawn}">${pawnArt(pawn)}<span>${t(pawn === 'female' ? 'Female pawn' : 'Male pawn')}</span></button>`).join('')}</div>` : `<div class="title-actions">${button(state.run ? 'Continue career' : 'Start a career', state.run ? 'resume' : 'select-pawn', 'primary')}${button('Gallery', 'gallery')}${button('Settings', 'settings')}</div>`}
     <p class="keyboard-note">${t('ONE CAREER AT A TIME · EVERY CHOICE STAYS')}</p></div>
     <div class="title-art-panel">${titleArt}<span class="art-caption">${t('NEW HIRE → CREATIVE DIRECTOR → ?')}</span></div></div>
