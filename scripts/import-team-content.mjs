@@ -198,7 +198,7 @@ for (const row of [...scenarios]) {
 const oldCopy = JSON.parse(read('public/data/legacy-data.json')).copy;
 const copy = { ...oldCopy, companyName: 'FreeDom', introduction: chapters[0].scene, promotionTitle: chapters[3].title, promotionText: chapters[3].scene,
   gatekeeperReturning: '', gatekeeperFormal: '', gatekeeperUnchanged: '',
-  placeholderNotice: 'Story and rules supplied by the team. Art placeholders will be replaced with the prepared assets.',
+  placeholderNotice: 'Story and rules supplied by the team.',
   statDescriptions: Object.fromEntries(statNames.map(name => [name, oldCopy.statDescriptions[name]])),
   lowEnergyAdvice: 'You look a little tired! Don’t worry, everyone in the creative industries gets through it this way. (A little tip: if your energy runs out, you’ll leave the industry.)',
 };

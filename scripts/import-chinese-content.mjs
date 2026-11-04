@@ -118,7 +118,7 @@ for (const row of runtime.scenarios.filter(r => r.condition === 'flag:previous_f
 const interfaceCopy = {
   'One career. Another turn.': '一段职业生涯。又一次选择。',
   'The Director': '创意总监',
-  'Story and rules supplied by the team. Art placeholders will be replaced with the prepared assets.': '剧情与规则由项目组提供。美术占位图将逐步替换为正式素材。',
+  'Story and rules supplied by the team.': '剧情与规则由项目组提供。',
   'Developing original ideas and creative contributions.': '提出原创想法并作出创意贡献的能力。',
   'Communicating ideas and working with others.': '表达想法、与他人协作的能力。',
   'Access to professional contacts and opportunities.': '获得行业人脉与工作机会的渠道。',

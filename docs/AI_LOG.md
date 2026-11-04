@@ -248,3 +248,9 @@ For the course's compulsory AI appendix: why AI was used, how it was used, and h
 - Done: use the existing rich-text catalog on the homepage introduction and give its closing emphasized question a separate block with paragraph spacing. The English sentence and its authored Chinese equivalent keep their existing wording and bold ranges.
 - Verification: 210 tests, data validation and production build pass. Checked the English homepage at 1280px and 390px and the Chinese homepage at 390px: the complete closing question has 700 font weight, its own block and a 17px gap, with no horizontal overflow or console errors. Screenshot: .verification/2026-11-05-reader-feedback/homepage-question.png.
 - Human decisions: the designer supplied the previously missing sixth screenshot. No story, rules, artwork or saved progress changes; publish through the existing GitHub Pages workflow.
+
+## 2026-11-05 — Remove the obsolete homepage art notice (Codex)
+- Asked: remove the highlighted sentence promising future replacement of placeholder art.
+- Done: retain only “Story and rules supplied by the team.” / “剧情与规则由项目组提供。” in the homepage footer; update both importers and their generated data so later imports preserve the change.
+- Verification: 210 tests, data validation and production build pass. Checked both languages in the built application, with no console warnings/errors. Homepage evidence: .verification/2026-11-05-reader-feedback/homepage-footer.png.
+- Human decisions: the designer explicitly removed this outdated notice; retain the team attribution and publish to the existing site. No gameplay, artwork or progress changes.
